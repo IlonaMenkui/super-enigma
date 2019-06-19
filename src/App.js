@@ -4,7 +4,9 @@ import Header from './components/NavigationTabs/Header'
 
 function App() {
   return (
+    <div className="App">
       <Header/>
+    </div>
   );
 }
 
