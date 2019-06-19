@@ -1,11 +1,21 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
 import './App.css';
-import Header from './components/NavigationTabs/Header'
+import PopularPage from './components/pages/PopularPage/PopularPage'
+import LatestPage from './components/pages/LatestPage/LatestPage'
+import NowPlayingPage from './components/pages/NowPlayingPage/NowPlayingPage'
 
 function App() {
   return (
     <div className="App">
-      <Header/>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={PopularPage}/>
+          <Route path="/latest" component={LatestPage}/>
+          <Route path="/nowplaying" component={NowPlayingPage}/>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
