@@ -2,9 +2,11 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import './App.css';
-import PopularPage from './components/pages/PopularPage/PopularPage'
-import LatestPage from './components/pages/LatestPage/LatestPage'
-import NowPlayingPage from './components/pages/NowPlayingPage/NowPlayingPage'
+import {
+  PopularPage,
+  LatestPage,
+  NowPlayingPage
+} from './components/pages/'
 
 function App() {
   return (

@@ -1,11 +1,13 @@
 .tabs {
   margin: 0 15%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: rgb(255, 255, 255);
 }
 
 .tab {
   height: 120px;
+  width: 150px;
+}
+
+.link {
+  text-decoration: none;
 }
