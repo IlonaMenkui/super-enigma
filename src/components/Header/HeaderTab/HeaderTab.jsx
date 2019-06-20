@@ -5,8 +5,8 @@ import { Tab } from '@material-ui/core'
 import { HEADER_TABS as tabs } from '../../../App.constants'
 import '../Header.css'
 
-const HeaderTab = ({ path, title }) => (
-    <Tab className="tab" component={"button"} label={title} to={path} component={Link} />
+const HeaderTab = ({ path, title }, index) => (
+    <Tab key={index} className="tab" label={title} to={path} component={Link} />
 )
 
 HeaderTab.propTypes = {
