@@ -1,9 +1,7 @@
-import React from 'react';
-import Header from '../../components/Header'
+import React from 'react'
 
 export const PopularPage = () => (
     <div>
-        <Header />
         <h1>Popular movies</h1>
     </div>
 )

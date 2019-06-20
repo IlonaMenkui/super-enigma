@@ -1,10 +1,7 @@
-import React from 'react';
-import Header from '../../components/Header'
-
+import React from 'react'
 
 export const LatestPage = () => (
     <div>
-        <Header />
         <h1>Latest movies</h1>
     </div>
 )

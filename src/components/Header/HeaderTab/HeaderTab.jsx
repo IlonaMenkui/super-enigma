@@ -6,7 +6,7 @@ import { HEADER_TABS as tabs } from '../../../App.constants'
 import '../Header.css'
 
 const HeaderTab = ({ path, title }, index) => (
-    <Tab key={index} className="tab" label={title} to={path} component={Link} />
+    <Tab key={index} className="tab" label={title} to={path}/>
 )
 
 HeaderTab.propTypes = {
