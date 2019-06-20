@@ -6,7 +6,7 @@ import {
   PopularPage,
   LatestPage,
   NowPlayingPage
-} from './components/pages/'
+} from './pages/'
 
 function App() {
   return (

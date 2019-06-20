@@ -1,13 +1,9 @@
 import React from 'react'
 import Paper from '@material-ui/core/Paper'
-import { Button, Tabs, Tab } from '@material-ui/core'
-import './Header.css'
-import { Link } from "react-router-dom";
+import { Tabs } from '@material-ui/core'
 import { HEADER_TABS as tabs } from '../../App.constants'
-
-const HeaderTab = ({ path, title }) => (
-  <Tab component={"button"} label={title} to={path} component={Link} />
-)
+import HeaderTab from './HeaderTab/HeaderTab'
+import './Header.css'
 
 export const Header = () => {
   return (
@@ -19,4 +15,4 @@ export const Header = () => {
   )
 }
 
-export default Header;
+export default Header
