@@ -1,8 +1,15 @@
 import React from 'react'
 
-export const NowPlayingPage = () => (
+export default class NowPlayingPage extends React.Component {
+    componentDidMount() {
+
+    }
+    
+    render() {
+        return (
     <div>
         <h1>Now playing movies</h1>
     </div>
-)
-export default NowPlayingPage
+        )
+    }
+}
