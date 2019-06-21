@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       <Router history={history}>
-      <Header />
+      <Header history={history}/>
         <Switch>
           <Route exact path="/" component={PopularPage}/>
           <Route path="/latest" component={LatestPage}/>

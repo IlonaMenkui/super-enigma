@@ -1,6 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { Tab } from '@material-ui/core'
 import { HEADER_TABS as tabs } from '../../../App.constants'
 import '../Header.css'

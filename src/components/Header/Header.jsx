@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Paper, Tabs, Tab } from '@material-ui/core'
+import { createBrowserHistory } from 'history'
+
+import { Paper, Tabs } from '@material-ui/core'
 
 import { HEADER_TABS as tabs } from '../../App.constants'
 import HeaderTab from './HeaderTab/HeaderTab'
@@ -10,16 +12,27 @@ import './Header.css'
 
 export class Header extends React.Component {
 
-  constructor() {
+  constructor({ history }) {
     super()
     this.state = {
       value: 0
     }
+    this.history = history
+  }
+
+  componentWillMount() {
+    const { pathname } = this.history.location
+    const currentTabIndex = tabs.findIndex(({ path }) =>  pathname === path)
+    const newState =  {
+      value: currentTabIndex
+    }
+    this.setState(newState)
   }
 
   handleChange = (event, value) => {
-    // event.preventDefault()
+    this.history.push(tabs[value].path)
     this.setState({ value })
+
     console.log(value)
   }
 
