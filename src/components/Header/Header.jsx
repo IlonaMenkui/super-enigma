@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { createBrowserHistory } from 'history'
-
 import { Paper, Tabs } from '@material-ui/core'
 
 import { HEADER_TABS as tabs } from '../../App.constants'
@@ -48,6 +46,10 @@ export class Header extends React.Component {
       </Paper>
     )
   }
+}
+
+Header.propTypes = {
+  history: PropTypes.object.isRequired
 }
 
 export default Header
