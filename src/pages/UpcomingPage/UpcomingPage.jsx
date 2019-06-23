@@ -5,7 +5,7 @@ import { PARAMS as params } from '../../App.constants'
 import axios from 'axios'
 
 
-export default class NowPlayingPage extends React.Component {
+export default class UpcomingPage extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -14,7 +14,7 @@ export default class NowPlayingPage extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('https://api.themoviedb.org/3/movie/now_playing',
+        axios.get('https://api.themoviedb.org/3/movie/upcoming',
             {
                 params: { api_key: params.api_key }
             })
@@ -31,7 +31,7 @@ export default class NowPlayingPage extends React.Component {
     render() {
         return (
             <div>
-                <h1>Now playing movies:</h1>
+                <h1>Upcoming movies:</h1>
                 {this.state.movies.map(movie => <h4>{movie.title}</h4>)}
             </div>
         )

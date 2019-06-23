@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history'
 
 import {
   PopularPage,
-  LatestPage,
+  UpcomingPage,
   NowPlayingPage
 } from './pages/'
 import Header from './components/Header'
@@ -20,7 +20,7 @@ function App() {
       <Header history={history}/>
         <Switch>
           <Route exact path="/" component={PopularPage}/>
-          <Route path="/latest" component={LatestPage}/>
+          <Route path="/upcoming" component={UpcomingPage}/>
           <Route path="/nowplaying" component={NowPlayingPage}/>
         </Switch>
       </Router>
