@@ -15,6 +15,7 @@ const history = createBrowserHistory()
 
 function App() {
   return (
+    <div className="wrapper">
     <div className="App">
       <Router history={history}>
       <Header history={history}/>
@@ -24,6 +25,7 @@ function App() {
           <Route path="/nowplaying" component={NowPlayingPage}/>
         </Switch>
       </Router>
+    </div>
     </div>
   );
 }

@@ -1,11 +1,6 @@
-.tabs {
-  margin: 0 15%;
-  background-color: rgb(255, 255, 255);
-}
-
 .tab {
   height: 120px;
-  width: 150px;
+  width: 33%;
 }
 
 .link {

@@ -20,8 +20,8 @@ export class Header extends React.Component {
 
   componentWillMount() {
     const { pathname } = this.history.location
-    const currentTabIndex = tabs.findIndex(({ path }) =>  pathname === path)
-    const newState =  {
+    const currentTabIndex = tabs.findIndex(({ path }) => pathname === path)
+    const newState = {
       value: currentTabIndex
     }
     this.setState(newState)
@@ -36,7 +36,7 @@ export class Header extends React.Component {
 
   render() {
     return (
-      <Paper className="tabs">
+      <Paper>
         <Tabs value={this.state.value}
           centered
           onChange={this.handleChange}
