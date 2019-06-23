@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { PARAMS as params } from '../../App.constants'
+import { MovieList } from '../../components/MovieList/MovieList'
 
 import axios from 'axios'
 
@@ -34,7 +35,7 @@ export default class PopularPage extends React.Component {
         return (
             <div>
                 <h1>Popular movies:</h1>
-                {this.state.movies.map(movie => <h4>{movie.title}</h4>)}
+                {this.state.movies.map(movie => <MovieList title={movie.title} />)}
             </div>
         )
     }
