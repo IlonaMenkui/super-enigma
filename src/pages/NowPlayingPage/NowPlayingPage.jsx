@@ -1,13 +1,14 @@
 import React from 'react'
 
 import { PARAMS as params, STATIC_URL as img_url } from '../../App.constants'
-import { MovieList } from '../../components/MovieListItem/MovieListItem'
+import { MovieListItem } from '../../components/MovieListItem/MovieListItem'
 
-import { Paper } from '@material-ui/core'
+import { Paper, Typography } from '@material-ui/core'
 
 import axios from 'axios'
 
 import '../pages.css'
+
 export default class NowPlayingPage extends React.Component {
     constructor() {
         super()
@@ -25,7 +26,8 @@ export default class NowPlayingPage extends React.Component {
                 const movies = res.data.results.map(movie => {
                     return {
                         title: movie.title,
-                        adult: movie.adult,
+                        genres: movie.genres,
+                        imdb_id: movie.imdb_id,
                         overview: movie.overview,
                         poster_path: `${img_url}${movie.poster_path.substring(1)}`
                     }
@@ -36,10 +38,15 @@ export default class NowPlayingPage extends React.Component {
 
     render() {
         return (
-            <main>
-            <Paper className="movies-wrap">
-                <h1>Now playing movies:</h1>
-                {this.state.movies.map(movie => <MovieList title={movie.title} adult={movie.adult} overview={movie.overview} poster_path={movie.poster_path}/>)}
+            <main className="movies-wrap">
+            <Paper>
+                <Typography className='heading' variant='h4'>Now playing movies:</Typography>
+                {this.state.movies.map(movie => <MovieListItem
+                title={movie.title}
+                genres={movie.genres}
+                imdb_id={movie.imdb_id}
+                overview={movie.overview}
+                poster_path={movie.poster_path}/>)}
             </Paper>
             </main>
         )

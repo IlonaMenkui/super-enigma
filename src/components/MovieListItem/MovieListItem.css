@@ -1,12 +1,14 @@
-.wrap {
-    display: flex;
-
+.img {
+    margin-left: 10px;
+    margin-bottom: 15px;
+    height: 230px;
+}
+.paper {
+    padding-left: 3px;
+    padding-right: 2%;
 }
 
-.poster {
-
-}
-
-.title {
-    margin-left: 20px;
+.overview {
+    padding-left: 10px;
+    padding-right: 3%;
 }
