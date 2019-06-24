@@ -3,10 +3,8 @@ import PropTypes from 'prop-types'
 
 import { Paper, Tabs } from '@material-ui/core'
 
-import { HEADER_TABS as tabs } from '../../App.constants'
+import { HEADER_TABS as tabs } from '../../app.constants'
 import HeaderTab from './HeaderTab/HeaderTab'
-
-import './Header.css'
 
 export class Header extends React.Component {
 

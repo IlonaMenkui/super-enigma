@@ -12,6 +12,12 @@ export const HEADER_TABS = [{
     }
 ]
 
+export const MOVIE_TYPE = {
+    POPULAR: 'popular',
+    UPCOMING: 'upcoming',
+    NOW_PLAYING: 'now_playing',
+}
+
 export const PARAMS = {
     api_key: 'ab7c9fc53125a8e8d9fd23c8704f80e5'
 }

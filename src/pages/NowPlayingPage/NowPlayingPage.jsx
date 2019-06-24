@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PARAMS as params, STATIC_URL as img_url } from '../../App.constants'
+import { PARAMS as params, STATIC_URL as img_url } from '../../app.constants'
 import { MovieList } from '../../components/MovieListItem/MovieListItem'
 
 import { Paper } from '@material-ui/core'

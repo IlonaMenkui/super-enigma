@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { Tab } from '@material-ui/core'
-import '../Header.css'
+
+import './header-tab.css'
 
 const HeaderTab = ({ path, title }, index) => (
     <Tab key={index} className="tab" label={title} to={path}/>
