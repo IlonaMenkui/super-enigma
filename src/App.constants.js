@@ -16,6 +16,4 @@ export const PARAMS = {
     api_key: 'ab7c9fc53125a8e8d9fd23c8704f80e5'
 }
 
-export const STATIC_URL = {
-    img_url: 'https://image.tmdb.org/t/p/w500'
-}
+export const STATIC_URL = 'https://image.tmdb.org/t/p/w200/'

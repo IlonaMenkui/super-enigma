@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PARAMS as params } from '../../App.constants'
+import { PARAMS as params, STATIC_URL as img_url } from '../../App.constants'
 import { MovieList } from '../../components/MovieListItem/MovieListItem'
 
 import { Paper } from '@material-ui/core'
@@ -27,7 +27,8 @@ export default class UpcomingPage extends React.Component {
                         title: movie.title,
                         adult: movie.adult,
                         overview: movie.overview,
-                        poster_path: movie.poster_path
+                        poster_path: `${img_url}${movie.poster_path.substring(1)}`
+                        
                     }
                 })
                 this.setState({ movies })
@@ -39,7 +40,7 @@ export default class UpcomingPage extends React.Component {
             <main>
             <Paper className="movies-wrap">
                 <h1>Upcoming movies:</h1>
-                {this.state.movies.map(movie => <MovieList title={movie.title} adult={movie.adult} overview={movie.overview} />)}
+                {this.state.movies.map(movie => <MovieList title={movie.title} adult={movie.adult} overview={movie.overview} poster_path={movie.poster_path} />)}
             </Paper>
             </main>
         )
