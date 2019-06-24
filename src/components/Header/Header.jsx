@@ -10,16 +10,16 @@ import './Header.css'
 
 export class Header extends React.Component {
 
-  constructor({ history }) {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       value: 0
     }
-    this.history = history
   }
 
   componentWillMount() {
-    const { pathname } = this.history.location
+    const { history } = this.props
+    const { pathname } = history.location
     const currentTabIndex = tabs.findIndex(({ path }) => pathname === path)
     const newState = {
       value: currentTabIndex
@@ -28,14 +28,13 @@ export class Header extends React.Component {
   }
 
   handleChange = (event, value) => {
-    this.history.push(tabs[value].path)
+    this.props.history.push(tabs[value].path)
     this.setState({ value })
-
-    console.log(value)
   }
 
   render() {
     return (
+      <header>
       <Paper>
         <Tabs value={this.state.value}
           centered
@@ -44,6 +43,7 @@ export class Header extends React.Component {
           {tabs.map(HeaderTab)}
         </Tabs>
       </Paper>
+      </header>
     )
   }
 }

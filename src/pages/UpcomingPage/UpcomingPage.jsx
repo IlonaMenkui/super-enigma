@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PARAMS as params } from '../../App.constants'
-import { MovieList } from '../../components/MovieList/MovieList'
+import { MovieList } from '../../components/MovieListItem/MovieListItem'
 
 import { Paper } from '@material-ui/core'
 
@@ -36,10 +36,12 @@ export default class UpcomingPage extends React.Component {
 
     render() {
         return (
+            <main>
             <Paper className="movies-wrap">
                 <h1>Upcoming movies:</h1>
                 {this.state.movies.map(movie => <MovieList title={movie.title} adult={movie.adult} overview={movie.overview} />)}
             </Paper>
+            </main>
         )
     }
 }
