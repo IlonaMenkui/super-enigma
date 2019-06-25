@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import ButtonBase from '@material-ui/core/ButtonBase'
 
-import './MovieListItem.css'
+import './movie-list-item.css'
 
 export const MovieListItem = ({ title, genres, overview, poster_path, imdb_id }) => (
   <Paper className='paper'>
