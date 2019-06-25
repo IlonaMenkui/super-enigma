@@ -10,8 +10,8 @@ const HeaderTab = ({ path, title }, index) => (
 )
 
 HeaderTab.propTypes = {
-    path: PropTypes.string,
-    title: PropTypes.string
+    path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
 }
 
 export default HeaderTab
