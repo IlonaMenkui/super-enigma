@@ -19,6 +19,7 @@ export const MOVIE_TYPE = {
 }
 
 export const PARAMS = {
+    url: 'https://api.themoviedb.org/3/movie/',
     api_key: 'ab7c9fc53125a8e8d9fd23c8704f80e5'
 }
 

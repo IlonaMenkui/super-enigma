@@ -33,14 +33,14 @@ export class Header extends React.Component {
   render() {
     return (
       <header>
-      <Paper>
-        <Tabs value={this.state.value}
-          centered
-          onChange={this.handleChange}
-          indicatorColor={"primary"}>
-          {tabs.map(HeaderTab)}
-        </Tabs>
-      </Paper>
+        <Paper>
+          <Tabs value={this.state.value}
+            centered
+            onChange={this.handleChange}
+            indicatorColor={"primary"}>
+            {tabs.map(HeaderTab)}
+          </Tabs>
+        </Paper>
       </header>
     )
   }
