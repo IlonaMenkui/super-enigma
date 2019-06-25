@@ -6,17 +6,17 @@ import {
   PopularPage,
   UpcomingPage,
   NowPlayingPage
-} from './pages/'
-import Header from './components/Header'
+} from '../pages'
+import Header from '../components/Header'
 
-import './App.css'
+import './app.css'
 
 const history = createBrowserHistory()
 
 function App() {
   return (
     <div className="wrapper">
-    <div className="App">
+    <div className="app">
       <Router history={history}>
       <Header history={history}/>
         <Switch>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PARAMS as params, STATIC_URL as img_url } from '../../App.constants'
+import { PARAMS as params, STATIC_URL as img_url } from '../../app.constants.js'
 import { MovieListItem } from '../../components/MovieListItem/MovieListItem'
 
 import { Paper, Typography } from '@material-ui/core'
@@ -26,7 +26,7 @@ export default class NowPlayingPage extends React.Component {
                 const movies = res.data.results.map(movie => {
                     return {
                         title: movie.title,
-                        genres: movie.genres,
+                        genres: movie.genre_ids,
                         imdb_id: movie.imdb_id,
                         overview: movie.overview,
                         poster_path: `${img_url}${movie.poster_path.substring(1)}`
