@@ -5,8 +5,6 @@ import MovieList from '../../components/MovieList/MovieList';
 
 import { getMovies } from '../../api/api';
 
-import '../pages.css';
-
 export default class PopularPage extends React.Component {
   constructor() {
     super();

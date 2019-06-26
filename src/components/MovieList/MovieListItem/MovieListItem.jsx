@@ -8,7 +8,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import './movie-list-item.css';
 
 export const MovieListItem = ({
-  title, genres, overview, posterPath, imdbId,
+  title, genres, overview, posterPath, voteAverage,
 }) => (
   <Paper className="paper">
     <Grid container spacing={2}>
@@ -27,19 +27,12 @@ export const MovieListItem = ({
               {overview}
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              Genres:
-              {' '}
-              {genres}
+              {`Genres: ${genres}`}
             </Typography>
           </Grid>
-          {/* <Grid item>
-                <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                  Remove
-                </Typography>
-              </Grid> */}
         </Grid>
         <Grid item>
-          <Typography variant="subtitle1">{imdbId}</Typography>
+          <Typography variant="subtitle1">{voteAverage}</Typography>
         </Grid>
       </Grid>
     </Grid>

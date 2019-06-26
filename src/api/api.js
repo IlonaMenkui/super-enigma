@@ -9,11 +9,11 @@ export const getMovies = type => axios.get(
 )
   .then(res => res.data.results.map(
     ({
-      title, genre_ids, imdb_id, overview, poster_path,
+      title, genre_ids, vote_average, overview, poster_path,
     }) => ({
       title,
       genres: genre_ids,
-      imdb_id,
+      voteAverage: vote_average,
       overview,
       poster_path: `${imgUrl}${poster_path.substring(1)}`,
     }),

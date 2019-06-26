@@ -1,0 +1,8 @@
+.movies-wrap {
+    display: flex;
+    flex-flow: column;
+}
+
+.heading {
+    padding: 13px;
+}

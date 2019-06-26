@@ -14,7 +14,7 @@ const MovieList = ({ movies, pageTitle }) => (
         <MovieListItem
           title={movie.title}
           genres={movie.genres}
-          imdbId={movie.imdb_id}
+          voteAverage={movie.voteAverage}
           overview={movie.overview}
           posterPath={movie.poster_path}
         />
