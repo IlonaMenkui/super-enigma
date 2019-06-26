@@ -1,22 +1,24 @@
-import React from 'react'
+import React from 'react';
 
-import Grid from '@material-ui/core/Grid'
-import Paper from '@material-ui/core/Paper'
-import Typography from '@material-ui/core/Typography'
-import ButtonBase from '@material-ui/core/ButtonBase'
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
-import './movie-list-item.css'
+import './movie-list-item.css';
 
-export const MovieListItem = ({ title, genres, overview, poster_path, imdb_id }) => (
-  <Paper className='paper'>
+export const MovieListItem = ({
+  title, genres, overview, posterPath, imdbId,
+}) => (
+  <Paper className="paper">
     <Grid container spacing={2}>
       <Grid item>
         <ButtonBase>
-          <img className='img' alt="poster" src={poster_path} />
+          <img className="img" alt="poster" src={posterPath} />
         </ButtonBase>
       </Grid>
       <Grid item xs={12} sm container>
-        <Grid className='overview' item xs container direction="column" spacing={2}>
+        <Grid className="overview" item xs container direction="column" spacing={2}>
           <Grid item xs>
             <Typography gutterBottom variant="h5">
               {title}
@@ -25,7 +27,9 @@ export const MovieListItem = ({ title, genres, overview, poster_path, imdb_id })
               {overview}
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              Genres: {genres}
+              Genres:
+              {' '}
+              {genres}
             </Typography>
           </Grid>
           {/* <Grid item>
@@ -35,9 +39,9 @@ export const MovieListItem = ({ title, genres, overview, poster_path, imdb_id })
               </Grid> */}
         </Grid>
         <Grid item>
-          <Typography variant="subtitle1">{imdb_id}</Typography>
+          <Typography variant="subtitle1">{imdbId}</Typography>
         </Grid>
       </Grid>
     </Grid>
   </Paper>
-)
+);

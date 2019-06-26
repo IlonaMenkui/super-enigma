@@ -1,22 +1,26 @@
-import React from 'react'
+import React from 'react';
 
-import { MovieListItem } from './MovieListItem/MovieListItem'
+import { Paper, Typography } from '@material-ui/core';
+import { MovieListItem } from './MovieListItem/MovieListItem';
 
-import { Paper, Typography } from '@material-ui/core'
 
-import './movie-list.css'
+import './movie-list.css';
 
-const MovieList = ({movies, page_title}) => (<main className="movies-wrap">
+const MovieList = ({ movies, pageTitle }) => (
+  <main className="movies-wrap">
     <Paper>
-        <Typography className='heading' variant='h4'>{page_title}</Typography>
-        {movies.map(movie => <MovieListItem
-            title={movie.title}
-            genres={movie.genres}
-            imdb_id={movie.imdb_id}
-            overview={movie.overview}
-            poster_path={movie.poster_path} />)}
+      <Typography className="heading" variant="h4">{pageTitle}</Typography>
+      {movies.map(movie => (
+        <MovieListItem
+          title={movie.title}
+          genres={movie.genres}
+          imdbId={movie.imdb_id}
+          overview={movie.overview}
+          posterPath={movie.poster_path}
+        />
+      ))}
     </Paper>
-</main>
-)
+  </main>
+);
 
-export default MovieList
+export default MovieList;
