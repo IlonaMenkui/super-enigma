@@ -17,7 +17,7 @@ export class Header extends React.Component {
   componentWillMount() {
     const { history: { location } } = this.props;
     const { pathname } = location;
-    const currentTabIndex = tabs.findIndex(({ path }) => pathname === path);
+    const currentTabIndex = tabs.findIndex(({ PATH }) => pathname === PATH);
     const newState = {
       value: currentTabIndex,
     };
@@ -25,7 +25,7 @@ export class Header extends React.Component {
   }
 
   handleChange = (event, value) => {
-    this.props.history.push(tabs[value].path);
+    this.props.history.push(tabs[value].PATH);
     this.setState({ value });
   }
 
