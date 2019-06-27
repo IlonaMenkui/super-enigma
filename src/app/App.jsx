@@ -8,7 +8,7 @@ import {
   NowPlayingPage,
 } from '../pages';
 import Header from '../components/Header';
-import { ROUTES } from '../app.constants'
+import { ROUTES } from '../app.constants';
 
 import './app.css';
 

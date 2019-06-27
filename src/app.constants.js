@@ -2,7 +2,7 @@ export const ROUTES = {
   POPULAR: '/',
   UPCOMING: '/upcoming',
   NOW_PLAYING: '/nowplaying',
-}
+};
 
 export const HEADER_TABS = [{
   TITLE: 'popular',

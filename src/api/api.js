@@ -9,6 +9,7 @@ const getMoviesWithoutGenres = type => axios.get(
 )
   .then(res => res.data.results.map(
     ({
+      // eslint-disable-next-line camelcase
       title, genre_ids, vote_average, overview, poster_path,
     }) => ({
       title,
@@ -20,15 +21,15 @@ const getMoviesWithoutGenres = type => axios.get(
   ));
 
 const getMovieWithGenres = (movie, genres) => {
-  const { genresIds } = movie
+  const { genresIds } = movie;
   const genreNames = genres
     .filter(({ id }) => genresIds.includes(id))
-    .map(({ name }) => name)
+    .map(({ name }) => name);
   return {
     ...movie,
-    genres: genreNames
-  }
-}
+    genres: genreNames,
+  };
+};
 
 const getAllGenres = () => axios.get(
   params.GENRES_URL,
@@ -36,10 +37,9 @@ const getAllGenres = () => axios.get(
     params: { api_key: params.API_KEY },
   },
 )
-  .then(res => res.data.genres)
+  .then(res => res.data.genres);
 
 
 export const getMovies = type => getAllGenres()
   .then(genres => getMoviesWithoutGenres(type)
-    .then(movies => movies.map(movie => getMovieWithGenres(movie, genres)))
-  )
+    .then(movies => movies.map(movie => getMovieWithGenres(movie, genres))));
