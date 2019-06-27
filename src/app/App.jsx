@@ -8,6 +8,7 @@ import {
   NowPlayingPage,
 } from '../pages';
 import Header from '../components/Header';
+import { ROUTES } from '../app.constants'
 
 import './app.css';
 
@@ -20,9 +21,9 @@ function App() {
         <Router history={history}>
           <Header history={history} />
           <Switch>
-            <Route exact path="/" component={PopularPage} />
-            <Route path="/upcoming" component={UpcomingPage} />
-            <Route path="/nowplaying" component={NowPlayingPage} />
+            <Route exact path={ROUTES.POPULAR} component={PopularPage} />
+            <Route path={ROUTES.UPCOMING} component={UpcomingPage} />
+            <Route path={ROUTES.NOW_PLAYING} component={NowPlayingPage} />
           </Switch>
         </Router>
       </div>

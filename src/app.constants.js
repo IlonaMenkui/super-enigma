@@ -1,14 +1,20 @@
+export const ROUTES = {
+  POPULAR: '/',
+  UPCOMING: '/upcoming',
+  NOW_PLAYING: '/nowplaying',
+}
+
 export const HEADER_TABS = [{
   title: 'popular',
-  path: '/',
+  path: ROUTES.POPULAR,
 },
 {
   title: 'upcoming',
-  path: '/upcoming',
+  path: ROUTES.UPCOMING,
 },
 {
   title: 'now playing',
-  path: '/nowplaying',
+  path: ROUTES.NOW_PLAYING,
 },
 ];
 
