@@ -5,16 +5,16 @@ export const ROUTES = {
 }
 
 export const HEADER_TABS = [{
-  title: 'popular',
-  path: ROUTES.POPULAR,
+  TITLE: 'popular',
+  PATH: ROUTES.POPULAR,
 },
 {
-  title: 'upcoming',
-  path: ROUTES.UPCOMING,
+  TITLE: 'upcoming',
+  PATH: ROUTES.UPCOMING,
 },
 {
-  title: 'now playing',
-  path: ROUTES.NOW_PLAYING,
+  TITLE: 'now playing',
+  PATH: ROUTES.NOW_PLAYING,
 },
 ];
 
@@ -24,9 +24,12 @@ export const MOVIE_TYPE = {
   NOW_PLAYING: 'now_playing',
 };
 
+export const BASE_URL = 'https://api.themoviedb.org/3/';
+
 export const PARAMS = {
-  url: 'https://api.themoviedb.org/3/movie/',
-  api_key: 'ab7c9fc53125a8e8d9fd23c8704f80e5',
+  URL: `${BASE_URL}movie/`,
+  GENRES_URL: `${BASE_URL}genre/movie/list`,
+  API_KEY: 'ab7c9fc53125a8e8d9fd23c8704f80e5',
 };
 
 export const STATIC_URL = 'https://image.tmdb.org/t/p/w200/';

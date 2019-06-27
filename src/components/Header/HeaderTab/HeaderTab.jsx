@@ -5,13 +5,13 @@ import { Tab } from '@material-ui/core';
 
 import './header-tab.css';
 
-const HeaderTab = ({ path, title }, index) => (
-  <Tab key={index} className="tab" label={title} to={path} />
+const HeaderTab = ({ PATH, TITLE }, index) => (
+  <Tab key={index} className="tab" label={TITLE} to={PATH} />
 );
 
 HeaderTab.propTypes = {
-  path: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  PATH: PropTypes.string.isRequired,
+  TITLE: PropTypes.string.isRequired,
 };
 
 export default HeaderTab;

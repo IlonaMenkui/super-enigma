@@ -27,7 +27,7 @@ export const MovieListItem = ({
               {overview}
             </Typography>
             <Typography variant="body2" color="textSecondary">
-              {`Genres: ${genres}`}
+              {`Genres: ${genres.join(', ')}`}
             </Typography>
           </Grid>
         </Grid>
