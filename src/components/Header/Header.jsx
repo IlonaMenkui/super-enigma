@@ -25,16 +25,18 @@ export class Header extends React.Component {
   }
 
   handleChange = (event, value) => {
-    this.props.history.push(tabs[value].PATH);
+    const { history } = this.props;
+    history.push(tabs[value].PATH);
     this.setState({ value });
   }
 
   render() {
+    const { value } = this.state;
     return (
       <header>
         <Paper>
           <Tabs
-            value={this.state.value}
+            value={value}
             centered
             onChange={this.handleChange}
             indicatorColor="primary"
@@ -49,6 +51,7 @@ export class Header extends React.Component {
 
 Header.propTypes = {
   history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,

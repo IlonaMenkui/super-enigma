@@ -38,3 +38,5 @@ export const MovieListItem = ({
     </Grid>
   </Paper>
 );
+
+export default MovieListItem;
