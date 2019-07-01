@@ -12,23 +12,30 @@ export default class UpcomingPage extends React.Component {
     this.state = {
       movies: [],
       page: 1,
+      totalResults: 12,
     };
   }
 
   componentDidMount() {
-    getMovies(type.UPCOMING)
-      .then((movies) => {
+    getMovies(type.UPCOMING, this.state.page)
+      .then(({ movies }) => {
         this.setState({ movies });
       });
   }
 
+  changePage(page) {
+    getMovies(type.UPCOMING, page)
+      .then(({ movies, totalResults }) => {
+        this.setState({ movies, totalResults });
+      });
+  }
+
   render() {
-    const { movies } = this.state;
-    const { page } = this.state;
+    const { movies, page } = this.state;
     return (
       <div>
+        <FlatPagination onClickPage={(e, offset) => this.changePage(offset / 10 + 1)} page={page} totalResults={this.state.totalResults} />
         <MovieList movies={movies} pageTitle="Upcoming movies:" />
-        <FlatPagination page={page} />
       </div>
     );
   }

@@ -3,29 +3,30 @@ import { PARAMS as params, STATIC_URL as imgUrl } from '../app.constants';
 
 let cachedGenres = null;
 
-const getMoviesWithoutGenres = type => axios.get(
+const getMoviesWithoutGenres = (type, page) => axios.get(
   `${params.URL}${type}`,
   {
-    params: { api_key: params.API_KEY },
+    params: { api_key: params.API_KEY, page },
   },
 )
   .then((res) => {
-    const { page } = res.data;
-    console.log(page);
-    return res;
-  })
-  .then(res => res.data.results.map(
-    ({
-      // eslint-disable-next-line camelcase
-      title, genre_ids, vote_average, overview, poster_path,
-    }) => ({
-      title,
-      genresIds: genre_ids,
-      voteAverage: vote_average,
-      overview,
-      poster_path: `${imgUrl}${poster_path.substring(1)}`,
-    }),
-  ));
+    // eslint-disable-next-line camelcase
+    const { total_results, results } = res.data;
+    const movies = results.map(
+      ({
+        // eslint-disable-next-line camelcase
+        title, genre_ids, vote_average, overview, poster_path,
+      }) => ({
+        title,
+        genresIds: genre_ids,
+        voteAverage: vote_average,
+        overview,
+        // eslint-disable-next-line camelcase
+        poster_path: `${imgUrl}${poster_path && poster_path.substring(1)}`,
+      }),
+    );
+    return { totalResults: total_results, movies };
+  });
 
 const getMovieWithGenres = (movie, genres) => {
   const { genresIds } = movie;
@@ -51,8 +52,11 @@ const getAllGenres = () => (cachedGenres ? Promise.resolve(cachedGenres) : axios
   }));
 
 
-export const getMovies = type => getAllGenres()
-  .then(genres => getMoviesWithoutGenres(type)
-    .then(movies => movies.map(movie => getMovieWithGenres(movie, genres))));
+export const getMovies = (type, page) => getAllGenres()
+  .then(genres => getMoviesWithoutGenres(type, page)
+    .then(({ movies, totalResults }) => ({
+      totalResults,
+      movies: movies.map(movie => getMovieWithGenres(movie, genres)),
+    })));
 
 export default getMovies;

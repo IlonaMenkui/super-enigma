@@ -12,7 +12,8 @@ export class FlatPagination extends React.Component {
     this.state = { offset: 0 };
   }
 
-  handleClick(offset) {
+  handleClick(e, offset) {
+    this.props.onClickPage(e, offset);
     this.setState({ offset });
   }
 
@@ -26,8 +27,8 @@ export class FlatPagination extends React.Component {
         // The number of rows to skip. Allow a number greater than or equal to 0.
           offset={this.state.offset}
         // The total number of rows. Allow a number greater than or equal to 0.
-          total={1000}
-          onClick={(e, offset) => this.handleClick(offset)}
+          total={this.props.totalResults}
+          onClick={this.handleClick.bind(this)}
         />
       </MuiThemeProvider>
     );
