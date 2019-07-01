@@ -9,6 +9,11 @@ const getMoviesWithoutGenres = type => axios.get(
     params: { api_key: params.API_KEY },
   },
 )
+  .then((res) => {
+    const { page } = res.data;
+    console.log(page);
+    return res;
+  })
   .then(res => res.data.results.map(
     ({
       // eslint-disable-next-line camelcase
