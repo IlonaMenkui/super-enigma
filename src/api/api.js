@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import axios from 'axios';
 import { PARAMS as params, STATIC_URL as imgUrl } from '../app.constants';
 
