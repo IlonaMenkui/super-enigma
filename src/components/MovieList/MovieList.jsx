@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Paper, Typography } from '@material-ui/core';
 import { MovieListItem } from './MovieListItem/MovieListItem';
@@ -22,5 +23,9 @@ const MovieList = ({ movies, pageTitle }) => (
     </Paper>
   </main>
 );
+
+MovieList.propTypes = {
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default MovieList;

@@ -13,7 +13,8 @@ export class FlatPagination extends React.Component {
   }
 
   handleClick(e, offset) {
-    this.props.onClickPage(e, offset);
+    const { onClickPage } = this.props;
+    onClickPage(e, offset);
     this.setState({ offset });
   }
 
