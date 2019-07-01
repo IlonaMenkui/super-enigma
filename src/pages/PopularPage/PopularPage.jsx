@@ -17,7 +17,8 @@ export default class PopularPage extends React.Component {
   }
 
   componentDidMount() {
-    getMovies(type.POPULAR, this.state.page)
+    const { page } = this.state;
+    getMovies(type.POPULAR, page)
       .then(({ movies }) => {
         this.setState({ movies });
       });

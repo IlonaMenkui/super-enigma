@@ -17,7 +17,8 @@ export default class UpcomingPage extends React.Component {
   }
 
   componentDidMount() {
-    getMovies(type.UPCOMING, this.state.page)
+    const { page } = this.state;
+    getMovies(type.UPCOMING, page)
       .then(({ movies }) => {
         this.setState({ movies });
       });

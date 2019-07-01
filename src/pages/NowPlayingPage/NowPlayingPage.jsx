@@ -17,7 +17,8 @@ export default class NowPlayingPage extends React.Component {
   }
 
   componentDidMount() {
-    getMovies(type.NOW_PLAYING, this.state.page)
+    const { page } = this.state;
+    getMovies(type.NOW_PLAYING, page)
       .then(({ movies }) => {
         this.setState({ movies });
       });
