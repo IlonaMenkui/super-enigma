@@ -21,8 +21,9 @@ export default class NowPlayingPage extends React.Component {
   }
 
   render() {
+    const { movies } = this.state;
     return (
-      <MovieList movies={this.state.movies} pageTitle="Now playing movies:" />
+      <MovieList movies={movies} pageTitle="Now playing movies:" />
     );
   }
 }

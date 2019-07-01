@@ -21,8 +21,9 @@ export default class PopularPage extends React.Component {
   }
 
   render() {
+    const { movies } = this.state;
     return (
-      <MovieList movies={this.state.movies} pageTitle="Popular movies:" />
+      <MovieList movies={movies} pageTitle="Popular movies:" />
     );
   }
 }

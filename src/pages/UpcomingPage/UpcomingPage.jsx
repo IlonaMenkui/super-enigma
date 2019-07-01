@@ -21,8 +21,9 @@ export default class UpcomingPage extends React.Component {
   }
 
   render() {
+    const { movies } = this.state;
     return (
-      <MovieList movies={this.state.movies} pageTitle="Upcoming movies:" />
+      <MovieList movies={movies} pageTitle="Upcoming movies:" />
     );
   }
 }

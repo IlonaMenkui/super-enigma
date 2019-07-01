@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
@@ -8,7 +9,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import './movie-list-item.css';
 
 export const MovieListItem = ({
-  title, genres, overview, posterPath, voteAverage,
+  genres, title, overview, posterPath, voteAverage,
 }) => (
   <Paper className="paper">
     <Grid container spacing={2}>
@@ -38,3 +39,14 @@ export const MovieListItem = ({
     </Grid>
   </Paper>
 );
+
+
+MovieListItem.propTypes = {
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string.isRequired,
+  overview: PropTypes.string.isRequired,
+  posterPath: PropTypes.string.isRequired,
+  voteAverage: PropTypes.number.isRequired,
+};
+
+export default MovieListItem;
