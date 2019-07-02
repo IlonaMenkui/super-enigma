@@ -26,6 +26,7 @@ const MovieList = ({ movies, pageTitle }) => (
 
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pageTitle: PropTypes.string.isRequired,
 };
 
 export default MovieList;
