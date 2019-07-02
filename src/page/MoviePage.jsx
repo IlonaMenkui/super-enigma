@@ -55,16 +55,7 @@ export default class MoviePage extends React.Component {
   }
 }
 
-MoviePage.defaultProps = {
-  totalResults: {
-    PAGE_COUNT: { PAGE_COUNT },
-  },
-};
-
 MoviePage.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  totalResults: PropTypes.shape({
-    PAGE_COUNT: PropTypes.number,
-  }),
 };

@@ -47,17 +47,9 @@ export class FlatPagination extends React.Component {
   }
 }
 
-FlatPagination.defaultProps = {
-  totalResults: {
-    PAGE_COUNT: { PAGE_COUNT },
-  },
-};
-
 FlatPagination.propTypes = {
   onClickPage: PropTypes.func.isRequired,
-  totalResults: PropTypes.shape({
-    PAGE_COUNT: PropTypes.number,
-  }),
+  totalResults: PropTypes.number.isRequired,
 };
 
 export default FlatPagination;
