@@ -13,29 +13,32 @@ export default class MoviePage extends React.Component {
     this.state = {
       movies: [],
       page: 1,
-      totalResults: { PAGE_COUNT },
+      totalResults: 0,
     };
   }
 
   componentDidMount() {
-    this.loadMovies();
+    this.loadMovies(1);
   }
 
-  componentWillUpdate() {
-    this.loadMovies();
+  componentDidUpdate(prevProps) {
+    const { title: prevTitle } = prevProps;
+    const { title } = this.props;
+    if (prevTitle !== title) {
+      this.loadMovies(1);
+    }
   }
 
-  changePage(page) {
-    this.setState({ page });
-    this.loadMovies();
+  changePage(offset) {
+    const page = offset / PAGE_COUNT + 1;
+    this.loadMovies(page);
   }
 
-  loadMovies() {
+  loadMovies(page) {
     const { type } = this.props;
-    const { page } = this.state;
     getMovies(type, page)
       .then(({ movies, totalResults }) => {
-        this.setState({ movies, totalResults });
+        this.setState({ movies, totalResults, page });
       });
   }
 
@@ -45,7 +48,7 @@ export default class MoviePage extends React.Component {
     return (
       <div>
         <FlatPagination
-          onClickPage={(e, offset) => this.changePage(offset / PAGE_COUNT + 1)}
+          onClickPage={(e, offset) => this.changePage(offset)}
           page={page}
           totalResults={totalResults}
         />

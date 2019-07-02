@@ -15,19 +15,17 @@ const theme = createMuiTheme();
 export class FlatPagination extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { offset: 0 };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(e, offset) {
     const { onClickPage } = this.props;
     onClickPage(e, offset);
-    this.setState({ offset });
   }
 
   render() {
-    const { totalResults } = this.props;
-    const { offset } = this.state;
+    const { totalResults, page } = this.props;
+    const offset = PAGE_COUNT * page - 1;
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
