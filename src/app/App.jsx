@@ -2,13 +2,9 @@ import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-import {
-  PopularPage,
-  UpcomingPage,
-  NowPlayingPage,
-} from '../pages';
 import Header from '../components/Header';
-import { ROUTES } from '../app.constants';
+import { ROUTES, MOVIE_TYPE as type } from '../app.constants';
+import MoviePage from '../page/MoviePage';
 
 import './app.css';
 
@@ -21,9 +17,19 @@ function App() {
         <Router history={history}>
           <Header history={history} />
           <Switch>
-            <Route exact path={ROUTES.POPULAR} component={PopularPage} />
-            <Route path={ROUTES.UPCOMING} component={UpcomingPage} />
-            <Route path={ROUTES.NOW_PLAYING} component={NowPlayingPage} />
+            <Route
+              exact
+              path={ROUTES.POPULAR}
+              render={() => <MoviePage title="Popular movies:" type={type.POPULAR} />}
+            />
+            <Route
+              path={ROUTES.UPCOMING}
+              render={() => <MoviePage title="Upcoming movies:" type={type.UPCOMING} />}
+            />
+            <Route
+              path={ROUTES.NOW_PLAYING}
+              render={() => <MoviePage title="Now playing movies:" type={type.NOW_PLAYING} />}
+            />
           </Switch>
         </Router>
       </div>

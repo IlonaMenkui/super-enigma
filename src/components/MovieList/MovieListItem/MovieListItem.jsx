@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -33,7 +34,7 @@ export const MovieListItem = ({
           </Grid>
         </Grid>
         <Grid item>
-          <Typography variant="subtitle1">{voteAverage}</Typography>
+          <Chip className="chip" label={voteAverage} variant="outlined" />
         </Grid>
       </Grid>
     </Grid>
