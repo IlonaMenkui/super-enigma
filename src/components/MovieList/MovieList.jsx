@@ -2,14 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Paper, Typography } from '@material-ui/core';
+
+import { Circular } from '../Circular/Circular';
 import { MovieListItem } from './MovieListItem/MovieListItem';
 
 
 import './movie-list.css';
 
-const MovieList = ({ movies, pageTitle }) => (
+const MovieList = ({ movies, pageTitle, showCircular }) => (
   <main className="movies-wrap">
     <Paper>
+      <Circular visible={showCircular} />
       <Typography className="heading" variant="h4">{pageTitle}</Typography>
       {movies.map(movie => (
         <MovieListItem
@@ -27,6 +30,7 @@ const MovieList = ({ movies, pageTitle }) => (
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
   pageTitle: PropTypes.string.isRequired,
+  showCircular: PropTypes.bool.isRequired,
 };
 
 export default MovieList;

@@ -1,0 +1,7 @@
+.circular-wrapp {
+    display: flex;
+    justify-content: center;
+}
+.circular {
+    margin-top: 15px;
+}

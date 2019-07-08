@@ -14,11 +14,13 @@ export default class MoviePage extends React.Component {
       movies: [],
       page: 1,
       totalResults: 0,
+      showCircular: true,
     };
   }
 
   componentDidMount() {
-    this.loadMovies(1);
+    const { page } = this.state;
+    this.loadMovies(page);
   }
 
   componentDidUpdate(prevProps) {
@@ -36,15 +38,20 @@ export default class MoviePage extends React.Component {
 
   loadMovies(page) {
     const { type } = this.props;
-    getMovies(type, page)
+    return getMovies(type, page)
       .then(({ movies, totalResults }) => {
         this.setState({ movies, totalResults, page });
+      })
+      .then(() => {
+        this.setState({ showCircular: false });
       });
   }
 
   render() {
     const { title } = this.props;
-    const { movies, page, totalResults } = this.state;
+    const {
+      movies, page, totalResults, showCircular,
+    } = this.state;
     return (
       <div>
         <FlatPagination
@@ -52,7 +59,7 @@ export default class MoviePage extends React.Component {
           page={page}
           totalResults={totalResults}
         />
-        <MovieList movies={movies} pageTitle={title} />
+        <MovieList movies={movies} pageTitle={title} showCircular={showCircular} />
       </div>
     );
   }
