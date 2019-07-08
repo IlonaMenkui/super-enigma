@@ -14,15 +14,13 @@ export default class MoviePage extends React.Component {
       movies: [],
       page: 1,
       totalResults: 0,
-      circularVisibility: '',
+      showCircular: true,
     };
   }
 
   componentDidMount() {
-    this.loadMovies(1);
-    let { circularVisibility } = this.state;
-    circularVisibility = '';
-    this.setState({ circularVisibility });
+    const { page } = this.state;
+    this.loadMovies(page);
   }
 
   componentDidUpdate(prevProps) {
@@ -40,16 +38,19 @@ export default class MoviePage extends React.Component {
 
   loadMovies(page) {
     const { type } = this.props;
-    getMovies(type, page)
+    return getMovies(type, page)
       .then(({ movies, totalResults }) => {
         this.setState({ movies, totalResults, page });
+      })
+      .then(() => {
+        this.setState({ showCircular: false });
       });
   }
 
   render() {
     const { title } = this.props;
     const {
-      movies, page, totalResults, circularVisibility,
+      movies, page, totalResults, showCircular,
     } = this.state;
     return (
       <div>
@@ -58,7 +59,7 @@ export default class MoviePage extends React.Component {
           page={page}
           totalResults={totalResults}
         />
-        <MovieList movies={movies} pageTitle={title} circularVisibility={circularVisibility} />
+        <MovieList movies={movies} pageTitle={title} showCircular={showCircular} />
       </div>
     );
   }
