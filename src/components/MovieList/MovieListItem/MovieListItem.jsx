@@ -51,6 +51,7 @@ MovieListItem.propTypes = {
   overview: PropTypes.string.isRequired,
   posterPath: PropTypes.string.isRequired,
   voteAverage: PropTypes.number.isRequired,
+  releaseDate: PropTypes.string.isRequired,
 };
 
 export default MovieListItem;
