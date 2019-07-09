@@ -1,5 +1,7 @@
 import axios from 'axios';
+
 import { PARAMS as params, STATIC_URL as imgUrl } from '../app.constants';
+import noImg from '../static/images/no-img.png';
 
 let cachedGenres = null;
 
@@ -22,7 +24,7 @@ const getMoviesWithoutGenres = (type, page) => axios.get(
         voteAverage: vote_average,
         overview,
         // eslint-disable-next-line camelcase
-        poster_path: `${imgUrl}${poster_path && poster_path.substring(1)}`,
+        poster_path: poster_path === null ? noImg : `${imgUrl}${poster_path && poster_path.substring(1)}`,
       }),
     );
     return { totalResults: total_results, movies };
