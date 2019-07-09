@@ -21,6 +21,7 @@ const MovieList = ({ movies, pageTitle, showCircular }) => (
           voteAverage={movie.voteAverage}
           overview={movie.overview}
           posterPath={movie.poster_path}
+          releaseDate={movie.releaseDate}
         />
       ))}
     </Paper>

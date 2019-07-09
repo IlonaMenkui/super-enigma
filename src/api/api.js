@@ -17,12 +17,13 @@ const getMoviesWithoutGenres = (type, page) => axios.get(
     const movies = results.map(
       ({
         // eslint-disable-next-line camelcase
-        title, genre_ids, vote_average, overview, poster_path,
+        title, genre_ids, vote_average, overview, poster_path, release_date,
       }) => ({
         title,
         genresIds: genre_ids,
         voteAverage: vote_average,
         overview,
+        releaseDate: release_date.substring(0, 4),
         // eslint-disable-next-line camelcase
         poster_path: poster_path === null ? noImg : `${imgUrl}${poster_path && poster_path.substring(1)}`,
       }),

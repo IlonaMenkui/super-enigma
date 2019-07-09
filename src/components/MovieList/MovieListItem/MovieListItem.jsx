@@ -10,7 +10,7 @@ import ButtonBase from '@material-ui/core/ButtonBase';
 import './movie-list-item.css';
 
 export const MovieListItem = ({
-  genres, title, overview, posterPath, voteAverage,
+  genres, title, overview, posterPath, voteAverage, releaseDate,
 }) => (
   <Paper className="paper">
     <Grid container spacing={2}>
@@ -24,6 +24,9 @@ export const MovieListItem = ({
           <Grid item xs>
             <Typography gutterBottom variant="h5">
               {title}
+              <Typography variant="body2" color="textSecondary">
+                {releaseDate}
+              </Typography>
             </Typography>
             <Typography variant="body2" gutterBottom>
               {overview}
