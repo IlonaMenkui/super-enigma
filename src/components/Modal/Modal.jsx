@@ -14,6 +14,9 @@ export class SimpleModal extends React.Component {
 
   render() {
     const { open } = this.state;
+    const {
+      genres, title, overview, voteAverage, releaseDate,
+    } = this.props;
     return (
       <div>
         <Button onClick={() => this.setState({ open: true })}>Open Modal</Button>
@@ -25,10 +28,19 @@ export class SimpleModal extends React.Component {
         >
           <div>
             <Typography variant="h6" id="modal-title">
-            Text in a modal
+              {title}
+              <Typography variant="body2" color="textSecondary">
+                {releaseDate}
+              </Typography>
+              <Typography variant="caption">
+                {voteAverage}
+              </Typography>
             </Typography>
-            <Typography variant="subtitle1" id="simple-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            <Typography variant="body2" gutterBottom>
+              {overview}
+            </Typography>
+            <Typography variant="body2" color="textSecondary">
+              {`Genres: ${genres.join(', ')}`}
             </Typography>
           </div>
         </Modal>

@@ -29,7 +29,7 @@ export class MovieListItem extends React.Component {
             <ButtonBase>
               <img className="img" alt="poster" src={posterPath} />
             </ButtonBase>
-            <SimpleModal />
+            <SimpleModal genres={genres} title={title} overview={overview} posterPath={posterPath} voteAverage={voteAverage} releaseDate={releaseDate} />
           </Grid>
           <Grid item xs={12} sm container>
             <Grid className="overview" item xs container direction="column" spacing={2}>
@@ -64,7 +64,7 @@ MovieListItem.propTypes = {
   overview: PropTypes.string.isRequired,
   posterPath: PropTypes.string.isRequired,
   voteAverage: PropTypes.number.isRequired,
-  releaseDate: PropTypes.string.isRequired,
+  releaseDate: PropTypes.number.isRequired,
 };
 
 export default MovieListItem;
