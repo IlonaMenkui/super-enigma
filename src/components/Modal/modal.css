@@ -1,0 +1,7 @@
+.modal-paper {
+    width: 400px;
+    height: 400px;
+    background-color: aliceblue;
+    box-shadow: 5px black;
+    padding: 4px;
+}
