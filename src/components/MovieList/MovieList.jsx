@@ -20,8 +20,12 @@ const MovieList = ({ movies, pageTitle, showCircular }) => (
           genres={movie.genres}
           voteAverage={movie.voteAverage}
           overview={movie.overview}
-          posterPath={movie.poster_path}
+          posterPath={movie.posterPath}
           releaseDate={movie.releaseDate}
+          popularity={movie.popularity}
+          originalLanguage={movie.originalLanguage}
+          voteCount={movie.voteCount}
+          originalTitle={movie.originalTitle}
         />
       ))}
     </Paper>

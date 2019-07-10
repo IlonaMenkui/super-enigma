@@ -1,8 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import HelpIcon from '@material-ui/icons/Help';
 
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
+
+import './modal.css';
 
 export class SimpleModal extends React.Component {
   constructor(props) {
@@ -13,34 +17,40 @@ export class SimpleModal extends React.Component {
   }
 
   render() {
-    const { open } = this.state;
     const {
-      genres, title, overview, voteAverage, releaseDate,
+      genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
+      originalLanguage, voteCount, originalTitle,
     } = this.props;
+    const { open } = this.state;
     return (
       <div>
-        <Button onClick={() => this.setState({ open: true })}>Open Modal</Button>
+        <HelpIcon fontSize="small" className="title" color="action" onClick={() => this.setState({ open: true })} />
         <Modal
+          onClose={() => this.setState({ open: false })}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={open}
-          onClose={() => this.setState({ open: false })}
         >
-          <div>
-            <Typography variant="h6" id="modal-title">
+          <div className="modal-paper">
+            <img className="img" alt="poster" src={posterPath} />
+            <Typography gutterBottom variant="h5">
               {title}
-              <Typography variant="body2" color="textSecondary">
-                {releaseDate}
-              </Typography>
-              <Typography variant="caption">
-                {voteAverage}
-              </Typography>
             </Typography>
-            <Typography variant="body2" gutterBottom>
-              {overview}
-            </Typography>
-            <Typography variant="body2" color="textSecondary">
-              {`Genres: ${genres.join(', ')}`}
+            <Typography variant="subtitle2">
+              {`Original title: ${originalTitle} (${originalLanguage})`}
+              <Typography variant="subtitle2">
+                {`Vote average (vote count): ${voteAverage} (${voteCount})`}
+                <Typography variant="subtitle2">
+                  {`Popularity index: ${popularity}`}
+                </Typography>
+              </Typography>
+              {`Date of release: ${releaseDate}`}
+              <Typography variant="subtitle2">
+                {`Overview: ${overview}`}
+              </Typography>
+              <Typography variant="subtitle2" color="textSecondary">
+                {`Genres: ${genres.join(', ')}`}
+              </Typography>
             </Typography>
           </div>
         </Modal>
@@ -48,5 +58,18 @@ export class SimpleModal extends React.Component {
     );
   }
 }
+
+SimpleModal.propTypes = {
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string.isRequired,
+  overview: PropTypes.string.isRequired,
+  posterPath: PropTypes.string.isRequired,
+  voteAverage: PropTypes.number.isRequired,
+  releaseDate: PropTypes.number.isRequired,
+  popularity: PropTypes.number.isRequired,
+  originalLanguage: PropTypes.string.isRequired,
+  voteCount: PropTypes.number.isRequired,
+  originalTitle: PropTypes.string.isRequired,
+};
 
 export default SimpleModal;

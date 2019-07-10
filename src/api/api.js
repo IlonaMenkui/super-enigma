@@ -12,23 +12,27 @@ const getMoviesWithoutGenres = (type, page) => axios.get(
   },
 )
   .then((res) => {
-    // eslint-disable-next-line camelcase
-    const { total_results, results } = res.data;
+    const { total_results: totalResults, results } = res.data;
     const movies = results.map(
       ({
-        // eslint-disable-next-line camelcase
-        title, genre_ids, vote_average, overview, poster_path, release_date,
+        title, genre_ids: genresIds, vote_average: voteAverage, overview, poster_path: posterPath,
+        release_date: releaseDate, popularity,
+        original_language: originalLanguage, vote_count: voteCount, original_title: originalTitle,
       }) => ({
         title,
-        genresIds: genre_ids,
-        voteAverage: vote_average,
+        genresIds,
+        voteAverage,
         overview,
-        releaseDate: new Date(release_date).getFullYear(),
+        popularity,
+        originalLanguage,
+        voteCount,
+        originalTitle,
+        releaseDate: new Date(releaseDate).getFullYear(),
         // eslint-disable-next-line camelcase
-        poster_path: poster_path === null ? noImg : `${imgUrl}${poster_path && poster_path.substring(1)}`,
+        posterPath: posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`,
       }),
     );
-    return { totalResults: total_results, movies };
+    return { totalResults, movies };
   });
 
 const getMovieWithGenres = (movie, genres) => {

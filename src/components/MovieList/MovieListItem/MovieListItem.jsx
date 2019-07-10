@@ -20,22 +20,36 @@ export class MovieListItem extends React.Component {
 
   render() {
     const {
-      genres, title, overview, posterPath, voteAverage, releaseDate,
+      genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
+      originalLanguage, voteCount, originalTitle,
     } = this.props;
     return (
-      <Paper className="paper">
+      <Paper>
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase>
               <img className="img" alt="poster" src={posterPath} />
             </ButtonBase>
-            <SimpleModal genres={genres} title={title} overview={overview} posterPath={posterPath} voteAverage={voteAverage} releaseDate={releaseDate} />
           </Grid>
           <Grid item xs={12} sm container>
             <Grid className="overview" item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="h5">
-                  {title}
+                  <div className="title-wrap">
+                    <div>{title}</div>
+                    <SimpleModal
+                      popularity={popularity}
+                      originalLanguage={originalLanguage}
+                      voteCount={voteCount}
+                      originalTitle={originalTitle}
+                      genres={genres}
+                      title={title}
+                      overview={overview}
+                      posterPath={posterPath}
+                      voteAverage={voteAverage}
+                      releaseDate={releaseDate}
+                    />
+                  </div>
                   <Typography variant="body2" color="textSecondary">
                     {releaseDate}
                   </Typography>
@@ -65,6 +79,10 @@ MovieListItem.propTypes = {
   posterPath: PropTypes.string.isRequired,
   voteAverage: PropTypes.number.isRequired,
   releaseDate: PropTypes.number.isRequired,
+  popularity: PropTypes.number.isRequired,
+  originalLanguage: PropTypes.string.isRequired,
+  voteCount: PropTypes.number.isRequired,
+  originalTitle: PropTypes.string.isRequired,
 };
 
 export default MovieListItem;
