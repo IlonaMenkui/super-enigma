@@ -32,26 +32,28 @@ export class SimpleModal extends React.Component {
           open={open}
         >
           <div className="modal-paper">
-            <img className="img" alt="poster" src={posterPath} />
-            <Typography gutterBottom variant="h5">
-              {title}
-            </Typography>
-            <Typography variant="subtitle2">
-              {`Original title: ${originalTitle} (${originalLanguage})`}
+            <div><img className="img" alt="poster" src={posterPath} /></div>
+            <div className="text-wrap">
+              <Typography gutterBottom variant="h5">
+                {title}
+              </Typography>
               <Typography variant="subtitle2">
-                {`Vote average (vote count): ${voteAverage} (${voteCount})`}
+                {`Original title: ${originalTitle} (${originalLanguage})`}
                 <Typography variant="subtitle2">
-                  {`Popularity index: ${popularity}`}
+                  {`Vote average (vote count): ${voteAverage} (${voteCount})`}
+                  <Typography variant="subtitle2">
+                    {`Popularity index: ${popularity}`}
+                  </Typography>
+                </Typography>
+                {`Date of release: ${releaseDate}`}
+                <Typography variant="subtitle2">
+                  {`Overview: ${overview}`}
+                </Typography>
+                <Typography variant="subtitle2" color="textSecondary">
+                  {`Genres: ${genres.join(', ')}`}
                 </Typography>
               </Typography>
-              {`Date of release: ${releaseDate}`}
-              <Typography variant="subtitle2">
-                {`Overview: ${overview}`}
-              </Typography>
-              <Typography variant="subtitle2" color="textSecondary">
-                {`Genres: ${genres.join(', ')}`}
-              </Typography>
-            </Typography>
+            </div>
           </div>
         </Modal>
       </div>
