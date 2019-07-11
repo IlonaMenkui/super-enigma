@@ -5,6 +5,38 @@ import noImg from '../static/images/no-img.png';
 
 let cachedGenres = null;
 
+export const searchMoviesByTitle = searchQuery => axios.get(
+  `${params.SEARCH_URL}`,
+  {
+    params: {
+      api_key: params.API_KEY,
+      query: searchQuery,
+    },
+  },
+)
+  .then(((res) => {
+    const { results } = res.data;
+    const movies = results.map(
+      ({
+        title, genre_ids: genresIds, vote_average: voteAverage, overview, poster_path: posterPath,
+        release_date: releaseDate, popularity,
+        original_language: originalLanguage, vote_count: voteCount, original_title: originalTitle,
+      }) => ({
+        title,
+        genresIds,
+        voteAverage,
+        overview,
+        popularity,
+        originalLanguage,
+        voteCount,
+        originalTitle,
+        releaseDate,
+        posterPath: posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`,
+      }),
+    );
+    return { movies };
+  }));
+
 const getMoviesWithoutGenres = (type, page) => axios.get(
   `${params.URL}${type}`,
   {
@@ -28,7 +60,6 @@ const getMoviesWithoutGenres = (type, page) => axios.get(
         voteCount,
         originalTitle,
         releaseDate,
-        // eslint-disable-next-line camelcase
         posterPath: posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`,
       }),
     );
