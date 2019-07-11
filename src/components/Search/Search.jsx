@@ -10,20 +10,19 @@ import './search.css';
 export class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      text: null,
-    };
+    this.searchQuery = null;
   }
 
-  searchClick = (text) => {
-    if (text === '') {
-      this.state.text = null;
+  searchClick = (searchQuery) => {
+    if (searchQuery) {
+      searchMoviesByTitle(searchQuery)
+        .then((movies) => {
+          console.log(movies);
+        });
     }
-    console.log(this.state.text);
   };
 
   render() {
-    const { text } = this.state;
     return (
       <div className="search">
         <InputBase
@@ -31,14 +30,13 @@ export class Search extends React.Component {
           className="input"
           inputProps={{ 'aria-label': 'Search' }}
           onChange={(e) => {
-            this.setState({ text: e.target.value });
-            searchMoviesByTitle(text);
+            this.searchQuery = e.target.value;
           }}
         />
         <div className="search-icon">
           <SearchIcon
             color="primary"
-            onClick={this.searchClick(text)}
+            onClick={() => this.searchClick(this.searchQuery)}
           />
         </div>
       </div>
