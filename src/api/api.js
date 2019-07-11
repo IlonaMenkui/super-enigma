@@ -27,7 +27,7 @@ const getMoviesWithoutGenres = (type, page) => axios.get(
         originalLanguage,
         voteCount,
         originalTitle,
-        releaseDate: new Date(releaseDate).getFullYear(),
+        releaseDate,
         // eslint-disable-next-line camelcase
         posterPath: posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`,
       }),

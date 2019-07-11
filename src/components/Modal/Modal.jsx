@@ -24,7 +24,7 @@ export class SimpleModal extends React.Component {
     const { open } = this.state;
     return (
       <div>
-        <HelpIcon fontSize="small" className="title" color="action" onClick={() => this.setState({ open: true })} />
+        <HelpIcon fontSize="small" className="icon" color="action" onClick={() => this.setState({ open: true })} />
         <Modal
           onClose={() => this.setState({ open: false })}
           aria-labelledby="simple-modal-title"
@@ -38,20 +38,28 @@ export class SimpleModal extends React.Component {
                 {title}
               </Typography>
               <Typography variant="subtitle2">
-                {`Original title: ${originalTitle} (${originalLanguage})`}
-                <Typography variant="subtitle2">
-                  {`Vote average (vote count): ${voteAverage} (${voteCount})`}
-                  <Typography variant="subtitle2">
-                    {`Popularity index: ${popularity}`}
-                  </Typography>
-                </Typography>
-                {`Date of release: ${releaseDate}`}
-                <Typography variant="subtitle2">
-                  {`Overview: ${overview}`}
-                </Typography>
-                <Typography variant="subtitle2" color="textSecondary">
-                  {`Genres: ${genres.join(', ')}`}
-                </Typography>
+                <b>Original title: </b>
+                {`${originalTitle} (${originalLanguage})`}
+              </Typography>
+              <Typography variant="subtitle2">
+                <b>Vote average (vote count): </b>
+                {`${voteAverage} (${voteCount})`}
+              </Typography>
+              <Typography variant="subtitle2">
+                <b>Popularity index: </b>
+                {`${popularity}`}
+              </Typography>
+              <Typography variant="subtitle2">
+                <b>Full date of release: </b>
+                {`${releaseDate.replace(/-/g, '.')}`}
+              </Typography>
+              <Typography variant="subtitle2">
+                <b>Overview: </b>
+                {`${overview}`}
+              </Typography>
+              <Typography variant="subtitle2">
+                <b>Genres: </b>
+                {`${genres.join(', ')}`}
               </Typography>
             </div>
           </div>
@@ -67,7 +75,7 @@ SimpleModal.propTypes = {
   overview: PropTypes.string.isRequired,
   posterPath: PropTypes.string.isRequired,
   voteAverage: PropTypes.number.isRequired,
-  releaseDate: PropTypes.number.isRequired,
+  releaseDate: PropTypes.string.isRequired,
   popularity: PropTypes.number.isRequired,
   originalLanguage: PropTypes.string.isRequired,
   voteCount: PropTypes.number.isRequired,

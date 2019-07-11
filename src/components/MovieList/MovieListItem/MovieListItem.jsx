@@ -51,7 +51,7 @@ export class MovieListItem extends React.Component {
                     />
                   </div>
                   <Typography variant="body2" color="textSecondary">
-                    {releaseDate}
+                    {new Date(releaseDate).getFullYear()}
                   </Typography>
                 </Typography>
                 <Typography variant="body2" gutterBottom>
@@ -78,7 +78,7 @@ MovieListItem.propTypes = {
   overview: PropTypes.string.isRequired,
   posterPath: PropTypes.string.isRequired,
   voteAverage: PropTypes.number.isRequired,
-  releaseDate: PropTypes.number.isRequired,
+  releaseDate: PropTypes.string.isRequired,
   popularity: PropTypes.number.isRequired,
   originalLanguage: PropTypes.string.isRequired,
   voteCount: PropTypes.number.isRequired,
