@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { PAGE_COUNT } from '../app.constants';
+import { Search } from '../components/Search/Search';
 import MovieList from '../components/MovieList/MovieList';
 
 import { getMovies } from '../api/api';
@@ -59,6 +60,7 @@ export default class MoviePage extends React.Component {
           page={page}
           totalResults={totalResults}
         />
+        <Search />
         <MovieList movies={movies} pageTitle={title} showCircular={showCircular} />
       </div>
     );
