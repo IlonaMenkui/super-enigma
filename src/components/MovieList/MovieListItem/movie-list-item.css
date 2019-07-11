@@ -4,11 +4,11 @@
     height: 230px;
 }
 
-.title {
-    margin-left: 20px;
-}
-
 .chip {
     margin-right: 15px;
     margin-left: 10px; 
+}
+
+.title-wrap {
+    display: flex;
 }
