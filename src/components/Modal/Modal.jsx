@@ -34,7 +34,7 @@ export class SimpleModal extends React.Component {
           <div className="modal-paper">
             <div><img className="img" alt="poster" src={posterPath} /></div>
             <div className="text-wrap">
-              <Typography gutterBottom variant="h5">
+              <Typography gutterBottom variant="h4">
                 {title}
               </Typography>
               <Typography variant="subtitle2">
