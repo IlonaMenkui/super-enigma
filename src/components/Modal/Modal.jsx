@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import HelpIcon from '@material-ui/icons/Help';
-
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 
@@ -24,7 +22,7 @@ export class SimpleModal extends React.Component {
     const { open } = this.state;
     return (
       <div>
-        <HelpIcon fontSize="small" className="icon" color="action" onClick={() => this.setState({ open: true })} />
+        <img className="img" alt="poster" src={posterPath} onClick={() => this.setState({ open: true })} />
         <Modal
           onClose={() => this.setState({ open: false })}
           aria-labelledby="simple-modal-title"

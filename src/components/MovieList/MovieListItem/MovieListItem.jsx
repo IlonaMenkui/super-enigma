@@ -28,7 +28,18 @@ export class MovieListItem extends React.Component {
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase>
-              <img className="img" alt="poster" src={posterPath} />
+              <SimpleModal
+                popularity={popularity}
+                originalLanguage={originalLanguage}
+                voteCount={voteCount}
+                originalTitle={originalTitle}
+                genres={genres}
+                title={title}
+                overview={overview}
+                posterPath={posterPath}
+                voteAverage={voteAverage}
+                releaseDate={releaseDate}
+              />
             </ButtonBase>
           </Grid>
           <Grid item xs={12} sm container>
@@ -37,18 +48,6 @@ export class MovieListItem extends React.Component {
                 <Typography gutterBottom variant="h5">
                   <div className="title-wrap">
                     <div>{title}</div>
-                    <SimpleModal
-                      popularity={popularity}
-                      originalLanguage={originalLanguage}
-                      voteCount={voteCount}
-                      originalTitle={originalTitle}
-                      genres={genres}
-                      title={title}
-                      overview={overview}
-                      posterPath={posterPath}
-                      voteAverage={voteAverage}
-                      releaseDate={releaseDate}
-                    />
                   </div>
                   <Typography variant="body2" color="textSecondary">
                     {new Date(releaseDate).getFullYear()}
