@@ -1,11 +1,26 @@
 import React from 'react';
 
+import { createStore } from 'redux';
+
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
 import { searchMoviesByTitle } from '../../api/api';
 
 import './search.css';
+
+function searchMovieObject(movies, action) {
+  switch (action.type) {
+    case 'GET_SEARCH_MOVIES':
+      return movies;
+    default:
+      return movies;
+  }
+}
+
+let store = createStore(searchMovieObject);
+
+store.subscribe(() => console.log(store.getState()));
 
 export class Search extends React.Component {
   constructor(props) {
@@ -17,7 +32,7 @@ export class Search extends React.Component {
     if (searchQuery) {
       searchMoviesByTitle(searchQuery)
         .then((movies) => {
-          console.log(movies);
+          store.dispatch({ movies, type: 'GET_SEARCH_MOVIES' });
         });
     }
   };
