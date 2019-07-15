@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
@@ -18,7 +20,8 @@ export class Search extends React.Component {
     if (searchQuery) {
       searchMoviesByTitle(searchQuery)
         .then((payload) => {
-          const dispatch = this.props.getActionDispatcher({ payload, type: MOVIES.SEARCH });
+          const { getActionDispatcher } = this.props;
+          const dispatch = getActionDispatcher({ payload, type: MOVIES.SEARCH });
           dispatch();
         });
     }
@@ -46,4 +49,7 @@ export class Search extends React.Component {
   }
 }
 
+Search.propTypes = {
+  getActionDispatcher: PropTypes.func.isRequired,
+};
 export default Search;
