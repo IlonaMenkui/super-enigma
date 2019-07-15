@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PAGE_COUNT } from '../app.constants';
-import { Search } from '../components/Search/Search';
+import { PAGE_COUNT } from '../constants/constants';
+import Search from '../containers/Search';
 import MovieList from '../components/MovieList/MovieList';
 
 import { getMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
 export default class MoviePage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       movies: [],
       page: 1,

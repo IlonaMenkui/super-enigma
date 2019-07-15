@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { PARAMS as params, STATIC_URL as imgUrl } from '../app.constants';
+import { PARAMS as params, STATIC_URL as imgUrl } from '../constants/constants';
 import noImg from '../static/images/no-img.png';
 
 let cachedGenres = null;

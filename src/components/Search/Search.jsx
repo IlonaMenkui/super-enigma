@@ -1,27 +1,12 @@
 import React from 'react';
 
-import { createStore } from 'redux';
-import { connect } from 'react-redux';
-
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
 import { searchMoviesByTitle } from '../../api/api';
+import { MOVIES } from '../../constants/actions';
 
 import './search.css';
-
-function searchMovieObject(state, action) {
-  switch (action.type) {
-    case 'GET_SEARCH_MOVIES':
-      return action.movies;
-    default:
-      return state;
-  }
-}
-
-const store = createStore(searchMovieObject);
-
-store.subscribe(() => console.log(store.getState()));
 
 export class Search extends React.Component {
   constructor(props) {
@@ -32,8 +17,9 @@ export class Search extends React.Component {
   searchClick = (searchQuery) => {
     if (searchQuery) {
       searchMoviesByTitle(searchQuery)
-        .then((movies) => {
-          store.dispatch({ movies, type: 'GET_SEARCH_MOVIES' });
+        .then((payload) => {
+          const dispatch = this.props.getActionDispatcher({ payload, type: MOVIES.SEARCH });
+          dispatch();
         });
     }
   };
@@ -60,11 +46,4 @@ export class Search extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  ...state,
-});
-
-export default connect(
-  mapStateToProps,
-  null,
-)(Search);
+export default Search;
