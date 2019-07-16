@@ -23,47 +23,47 @@ export class MovieListItem extends React.Component {
       originalLanguage, voteCount, originalTitle,
     } = this.props;
     return (
-        <Grid container spacing={2}>
-          <Grid item>
-            <ButtonBase>
-              <SimpleModal
-                popularity={popularity}
-                originalLanguage={originalLanguage}
-                voteCount={voteCount}
-                originalTitle={originalTitle}
-                genres={genres}
-                title={title}
-                overview={overview}
-                posterPath={posterPath}
-                voteAverage={voteAverage}
-                releaseDate={releaseDate}
-              />
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid className="overview" item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant="h5">
-                  <div className="title-wrap">
-                    <div>{title}</div>
-                  </div>
-                  <Typography variant="body2" color="textSecondary">
-                    {new Date(releaseDate).getFullYear()}
-                  </Typography>
-                </Typography>
-                <Typography variant="body2" gutterBottom>
-                  {overview}
-                </Typography>
+      <Grid container spacing={2}>
+        <Grid item>
+          <ButtonBase>
+            <SimpleModal
+              popularity={popularity}
+              originalLanguage={originalLanguage}
+              voteCount={voteCount}
+              originalTitle={originalTitle}
+              genres={genres}
+              title={title}
+              overview={overview}
+              posterPath={posterPath}
+              voteAverage={voteAverage}
+              releaseDate={releaseDate}
+            />
+          </ButtonBase>
+        </Grid>
+        <Grid item xs={12} sm container>
+          <Grid className="overview" item xs container direction="column" spacing={2}>
+            <Grid item xs>
+              <Typography gutterBottom variant="h5">
+                <div className="title-wrap">
+                  <div>{title}</div>
+                </div>
                 <Typography variant="body2" color="textSecondary">
-                  {`Genres: ${genres.join(', ')}`}
+                  {new Date(releaseDate).getFullYear()}
                 </Typography>
-              </Grid>
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                {overview}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                {`Genres: ${genres.join(', ')}`}
+              </Typography>
             </Grid>
-            <Grid item>
-              <Chip className="chip" label={voteAverage} variant="outlined" />
-            </Grid>
+          </Grid>
+          <Grid item>
+            <Chip className="chip" label={voteAverage} variant="outlined" />
           </Grid>
         </Grid>
+      </Grid>
     );
   }
 }

@@ -73,4 +73,9 @@ export default class MoviePage extends React.Component {
 MoviePage.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  page: PropTypes.number.isRequired,
+  totalResults: PropTypes.number.isRequired,
+  showCircular: PropTypes.bool.isRequired,
+  getActionDispatcher: PropTypes.func.isRequired,
 };
