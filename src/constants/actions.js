@@ -3,3 +3,5 @@ export const MOVIES = {
   SEARCH_RESET: 'SEARCH_MOVIES_RESET',
   LOAD: 'LOAD_MOVIES',
 };
+
+export default MOVIES;

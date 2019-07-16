@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
-import { searchMoviesByTitle } from '../../api/api';
+import { getSearchMovies } from '../../api/api';
 import { MOVIES } from '../../constants/actions';
 
 import './search.css';
@@ -18,7 +18,7 @@ export class Search extends React.Component {
 
   searchClick = (searchQuery) => {
     if (searchQuery) {
-      searchMoviesByTitle(searchQuery)
+      getSearchMovies(searchQuery)
         .then((payload) => {
           const { getActionDispatcher } = this.props;
           const dispatch = getActionDispatcher({ payload, type: MOVIES.SEARCH });

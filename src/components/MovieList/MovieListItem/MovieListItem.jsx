@@ -57,7 +57,7 @@ export class MovieListItem extends React.Component {
                   {overview}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  {/* {`Genres: ${genres.join(', ')}`} */}
+                  {`Genres: ${genres.join(', ')}`}
                 </Typography>
               </Grid>
             </Grid>
