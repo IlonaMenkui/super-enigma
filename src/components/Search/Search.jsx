@@ -29,7 +29,7 @@ export class Search extends React.Component {
 
   render() {
     return (
-      <div className="search">
+      <div className="search-wrap">
         <InputBase
           placeholder="Search…"
           className="input"

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Paper } from '@material-ui/core';
+
 import { PAGE_COUNT } from '../constants/constants';
 import { MOVIES } from '../constants/actions';
 import Search from '../containers/Search';
@@ -59,8 +61,10 @@ export default class MoviePage extends React.Component {
           page={page}
           totalResults={totalResults}
         />
-        <Search />
-        <MovieList movies={movies} pageTitle={title} showCircular={showCircular} />
+        <Paper>
+          <Search />
+          <MovieList movies={movies} pageTitle={title} showCircular={showCircular} />
+        </Paper>
       </div>
     );
   }

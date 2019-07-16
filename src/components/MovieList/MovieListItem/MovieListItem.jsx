@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
@@ -24,7 +23,6 @@ export class MovieListItem extends React.Component {
       originalLanguage, voteCount, originalTitle,
     } = this.props;
     return (
-      <Paper>
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase>
@@ -66,7 +64,6 @@ export class MovieListItem extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-      </Paper>
     );
   }
 }
