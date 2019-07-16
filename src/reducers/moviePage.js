@@ -1,12 +1,22 @@
 import { MOVIES } from '../constants/actions';
 
-export const search = (state = {}, action) => {
+const defaultState = {
+  movies: [],
+  page: 1,
+  totalResults: 0,
+  showCircular: true,
+};
+
+export const moviePage = (state = defaultState, action) => {
   switch (action.type) {
-    case MOVIES.SEARCH:
-      return action.payload;
+    case MOVIES.LOAD:
+      return {
+        ...defaultState,
+        ...action.payload,
+      };
     default:
       return state;
   }
 };
 
-export default search;
+export default moviePage;

@@ -1,9 +1,17 @@
 import { MOVIES } from '../constants/actions';
 
-export const search = (state = {}, action) => {
+const defaultState = {
+  movies: [],
+};
+
+export const search = (state = defaultState, action) => {
   switch (action.type) {
     case MOVIES.SEARCH:
-      return action.payload;
+      return {
+        ...action.payload,
+      };
+    case MOVIES.SEARCH_RESET:
+      return defaultState;
     default:
       return state;
   }

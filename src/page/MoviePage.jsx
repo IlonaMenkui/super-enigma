@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { PAGE_COUNT } from '../constants/constants';
+import { MOVIES } from '../constants/actions';
 import Search from '../containers/Search';
 import MovieList from '../components/MovieList/MovieList';
 
@@ -9,18 +10,8 @@ import { getMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
 export default class MoviePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      movies: [],
-      page: 1,
-      totalResults: 0,
-      showCircular: true,
-    };
-  }
-
   componentDidMount() {
-    const { page } = this.state;
+    const { page } = this.props;
     this.loadMovies(page);
   }
 
@@ -38,21 +29,29 @@ export default class MoviePage extends React.Component {
   }
 
   loadMovies(page) {
-    const { type } = this.props;
+    const { type, getActionDispatcher } = this.props;
     return getMovies(type, page)
       .then(({ movies, totalResults }) => {
-        this.setState({ movies, totalResults, page });
-      })
-      .then(() => {
-        this.setState({ showCircular: false });
+        getActionDispatcher({
+          type: MOVIES.LOAD,
+          payload: {
+            movies,
+            totalResults,
+            page,
+            showCircular: false,
+          },
+        })();
+        getActionDispatcher({
+          type: MOVIES.SEARCH_RESET,
+        })();
       });
   }
 
   render() {
-    const { title } = this.props;
     const {
-      movies, page, totalResults, showCircular,
-    } = this.state;
+      title, movies, page, totalResults, showCircular,
+    } = this.props;
+
     return (
       <div>
         <FlatPagination

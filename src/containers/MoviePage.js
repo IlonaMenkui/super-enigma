@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import MoviePage from '../page/MoviePage';
 
-const mapStateToProps = state => ({
-  ...state.payload,
+const mapStateToProps = ({ search, moviePage }) => ({
+  ...moviePage,
+  movies: search.movies.length ? search.movies : moviePage.movies,
 });
 
 const mapDispatchToProps = dispatch => ({

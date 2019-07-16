@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { Search } from '../components/Search/Search';
 
 const mapStateToProps = state => ({
-  ...state,
+  ...state.search,
 });
 
 const mapDispatchToProps = dispatch => ({
