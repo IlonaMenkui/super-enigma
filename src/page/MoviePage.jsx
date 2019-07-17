@@ -19,7 +19,9 @@ export default class MoviePage extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { title: prevTitle, searchQuery: prevSearchQuery } = prevProps;
-    const { title, isSearch, searchQuery, page } = this.props;
+    const {
+      title, isSearch, searchQuery, page,
+    } = this.props;
     if (prevTitle !== title) {
       this.loadMovies(1);
     }
@@ -102,4 +104,6 @@ MoviePage.propTypes = {
   totalResults: PropTypes.number.isRequired,
   showCircular: PropTypes.bool.isRequired,
   getActionDispatcher: PropTypes.func.isRequired,
+  searchQuery: PropTypes.string.isRequired,
+  isSearch: PropTypes.bool.isRequired,
 };

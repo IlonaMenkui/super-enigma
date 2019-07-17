@@ -18,7 +18,11 @@ export class Search extends React.Component {
   searchClick = (searchQuery) => {
     if (searchQuery) {
       const { getActionDispatcher } = this.props;
-      const dispatch = getActionDispatcher({ payload: { searchQuery, isSearch: true }, type: MOVIES.SEARCH });
+      const dispatch = getActionDispatcher({
+        payload:
+        { searchQuery, isSearch: true },
+        type: MOVIES.SEARCH,
+      });
       dispatch();
     }
   };
