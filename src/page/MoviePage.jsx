@@ -77,7 +77,7 @@ export default class MoviePage extends React.Component {
 
   render() {
     const {
-      title, movies, page, totalResults, showCircular,
+      title, movies, page, totalResults, showCircular, isSearch,
     } = this.props;
 
     return (
@@ -89,7 +89,7 @@ export default class MoviePage extends React.Component {
         />
         <Paper>
           <Search />
-          <MovieList movies={movies} pageTitle={title} showCircular={showCircular} />
+          <MovieList movies={movies} pageTitle={movies.length === 0 && isSearch ? 'No results' : isSearch ? 'Searching results:' : title} showCircular={showCircular} />
         </Paper>
       </div>
     );

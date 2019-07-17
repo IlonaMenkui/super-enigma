@@ -2,6 +2,7 @@ export const MOVIES = {
   SEARCH: 'SEARCH_MOVIES',
   SEARCH_RESET: 'SEARCH_MOVIES_RESET',
   LOAD: 'LOAD_MOVIES',
+  TITLE: 'GET_PAGE_TITLE',
 };
 
 export default MOVIES;
