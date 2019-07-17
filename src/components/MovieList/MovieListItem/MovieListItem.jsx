@@ -52,7 +52,7 @@ export class MovieListItem extends React.Component {
                 </Typography>
               </Typography>
               <Typography variant="body2" gutterBottom>
-                {overview}
+                {overview || 'No overview'}
               </Typography>
               <Typography variant="body2" color="textSecondary">
                 {`Genres: ${genres.join(', ')}`}
