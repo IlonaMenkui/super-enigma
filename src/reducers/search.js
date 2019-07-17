@@ -1,7 +1,8 @@
 import { MOVIES } from '../constants/actions';
 
 const defaultState = {
-  movies: [],
+  isSearch: false,
+  searchQuery: '',
 };
 
 export const search = (state = defaultState, action) => {

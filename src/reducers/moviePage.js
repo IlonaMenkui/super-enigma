@@ -5,6 +5,8 @@ const defaultState = {
   page: 1,
   totalResults: 0,
   showCircular: true,
+  isSearch: false,
+  searchQuery: '',
 };
 
 export const moviePage = (state = defaultState, action) => {

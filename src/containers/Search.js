@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { Search } from '../components/Search/Search';
 
-const mapStateToProps = state => ({
-  ...state.search,
+const mapStateToProps = ({ search }) => ({
+  ...search,
 });
 
 const mapDispatchToProps = dispatch => ({

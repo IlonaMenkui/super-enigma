@@ -8,7 +8,7 @@ import { MOVIES } from '../constants/actions';
 import Search from '../containers/Search';
 import MovieList from '../components/MovieList/MovieList';
 
-import { getMovies } from '../api/api';
+import { getMovies, getSearchMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
 export default class MoviePage extends React.Component {
@@ -18,16 +18,40 @@ export default class MoviePage extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { title: prevTitle } = prevProps;
-    const { title } = this.props;
+    const { title: prevTitle, searchQuery: prevSearchQuery } = prevProps;
+    const { title, isSearch, searchQuery, page } = this.props;
     if (prevTitle !== title) {
       this.loadMovies(1);
+    }
+    if (isSearch && prevSearchQuery !== searchQuery) {
+      this.searchMovies(page);
     }
   }
 
   changePage(offset) {
     const page = offset / PAGE_COUNT + 1;
-    this.loadMovies(page);
+    const { isSearch } = this.props;
+    if (isSearch) {
+      this.searchMovies(page);
+    } else {
+      this.loadMovies(page);
+    }
+  }
+
+  searchMovies(page) {
+    const { searchQuery, getActionDispatcher } = this.props;
+    return getSearchMovies(searchQuery, page)
+      .then(({ movies, totalResults }) => {
+        getActionDispatcher({
+          type: MOVIES.LOAD,
+          payload: {
+            movies,
+            totalResults,
+            page,
+            showCircular: false,
+          },
+        })();
+      });
   }
 
   loadMovies(page) {

@@ -3,7 +3,7 @@ import MoviePage from '../page/MoviePage';
 
 const mapStateToProps = ({ search, moviePage }) => ({
   ...moviePage,
-  movies: search.movies.length ? search.movies : moviePage.movies,
+  ...search,
 });
 
 const mapDispatchToProps = dispatch => ({
