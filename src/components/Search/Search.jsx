@@ -10,11 +10,6 @@ import { MOVIES } from '../../constants/actions';
 import './search.css';
 
 export class Search extends React.Component {
-  constructor(props) {
-    super(props);
-    this.searchQuery = false;
-  }
-
   searchClick = (searchQuery) => {
     if (searchQuery) {
       const { getActionDispatcher } = this.props;
