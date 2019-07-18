@@ -20,13 +20,13 @@ export default class MoviePage extends React.Component {
   componentDidUpdate(prevProps) {
     const { title: prevTitle, searchQuery: prevSearchQuery } = prevProps;
     const {
-      title, isSearch, searchQuery, page,
+      title, isSearch, searchQuery,
     } = this.props;
     if (prevTitle !== title) {
       this.loadMovies(1);
     }
     if (isSearch && prevSearchQuery !== searchQuery) {
-      this.searchMovies(page);
+      this.searchMovies(1);
     }
   }
 
