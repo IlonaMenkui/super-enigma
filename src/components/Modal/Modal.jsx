@@ -49,7 +49,7 @@ export class SimpleModal extends React.Component {
               </Typography>
               <Typography variant="subtitle2">
                 <b>Full date of release: </b>
-                {releaseDate ? `${releaseDate.replace(/-/g, '.')}` : "No release date"}
+                {releaseDate ? `${releaseDate.replace(/-/g, '.')}` : 'No release date'}
               </Typography>
               <Typography variant="subtitle2">
                 <b>Overview: </b>

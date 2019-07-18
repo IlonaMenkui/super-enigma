@@ -36,7 +36,13 @@ export class Search extends React.Component {
           inputProps={{ 'aria-label': 'Search' }}
           onChange={(e) => {
             this.searchQuery = e.target.value;
+            const { getActionDispatcher } = this.props;
+            const dispatch = getActionDispatcher({
+              type: MOVIES.SEARCH_QUERY,
+            });
+            dispatch();
           }}
+          value={this.props.searchQuery}
         />
         <div className="search-icon">
           <SearchIcon

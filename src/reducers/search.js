@@ -13,6 +13,10 @@ export const search = (state = defaultState, action) => {
       };
     case MOVIES.SEARCH_RESET:
       return defaultState;
+    case MOVIES.SEARCH_QUERY:
+      return {
+        ...action.payload,
+      };
     default:
       return state;
   }
