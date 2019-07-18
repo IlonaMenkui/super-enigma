@@ -12,7 +12,7 @@ import './search.css';
 export class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.searchQuery = null;
+    this.searchQuery = false;
   }
 
   searchClick = (searchQuery) => {
@@ -28,6 +28,7 @@ export class Search extends React.Component {
   };
 
   render() {
+    const { isSearch, searchQuery } = this.props;
     return (
       <div className="search-wrap">
         <InputBase
@@ -38,11 +39,12 @@ export class Search extends React.Component {
             this.searchQuery = e.target.value;
             const { getActionDispatcher } = this.props;
             const dispatch = getActionDispatcher({
+              payload: { isSearch },
               type: MOVIES.SEARCH_QUERY,
             });
             dispatch();
           }}
-          value={this.props.searchQuery}
+          value={searchQuery}
         />
         <div className="search-icon">
           <SearchIcon
@@ -57,5 +59,7 @@ export class Search extends React.Component {
 
 Search.propTypes = {
   getActionDispatcher: PropTypes.func.isRequired,
+  isSearch: PropTypes.bool.isRequired,
+  searchQuery: PropTypes.string,
 };
 export default Search;
