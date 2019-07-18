@@ -1,9 +1,42 @@
 import axios from 'axios';
 
-import { PARAMS as params, STATIC_URL as imgUrl } from '../app.constants';
+import { PARAMS as params, STATIC_URL as imgUrl } from '../constants/constants';
 import noImg from '../static/images/no-img.png';
 
 let cachedGenres = null;
+
+export const searchMoviesWithoutGenres = (searchQuery, page) => axios.get(
+  `${params.SEARCH_URL}`,
+  {
+    params: {
+      api_key: params.API_KEY,
+      query: searchQuery,
+      page,
+    },
+  },
+)
+  .then(((res) => {
+    const { total_results: totalResults, results } = res.data;
+    const movies = results.map(
+      ({
+        title, genre_ids: genresIds, vote_average: voteAverage, overview, poster_path: posterPath,
+        release_date: releaseDate, popularity,
+        original_language: originalLanguage, vote_count: voteCount, original_title: originalTitle,
+      }) => ({
+        title,
+        genresIds,
+        voteAverage,
+        overview,
+        popularity,
+        originalLanguage,
+        voteCount,
+        originalTitle,
+        releaseDate,
+        posterPath: posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`,
+      }),
+    );
+    return { totalResults, movies };
+  }));
 
 const getMoviesWithoutGenres = (type, page) => axios.get(
   `${params.URL}${type}`,
@@ -28,7 +61,6 @@ const getMoviesWithoutGenres = (type, page) => axios.get(
         voteCount,
         originalTitle,
         releaseDate,
-        // eslint-disable-next-line camelcase
         posterPath: posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`,
       }),
     );
@@ -58,6 +90,12 @@ const getAllGenres = () => (cachedGenres ? Promise.resolve(cachedGenres) : axios
     return genres;
   }));
 
+export const getSearchMovies = (searchQuery, page) => getAllGenres()
+  .then(genres => searchMoviesWithoutGenres(searchQuery, page)
+    .then(({ movies, totalResults }) => ({
+      totalResults,
+      movies: movies.map(movie => getMovieWithGenres(movie, genres)),
+    })));
 
 export const getMovies = (type, page) => getAllGenres()
   .then(genres => getMoviesWithoutGenres(type, page)

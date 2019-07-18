@@ -1,57 +1,85 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PAGE_COUNT } from '../app.constants';
+import { Paper } from '@material-ui/core';
+
+import { PAGE_COUNT } from '../constants/constants';
+import { MOVIES } from '../constants/actions';
+import Search from '../containers/Search';
 import MovieList from '../components/MovieList/MovieList';
 
-import { getMovies } from '../api/api';
+import { getMovies, getSearchMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
 export default class MoviePage extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      movies: [],
-      page: 1,
-      totalResults: 0,
-      showCircular: true,
-    };
-  }
-
   componentDidMount() {
-    const { page } = this.state;
+    const { page } = this.props;
     this.loadMovies(page);
   }
 
   componentDidUpdate(prevProps) {
-    const { title: prevTitle } = prevProps;
-    const { title } = this.props;
+    const { title: prevTitle, searchQuery: prevSearchQuery } = prevProps;
+    const {
+      title, isSearch, searchQuery,
+    } = this.props;
     if (prevTitle !== title) {
       this.loadMovies(1);
+    }
+    if (isSearch && prevSearchQuery !== searchQuery) {
+      this.searchMovies(1);
     }
   }
 
   changePage(offset) {
     const page = offset / PAGE_COUNT + 1;
-    this.loadMovies(page);
+    const { isSearch } = this.props;
+    if (isSearch) {
+      this.searchMovies(page);
+    } else {
+      this.loadMovies(page);
+    }
+  }
+
+  searchMovies(page) {
+    const { searchQuery, getActionDispatcher } = this.props;
+    return getSearchMovies(searchQuery, page)
+      .then(({ movies, totalResults }) => {
+        getActionDispatcher({
+          type: MOVIES.LOAD,
+          payload: {
+            movies,
+            totalResults,
+            page,
+            showCircular: false,
+          },
+        })();
+      });
   }
 
   loadMovies(page) {
-    const { type } = this.props;
+    const { type, getActionDispatcher } = this.props;
     return getMovies(type, page)
       .then(({ movies, totalResults }) => {
-        this.setState({ movies, totalResults, page });
-      })
-      .then(() => {
-        this.setState({ showCircular: false });
+        getActionDispatcher({
+          type: MOVIES.LOAD,
+          payload: {
+            movies,
+            totalResults,
+            page,
+            showCircular: false,
+          },
+        })();
+        getActionDispatcher({
+          type: MOVIES.SEARCH_RESET,
+        })();
       });
   }
 
   render() {
-    const { title } = this.props;
     const {
-      movies, page, totalResults, showCircular,
-    } = this.state;
+      title, movies, page, totalResults, showCircular, isSearch,
+    } = this.props;
+
     return (
       <div>
         <FlatPagination
@@ -59,7 +87,10 @@ export default class MoviePage extends React.Component {
           page={page}
           totalResults={totalResults}
         />
-        <MovieList movies={movies} pageTitle={title} showCircular={showCircular} />
+        <Paper>
+          <Search />
+          <MovieList movies={movies} pageTitle={movies.length === 0 && isSearch ? 'No results' : isSearch ? 'Searching results:' : title} showCircular={showCircular} />
+        </Paper>
       </div>
     );
   }
@@ -68,4 +99,11 @@ export default class MoviePage extends React.Component {
 MoviePage.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  page: PropTypes.number.isRequired,
+  totalResults: PropTypes.number.isRequired,
+  showCircular: PropTypes.bool.isRequired,
+  getActionDispatcher: PropTypes.func.isRequired,
+  searchQuery: PropTypes.string.isRequired,
+  isSearch: PropTypes.bool.isRequired,
 };

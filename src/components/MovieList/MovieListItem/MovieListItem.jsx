@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
@@ -24,49 +23,47 @@ export class MovieListItem extends React.Component {
       originalLanguage, voteCount, originalTitle,
     } = this.props;
     return (
-      <Paper>
-        <Grid container spacing={2}>
-          <Grid item>
-            <ButtonBase>
-              <SimpleModal
-                popularity={popularity}
-                originalLanguage={originalLanguage}
-                voteCount={voteCount}
-                originalTitle={originalTitle}
-                genres={genres}
-                title={title}
-                overview={overview}
-                posterPath={posterPath}
-                voteAverage={voteAverage}
-                releaseDate={releaseDate}
-              />
-            </ButtonBase>
-          </Grid>
-          <Grid item xs={12} sm container>
-            <Grid className="overview" item xs container direction="column" spacing={2}>
-              <Grid item xs>
-                <Typography gutterBottom variant="h5">
-                  <div className="title-wrap">
-                    <div>{title}</div>
-                  </div>
-                  <Typography variant="body2" color="textSecondary">
-                    {new Date(releaseDate).getFullYear()}
-                  </Typography>
-                </Typography>
-                <Typography variant="body2" gutterBottom>
-                  {overview}
-                </Typography>
+      <Grid container spacing={2}>
+        <Grid item>
+          <ButtonBase>
+            <SimpleModal
+              popularity={popularity}
+              originalLanguage={originalLanguage}
+              voteCount={voteCount}
+              originalTitle={originalTitle}
+              genres={genres}
+              title={title}
+              overview={overview}
+              posterPath={posterPath}
+              voteAverage={voteAverage}
+              releaseDate={releaseDate}
+            />
+          </ButtonBase>
+        </Grid>
+        <Grid item xs={12} sm container>
+          <Grid className="overview" item xs container direction="column" spacing={2}>
+            <Grid item xs>
+              <Typography gutterBottom variant="h5">
+                <div className="title-wrap">
+                  <div>{title}</div>
+                </div>
                 <Typography variant="body2" color="textSecondary">
-                  {`Genres: ${genres.join(', ')}`}
+                  {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
                 </Typography>
-              </Grid>
+              </Typography>
+              <Typography variant="body2" gutterBottom>
+                {overview || 'No overview'}
+              </Typography>
+              <Typography variant="body2" color="textSecondary">
+                {genres[0] !== undefined ? `Genres: ${genres.join(', ')}` : 'No genres'}
+              </Typography>
             </Grid>
-            <Grid item>
-              <Chip className="chip" label={voteAverage} variant="outlined" />
-            </Grid>
+          </Grid>
+          <Grid item>
+            <Chip className="chip" label={voteAverage} variant="outlined" />
           </Grid>
         </Grid>
-      </Paper>
+      </Grid>
     );
   }
 }

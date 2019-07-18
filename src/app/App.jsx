@@ -3,8 +3,8 @@ import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 import Header from '../components/Header';
-import { ROUTES, MOVIE_TYPE as type } from '../app.constants';
-import MoviePage from '../page/MoviePage';
+import { ROUTES, MOVIE_TYPE as type } from '../constants/constants';
+import MoviePage from '../containers/MoviePage';
 
 import './app.css';
 
