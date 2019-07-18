@@ -48,14 +48,14 @@ export class MovieListItem extends React.Component {
                   <div>{title}</div>
                 </div>
                 <Typography variant="body2" color="textSecondary">
-                  {new Date(releaseDate).getFullYear()}
+                  {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
                 </Typography>
               </Typography>
               <Typography variant="body2" gutterBottom>
                 {overview || 'No overview'}
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                {`Genres: ${genres.join(', ')}`}
+                {genres[0] !== undefined ? `Genres: ${genres.join(', ')}` : 'No genres'}
               </Typography>
             </Grid>
           </Grid>
