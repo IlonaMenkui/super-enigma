@@ -11,7 +11,7 @@ const defaultState = {
 
 export const moviePage = (state = defaultState, action) => {
   switch (action.type) {
-    case MOVIES.LOAD:
+    case MOVIES.LOAD_SUCCESS:
       return {
         ...defaultState,
         ...action.payload,

@@ -60,10 +60,13 @@ class MoviePage extends React.Component {
 
   loadMovies(page) {
     const { type, getActionDispatcher } = this.props;
+    getActionDispatcher({
+      type: MOVIES.REQUEST,
+    })();
     return getMovies(type, page)
       .then(({ movies, totalResults }) => {
         getActionDispatcher({
-          type: MOVIES.LOAD,
+          type: MOVIES.LOAD_SUCCESS,
           payload: {
             movies,
             totalResults,
@@ -74,7 +77,8 @@ class MoviePage extends React.Component {
         getActionDispatcher({
           type: MOVIES.SEARCH_RESET,
         })();
-      });
+      })
+      .catch((e) => { console.log(e); });
   }
 
   render() {
