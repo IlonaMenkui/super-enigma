@@ -78,7 +78,11 @@ class MoviePage extends React.Component {
           type: MOVIES.SEARCH_RESET,
         })();
       })
-      .catch((e) => { console.log(e); });
+      .catch(() => {
+        getActionDispatcher({
+          type: MOVIES.FAILURE,
+        })();
+      });
   }
 
   render() {

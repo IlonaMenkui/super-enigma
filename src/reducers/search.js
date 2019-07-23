@@ -20,6 +20,8 @@ export const search = (state = defaultState, action) => {
       };
     case MOVIES.REQUEST:
       return { showCircular: true };
+    case MOVIES.FAILURE:
+      return { showCircular: false };
     default:
       return state;
   }
