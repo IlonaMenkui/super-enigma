@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { connect } from 'react-redux';
+
 import PropTypes from 'prop-types';
 
 import SearchIcon from '@material-ui/icons/Search';
@@ -9,7 +11,7 @@ import { MOVIES } from '../../constants/actions';
 
 import './search.css';
 
-export class Search extends React.Component {
+class Search extends React.Component {
   searchClick = (searchQuery) => {
     if (searchQuery) {
       const { getActionDispatcher } = this.props;
@@ -52,9 +54,21 @@ export class Search extends React.Component {
   }
 }
 
+const mapStateToProps = ({ search }) => ({
+  ...search,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getActionDispatcher: action => () => dispatch(action),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Search);
+
 Search.propTypes = {
   getActionDispatcher: PropTypes.func.isRequired,
   isSearch: PropTypes.bool.isRequired,
   searchQuery: PropTypes.string,
 };
-export default Search;

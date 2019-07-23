@@ -7,8 +7,8 @@ import { Paper } from '@material-ui/core';
 
 import { PAGE_COUNT } from '../constants/constants';
 import { MOVIES } from '../constants/actions';
-import Search from '../containers/Search';
-import MovieList from '../components/MovieList/MovieList';
+import Search from '../components/Search';
+import MovieList from '../components/MovieList';
 
 import { getMovies, getSearchMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
