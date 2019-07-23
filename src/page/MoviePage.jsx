@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import { Paper } from '@material-ui/core';
 
 import { PAGE_COUNT } from '../constants/constants';
@@ -11,7 +13,7 @@ import MovieList from '../components/MovieList/MovieList';
 import { getMovies, getSearchMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
-export default class MoviePage extends React.Component {
+class MoviePage extends React.Component {
   componentDidMount() {
     const { page } = this.props;
     this.loadMovies(page);
@@ -95,6 +97,20 @@ export default class MoviePage extends React.Component {
     );
   }
 }
+
+const mapStateToProps = ({ search, moviePage }) => ({
+  ...moviePage,
+  ...search,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getActionDispatcher: action => () => dispatch(action),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(MoviePage);
 
 MoviePage.propTypes = {
   title: PropTypes.string.isRequired,
