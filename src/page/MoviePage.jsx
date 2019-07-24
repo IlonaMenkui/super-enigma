@@ -101,7 +101,7 @@ export default class MoviePage extends React.Component {
       title, movies, page, totalResults, showCircular, isSearch,
     } = this.props;
 
-    const pageTitleF = () => {
+    const definePageTitle = () => {
       if (movies.length === 0 && isSearch) { return 'No results'; }
       if (isSearch) { return 'Searching results:'; } return title;
     };
@@ -115,7 +115,7 @@ export default class MoviePage extends React.Component {
         />
         <Paper>
           <Search />
-          <MovieList movies={movies} pageTitle={pageTitleF()} showCircular={showCircular} />
+          <MovieList movies={movies} pageTitle={definePageTitle()} showCircular={showCircular} />
         </Paper>
       </div>
     );
