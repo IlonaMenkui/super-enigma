@@ -32,6 +32,7 @@ class Search extends React.Component {
           placeholder="Search…"
           className="input"
           inputProps={{ 'aria-label': 'Search' }}
+          onKeyPress={(e) => { if (e.charCode === 13) { this.searchClick(this.searchQuery); } }}
           onChange={(e) => {
             this.searchQuery = e.target.value;
             const { getActionDispatcher } = this.props;
