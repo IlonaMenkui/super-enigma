@@ -4,7 +4,7 @@ const defaultState = {
   movies: [],
   page: 1,
   totalResults: 0,
-  showCircular: true,
+  showCircular: false,
   isSearch: false,
   searchQuery: '',
 };

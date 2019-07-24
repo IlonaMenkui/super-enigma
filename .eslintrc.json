@@ -5,6 +5,9 @@
     "airbnb/rules/react"
   ],
   "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": { "legacyDecorators": true }
+  },
   "rules": {
     "react/destructuring-assignment": "warn",
     "react/no-did-update-set-state": "off",

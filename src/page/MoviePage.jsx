@@ -13,7 +13,17 @@ import MovieList from '../components/MovieList';
 import { getMovies, getSearchMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
-class MoviePage extends React.Component {
+const mapStateToProps = ({ search, moviePage }) => ({
+  ...moviePage,
+  ...search,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getActionDispatcher: action => () => dispatch(action),
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class MoviePage extends React.Component {
   componentDidMount() {
     const { page } = this.props;
     this.loadMovies(page);
@@ -47,7 +57,7 @@ class MoviePage extends React.Component {
     return getSearchMovies(searchQuery, page)
       .then(({ movies, totalResults }) => {
         getActionDispatcher({
-          type: MOVIES.LOAD,
+          type: MOVIES.LOAD_SUCCESS,
           payload: {
             movies,
             totalResults,
@@ -85,10 +95,16 @@ class MoviePage extends React.Component {
       });
   }
 
+
   render() {
     const {
       title, movies, page, totalResults, showCircular, isSearch,
     } = this.props;
+
+    const pageTitleF = () => {
+      if (movies.length === 0 && isSearch) { return 'No results'; }
+      if (isSearch) { return 'Searching results:'; } return title;
+    };
 
     return (
       <div>
@@ -99,26 +115,12 @@ class MoviePage extends React.Component {
         />
         <Paper>
           <Search />
-          <MovieList movies={movies} pageTitle={movies.length === 0 && isSearch ? 'No results' : isSearch ? 'Searching results:' : title} showCircular={showCircular} />
+          <MovieList movies={movies} pageTitle={pageTitleF()} showCircular={showCircular} />
         </Paper>
       </div>
     );
   }
 }
-
-const mapStateToProps = ({ search, moviePage }) => ({
-  ...moviePage,
-  ...search,
-});
-
-const mapDispatchToProps = dispatch => ({
-  getActionDispatcher: action => () => dispatch(action),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(MoviePage);
 
 MoviePage.propTypes = {
   title: PropTypes.string.isRequired,
