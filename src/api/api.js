@@ -5,7 +5,7 @@ import noImg from '../static/images/no-img.png';
 
 let cachedGenres = null;
 
-export const getMoviesWithoutGenres = (searchQuery, page, type) => axios.get(
+export const getMoviesWithoutGenres = ({ searchQuery, page, type }) => axios.get(
   type !== undefined ? `${params.URL}${type}` : `${params.SEARCH_URL}`,
   {
     params: {
@@ -62,14 +62,14 @@ const getAllGenres = () => (cachedGenres ? Promise.resolve(cachedGenres) : axios
   }));
 
 export const getSearchMovies = (searchQuery, page) => getAllGenres()
-  .then(genres => getMoviesWithoutGenres(searchQuery, page)
+  .then(genres => getMoviesWithoutGenres({ searchQuery, page })
     .then(({ movies, totalResults }) => ({
       totalResults,
       movies: movies.map(movie => getMovieWithGenres(movie, genres)),
     })));
 
 export const getMovies = (type, page) => getAllGenres()
-  .then(genres => getMoviesWithoutGenres(undefined, page, type)
+  .then(genres => getMoviesWithoutGenres({ page, type })
     .then(({ movies, totalResults }) => ({
       totalResults,
       movies: movies.map(movie => getMovieWithGenres(movie, genres)),
