@@ -61,15 +61,8 @@ const getAllGenres = () => (cachedGenres ? Promise.resolve(cachedGenres) : axios
     return genres;
   }));
 
-export const getSearchMovies = (searchQuery, page) => getAllGenres()
-  .then(genres => getMoviesWithoutGenres({ searchQuery, page })
-    .then(({ movies, totalResults }) => ({
-      totalResults,
-      movies: movies.map(movie => getMovieWithGenres(movie, genres)),
-    })));
-
-export const getMovies = (type, page) => getAllGenres()
-  .then(genres => getMoviesWithoutGenres({ page, type })
+export const getMovies = ({ searchQuery, type, page }) => getAllGenres()
+  .then(genres => getMoviesWithoutGenres({ searchQuery, page, type })
     .then(({ movies, totalResults }) => ({
       totalResults,
       movies: movies.map(movie => getMovieWithGenres(movie, genres)),

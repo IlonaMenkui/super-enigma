@@ -10,7 +10,7 @@ import { MOVIES } from '../constants/actions';
 import Search from '../components/Search';
 import MovieList from '../components/MovieList';
 
-import { getMovies, getSearchMovies } from '../api/api';
+import { getMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
 const mapStateToProps = ({ search, moviePage }) => ({
@@ -54,7 +54,7 @@ export default class MoviePage extends React.Component {
 
   searchMovies(page) {
     const { searchQuery, getActionDispatcher } = this.props;
-    return getSearchMovies(searchQuery, page)
+    return getMovies({ searchQuery, page })
       .then(({ movies, totalResults }) => {
         getActionDispatcher({
           type: MOVIES.LOAD_SUCCESS,
@@ -73,7 +73,7 @@ export default class MoviePage extends React.Component {
     getActionDispatcher({
       type: MOVIES.REQUEST,
     })();
-    return getMovies(type, page)
+    return getMovies({ type, page })
       .then(({ movies, totalResults }) => {
         getActionDispatcher({
           type: MOVIES.LOAD_SUCCESS,
