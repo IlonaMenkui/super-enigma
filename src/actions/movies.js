@@ -16,10 +16,3 @@ export const failure = () => ({
 export const reset = () => ({
   type: MOVIES.SEARCH_RESET,
 });
-
-export default {
-  request,
-  succsess,
-  failure,
-  reset,
-};

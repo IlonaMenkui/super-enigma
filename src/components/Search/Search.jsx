@@ -41,7 +41,11 @@ export default class Search extends React.Component {
           placeholder="Search…"
           className="input"
           inputProps={{ 'aria-label': 'Search' }}
-          onKeyPress={(e) => { if (e.charCode === ENTER_KEY) { this.searchClick(this.searchQuery); } }}
+          onKeyPress={(e) => {
+            if (e.charCode === ENTER_KEY) {
+              this.searchClick(this.searchQuery);
+            }
+          }}
           onChange={(e) => {
             this.searchQuery = e.target.value;
             const { getActionDispatcher } = this.props;

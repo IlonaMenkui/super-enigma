@@ -8,7 +8,12 @@ import { Paper } from '@material-ui/core';
 import { PAGE_COUNT, PARAMS as params } from '../constants/constants';
 import Search from '../components/Search';
 import MovieList from '../components/MovieList';
-import { movies } from '../actions';
+import {
+  request,
+  succsess,
+  failure,
+  reset,
+} from '../actions/movies';
 
 import { getMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
@@ -19,10 +24,10 @@ import { FlatPagination } from '../components/FlatPagination/FlatPagination';
     ...search,
   }),
   dispatch => ({
-    requestMovies: () => dispatch(movies.request()),
-    successMovies: payload => dispatch(movies.succsess(payload)),
-    failureMovies: () => dispatch(movies.failure()),
-    resetSearchMovies: () => dispatch(movies.reset()),
+    requestLoadMovies: () => dispatch(request()),
+    successLoadMovies: payload => dispatch(succsess(payload)),
+    failureLoadMovies: () => dispatch(failure()),
+    resetSearchMovies: () => dispatch(reset()),
   }),
 )
 export default class MoviePage extends React.Component {
@@ -55,10 +60,10 @@ export default class MoviePage extends React.Component {
   }
 
   searchMovies(page) {
-    const { searchQuery, successMovies } = this.props;
+    const { searchQuery, successLoadMovies } = this.props;
     return getMovies({ searchQuery, page })
       .then(({ movies, totalResults }) => {
-        successMovies({
+        successLoadMovies({
           movies,
           totalResults,
           page,
@@ -69,13 +74,13 @@ export default class MoviePage extends React.Component {
 
   loadMovies(page) {
     const {
-      type, requestMovies, successMovies, failureMovies, resetSearchMovies,
+      type, requestLoadMovies, successLoadMovies, failureLoadMovies, resetSearchMovies,
     } = this.props;
     const url = `${params.URL}${type}`;
-    requestMovies();
+    requestLoadMovies();
     return getMovies({ page, url })
       .then(({ movies, totalResults }) => {
-        successMovies({
+        successLoadMovies({
           movies,
           totalResults,
           page,
@@ -84,7 +89,7 @@ export default class MoviePage extends React.Component {
         resetSearchMovies();
       })
       .catch(() => {
-        failureMovies();
+        failureLoadMovies();
       });
   }
 
@@ -121,8 +126,8 @@ MoviePage.propTypes = {
   showCircular: PropTypes.bool.isRequired,
   searchQuery: PropTypes.string.isRequired,
   isSearch: PropTypes.bool.isRequired,
-  requestMovies: PropTypes.func,
-  successMovies: PropTypes.func,
-  failureMovies: PropTypes.func,
+  requestLoadMovies: PropTypes.func,
+  successLoadMovies: PropTypes.func,
+  failureLoadMovies: PropTypes.func,
   resetSearchMovies: PropTypes.func,
 };
