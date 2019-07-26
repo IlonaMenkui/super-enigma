@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import { Paper } from '@material-ui/core';
 
 import { PAGE_COUNT } from '../constants/constants';
-import { MOVIES } from '../constants/actions';
 import Search from '../components/Search';
 import MovieList from '../components/MovieList';
+import { movies } from '../actions';
 
 import { getMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
@@ -19,7 +19,10 @@ const mapStateToProps = ({ search, moviePage }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getActionDispatcher: action => () => dispatch(action),
+  requestMovies: () => dispatch(movies.request()),
+  successMovies: payload => dispatch(movies.succsess(payload)),
+  failureMovies: () => dispatch(movies.failure()),
+  resetSearchMovies: () => dispatch(movies.reset()),
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -53,58 +56,45 @@ export default class MoviePage extends React.Component {
   }
 
   searchMovies(page) {
-    const { searchQuery, getActionDispatcher } = this.props;
+    const { searchQuery, successMovies } = this.props;
     return getMovies({ searchQuery, page })
       .then(({ movies, totalResults }) => {
-        getActionDispatcher({
-          type: MOVIES.LOAD_SUCCESS,
-          payload: {
-            movies,
-            totalResults,
-            page,
-            showCircular: false,
-          },
-        })();
+        successMovies({
+          movies,
+          totalResults,
+          page,
+          showCircular: false,
+        });
       });
   }
 
   loadMovies(page) {
-    const { type, getActionDispatcher } = this.props;
-    getActionDispatcher({
-      type: MOVIES.REQUEST,
-    })();
+    const {
+      type, requestMovies, successMovies, failureMovies, resetSearchMovies,
+    } = this.props;
+    requestMovies();
     return getMovies({ type, page })
       .then(({ movies, totalResults }) => {
-        getActionDispatcher({
-          type: MOVIES.LOAD_SUCCESS,
-          payload: {
-            movies,
-            totalResults,
-            page,
-            showCircular: false,
-          },
-        })();
-        getActionDispatcher({
-          type: MOVIES.SEARCH_RESET,
-        })();
+        successMovies({
+          movies,
+          totalResults,
+          page,
+          showCircular: false,
+        });
+        resetSearchMovies();
       })
       .catch(() => {
-        getActionDispatcher({
-          type: MOVIES.FAILURE,
-        })();
+        failureMovies();
       });
   }
-
 
   render() {
     const {
       title, movies, page, totalResults, showCircular, isSearch,
     } = this.props;
 
-    const definePageTitle = () => {
-      if (movies.length === 0 && isSearch) { return 'No results'; }
-      if (isSearch) { return 'Searching results:'; } return title;
-    };
+    const searchTitle = movies.length === 0 ? 'No results' : 'Searching results:';
+    const pageTitle = isSearch ? searchTitle : title;
 
     return (
       <div>
@@ -115,7 +105,7 @@ export default class MoviePage extends React.Component {
         />
         <Paper>
           <Search />
-          <MovieList movies={movies} pageTitle={definePageTitle()} showCircular={showCircular} />
+          <MovieList movies={movies} pageTitle={pageTitle} showCircular={showCircular} />
         </Paper>
       </div>
     );
@@ -129,7 +119,10 @@ MoviePage.propTypes = {
   page: PropTypes.number.isRequired,
   totalResults: PropTypes.number.isRequired,
   showCircular: PropTypes.bool.isRequired,
-  getActionDispatcher: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
   isSearch: PropTypes.bool.isRequired,
+  requestMovies: PropTypes.func,
+  successMovies: PropTypes.func,
+  failureMovies: PropTypes.func,
+  resetSearchMovies: PropTypes.func,
 };

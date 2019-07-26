@@ -28,6 +28,7 @@ export const BASE_URL = 'https://api.themoviedb.org/3/';
 
 export const PARAMS = {
   URL: `${BASE_URL}movie/`,
+  POPULAR_URL: `${URL}popular`,
   SEARCH_URL: `${BASE_URL}search/movie`,
   GENRES_URL: `${BASE_URL}genre/movie/list`,
   API_KEY: 'ab7c9fc53125a8e8d9fd23c8704f80e5',
@@ -36,3 +37,5 @@ export const PARAMS = {
 export const STATIC_URL = 'https://image.tmdb.org/t/p/w200/';
 
 export const PAGE_COUNT = 20;
+
+export const ENTER_KEY = 13;

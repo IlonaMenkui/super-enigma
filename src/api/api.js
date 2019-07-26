@@ -10,7 +10,7 @@ export const getMoviesWithoutGenres = ({ searchQuery, page, type }) => axios.get
   {
     params: {
       api_key: params.API_KEY,
-      query: searchQuery || undefined,
+      query: searchQuery,
       page,
     },
   },

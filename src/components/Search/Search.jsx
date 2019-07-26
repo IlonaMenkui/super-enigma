@@ -8,10 +8,20 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
 import { MOVIES } from '../../constants/actions';
+import { ENTER_KEY } from '../../constants/constants';
 
 import './search.css';
 
-class Search extends React.Component {
+const mapStateToProps = ({ search }) => ({
+  ...search,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getActionDispatcher: action => () => dispatch(action),
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class Search extends React.Component {
   searchClick = (searchQuery) => {
     if (searchQuery) {
       const { getActionDispatcher } = this.props;
@@ -32,7 +42,7 @@ class Search extends React.Component {
           placeholder="Search…"
           className="input"
           inputProps={{ 'aria-label': 'Search' }}
-          onKeyPress={(e) => { if (e.charCode === 13) { this.searchClick(this.searchQuery); } }}
+          onKeyPress={(e) => { if (e.charCode === ENTER_KEY) { this.searchClick(this.searchQuery); } }}
           onChange={(e) => {
             this.searchQuery = e.target.value;
             const { getActionDispatcher } = this.props;
@@ -54,19 +64,6 @@ class Search extends React.Component {
     );
   }
 }
-
-const mapStateToProps = ({ search }) => ({
-  ...search,
-});
-
-const mapDispatchToProps = dispatch => ({
-  getActionDispatcher: action => () => dispatch(action),
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Search);
 
 Search.propTypes = {
   getActionDispatcher: PropTypes.func.isRequired,
