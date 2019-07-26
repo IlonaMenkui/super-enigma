@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Paper } from '@material-ui/core';
 
-import { PAGE_COUNT } from '../constants/constants';
+import { PAGE_COUNT, MOVIE_TYPE as movieType, PARAMS as params } from '../constants/constants';
 import Search from '../components/Search';
 import MovieList from '../components/MovieList';
 import { movies } from '../actions';
@@ -72,8 +72,19 @@ export default class MoviePage extends React.Component {
     const {
       type, requestMovies, successMovies, failureMovies, resetSearchMovies,
     } = this.props;
+    let url;
+    if (type === movieType.POPULAR) {
+      url = movieType.POPULAR;
+    } else if (type === movieType.UPCOMING) {
+      url = movieType.UPCOMING;
+    } else if (type === movieType.NOW_PLAYING) {
+      url = movieType.NOW_PLAYING;
+    }
+    url = `${params.URL}${type}`;
+    // eslint-disable-next-line no-console
+    console.log(url);
     requestMovies();
-    return getMovies({ type, page })
+    return getMovies({ page, url })
       .then(({ movies, totalResults }) => {
         successMovies({
           movies,
