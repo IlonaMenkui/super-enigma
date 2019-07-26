@@ -126,8 +126,8 @@ MoviePage.propTypes = {
   showCircular: PropTypes.bool.isRequired,
   searchQuery: PropTypes.string.isRequired,
   isSearch: PropTypes.bool.isRequired,
-  requestLoadMovies: PropTypes.func,
-  successLoadMovies: PropTypes.func,
-  failureLoadMovies: PropTypes.func,
-  resetSearchMovies: PropTypes.func,
+  requestLoadMovies: PropTypes.func.isRequired,
+  successLoadMovies: PropTypes.func.isRequired,
+  failureLoadMovies: PropTypes.func.isRequired,
+  resetSearchMovies: PropTypes.func.isRequired,
 };

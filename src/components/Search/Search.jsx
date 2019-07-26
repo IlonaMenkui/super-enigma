@@ -9,6 +9,9 @@ import InputBase from '@material-ui/core/InputBase';
 
 import { MOVIES } from '../../constants/actions';
 import { ENTER_KEY } from '../../constants/constants';
+import {
+  searching,
+} from '../../actions/movies';
 
 import './search.css';
 
@@ -17,19 +20,15 @@ import './search.css';
     ...search,
   }),
   dispatch => ({
-    getActionDispatcher: action => () => dispatch(action),
+    searchMovies: payload => dispatch(searching(payload)),
   }),
 )
 export default class Search extends React.Component {
   searchClick = (searchQuery) => {
     if (searchQuery) {
-      const { getActionDispatcher } = this.props;
-      const dispatch = getActionDispatcher({
-        payload:
+      this.searchMovies(
         { searchQuery, isSearch: true },
-        type: MOVIES.SEARCH,
-      });
-      dispatch();
+      );
     }
   };
 
@@ -71,5 +70,5 @@ export default class Search extends React.Component {
 Search.propTypes = {
   getActionDispatcher: PropTypes.func.isRequired,
   isSearch: PropTypes.bool.isRequired,
-  searchQuery: PropTypes.string,
+  searchQuery: PropTypes.string.isRequired,
 };

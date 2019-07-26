@@ -16,3 +16,7 @@ export const failure = () => ({
 export const reset = () => ({
   type: MOVIES.SEARCH_RESET,
 });
+
+export const searching = () => ({
+  type: MOVIES.SEARCH,
+});
