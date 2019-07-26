@@ -12,15 +12,14 @@ import { ENTER_KEY } from '../../constants/constants';
 
 import './search.css';
 
-const mapStateToProps = ({ search }) => ({
-  ...search,
-});
-
-const mapDispatchToProps = dispatch => ({
-  getActionDispatcher: action => () => dispatch(action),
-});
-
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(
+  ({ search }) => ({
+    ...search,
+  }),
+  dispatch => ({
+    getActionDispatcher: action => () => dispatch(action),
+  }),
+)
 export default class Search extends React.Component {
   searchClick = (searchQuery) => {
     if (searchQuery) {
