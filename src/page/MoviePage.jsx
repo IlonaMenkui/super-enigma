@@ -13,19 +13,18 @@ import { movies } from '../actions';
 import { getMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
-const mapStateToProps = ({ search, moviePage }) => ({
-  ...moviePage,
-  ...search,
-});
-
-const mapDispatchToProps = dispatch => ({
-  requestMovies: () => dispatch(movies.request()),
-  successMovies: payload => dispatch(movies.succsess(payload)),
-  failureMovies: () => dispatch(movies.failure()),
-  resetSearchMovies: () => dispatch(movies.reset()),
-});
-
-@connect(mapStateToProps, mapDispatchToProps)
+@connect(
+  ({ search, moviePage }) => ({
+    ...moviePage,
+    ...search,
+  }),
+  dispatch => ({
+    requestMovies: () => dispatch(movies.request()),
+    successMovies: payload => dispatch(movies.succsess(payload)),
+    failureMovies: () => dispatch(movies.failure()),
+    resetSearchMovies: () => dispatch(movies.reset()),
+  }),
+)
 export default class MoviePage extends React.Component {
   componentDidMount() {
     const { page } = this.props;
