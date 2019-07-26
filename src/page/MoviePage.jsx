@@ -72,17 +72,8 @@ export default class MoviePage extends React.Component {
     const {
       type, requestMovies, successMovies, failureMovies, resetSearchMovies,
     } = this.props;
-    let url;
-    if (type === movieType.POPULAR) {
-      url = movieType.POPULAR;
-    } else if (type === movieType.UPCOMING) {
-      url = movieType.UPCOMING;
-    } else if (type === movieType.NOW_PLAYING) {
-      url = movieType.NOW_PLAYING;
-    }
-    url = `${params.URL}${type}`;
-    // eslint-disable-next-line no-console
-    console.log(url);
+    const types = Object.values(movieType);
+    const url = types.includes(type) ? `${params.URL}${type}` : undefined;
     requestMovies();
     return getMovies({ page, url })
       .then(({ movies, totalResults }) => {
