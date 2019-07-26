@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Paper } from '@material-ui/core';
 
-import { PAGE_COUNT, MOVIE_TYPE as movieType, PARAMS as params } from '../constants/constants';
+import { PAGE_COUNT, PARAMS as params } from '../constants/constants';
 import Search from '../components/Search';
 import MovieList from '../components/MovieList';
 import { movies } from '../actions';
@@ -72,8 +72,7 @@ export default class MoviePage extends React.Component {
     const {
       type, requestMovies, successMovies, failureMovies, resetSearchMovies,
     } = this.props;
-    const types = Object.values(movieType);
-    const url = types.includes(type) ? `${params.URL}${type}` : undefined;
+    const url = `${params.URL}${type}`;
     requestMovies();
     return getMovies({ page, url })
       .then(({ movies, totalResults }) => {
