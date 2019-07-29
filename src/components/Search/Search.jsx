@@ -7,7 +7,7 @@ import InputBase from '@material-ui/core/InputBase';
 
 import './search.css';
 
-export const Search = ({
+const Search = ({
   searchQuery, onEnterPress, onHandleChange, onSearchClick,
 }) => (
   <div className="search-wrap">
