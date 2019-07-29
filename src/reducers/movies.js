@@ -1,19 +1,32 @@
 import { MOVIES } from '../constants/actions';
 
 const defaultState = {
+  movies: [],
+  page: 1,
+  totalResults: 0,
+  showCircular: false,
   isSearch: false,
   searchQuery: '',
-  showCircular: false,
 };
 
-export const search = (state = defaultState, action) => {
+const movies = (state = defaultState, action) => {
   switch (action.type) {
+    case MOVIES.LOAD_SUCCESS:
+      return {
+        ...defaultState,
+        ...action.payload,
+      };
     case MOVIES.SEARCH:
       return {
         ...action.payload,
       };
     case MOVIES.SEARCH_RESET:
-      return defaultState;
+      return {
+        // prev. defaultState from search reducer
+        isSearch: false,
+        searchQuery: '',
+        showCircular: false,
+      };
     case MOVIES.SEARCH_QUERY:
       return {
         ...action.payload,
@@ -27,4 +40,4 @@ export const search = (state = defaultState, action) => {
   }
 };
 
-export default search;
+export default movies;

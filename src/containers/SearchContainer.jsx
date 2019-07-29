@@ -15,8 +15,8 @@ import {
 } from '../actions/movies';
 
 @connect(
-  ({ search }) => ({
-    ...search,
+  ({ movies }) => ({
+    ...movies,
   }),
   {
     searchMovies: searching,

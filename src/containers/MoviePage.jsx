@@ -19,9 +19,8 @@ import { getMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
 @connect(
-  ({ search, moviePage }) => ({
-    ...moviePage,
-    ...search,
+  ({ movies }) => ({
+    ...movies,
   }),
   {
     requestLoadMovies: request,
@@ -60,7 +59,10 @@ export default class MoviePage extends React.Component {
   }
 
   searchMovies(page) {
-    const { searchQuery, successLoadMovies } = this.props;
+    const {
+      searchQuery, requestLoadMovies, successLoadMovies, failureLoadMovies,
+    } = this.props;
+    requestLoadMovies();
     return getMovies({ searchQuery, page })
       .then(({ movies, totalResults }) => {
         successLoadMovies({
@@ -69,6 +71,9 @@ export default class MoviePage extends React.Component {
           page,
           showCircular: false,
         });
+      })
+      .catch(() => {
+        failureLoadMovies();
       });
   }
 
@@ -95,7 +100,7 @@ export default class MoviePage extends React.Component {
 
   render() {
     const {
-      title, movies, page, totalResults, showCircular, isSearch,
+      title, movies = [], page, totalResults, showCircular, isSearch,
     } = this.props;
 
     const searchTitle = movies.length === 0 ? 'No results' : 'Searching results:';
