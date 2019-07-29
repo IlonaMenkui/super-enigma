@@ -1,16 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import { Paper } from '@material-ui/core';
 
-import { PAGE_COUNT } from '../constants/constants';
-import { MOVIES } from '../constants/actions';
-import Search from '../containers/Search';
-import MovieList from '../components/MovieList/MovieList';
+import { PAGE_COUNT, PARAMS as params } from '../constants/constants';
+import SearchContainer from './SearchContainer';
+import MovieList from '../components/MovieList';
+import {
+  request,
+  succsess,
+  failure,
+  reset,
+} from '../actions/movies';
 
-import { getMovies, getSearchMovies } from '../api/api';
+import { getMovies } from '../api/api';
 import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
+@connect(
+  ({ search, moviePage }) => ({
+    ...moviePage,
+    ...search,
+  }),
+  {
+    requestLoadMovies: request,
+    successLoadMovies: succsess,
+    failureLoadMovies: failure,
+    resetSearchMovies: reset,
+  },
+)
 export default class MoviePage extends React.Component {
   componentDidMount() {
     const { page } = this.props;
@@ -41,37 +60,36 @@ export default class MoviePage extends React.Component {
   }
 
   searchMovies(page) {
-    const { searchQuery, getActionDispatcher } = this.props;
-    return getSearchMovies(searchQuery, page)
+    const { searchQuery, successLoadMovies } = this.props;
+    return getMovies({ searchQuery, page })
       .then(({ movies, totalResults }) => {
-        getActionDispatcher({
-          type: MOVIES.LOAD,
-          payload: {
-            movies,
-            totalResults,
-            page,
-            showCircular: false,
-          },
-        })();
+        successLoadMovies({
+          movies,
+          totalResults,
+          page,
+          showCircular: false,
+        });
       });
   }
 
   loadMovies(page) {
-    const { type, getActionDispatcher } = this.props;
-    return getMovies(type, page)
+    const {
+      type, requestLoadMovies, successLoadMovies, failureLoadMovies, resetSearchMovies,
+    } = this.props;
+    const url = `${params.URL}${type}`;
+    requestLoadMovies();
+    return getMovies({ page, url })
       .then(({ movies, totalResults }) => {
-        getActionDispatcher({
-          type: MOVIES.LOAD,
-          payload: {
-            movies,
-            totalResults,
-            page,
-            showCircular: false,
-          },
-        })();
-        getActionDispatcher({
-          type: MOVIES.SEARCH_RESET,
-        })();
+        successLoadMovies({
+          movies,
+          totalResults,
+          page,
+          showCircular: false,
+        });
+        resetSearchMovies();
+      })
+      .catch(() => {
+        failureLoadMovies();
       });
   }
 
@@ -79,6 +97,9 @@ export default class MoviePage extends React.Component {
     const {
       title, movies, page, totalResults, showCircular, isSearch,
     } = this.props;
+
+    const searchTitle = movies.length === 0 ? 'No results' : 'Searching results:';
+    const pageTitle = isSearch ? searchTitle : title;
 
     return (
       <div>
@@ -88,8 +109,8 @@ export default class MoviePage extends React.Component {
           totalResults={totalResults}
         />
         <Paper>
-          <Search />
-          <MovieList movies={movies} pageTitle={movies.length === 0 && isSearch ? 'No results' : isSearch ? 'Searching results:' : title} showCircular={showCircular} />
+          <SearchContainer />
+          <MovieList movies={movies} pageTitle={pageTitle} showCircular={showCircular} />
         </Paper>
       </div>
     );
@@ -103,7 +124,10 @@ MoviePage.propTypes = {
   page: PropTypes.number.isRequired,
   totalResults: PropTypes.number.isRequired,
   showCircular: PropTypes.bool.isRequired,
-  getActionDispatcher: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
   isSearch: PropTypes.bool.isRequired,
+  requestLoadMovies: PropTypes.func.isRequired,
+  successLoadMovies: PropTypes.func.isRequired,
+  failureLoadMovies: PropTypes.func.isRequired,
+  resetSearchMovies: PropTypes.func.isRequired,
 };

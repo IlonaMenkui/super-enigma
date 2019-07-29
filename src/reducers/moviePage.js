@@ -4,14 +4,14 @@ const defaultState = {
   movies: [],
   page: 1,
   totalResults: 0,
-  showCircular: true,
+  showCircular: false,
   isSearch: false,
   searchQuery: '',
 };
 
 export const moviePage = (state = defaultState, action) => {
   switch (action.type) {
-    case MOVIES.LOAD:
+    case MOVIES.LOAD_SUCCESS:
       return {
         ...defaultState,
         ...action.payload,

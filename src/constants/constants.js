@@ -36,3 +36,5 @@ export const PARAMS = {
 export const STATIC_URL = 'https://image.tmdb.org/t/p/w200/';
 
 export const PAGE_COUNT = 20;
+
+export const ENTER_KEY = 13;

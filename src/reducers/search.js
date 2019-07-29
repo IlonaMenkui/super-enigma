@@ -3,6 +3,7 @@ import { MOVIES } from '../constants/actions';
 const defaultState = {
   isSearch: false,
   searchQuery: '',
+  showCircular: false,
 };
 
 export const search = (state = defaultState, action) => {
@@ -17,6 +18,10 @@ export const search = (state = defaultState, action) => {
       return {
         ...action.payload,
       };
+    case MOVIES.REQUEST:
+      return { showCircular: true };
+    case MOVIES.FAILURE:
+      return { showCircular: false };
     default:
       return state;
   }
