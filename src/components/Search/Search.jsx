@@ -19,10 +19,10 @@ import './search.css';
   ({ search }) => ({
     ...search,
   }),
-  dispatch => ({
-    searchMovies: payload => dispatch(searching(payload)),
-    setQuery: payload => dispatch(setSearchQuery(payload)),
-  }),
+  {
+    searchMovies: searching,
+    setQuery: setSearchQuery,
+  },
 )
 export default class Search extends React.Component {
   searchClick = (searchQuery) => {
@@ -67,4 +67,6 @@ export default class Search extends React.Component {
 Search.propTypes = {
   isSearch: PropTypes.bool.isRequired,
   searchQuery: PropTypes.string.isRequired,
+  setQuery: PropTypes.func.isRequired,
+  searchMovies: PropTypes.func.isRequired,
 };
