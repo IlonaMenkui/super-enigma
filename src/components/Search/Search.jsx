@@ -7,10 +7,10 @@ import PropTypes from 'prop-types';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
-import { MOVIES } from '../../constants/actions';
 import { ENTER_KEY } from '../../constants/constants';
 import {
   searching,
+  setSearchQuery,
 } from '../../actions/movies';
 
 import './search.css';
@@ -21,19 +21,21 @@ import './search.css';
   }),
   dispatch => ({
     searchMovies: payload => dispatch(searching(payload)),
+    setQuery: payload => dispatch(setSearchQuery(payload)),
   }),
 )
 export default class Search extends React.Component {
   searchClick = (searchQuery) => {
+    const { searchMovies } = this.props;
     if (searchQuery) {
-      this.searchMovies(
+      searchMovies(
         { searchQuery, isSearch: true },
       );
     }
   };
 
   render() {
-    const { isSearch, searchQuery } = this.props;
+    const { isSearch, searchQuery, setQuery } = this.props;
     return (
       <div className="search-wrap">
         <InputBase
@@ -47,12 +49,7 @@ export default class Search extends React.Component {
           }}
           onChange={(e) => {
             this.searchQuery = e.target.value;
-            const { getActionDispatcher } = this.props;
-            const dispatch = getActionDispatcher({
-              payload: { isSearch },
-              type: MOVIES.SEARCH_QUERY,
-            });
-            dispatch();
+            setQuery({ isSearch });
           }}
           value={searchQuery}
         />
@@ -68,7 +65,6 @@ export default class Search extends React.Component {
 }
 
 Search.propTypes = {
-  getActionDispatcher: PropTypes.func.isRequired,
   isSearch: PropTypes.bool.isRequired,
   searchQuery: PropTypes.string.isRequired,
 };

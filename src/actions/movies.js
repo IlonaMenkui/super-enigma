@@ -17,6 +17,12 @@ export const reset = () => ({
   type: MOVIES.SEARCH_RESET,
 });
 
-export const searching = () => ({
+export const searching = payload => ({
   type: MOVIES.SEARCH,
+  payload,
+});
+
+export const setSearchQuery = payload => ({
+  type: MOVIES.SEARCH_QUERY,
+  payload,
 });
