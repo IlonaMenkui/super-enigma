@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Paper } from '@material-ui/core';
 
 import { PAGE_COUNT, PARAMS as params } from '../constants/constants';
-import Search from '../components/Search';
+import SearchContainer from './SearchContainer';
 import MovieList from '../components/MovieList';
 import {
   request,
@@ -109,7 +109,7 @@ export default class MoviePage extends React.Component {
           totalResults={totalResults}
         />
         <Paper>
-          <Search />
+          <SearchContainer />
           <MovieList movies={movies} pageTitle={pageTitle} showCircular={showCircular} />
         </Paper>
       </div>

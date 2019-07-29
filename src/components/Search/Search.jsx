@@ -1,72 +1,38 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
-
 import PropTypes from 'prop-types';
 
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 
-import { ENTER_KEY } from '../../constants/constants';
-import {
-  searching,
-  setSearchQuery,
-} from '../../actions/movies';
-
 import './search.css';
 
-@connect(
-  ({ search }) => ({
-    ...search,
-  }),
-  {
-    searchMovies: searching,
-    setQuery: setSearchQuery,
-  },
-)
-export default class Search extends React.Component {
-  searchClick = (searchQuery) => {
-    const { searchMovies } = this.props;
-    if (searchQuery) {
-      searchMovies(
-        { searchQuery, isSearch: true },
-      );
-    }
-  };
+export const Search = ({
+  searchQuery, onEnterPress, onHandleChange, onSearchClick,
+}) => (
+  <div className="search-wrap">
+    <InputBase
+      placeholder="Search…"
+      className="input"
+      inputProps={{ 'aria-label': 'Search' }}
+      onKeyPress={e => onEnterPress(e)}
+      onChange={e => onHandleChange(e)}
+      value={searchQuery}
+    />
+    <div className="search-icon">
+      <SearchIcon
+        color="primary"
+        onClick={() => onSearchClick()}
+      />
+    </div>
+  </div>
+);
 
-  render() {
-    const { isSearch, searchQuery, setQuery } = this.props;
-    return (
-      <div className="search-wrap">
-        <InputBase
-          placeholder="Search…"
-          className="input"
-          inputProps={{ 'aria-label': 'Search' }}
-          onKeyPress={(e) => {
-            if (e.charCode === ENTER_KEY) {
-              this.searchClick(this.searchQuery);
-            }
-          }}
-          onChange={(e) => {
-            this.searchQuery = e.target.value;
-            setQuery({ isSearch });
-          }}
-          value={searchQuery}
-        />
-        <div className="search-icon">
-          <SearchIcon
-            color="primary"
-            onClick={() => this.searchClick(this.searchQuery)}
-          />
-        </div>
-      </div>
-    );
-  }
-}
+export default Search;
 
 Search.propTypes = {
-  isSearch: PropTypes.bool.isRequired,
   searchQuery: PropTypes.string.isRequired,
-  setQuery: PropTypes.func.isRequired,
-  searchMovies: PropTypes.func.isRequired,
+  onSearchClick: PropTypes.func.isRequired,
+  onEnterPress: PropTypes.func.isRequired,
+  onHandleChange: PropTypes.func.isRequired,
 };
