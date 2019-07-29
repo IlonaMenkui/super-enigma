@@ -23,12 +23,12 @@ import { FlatPagination } from '../components/FlatPagination/FlatPagination';
     ...moviePage,
     ...search,
   }),
-  dispatch => ({
-    requestLoadMovies: () => dispatch(request()),
-    successLoadMovies: payload => dispatch(succsess(payload)),
-    failureLoadMovies: () => dispatch(failure()),
-    resetSearchMovies: () => dispatch(reset()),
-  }),
+  {
+    requestLoadMovies: request,
+    successLoadMovies: succsess,
+    failureLoadMovies: failure,
+    resetSearchMovies: reset,
+  },
 )
 export default class MoviePage extends React.Component {
   componentDidMount() {
