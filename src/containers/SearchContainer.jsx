@@ -25,7 +25,7 @@ export default class SearchContainer extends React.Component {
     const { searchMovies, searchQuery } = this.props;
     if (searchQuery) {
       searchMovies(
-        { searchQuery, isSearch: true },
+        { searchQuery, isSearch: true, isSearchChange: true },
       );
     }
   };
@@ -38,7 +38,7 @@ export default class SearchContainer extends React.Component {
 
   onHandleChange = (e) => {
     const { setQuery } = this.props;
-    setQuery({ searchQuery: e.target.value, isSearchChange: true });
+    setQuery({ searchQuery: e.target.value });
   }
 
   render() {
