@@ -138,4 +138,5 @@ MoviePage.propTypes = {
   successLoadMovies: PropTypes.func.isRequired,
   failureLoadMovies: PropTypes.func.isRequired,
   resetSearchMovies: PropTypes.func.isRequired,
+  isSearchChange: PropTypes.bool.isRequired,
 };
