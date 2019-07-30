@@ -12,8 +12,8 @@ import {
 } from '../actions/movies';
 
 @connect(
-  ({ movies }) => ({
-    ...movies,
+  state => ({
+    ...state,
   }),
   {
     searchMovies: searching,
@@ -21,8 +21,8 @@ import {
   },
 )
 export default class SearchContainer extends React.Component {
-  searchClick = (searchQuery) => {
-    const { searchMovies } = this.props;
+  onSearchClick = () => {
+    const { searchMovies, searchQuery } = this.props;
     if (searchQuery) {
       searchMovies(
         { searchQuery, isSearch: true },
@@ -37,20 +37,14 @@ export default class SearchContainer extends React.Component {
   }
 
   onHandleChange = (e) => {
-    const { setQuery, isSearch } = this.props;
-    this.searchQuery = e.target.value;
-    setQuery({ isSearch });
-  }
-
-  onSearchClick = () => {
-    this.searchClick(this.searchQuery);
+    const { setQuery } = this.props;
+    setQuery({ searchQuery: e.target.value, isSearchChange: true });
   }
 
   render() {
     const { isSearch, searchQuery, setQuery } = this.props;
     return (
       <Search
-        searchClick={this.searchClick}
         onHandleChange={this.onHandleChange}
         onSearchClick={this.onSearchClick}
         onEnterPress={this.onEnterPress}

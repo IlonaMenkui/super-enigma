@@ -6,6 +6,7 @@ const defaultState = {
   totalResults: 0,
   showCircular: false,
   isSearch: false,
+  isSearchChange: false,
   searchQuery: '',
 };
 
@@ -18,21 +19,26 @@ const movies = (state = defaultState, action) => {
       };
     case MOVIES.SEARCH:
       return {
+        ...state,
         ...action.payload,
       };
     case MOVIES.SEARCH_RESET:
       return {
-        // prev. defaultState from search reducer
+        ...state,
         isSearch: false,
         searchQuery: '',
         showCircular: false,
       };
     case MOVIES.SEARCH_QUERY:
       return {
+        ...state,
         ...action.payload,
       };
     case MOVIES.REQUEST:
-      return { showCircular: true };
+      return {
+        ...state,
+        showCircular: true,
+      };
     case MOVIES.FAILURE:
       return { showCircular: false };
     default:
