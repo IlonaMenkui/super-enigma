@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 
 import { Paper, Typography } from '@material-ui/core';
 
-import { Circular } from '../Circular/Circular';
+import Circular from '../Circular/Circular';
 import MovieListItem from './MovieListItem/MovieListItem';
-
 
 import './movie-list.css';
 
