@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-// import SearchIcon from '@material-ui/icons/Search';
-// import InputBase from '@material-ui/core/InputBase';
-
 import Search from '../components/Search/Search';
 import { ENTER_KEY } from '../constants/constants';
 import {
