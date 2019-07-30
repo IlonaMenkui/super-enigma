@@ -32,7 +32,7 @@ export default class SearchContainer extends React.Component {
 
   onEnterPress = (e) => {
     if (e.charCode === ENTER_KEY) {
-      this.searchClick(this.searchQuery);
+      this.onSearchClick(this.searchQuery);
     }
   }
 
