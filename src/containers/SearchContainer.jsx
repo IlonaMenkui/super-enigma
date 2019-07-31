@@ -28,6 +28,16 @@ export default class SearchContainer extends React.Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps) {
+    if (nextProps.searchQuery !== '' && !nextProps.isSearch) {
+      return {
+        searchQuery: '',
+      };
+    }
+    // Return null to indicate no change to state.
+    return null;
+  }
+
   onSearchClick = () => {
     const { searchMovies, setQuery } = this.props;
     const { searchQuery } = this.state;
@@ -53,14 +63,13 @@ export default class SearchContainer extends React.Component {
   }
 
   render() {
-    const { isSearch, setQuery } = this.props;
+    const { setQuery } = this.props;
     const { searchQuery } = this.state;
     return (
       <Search
         onHandleChange={this.onHandleChange}
         onSearchClick={this.onSearchClick}
         onEnterPress={this.onEnterPress}
-        isSearch={isSearch}
         searchQuery={searchQuery}
         setQuery={setQuery}
       />
@@ -69,7 +78,6 @@ export default class SearchContainer extends React.Component {
 }
 
 SearchContainer.propTypes = {
-  isSearch: PropTypes.bool.isRequired,
   setQuery: PropTypes.func.isRequired,
   searchMovies: PropTypes.func.isRequired,
 };
