@@ -4,7 +4,7 @@ const defaultState = {
   movies: [],
   page: 1,
   totalResults: 0,
-  showCircular: false,
+  isLoading: false,
   isSearch: false,
   isSearchChange: false,
   searchQuery: '',
@@ -14,7 +14,6 @@ const movies = (state = defaultState, action) => {
   switch (action.type) {
     case MOVIES.LOAD_SUCCESS:
       return {
-        ...defaultState,
         ...action.payload,
       };
     case MOVIES.SEARCH:
@@ -27,7 +26,7 @@ const movies = (state = defaultState, action) => {
         ...state,
         isSearch: false,
         searchQuery: '',
-        showCircular: false,
+        isLoading: false,
       };
     case MOVIES.SEARCH_QUERY:
       return {
@@ -37,10 +36,10 @@ const movies = (state = defaultState, action) => {
     case MOVIES.REQUEST:
       return {
         ...state,
-        showCircular: true,
+        isLoading: true,
       };
     case MOVIES.FAILURE:
-      return { showCircular: false };
+      return { isLoading: false };
     default:
       return state;
   }

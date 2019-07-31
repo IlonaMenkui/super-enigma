@@ -69,7 +69,7 @@ export default class MoviePage extends React.Component {
           movies,
           totalResults,
           page,
-          showCircular: false,
+          isLoading: false,
           searchQuery,
           isSearch: true,
           isSearchChange: false,
@@ -92,7 +92,7 @@ export default class MoviePage extends React.Component {
           movies,
           totalResults,
           page,
-          showCircular: false,
+          isLoading: false,
         });
         resetSearchMovies();
       })
@@ -103,7 +103,7 @@ export default class MoviePage extends React.Component {
 
   render() {
     const {
-      title, movies, page, totalResults, showCircular, isSearch,
+      title, movies, page, totalResults, isLoading, isSearch,
     } = this.props;
 
     const searchTitle = movies.length === 0 ? 'No results' : 'Searching results:';
@@ -118,7 +118,7 @@ export default class MoviePage extends React.Component {
         />
         <Paper>
           <SearchContainer />
-          <MovieList movies={movies} pageTitle={pageTitle} showCircular={showCircular} />
+          <MovieList movies={movies} pageTitle={pageTitle} isLoading={isLoading} />
         </Paper>
       </div>
     );
@@ -131,7 +131,7 @@ MoviePage.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
   page: PropTypes.number.isRequired,
   totalResults: PropTypes.number.isRequired,
-  showCircular: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   searchQuery: PropTypes.string.isRequired,
   isSearch: PropTypes.bool.isRequired,
   requestLoadMovies: PropTypes.func.isRequired,

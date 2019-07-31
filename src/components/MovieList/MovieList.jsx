@@ -8,10 +8,10 @@ import MovieListItem from './MovieListItem';
 
 import './movie-list.css';
 
-const MovieList = ({ movies, pageTitle, showCircular }) => (
+const MovieList = ({ movies, pageTitle, isLoading }) => (
   <main className="movies-wrap">
     <Paper>
-      {showCircular && <Circular visible={showCircular} />}
+      {isLoading && <Circular />}
       <Typography className="heading" variant="h4">{pageTitle}</Typography>
       {movies.map(movie => (
         <MovieListItem
@@ -34,7 +34,7 @@ const MovieList = ({ movies, pageTitle, showCircular }) => (
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
   pageTitle: PropTypes.string.isRequired,
-  showCircular: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default MovieList;
