@@ -11,7 +11,7 @@ import './movie-list.css';
 const MovieList = ({ movies, pageTitle, showCircular }) => (
   <main className="movies-wrap">
     <Paper>
-      <Circular visible={showCircular} />
+      {showCircular && <Circular visible={showCircular} />}
       <Typography className="heading" variant="h4">{pageTitle}</Typography>
       {movies.map(movie => (
         <MovieListItem
