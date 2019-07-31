@@ -21,8 +21,17 @@ import {
   },
 )
 export default class SearchContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchQuery: null,
+    };
+  }
+
   onSearchClick = () => {
-    const { searchMovies, searchQuery } = this.props;
+    const { searchMovies, setQuery } = this.props;
+    const { searchQuery } = this.state;
+    setQuery({ searchQuery });
     if (searchQuery) {
       searchMovies(
         { searchQuery, isSearch: true, isSearchChange: true },
@@ -32,17 +41,20 @@ export default class SearchContainer extends React.Component {
 
   onEnterPress = (e) => {
     if (e.charCode === ENTER_KEY) {
-      this.onSearchClick(this.searchQuery);
+      const { setQuery } = this.props;
+      const { searchQuery } = this.state;
+      setQuery({ searchQuery });
+      this.onSearchClick(searchQuery);
     }
   }
 
   onHandleChange = (e) => {
-    const { setQuery } = this.props;
-    setQuery({ searchQuery: e.target.value });
+    this.setState({ searchQuery: e.target.value });
   }
 
   render() {
-    const { isSearch, searchQuery, setQuery } = this.props;
+    const { isSearch, setQuery } = this.props;
+    const { searchQuery } = this.state;
     return (
       <Search
         onHandleChange={this.onHandleChange}
@@ -58,7 +70,6 @@ export default class SearchContainer extends React.Component {
 
 SearchContainer.propTypes = {
   isSearch: PropTypes.bool.isRequired,
-  searchQuery: PropTypes.string.isRequired,
   setQuery: PropTypes.func.isRequired,
   searchMovies: PropTypes.func.isRequired,
 };
