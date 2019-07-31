@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import Search from '../components/Search/Search';
+import Search from '../components/Search';
 import { ENTER_KEY } from '../constants/constants';
 import {
   searching,

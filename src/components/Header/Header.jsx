@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Paper, Tabs } from '@material-ui/core';
 
 import { HEADER_TABS as tabs } from '../../constants/constants';
-import HeaderTab from './HeaderTab/HeaderTab';
+import HeaderTab from './HeaderTab';
 
 export class Header extends React.Component {
   constructor(props) {

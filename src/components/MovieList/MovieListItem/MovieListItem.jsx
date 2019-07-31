@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
-import { SimpleModal } from '../../Modal/Modal';
+import SimpleModal from '../../Modal';
 
 import './movie-list-item.css';
 

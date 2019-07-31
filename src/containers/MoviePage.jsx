@@ -7,6 +7,7 @@ import { Paper } from '@material-ui/core';
 
 import { PAGE_COUNT, PARAMS as params } from '../constants/constants';
 import SearchContainer from './SearchContainer';
+import FlatPagination from '../components/FlatPagination';
 import MovieList from '../components/MovieList';
 import {
   request,
@@ -16,7 +17,6 @@ import {
 } from '../actions/movies';
 
 import { getMovies } from '../api/api';
-import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
 @connect(
   state => ({
