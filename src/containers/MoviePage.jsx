@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Paper } from '@material-ui/core';
 
-import { PAGE_COUNT, PARAMS as params } from '../constants/constants';
+import { PAGE_COUNT, PARAMS } from '../constants/constants';
 import SearchContainer from './SearchContainer';
 import FlatPagination from '../components/FlatPagination';
 import MovieList from '../components/MovieList';
@@ -44,7 +44,7 @@ export default class MoviePage extends React.Component {
       this.loadMovies(1);
     }
     if (isSearch && isSearchChange) {
-      this.searchMovies(1);
+      this.loadMovies(1);
     }
   }
 
@@ -52,18 +52,34 @@ export default class MoviePage extends React.Component {
     const page = offset / PAGE_COUNT + 1;
     const { isSearch } = this.props;
     if (isSearch) {
-      this.searchMovies(page);
+      this.loadMovies(page);
     } else {
       this.loadMovies(page);
     }
   }
 
-  searchMovies(page) {
+  loadMovies(page) {
     const {
-      searchQuery, requestLoadMovies, successLoadMovies, failureLoadMovies,
+      searchQuery, type, requestLoadMovies, successLoadMovies, failureLoadMovies, resetSearchMovies,
     } = this.props;
     requestLoadMovies();
-    return getMovies({ searchQuery, page })
+    if (!searchQuery) {
+      const url = `${PARAMS.URL}${type}`;
+      return getMovies({ page, url })
+        .then(({ movies, totalResults }) => {
+          successLoadMovies({
+            movies,
+            totalResults,
+            page,
+            isLoading: false,
+          });
+          resetSearchMovies();
+        })
+        .catch(() => {
+          failureLoadMovies();
+        });
+    }
+    return getMovies({ searchQuery, page, url: PARAMS.SEARCH_URL })
       .then(({ movies, totalResults }) => {
         successLoadMovies({
           movies,
@@ -74,27 +90,6 @@ export default class MoviePage extends React.Component {
           isSearch: true,
           isSearchChange: false,
         });
-      })
-      .catch(() => {
-        failureLoadMovies();
-      });
-  }
-
-  loadMovies(page) {
-    const {
-      type, requestLoadMovies, successLoadMovies, failureLoadMovies, resetSearchMovies,
-    } = this.props;
-    const url = `${params.URL}${type}`;
-    requestLoadMovies();
-    return getMovies({ page, url })
-      .then(({ movies, totalResults }) => {
-        successLoadMovies({
-          movies,
-          totalResults,
-          page,
-          isLoading: false,
-        });
-        resetSearchMovies();
       })
       .catch(() => {
         failureLoadMovies();
