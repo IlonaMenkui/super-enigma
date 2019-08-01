@@ -34,15 +34,14 @@ export default class SearchContainer extends React.Component {
         searchQuery: '',
       };
     }
-    // Return null to indicate no change to state.
     return null;
   }
 
   onSearchClick = () => {
     const { searchMovies, setQuery } = this.props;
     const { searchQuery } = this.state;
-    setQuery({ searchQuery });
     if (searchQuery) {
+      setQuery({ searchQuery });
       searchMovies(
         { searchQuery, isSearch: true, isSearchChange: true },
       );
@@ -50,9 +49,9 @@ export default class SearchContainer extends React.Component {
   };
 
   onEnterPress = (e) => {
-    if (e.charCode === ENTER_KEY) {
-      const { setQuery } = this.props;
-      const { searchQuery } = this.state;
+    const { setQuery } = this.props;
+    const { searchQuery } = this.state;
+    if (e.charCode === ENTER_KEY && searchQuery) {
       setQuery({ searchQuery });
       this.onSearchClick(searchQuery);
     }
