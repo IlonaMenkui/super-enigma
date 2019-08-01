@@ -11,22 +11,26 @@ import './movie-list.css';
 const MovieList = ({ movies, pageTitle, isLoading }) => (
   <main className="movies-wrap">
     <Paper>
-      {isLoading && <Circular />}
-      <Typography className="heading" variant="h4">{pageTitle}</Typography>
-      {movies.map(movie => (
-        <MovieListItem
-          title={movie.title}
-          genres={movie.genres}
-          voteAverage={movie.voteAverage}
-          overview={movie.overview}
-          posterPath={movie.posterPath}
-          releaseDate={movie.releaseDate}
-          popularity={movie.popularity}
-          originalLanguage={movie.originalLanguage}
-          voteCount={movie.voteCount}
-          originalTitle={movie.originalTitle}
-        />
-      ))}
+      {isLoading ? <Circular />
+        : (
+          <>
+            <Typography className="heading" variant="h4">{pageTitle}</Typography>
+            {movies.map(movie => (
+              <MovieListItem
+                title={movie.title}
+                genres={movie.genres}
+                voteAverage={movie.voteAverage}
+                overview={movie.overview}
+                posterPath={movie.posterPath}
+                releaseDate={movie.releaseDate}
+                popularity={movie.popularity}
+                originalLanguage={movie.originalLanguage}
+                voteCount={movie.voteCount}
+                originalTitle={movie.originalTitle}
+              />
+            ))}
+          </>
+        )}
     </Paper>
   </main>
 );
