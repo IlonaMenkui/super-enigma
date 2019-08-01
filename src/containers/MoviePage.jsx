@@ -7,6 +7,7 @@ import { Paper } from '@material-ui/core';
 
 import { PAGE_COUNT, PARAMS as params } from '../constants/constants';
 import SearchContainer from './SearchContainer';
+import FlatPagination from '../components/FlatPagination';
 import MovieList from '../components/MovieList';
 import {
   request,
@@ -16,12 +17,10 @@ import {
 } from '../actions/movies';
 
 import { getMovies } from '../api/api';
-import { FlatPagination } from '../components/FlatPagination/FlatPagination';
 
 @connect(
-  ({ search, moviePage }) => ({
-    ...moviePage,
-    ...search,
+  state => ({
+    ...state,
   }),
   {
     requestLoadMovies: request,
@@ -37,14 +36,14 @@ export default class MoviePage extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { title: prevTitle, searchQuery: prevSearchQuery } = prevProps;
+    const { title: prevTitle } = prevProps;
     const {
-      title, isSearch, searchQuery,
+      title, isSearch, isSearchChange,
     } = this.props;
     if (prevTitle !== title) {
       this.loadMovies(1);
     }
-    if (isSearch && prevSearchQuery !== searchQuery) {
+    if (isSearch && isSearchChange) {
       this.searchMovies(1);
     }
   }
@@ -60,15 +59,24 @@ export default class MoviePage extends React.Component {
   }
 
   searchMovies(page) {
-    const { searchQuery, successLoadMovies } = this.props;
+    const {
+      searchQuery, requestLoadMovies, successLoadMovies, failureLoadMovies,
+    } = this.props;
+    requestLoadMovies();
     return getMovies({ searchQuery, page })
       .then(({ movies, totalResults }) => {
         successLoadMovies({
           movies,
           totalResults,
           page,
-          showCircular: false,
+          isLoading: false,
+          searchQuery,
+          isSearch: true,
+          isSearchChange: false,
         });
+      })
+      .catch(() => {
+        failureLoadMovies();
       });
   }
 
@@ -84,7 +92,7 @@ export default class MoviePage extends React.Component {
           movies,
           totalResults,
           page,
-          showCircular: false,
+          isLoading: false,
         });
         resetSearchMovies();
       })
@@ -95,7 +103,7 @@ export default class MoviePage extends React.Component {
 
   render() {
     const {
-      title, movies, page, totalResults, showCircular, isSearch,
+      title, movies, page, totalResults, isLoading, isSearch,
     } = this.props;
 
     const searchTitle = movies.length === 0 ? 'No results' : 'Searching results:';
@@ -110,7 +118,7 @@ export default class MoviePage extends React.Component {
         />
         <Paper>
           <SearchContainer />
-          <MovieList movies={movies} pageTitle={pageTitle} showCircular={showCircular} />
+          <MovieList movies={movies} pageTitle={pageTitle} isLoading={isLoading} />
         </Paper>
       </div>
     );
@@ -123,11 +131,12 @@ MoviePage.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
   page: PropTypes.number.isRequired,
   totalResults: PropTypes.number.isRequired,
-  showCircular: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   searchQuery: PropTypes.string.isRequired,
   isSearch: PropTypes.bool.isRequired,
   requestLoadMovies: PropTypes.func.isRequired,
   successLoadMovies: PropTypes.func.isRequired,
   failureLoadMovies: PropTypes.func.isRequired,
   resetSearchMovies: PropTypes.func.isRequired,
+  isSearchChange: PropTypes.bool.isRequired,
 };

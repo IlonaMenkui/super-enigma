@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 
 import { Paper, Typography } from '@material-ui/core';
 
-import { Circular } from '../Circular/Circular';
-import { MovieListItem } from './MovieListItem/MovieListItem';
-
+import Circular from '../Circular';
+import MovieListItem from './MovieListItem';
 
 import './movie-list.css';
 
-const MovieList = ({ movies, pageTitle, showCircular }) => (
+const MovieList = ({ movies, pageTitle, isLoading }) => (
   <main className="movies-wrap">
     <Paper>
-      <Circular visible={showCircular} />
+      {isLoading && <Circular />}
       <Typography className="heading" variant="h4">{pageTitle}</Typography>
       {movies.map(movie => (
         <MovieListItem
@@ -35,7 +34,7 @@ const MovieList = ({ movies, pageTitle, showCircular }) => (
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
   pageTitle: PropTypes.string.isRequired,
-  showCircular: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default MovieList;

@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-// import SearchIcon from '@material-ui/icons/Search';
-// import InputBase from '@material-ui/core/InputBase';
-
-import Search from '../components/Search/Search';
+import Search from '../components/Search';
 import { ENTER_KEY } from '../constants/constants';
 import {
   searching,
@@ -15,8 +12,8 @@ import {
 } from '../actions/movies';
 
 @connect(
-  ({ search }) => ({
-    ...search,
+  state => ({
+    ...state,
   }),
   {
     searchMovies: searching,
@@ -24,40 +21,54 @@ import {
   },
 )
 export default class SearchContainer extends React.Component {
-  searchClick = (searchQuery) => {
-    const { searchMovies } = this.props;
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchQuery: null,
+    };
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    if (nextProps.searchQuery !== '' && !nextProps.isSearch) {
+      return {
+        searchQuery: '',
+      };
+    }
+    return null;
+  }
+
+  onSearchClick = () => {
+    const { searchMovies, setQuery } = this.props;
+    const { searchQuery } = this.state;
     if (searchQuery) {
+      setQuery({ searchQuery });
       searchMovies(
-        { searchQuery, isSearch: true },
+        { searchQuery, isSearch: true, isSearchChange: true },
       );
     }
   };
 
   onEnterPress = (e) => {
-    if (e.charCode === ENTER_KEY) {
-      this.searchClick(this.searchQuery);
+    const { setQuery } = this.props;
+    const { searchQuery } = this.state;
+    if (e.charCode === ENTER_KEY && searchQuery) {
+      setQuery({ searchQuery });
+      this.onSearchClick(searchQuery);
     }
   }
 
   onHandleChange = (e) => {
-    const { setQuery, isSearch } = this.props;
-    this.searchQuery = e.target.value;
-    setQuery({ isSearch });
-  }
-
-  onSearchClick = () => {
-    this.searchClick(this.searchQuery);
+    this.setState({ searchQuery: e.target.value });
   }
 
   render() {
-    const { isSearch, searchQuery, setQuery } = this.props;
+    const { setQuery } = this.props;
+    const { searchQuery } = this.state;
     return (
       <Search
-        searchClick={this.searchClick}
         onHandleChange={this.onHandleChange}
         onSearchClick={this.onSearchClick}
         onEnterPress={this.onEnterPress}
-        isSearch={isSearch}
         searchQuery={searchQuery}
         setQuery={setQuery}
       />
@@ -66,8 +77,6 @@ export default class SearchContainer extends React.Component {
 }
 
 SearchContainer.propTypes = {
-  isSearch: PropTypes.bool.isRequired,
-  searchQuery: PropTypes.string.isRequired,
   setQuery: PropTypes.func.isRequired,
   searchMovies: PropTypes.func.isRequired,
 };

@@ -3,11 +3,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 
-import * as reducers from './reducers';
+import movies from './reducers';
 import App from './app/App';
 import * as serviceWorker from './serviceWorker';
 
@@ -15,7 +15,7 @@ import './index.css';
 
 const logger = createLogger();
 const store = createStore(
-  combineReducers({ ...reducers }),
+  movies,
   applyMiddleware(logger),
 );
 
