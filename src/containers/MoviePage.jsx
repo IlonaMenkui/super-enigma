@@ -78,6 +78,7 @@ export default class MoviePage extends React.Component {
           failureLoadMovies();
         });
     }
+    requestLoadMovies();
     return getMovies({ searchQuery, page, url: PARAMS.SEARCH_URL })
       .then(({ movies, totalResults }) => {
         successLoadMovies({
