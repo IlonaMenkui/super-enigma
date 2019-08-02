@@ -38,29 +38,28 @@ export default class MoviePage extends React.Component {
   componentDidUpdate(prevProps) {
     const { title: prevTitle } = prevProps;
     const {
-      title, isSearch, isSearchChange,
+      title, searchQuery, isSearchChange,
     } = this.props;
     if (prevTitle !== title) {
       this.loadMovies(1);
-    }
-    if (isSearch && isSearchChange) {
-      this.loadMovies(1);
+    } else if (searchQuery && isSearchChange) {
+      this.loadMovies(1, searchQuery);
     }
   }
 
   changePage(offset) {
     const page = offset / PAGE_COUNT + 1;
-    const { isSearch } = this.props;
-    if (isSearch) {
-      this.loadMovies(page);
+    const { searchQuery } = this.props;
+    if (searchQuery) {
+      this.loadMovies(page, searchQuery);
     } else {
       this.loadMovies(page);
     }
   }
 
-  loadMovies(page) {
+  loadMovies(page, searchQuery) {
     const {
-      searchQuery, type, requestLoadMovies, successLoadMovies, failureLoadMovies, resetSearchMovies,
+      type, requestLoadMovies, successLoadMovies, failureLoadMovies, resetSearchMovies,
     } = this.props;
     requestLoadMovies();
     if (!searchQuery) {
@@ -112,7 +111,7 @@ export default class MoviePage extends React.Component {
           totalResults={totalResults}
         />
         <Paper>
-          <SearchContainer />
+          <SearchContainer title={pageTitle} />
           <MovieList movies={movies} pageTitle={pageTitle} isLoading={isLoading} />
         </Paper>
       </div>
