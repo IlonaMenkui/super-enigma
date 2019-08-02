@@ -5,105 +5,33 @@ import { connect } from 'react-redux';
 
 import { Paper } from '@material-ui/core';
 
-import { PAGE_COUNT, PARAMS } from '../constants/constants';
+import { PAGE_COUNT } from '../constants/constants';
 import SearchContainer from './SearchContainer';
 import FlatPagination from '../components/FlatPagination';
-import MovieList from '../components/MovieList';
-import {
-  request,
-  succsess,
-  failure,
-  reset,
-} from '../actions/movies';
-
-import { getMovies } from '../api/api';
+import MovieListContainer from './MovieListContainer';
 
 @connect(
   state => ({
     ...state,
   }),
-  {
-    requestLoadMovies: request,
-    successLoadMovies: succsess,
-    failureLoadMovies: failure,
-    resetSearchMovies: reset,
-  },
 )
 export default class MoviePage extends React.Component {
-  componentDidMount() {
-    const { page } = this.props;
-    this.loadMovies(page);
-  }
-
-  componentDidUpdate(prevProps) {
-    const { title: prevTitle } = prevProps;
-    const {
-      title, searchQuery, isSearchChange,
-    } = this.props;
-    if (prevTitle !== title) {
-      this.loadMovies(1);
-    } else if (searchQuery && isSearchChange) {
-      this.loadMovies(1, searchQuery);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 1,
+    };
   }
 
   changePage(offset) {
-    const page = offset / PAGE_COUNT + 1;
-    const { searchQuery } = this.props;
-    if (searchQuery) {
-      this.loadMovies(page, searchQuery);
-    } else {
-      this.loadMovies(page);
-    }
-  }
-
-  loadMovies(page, searchQuery) {
-    const {
-      type, requestLoadMovies, successLoadMovies, failureLoadMovies, resetSearchMovies,
-    } = this.props;
-    requestLoadMovies();
-    if (!searchQuery) {
-      const url = `${PARAMS.URL}${type}`;
-      return getMovies({ page, url })
-        .then(({ movies, totalResults }) => {
-          successLoadMovies({
-            movies,
-            totalResults,
-            page,
-            isLoading: false,
-          });
-          resetSearchMovies();
-        })
-        .catch(() => {
-          failureLoadMovies();
-        });
-    }
-    requestLoadMovies();
-    return getMovies({ searchQuery, page, url: PARAMS.SEARCH_URL })
-      .then(({ movies, totalResults }) => {
-        successLoadMovies({
-          movies,
-          totalResults,
-          page,
-          isLoading: false,
-          searchQuery,
-          isSearch: true,
-          isSearchChange: false,
-        });
-      })
-      .catch(() => {
-        failureLoadMovies();
-      });
+    this.setState({ page: offset / PAGE_COUNT + 1 });
   }
 
   render() {
     const {
-      title, movies, page, totalResults, isLoading, isSearch,
+      title, totalResults, isLoading, type,
     } = this.props;
-
-    const searchTitle = movies.length === 0 ? 'No results' : 'Searching results:';
-    const pageTitle = isSearch ? searchTitle : title;
-
+    const { page } = this.state;
     return (
       <div>
         <FlatPagination
@@ -112,8 +40,8 @@ export default class MoviePage extends React.Component {
           totalResults={totalResults}
         />
         <Paper>
-          <SearchContainer title={pageTitle} />
-          <MovieList movies={movies} pageTitle={pageTitle} isLoading={isLoading} />
+          <SearchContainer />
+          <MovieListContainer page={page} type={type} title={title} isLoading={isLoading} />
         </Paper>
       </div>
     );
@@ -122,16 +50,7 @@ export default class MoviePage extends React.Component {
 
 MoviePage.propTypes = {
   title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
-  page: PropTypes.number.isRequired,
   totalResults: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  searchQuery: PropTypes.string.isRequired,
-  isSearch: PropTypes.bool.isRequired,
-  requestLoadMovies: PropTypes.func.isRequired,
-  successLoadMovies: PropTypes.func.isRequired,
-  failureLoadMovies: PropTypes.func.isRequired,
-  resetSearchMovies: PropTypes.func.isRequired,
-  isSearchChange: PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired,
 };

@@ -2,7 +2,6 @@ import { MOVIES } from '../constants/actions';
 
 const defaultState = {
   movies: [],
-  page: 1,
   totalResults: 0,
   isLoading: false,
   isSearch: false,
