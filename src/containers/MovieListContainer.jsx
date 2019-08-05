@@ -32,14 +32,16 @@ export default class MovieListContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { title: prevTitle } = prevProps;
+    const { title: prevTitle, page: prevPage, searchQuery: prevSearchQuery } = prevProps;
     const {
-      title, searchQuery, isSearchChange,
+      title, page, searchQuery,
     } = this.props;
-    if (prevTitle !== title) {
-      this.loadMovies(1);
-    } else if (searchQuery && isSearchChange) {
-      this.loadMovies(1, searchQuery);
+    if (prevTitle !== title || prevPage !== page
+      || (prevSearchQuery !== searchQuery && !searchQuery
+      && searchQuery !== undefined && prevSearchQuery !== undefined)) {
+      this.loadMovies(page);
+    } else if (prevSearchQuery !== searchQuery && searchQuery) {
+      this.loadMovies(page, searchQuery);
     }
   }
 
@@ -55,7 +57,6 @@ export default class MovieListContainer extends React.Component {
           successLoadMovies({
             movies,
             totalResults,
-            page,
             isLoading: false,
           });
           resetSearchMovies();
@@ -69,7 +70,6 @@ export default class MovieListContainer extends React.Component {
         successLoadMovies({
           movies,
           totalResults,
-          page,
           isLoading: false,
           searchQuery,
           isSearch: true,
@@ -106,5 +106,4 @@ MovieListContainer.propTypes = {
   successLoadMovies: PropTypes.func.isRequired,
   failureLoadMovies: PropTypes.func.isRequired,
   resetSearchMovies: PropTypes.func.isRequired,
-  isSearchChange: PropTypes.bool.isRequired,
 };
