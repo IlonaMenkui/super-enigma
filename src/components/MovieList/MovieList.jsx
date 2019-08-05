@@ -11,10 +11,10 @@ import './movie-list.css';
 const MovieList = ({ movies, title, isLoading }) => (
   <main className="movies-wrap">
     <Paper>
+      <Typography className="heading" variant="h4">{title}</Typography>
       {isLoading ? <Circular />
         : (
           <>
-            <Typography className="heading" variant="h4">{title}</Typography>
             {movies.map(movie => (
               <MovieListItem
                 title={movie.title}
