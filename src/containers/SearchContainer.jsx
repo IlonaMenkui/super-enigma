@@ -28,13 +28,12 @@ export default class SearchContainer extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    if (nextProps.searchQuery !== '' && !nextProps.searchQuery) {
-      return {
-        searchQuery: '',
-      };
+  componentDidUpdate(prevProps) {
+    const { title: prevTitle } = prevProps;
+    const { title } = this.props;
+    if (prevTitle !== title) {
+      this.setState({ searchQuery: '' });
     }
-    return null;
   }
 
   onSearchClick = () => {

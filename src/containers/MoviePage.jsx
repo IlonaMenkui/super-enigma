@@ -45,7 +45,7 @@ export default class MoviePage extends React.Component {
           totalResults={totalResults}
         />
         <Paper>
-          <SearchContainer />
+          <SearchContainer title={title} />
           <MovieListContainer
             resetPage={this.resetPage}
             page={page}
