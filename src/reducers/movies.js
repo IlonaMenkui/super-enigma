@@ -4,7 +4,6 @@ const defaultState = {
   movies: [],
   totalResults: 0,
   isLoading: false,
-  isSearch: false,
   isSearchChange: false,
   searchQuery: '',
 };
@@ -23,7 +22,6 @@ const movies = (state = defaultState, action) => {
     case MOVIES.SEARCH_RESET:
       return {
         ...state,
-        isSearch: false,
         searchQuery: '',
         isLoading: false,
       };

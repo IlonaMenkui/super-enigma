@@ -55,7 +55,7 @@ export default class SearchContainer extends React.Component {
     const { searchQuery } = this.state;
     setQuery({ searchQuery });
     searchMovies(
-      { searchQuery, isSearch: true, isSearchChange: true },
+      { searchQuery, isSearchChange: true },
     );
   };
 

@@ -72,7 +72,6 @@ export default class MovieListContainer extends React.Component {
           totalResults,
           isLoading: false,
           searchQuery,
-          isSearch: true,
           isSearchChange: false,
         });
       })
