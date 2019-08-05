@@ -83,10 +83,10 @@ export default class MovieListContainer extends React.Component {
 
   render() {
     const {
-      title, movies, isLoading, isSearch, type,
+      title, movies, isLoading, searchQuery, type,
     } = this.props;
     const searchTitle = movies.length === 0 ? 'No results' : 'Searching results:';
-    const pageTitle = isSearch ? searchTitle : title;
+    const pageTitle = searchQuery ? searchTitle : title;
 
     return (
       <MovieList movies={movies} title={pageTitle} isLoading={isLoading} type={type} />
@@ -98,7 +98,6 @@ MovieListContainer.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
   page: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  isSearch: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   searchQuery: PropTypes.string.isRequired,
