@@ -29,7 +29,7 @@ export default class SearchContainer extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    if (nextProps.searchQuery !== '' && !nextProps.isSearch) {
+    if (nextProps.searchQuery !== '' && !nextProps.searchQuery) {
       return {
         searchQuery: '',
       };

@@ -39,9 +39,9 @@ export default class MovieListContainer extends React.Component {
     if (prevTitle !== title || prevPage !== page
       || (prevSearchQuery !== searchQuery && !searchQuery
       && searchQuery !== undefined && prevSearchQuery !== undefined)) {
-      this.loadMovies(page);
+      this.loadMovies(1);
     } else if (prevSearchQuery !== searchQuery && searchQuery) {
-      this.loadMovies(page, searchQuery);
+      this.loadMovies(1, searchQuery);
     }
   }
 
