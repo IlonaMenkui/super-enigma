@@ -27,6 +27,10 @@ export default class MoviePage extends React.Component {
     this.setState({ page: offset / PAGE_COUNT + 1 });
   }
 
+  resetPage(page) {
+    this.setState({ page });
+  }
+
   render() {
     const {
       title, totalResults, isLoading, type,
@@ -41,7 +45,13 @@ export default class MoviePage extends React.Component {
         />
         <Paper>
           <SearchContainer />
-          <MovieListContainer page={page} type={type} title={title} isLoading={isLoading} />
+          <MovieListContainer
+            resetPage={() => this.resetPage()}
+            page={page}
+            type={type}
+            title={title}
+            isLoading={isLoading}
+          />
         </Paper>
       </div>
     );

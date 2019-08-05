@@ -37,19 +37,6 @@ export default class SearchContainer extends React.Component {
     return null;
   }
 
-  // componentDidUpdate(nextProps, prevProps) {
-  //   const { searchQuery } = this.state;
-  //   if ((prevProps.searchQuery && nextProps.searchQuery !== '')
-  //   || (prevProps.searchQuery !== searchQuery)) {
-  //     return {
-  //       searchQuery: '',
-  //     };
-  //   }
-  //   return null;
-  // }
-  // prevSearchQuery !== searchQuery && searchQuery
-  // if (!prevProps.searchQuery && nextProps.searchQuery === '') {
-
   onSearchClick = () => {
     const { searchMovies, setQuery } = this.props;
     const { searchQuery } = this.state;
