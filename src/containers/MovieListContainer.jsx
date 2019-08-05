@@ -50,25 +50,11 @@ export default class MovieListContainer extends React.Component {
 
   loadMovies(page, searchQuery) {
     const {
-      type, requestLoadMovies, successLoadMovies, failureLoadMovies, resetSearchMovies,
+      type, requestLoadMovies, successLoadMovies, failureLoadMovies,
     } = this.props;
     requestLoadMovies();
-    if (!searchQuery) {
-      const url = `${PARAMS.URL}${type}`;
-      return getMovies({ page, url })
-        .then(({ movies, totalResults }) => {
-          successLoadMovies({
-            movies,
-            totalResults,
-            isLoading: false,
-          });
-          resetSearchMovies();
-        })
-        .catch(() => {
-          failureLoadMovies();
-        });
-    }
-    return getMovies({ searchQuery, page, url: PARAMS.SEARCH_URL })
+    const url = searchQuery ? PARAMS.SEARCH_URL : `${PARAMS.URL}${type}`;
+    return getMovies({ page, url, searchQuery })
       .then(({ movies, totalResults }) => {
         successLoadMovies({
           movies,
