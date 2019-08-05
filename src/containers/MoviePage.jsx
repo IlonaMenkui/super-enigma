@@ -21,14 +21,15 @@ export default class MoviePage extends React.Component {
     this.state = {
       page: 1,
     };
+    this.resetPage = this.resetPage.bind(this);
   }
 
   changePage(offset) {
     this.setState({ page: offset / PAGE_COUNT + 1 });
   }
 
-  resetPage(page) {
-    this.setState({ page });
+  resetPage() {
+    this.setState({ page: 1 });
   }
 
   render() {
@@ -46,7 +47,7 @@ export default class MoviePage extends React.Component {
         <Paper>
           <SearchContainer />
           <MovieListContainer
-            resetPage={() => this.resetPage()}
+            resetPage={this.resetPage}
             page={page}
             type={type}
             title={title}

@@ -12,6 +12,7 @@ const movies = (state = defaultState, action) => {
   switch (action.type) {
     case MOVIES.LOAD_SUCCESS:
       return {
+        ...state,
         ...action.payload,
       };
     case MOVIES.SEARCH:

@@ -34,16 +34,17 @@ export default class MovieListContainer extends React.Component {
   componentDidUpdate(prevProps) {
     const { title: prevTitle, page: prevPage, searchQuery: prevSearchQuery } = prevProps;
     const {
-      title, page, searchQuery, resetPage,
+      title, page, searchQuery, resetPage, resetSearchMovies,
     } = this.props;
-    if (prevTitle !== title && prevSearchQuery === searchQuery) {
-      resetPage(1);
-      this.loadMovies(1);
-    } else if (prevTitle === title && prevPage !== page && prevSearchQuery === searchQuery) {
+    if (prevTitle !== title) {
+      resetSearchMovies();
+      resetPage();
       this.loadMovies(page, searchQuery);
-    } else if (prevSearchQuery !== searchQuery && searchQuery) {
-      resetPage(1);
-      this.loadMovies(1, searchQuery);
+    } else if (prevTitle === title && prevPage !== page) {
+      this.loadMovies(page, searchQuery);
+    } else if (prevSearchQuery !== searchQuery) {
+      resetPage();
+      this.loadMovies(page, searchQuery);
     }
   }
 
