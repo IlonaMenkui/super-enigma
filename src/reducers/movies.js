@@ -28,7 +28,7 @@ const movies = (state = defaultState, action) => {
         isLoading: false,
         page: 1,
       };
-    case MOVIES.RESET_PAGE:
+    case MOVIES.SET_PAGE:
       return {
         ...state,
         ...action.payload,

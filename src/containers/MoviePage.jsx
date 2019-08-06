@@ -12,7 +12,7 @@ import MovieListContainer from './MovieListContainer';
 import {
   reset,
   initSearch,
-  resetPagination,
+  setPagination,
 } from '../actions/movies';
 
 @connect(
@@ -20,26 +20,26 @@ import {
     ...state,
   }),
   {
-    resetPage: resetPagination,
+    setPage: setPagination,
     initSearch,
     resetSearchMovies: reset,
   },
 )
 export default class MoviePage extends React.Component {
   componentDidUpdate(prevProps) {
-    const { searchQuery, resetPage } = this.props;
+    const { searchQuery, setPage } = this.props;
     const { title: prevTitle, searchQuery: prevSearchQuery } = prevProps;
     const { title, resetSearchMovies } = this.props;
     if (prevTitle !== title) {
       resetSearchMovies();
     } else if (prevSearchQuery !== searchQuery) {
-      resetPage({ page: 1 });
+      setPage({ page: 1 });
     }
   }
 
   changePage(offset) {
-    const { resetPage } = this.props;
-    resetPage({ page: (offset / PAGE_COUNT + 1) });
+    const { setPage } = this.props;
+    setPage({ page: (offset / PAGE_COUNT + 1) });
   }
 
   render() {
@@ -72,5 +72,5 @@ MoviePage.propTypes = {
   totalResults: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  resetPage: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
 };
