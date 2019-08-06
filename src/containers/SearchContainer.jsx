@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import Search from '../components/Search';
 import { ENTER_KEY } from '../constants/constants';
 import {
-  searching,
   initSearch,
 } from '../actions/movies';
 
@@ -16,7 +15,6 @@ import {
     ...state,
   }),
   {
-    searchMovies: searching,
     initSearch,
   },
 )
@@ -37,12 +35,9 @@ export default class SearchContainer extends React.Component {
   }
 
   onSearchClick = () => {
-    const { searchMovies, initSearch } = this.props;
+    const { initSearch } = this.props;
     const { searchQuery } = this.state;
     initSearch({ searchQuery, page: 1 });
-    searchMovies(
-      { searchQuery },
-    );
   };
 
   onEnterPress = (e) => {
@@ -71,6 +66,5 @@ export default class SearchContainer extends React.Component {
 
 SearchContainer.propTypes = {
   initSearch: PropTypes.func.isRequired,
-  searchMovies: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
 };

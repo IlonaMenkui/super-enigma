@@ -22,11 +22,6 @@ export const setPagination = payload => ({
   payload,
 });
 
-export const searching = payload => ({
-  type: MOVIES.SEARCH,
-  payload,
-});
-
 export const initSearch = payload => ({
   type: MOVIES.INIT_SEARCH,
   payload,

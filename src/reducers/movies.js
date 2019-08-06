@@ -16,11 +16,6 @@ const movies = (state = defaultState, action) => {
         ...state,
         ...action.payload,
       };
-    case MOVIES.SEARCH:
-      return {
-        ...state,
-        ...action.payload,
-      };
     case MOVIES.SEARCH_RESET:
       return {
         ...state,
