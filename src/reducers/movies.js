@@ -28,6 +28,11 @@ const movies = (state = defaultState, action) => {
         isLoading: false,
         page: 1,
       };
+    case MOVIES.RESET_PAGE:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case MOVIES.INIT_SEARCH:
       return {
         ...state,
@@ -41,11 +46,6 @@ const movies = (state = defaultState, action) => {
       };
     case MOVIES.FAILURE:
       return { isLoading: false };
-    case MOVIES.RESET_PAGE:
-      return {
-        ...state,
-        ...action.payload,
-      };
     default:
       return state;
   }

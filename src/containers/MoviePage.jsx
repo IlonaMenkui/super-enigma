@@ -10,6 +10,7 @@ import SearchContainer from './SearchContainer';
 import FlatPagination from '../components/FlatPagination';
 import MovieListContainer from './MovieListContainer';
 import {
+  initSearch,
   resetPagination,
 } from '../actions/movies';
 
@@ -19,12 +20,22 @@ import {
   }),
   {
     resetPage: resetPagination,
+    initSearch,
   },
 )
 export default class MoviePage extends React.Component {
+  componentDidUpdate() {
+    const { searchQuery, resetPage, initSearch } = this.props;
+    if (!searchQuery) {
+      resetPage({ page: 1 });
+    } else {
+      initSearch({ page: 1, searchQuery: '' });
+    }
+  }
+
   changePage(offset) {
     const { resetPage } = this.props;
-    resetPage({ page: offset / PAGE_COUNT + 1 });
+    resetPage({ page: (offset / PAGE_COUNT + 1) });
   }
 
   render() {
@@ -57,5 +68,6 @@ MoviePage.propTypes = {
   totalResults: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
+  searchQuery: PropTypes.string.isRequired,
   resetPage: PropTypes.func.isRequired,
 };
