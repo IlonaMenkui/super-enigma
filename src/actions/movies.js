@@ -17,8 +17,9 @@ export const reset = () => ({
   type: MOVIES.SEARCH_RESET,
 });
 
-export const resetPagination = () => ({
+export const resetPagination = payload => ({
   type: MOVIES.RESET_PAGE,
+  payload,
 });
 
 export const searching = payload => ({
