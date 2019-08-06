@@ -10,6 +10,7 @@ import SearchContainer from './SearchContainer';
 import FlatPagination from '../components/FlatPagination';
 import MovieListContainer from './MovieListContainer';
 import {
+  reset,
   initSearch,
   resetPagination,
 } from '../actions/movies';
@@ -21,9 +22,21 @@ import {
   {
     resetPage: resetPagination,
     initSearch,
+    resetSearchMovies: reset,
   },
 )
 export default class MoviePage extends React.Component {
+  componentDidUpdate(prevProps) {
+    const { searchQuery, resetPage } = this.props;
+    const { title: prevTitle, searchQuery: prevSearchQuery } = prevProps;
+    const { title, resetSearchMovies } = this.props;
+    if (prevTitle !== title) {
+      resetSearchMovies();
+    } else if (prevSearchQuery !== searchQuery) {
+      resetPage({ page: 1 });
+    }
+  }
+
   changePage(offset) {
     const { resetPage } = this.props;
     resetPage({ page: (offset / PAGE_COUNT + 1) });
