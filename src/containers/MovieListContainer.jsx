@@ -10,6 +10,7 @@ import {
   succsess,
   failure,
   reset,
+  resetPagination,
 } from '../actions/movies';
 import { PARAMS } from '../constants/constants';
 import { getMovies } from '../api/api';
@@ -23,6 +24,7 @@ import { getMovies } from '../api/api';
     successLoadMovies: succsess,
     failureLoadMovies: failure,
     resetSearchMovies: reset,
+    resetPage: resetPagination,
   },
 )
 export default class MovieListContainer extends React.Component {
@@ -38,12 +40,11 @@ export default class MovieListContainer extends React.Component {
     } = this.props;
     if (prevTitle !== title) {
       resetSearchMovies();
-      resetPage();
       this.loadMovies(page, searchQuery);
     } else if (prevTitle === title && prevPage !== page) {
       this.loadMovies(page, searchQuery);
     } else if (prevSearchQuery !== searchQuery) {
-      resetPage();
+      resetPage({ page: 1 });
       this.loadMovies(page, searchQuery);
     }
   }
@@ -72,7 +73,7 @@ export default class MovieListContainer extends React.Component {
     const {
       title, movies, isLoading, searchQuery, type,
     } = this.props;
-    const searchTitle = movies.length === 0 ? 'No results' : 'Searching results:';
+    const searchTitle = 'Searching results:';
     const pageTitle = searchQuery ? searchTitle : title;
 
     return (

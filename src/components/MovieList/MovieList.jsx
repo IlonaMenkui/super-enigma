@@ -11,7 +11,9 @@ import './movie-list.css';
 const MovieList = ({ movies, title, isLoading }) => (
   <main className="movies-wrap">
     <Paper>
-      <Typography className="heading" variant="h4">{title}</Typography>
+      <Typography className="heading" variant="h4">
+        {(!isLoading && movies.length === 0) ? 'No results' : title}
+      </Typography>
       {isLoading ? <Circular />
         : (
           <>

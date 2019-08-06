@@ -9,34 +9,28 @@ import { PAGE_COUNT } from '../constants/constants';
 import SearchContainer from './SearchContainer';
 import FlatPagination from '../components/FlatPagination';
 import MovieListContainer from './MovieListContainer';
+import {
+  resetPagination,
+} from '../actions/movies';
 
 @connect(
   state => ({
     ...state,
   }),
+  {
+    resetPage: resetPagination,
+  },
 )
 export default class MoviePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 1,
-    };
-    this.resetPage = this.resetPage.bind(this);
-  }
-
   changePage(offset) {
-    this.setState({ page: offset / PAGE_COUNT + 1 });
-  }
-
-  resetPage() {
-    this.setState({ page: 1 });
+    const { resetPage } = this.props;
+    resetPage({ page: offset / PAGE_COUNT + 1 });
   }
 
   render() {
     const {
-      title, totalResults, isLoading, type,
+      title, totalResults, isLoading, type, page,
     } = this.props;
-    const { page } = this.state;
     return (
       <div>
         <FlatPagination
@@ -47,8 +41,6 @@ export default class MoviePage extends React.Component {
         <Paper>
           <SearchContainer title={title} />
           <MovieListContainer
-            resetPage={this.resetPage}
-            page={page}
             type={type}
             title={title}
             isLoading={isLoading}
@@ -60,8 +52,10 @@ export default class MoviePage extends React.Component {
 }
 
 MoviePage.propTypes = {
+  page: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   totalResults: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
+  resetPage: PropTypes.func.isRequired,
 };

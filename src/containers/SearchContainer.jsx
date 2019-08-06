@@ -8,7 +8,7 @@ import Search from '../components/Search';
 import { ENTER_KEY } from '../constants/constants';
 import {
   searching,
-  setSearchQuery,
+  initSearch,
 } from '../actions/movies';
 
 @connect(
@@ -17,7 +17,7 @@ import {
   }),
   {
     searchMovies: searching,
-    setQuery: setSearchQuery,
+    initSearch,
   },
 )
 export default class SearchContainer extends React.Component {
@@ -37,19 +37,17 @@ export default class SearchContainer extends React.Component {
   }
 
   onSearchClick = () => {
-    const { searchMovies, setQuery } = this.props;
+    const { searchMovies, initSearch } = this.props;
     const { searchQuery } = this.state;
-    setQuery({ searchQuery });
+    initSearch({ searchQuery, page: 1 });
     searchMovies(
       { searchQuery },
     );
   };
 
   onEnterPress = (e) => {
-    const { setQuery } = this.props;
     const { searchQuery } = this.state;
     if (e.charCode === ENTER_KEY) {
-      setQuery({ searchQuery });
       this.onSearchClick(searchQuery);
     }
   }
@@ -59,7 +57,6 @@ export default class SearchContainer extends React.Component {
   }
 
   render() {
-    const { setQuery } = this.props;
     const { searchQuery } = this.state;
     return (
       <Search
@@ -67,13 +64,13 @@ export default class SearchContainer extends React.Component {
         onSearchClick={this.onSearchClick}
         onEnterPress={this.onEnterPress}
         searchQuery={searchQuery}
-        setQuery={setQuery}
       />
     );
   }
 }
 
 SearchContainer.propTypes = {
-  setQuery: PropTypes.func.isRequired,
+  initSearch: PropTypes.func.isRequired,
   searchMovies: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };

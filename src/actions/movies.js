@@ -17,12 +17,16 @@ export const reset = () => ({
   type: MOVIES.SEARCH_RESET,
 });
 
+export const resetPagination = () => ({
+  type: MOVIES.RESET_PAGE,
+});
+
 export const searching = payload => ({
   type: MOVIES.SEARCH,
   payload,
 });
 
-export const setSearchQuery = payload => ({
-  type: MOVIES.SEARCH_QUERY,
+export const initSearch = payload => ({
+  type: MOVIES.INIT_SEARCH,
   payload,
 });
