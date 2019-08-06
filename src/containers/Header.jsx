@@ -1,11 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import { Paper, Tabs } from '@material-ui/core';
 
-import { HEADER_TABS as tabs } from '../../constants/constants';
-import HeaderTab from './HeaderTab';
+import { HEADER_TABS as tabs } from '../constants/constants';
+import HeaderTab from '../components/Header/HeaderTab';
+import {
+  reset,
+} from '../actions/movies';
 
+@connect(
+  state => ({
+    ...state,
+  }),
+  {
+    resetSearchMovies: reset,
+  },
+)
 export class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -25,9 +38,10 @@ export class Header extends React.Component {
   }
 
   handleChange = (event, value) => {
-    const { history } = this.props;
+    const { history, resetSearchMovies } = this.props;
     history.push(tabs[value].PATH);
     this.setState({ value });
+    resetSearchMovies();
   }
 
   render() {
@@ -56,6 +70,7 @@ Header.propTypes = {
       pathname: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  resetSearchMovies: PropTypes.func.isRequired,
 };
 
 export default Header;

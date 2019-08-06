@@ -24,14 +24,6 @@ import {
   },
 )
 export default class MoviePage extends React.Component {
-  componentDidUpdate(prevProps) {
-    const { title: prevTitle } = prevProps;
-    const { title, resetSearchMovies } = this.props;
-    if (prevTitle !== title) {
-      resetSearchMovies();
-    }
-  }
-
   changePage(offset) {
     const { setPage } = this.props;
     setPage({ page: (offset / PAGE_COUNT + 1) });
