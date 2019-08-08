@@ -6,7 +6,7 @@ import noImg from '../static/images/no-img.png';
 let cachedGenres = null;
 
 export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
-  url || params.SEARCH_URL,
+  url,
   {
     params: {
       api_key: params.API_KEY,

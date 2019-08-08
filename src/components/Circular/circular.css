@@ -1,7 +1,8 @@
 .circular-wrapp {
     display: flex;
     justify-content: center;
+    height: 800px;
 }
 .circular {
-    margin-top: 15px;
+    margin-top: 270px;
 }

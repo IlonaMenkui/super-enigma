@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-import Header from '../components/Header';
+import { Header } from '../containers/Header';
 import { ROUTES, MOVIE_TYPE as type } from '../constants/constants';
 import MoviePage from '../containers/MoviePage';
 

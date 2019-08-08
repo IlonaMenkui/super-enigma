@@ -8,32 +8,38 @@ import MovieListItem from './MovieListItem';
 
 import './movie-list.css';
 
-const MovieList = ({ movies, pageTitle, isLoading }) => (
+const MovieList = ({ movies, title, isLoading }) => (
   <main className="movies-wrap">
     <Paper>
-      {isLoading && <Circular />}
-      <Typography className="heading" variant="h4">{pageTitle}</Typography>
-      {movies.map(movie => (
-        <MovieListItem
-          title={movie.title}
-          genres={movie.genres}
-          voteAverage={movie.voteAverage}
-          overview={movie.overview}
-          posterPath={movie.posterPath}
-          releaseDate={movie.releaseDate}
-          popularity={movie.popularity}
-          originalLanguage={movie.originalLanguage}
-          voteCount={movie.voteCount}
-          originalTitle={movie.originalTitle}
-        />
-      ))}
+      <Typography className="heading" variant="h4">
+        {(!isLoading && movies.length === 0) ? 'No results' : title}
+      </Typography>
+      {isLoading ? <Circular />
+        : (
+          <>
+            {movies.map(movie => (
+              <MovieListItem
+                title={movie.title}
+                genres={movie.genres}
+                voteAverage={movie.voteAverage}
+                overview={movie.overview}
+                posterPath={movie.posterPath}
+                releaseDate={movie.releaseDate}
+                popularity={movie.popularity}
+                originalLanguage={movie.originalLanguage}
+                voteCount={movie.voteCount}
+                originalTitle={movie.originalTitle}
+              />
+            ))}
+          </>
+        )}
     </Paper>
   </main>
 );
 
 MovieList.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
-  pageTitle: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
 

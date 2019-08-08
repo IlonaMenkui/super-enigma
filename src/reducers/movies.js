@@ -5,7 +5,6 @@ const defaultState = {
   page: 1,
   totalResults: 0,
   isLoading: false,
-  isSearch: false,
   isSearchChange: false,
   searchQuery: '',
 };
@@ -14,21 +13,22 @@ const movies = (state = defaultState, action) => {
   switch (action.type) {
     case MOVIES.LOAD_SUCCESS:
       return {
-        ...action.payload,
-      };
-    case MOVIES.SEARCH:
-      return {
         ...state,
         ...action.payload,
       };
     case MOVIES.SEARCH_RESET:
       return {
         ...state,
-        isSearch: false,
         searchQuery: '',
         isLoading: false,
+        page: 1,
       };
-    case MOVIES.SEARCH_QUERY:
+    case MOVIES.SET_PAGE:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case MOVIES.INIT_SEARCH:
       return {
         ...state,
         ...action.payload,
@@ -37,6 +37,7 @@ const movies = (state = defaultState, action) => {
       return {
         ...state,
         isLoading: true,
+        movies: [],
       };
     case MOVIES.FAILURE:
       return { isLoading: false };

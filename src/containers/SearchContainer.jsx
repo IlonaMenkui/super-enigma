@@ -7,8 +7,7 @@ import PropTypes from 'prop-types';
 import Search from '../components/Search';
 import { ENTER_KEY } from '../constants/constants';
 import {
-  searching,
-  setSearchQuery,
+  initSearch,
 } from '../actions/movies';
 
 @connect(
@@ -16,8 +15,7 @@ import {
     ...state,
   }),
   {
-    searchMovies: searching,
-    setQuery: setSearchQuery,
+    initSearch,
   },
 )
 export default class SearchContainer extends React.Component {
@@ -28,31 +26,23 @@ export default class SearchContainer extends React.Component {
     };
   }
 
-  static getDerivedStateFromProps(nextProps) {
-    if (nextProps.searchQuery !== '' && !nextProps.isSearch) {
-      return {
-        searchQuery: '',
-      };
+  componentDidUpdate(prevProps) {
+    const { searchQuery: prevSearchQuery } = prevProps;
+    const { searchQuery } = this.props;
+    if (prevSearchQuery !== searchQuery && !searchQuery) {
+      this.setState({ searchQuery: '' });
     }
-    return null;
   }
 
   onSearchClick = () => {
-    const { searchMovies, setQuery } = this.props;
+    const { initSearch } = this.props;
     const { searchQuery } = this.state;
-    if (searchQuery) {
-      setQuery({ searchQuery });
-      searchMovies(
-        { searchQuery, isSearch: true, isSearchChange: true },
-      );
-    }
+    initSearch({ searchQuery, page: 1 });
   };
 
   onEnterPress = (e) => {
-    const { setQuery } = this.props;
     const { searchQuery } = this.state;
-    if (e.charCode === ENTER_KEY && searchQuery) {
-      setQuery({ searchQuery });
+    if (e.charCode === ENTER_KEY) {
       this.onSearchClick(searchQuery);
     }
   }
@@ -62,7 +52,6 @@ export default class SearchContainer extends React.Component {
   }
 
   render() {
-    const { setQuery } = this.props;
     const { searchQuery } = this.state;
     return (
       <Search
@@ -70,13 +59,12 @@ export default class SearchContainer extends React.Component {
         onSearchClick={this.onSearchClick}
         onEnterPress={this.onEnterPress}
         searchQuery={searchQuery}
-        setQuery={setQuery}
       />
     );
   }
 }
 
 SearchContainer.propTypes = {
-  setQuery: PropTypes.func.isRequired,
-  searchMovies: PropTypes.func.isRequired,
+  initSearch: PropTypes.func.isRequired,
+  searchQuery: PropTypes.string.isRequired,
 };
