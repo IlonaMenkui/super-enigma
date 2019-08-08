@@ -40,11 +40,15 @@ export class Header extends React.Component {
   }
 
   handleChange = (event, value) => {
-    const { history, resetSearchMovies, searchQuery } = this.props;
+    const {
+      history, resetSearchMovies, searchQuery, setPageAction,
+    } = this.props;
     history.push(tabs[value].PATH);
     this.setState({ value });
     if (searchQuery) {
       resetSearchMovies();
+    } else {
+      setPageAction({ page: 1 });
     }
   }
 
