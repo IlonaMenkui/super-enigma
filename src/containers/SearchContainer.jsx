@@ -27,9 +27,9 @@ export default class SearchContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { title: prevTitle } = prevProps;
-    const { title } = this.props;
-    if (prevTitle !== title) {
+    const { searchQuery: prevSearchQuery } = prevProps;
+    const { searchQuery } = this.props;
+    if (prevSearchQuery !== searchQuery && !searchQuery) {
       this.setState({ searchQuery: '' });
     }
   }
@@ -66,5 +66,5 @@ export default class SearchContainer extends React.Component {
 
 SearchContainer.propTypes = {
   initSearch: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  searchQuery: PropTypes.string.isRequired,
 };

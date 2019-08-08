@@ -10,7 +10,7 @@ import {
   succsess,
   failure,
   reset,
-  setPagination,
+  setPage as setPageAction,
 } from '../actions/movies';
 import { PARAMS } from '../constants/constants';
 import { getMovies } from '../api/api';
@@ -24,7 +24,7 @@ import { getMovies } from '../api/api';
     successLoadMovies: succsess,
     failureLoadMovies: failure,
     resetSearchMovies: reset,
-    setPage: setPagination,
+    setPageAction,
   },
 )
 export default class MovieListContainer extends React.Component {

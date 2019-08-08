@@ -11,7 +11,7 @@ import FlatPagination from '../components/FlatPagination';
 import MovieListContainer from './MovieListContainer';
 import {
   reset,
-  setPagination,
+  setPage as setPageAction,
 } from '../actions/movies';
 
 @connect(
@@ -19,14 +19,14 @@ import {
     ...state,
   }),
   {
-    setPage: setPagination,
+    setPageAction,
     resetSearchMovies: reset,
   },
 )
 export default class MoviePage extends React.Component {
   changePage(offset) {
-    const { setPage } = this.props;
-    setPage({ page: (offset / PAGE_COUNT + 1) });
+    const { setPageAction } = this.props;
+    setPageAction({ page: (offset / PAGE_COUNT + 1) });
   }
 
   render() {
@@ -59,5 +59,5 @@ MoviePage.propTypes = {
   totalResults: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  setPage: PropTypes.func.isRequired,
+  setPageAction: PropTypes.func.isRequired,
 };

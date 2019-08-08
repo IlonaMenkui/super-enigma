@@ -9,6 +9,7 @@ import { HEADER_TABS as tabs } from '../constants/constants';
 import HeaderTab from '../components/Header/HeaderTab';
 import {
   reset,
+  setPage as setPageAction,
 } from '../actions/movies';
 
 @connect(
@@ -17,6 +18,7 @@ import {
   }),
   {
     resetSearchMovies: reset,
+    setPageAction,
   },
 )
 export class Header extends React.Component {
