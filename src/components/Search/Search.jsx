@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -7,26 +7,42 @@ import InputBase from '@material-ui/core/InputBase';
 
 import './search.css';
 
-const Search = ({
-  searchQuery, onEnterPress, onHandleChange, onSearchClick,
-}) => (
-  <div className="search-wrap">
-    <InputBase
-      placeholder="Search…"
-      className="input"
-      inputProps={{ 'aria-label': 'Search' }}
-      onKeyPress={e => onEnterPress(e)}
-      onChange={e => onHandleChange(e)}
-      value={searchQuery}
-    />
-    <div className="search-icon">
-      <SearchIcon
-        color="primary"
-        onClick={() => onSearchClick()}
+function Search({
+  searchQuery, onHandleChange, onSearchClick, onEnterPress,
+}) {
+  const memoizedEnterPress = useCallback(
+    (e) => {
+      onEnterPress(e);
+    },
+    [onEnterPress],
+  );
+
+  const memoizedHandleChange = useCallback(
+    (e) => {
+      onHandleChange(e);
+    },
+    [onHandleChange],
+  );
+
+  return (
+    <div className="search-wrap">
+      <InputBase
+        placeholder="Search…"
+        className="input"
+        inputProps={{ 'aria-label': 'Search' }}
+        onKeyPress={e => memoizedEnterPress(e)}
+        onChange={e => memoizedHandleChange(e)}
+        value={searchQuery}
       />
+      <div className="search-icon">
+        <SearchIcon
+          color="primary"
+          onClick={() => onSearchClick()}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+}
 
 export default Search;
 
