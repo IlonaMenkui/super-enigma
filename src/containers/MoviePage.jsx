@@ -19,14 +19,14 @@ import {
     ...state,
   }),
   {
-    setPageAction,
+    setPage: setPageAction,
     resetSearchMovies: reset,
   },
 )
 export default class MoviePage extends React.Component {
   changePage(offset) {
-    const { setPageAction } = this.props;
-    setPageAction({ page: (offset / PAGE_COUNT + 1) });
+    const { setPage } = this.props;
+    setPage({ page: (offset / PAGE_COUNT + 1) });
   }
 
   render() {
@@ -59,5 +59,5 @@ MoviePage.propTypes = {
   totalResults: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  setPageAction: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
 };

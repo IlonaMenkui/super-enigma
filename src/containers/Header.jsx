@@ -18,7 +18,7 @@ import {
   }),
   {
     resetSearchMovies: reset,
-    setPageAction,
+    setPage: setPageAction,
   },
 )
 export class Header extends React.Component {
@@ -41,14 +41,14 @@ export class Header extends React.Component {
 
   handleChange = (event, value) => {
     const {
-      history, resetSearchMovies, searchQuery, setPageAction,
+      history, resetSearchMovies, searchQuery, setPage,
     } = this.props;
     history.push(tabs[value].PATH);
     this.setState({ value });
     if (searchQuery) {
       resetSearchMovies();
     } else {
-      setPageAction({ page: 1 });
+      setPage({ page: 1 });
     }
   }
 
@@ -80,6 +80,7 @@ Header.propTypes = {
   }).isRequired,
   resetSearchMovies: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
+  setPage: PropTypes.func.isRequired,
 };
 
 export default Header;
