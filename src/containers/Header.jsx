@@ -41,13 +41,13 @@ export class Header extends React.Component {
 
   handleChange = (event, value) => {
     const {
-      history, resetSearchMovies, searchQuery, setPageAction,
+      history, resetSearchMovies, searchQuery, setPageAction, page,
     } = this.props;
     history.push(tabs[value].PATH);
     this.setState({ value });
     if (searchQuery) {
       resetSearchMovies();
-    } else {
+    } else if (page !== 1) {
       setPageAction({ page: 1 });
     }
   }
@@ -80,6 +80,8 @@ Header.propTypes = {
   }).isRequired,
   resetSearchMovies: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+  setPageAction: PropTypes.func.isRequired,
 };
 
 export default Header;
