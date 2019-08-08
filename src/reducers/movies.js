@@ -2,6 +2,7 @@ import { MOVIES } from '../constants/actions';
 
 const defaultState = {
   movies: [],
+  cachedGenres: [],
   page: 1,
   totalResults: 0,
   isLoading: false,
@@ -11,12 +12,12 @@ const defaultState = {
 
 const movies = (state = defaultState, action) => {
   switch (action.type) {
-    case MOVIES.LOAD_SUCCESS:
+    case MOVIES.LOAD_MOVIES_SUCCESS:
       return {
         ...state,
         ...action.payload,
       };
-    case MOVIES.SEARCH_RESET:
+    case MOVIES.SEARCH_MOVIES_RESET:
       return {
         ...state,
         searchQuery: '',
@@ -28,18 +29,18 @@ const movies = (state = defaultState, action) => {
         ...state,
         ...action.payload,
       };
-    case MOVIES.INIT_SEARCH:
+    case MOVIES.INIT_SEARCH_PROPS:
       return {
         ...state,
         ...action.payload,
       };
-    case MOVIES.REQUEST:
+    case MOVIES.LOAD_MOVIES_REQUEST:
       return {
         ...state,
         isLoading: true,
         movies: [],
       };
-    case MOVIES.FAILURE:
+    case MOVIES.LOAD_MOVIES_FAILURE:
       return { isLoading: false };
     default:
       return state;
