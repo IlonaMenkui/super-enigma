@@ -24,6 +24,13 @@ function Search({
     [onHandleChange],
   );
 
+  const memoizedSearchClick = useCallback(
+    () => {
+      onSearchClick();
+    },
+    [onSearchClick],
+  );
+
   return (
     <div className="search-wrap">
       <InputBase
@@ -37,7 +44,7 @@ function Search({
       <div className="search-icon">
         <SearchIcon
           color="primary"
-          onClick={() => onSearchClick()}
+          onClick={memoizedSearchClick}
         />
       </div>
     </div>
