@@ -46,7 +46,7 @@ const MovieListItem = ({
             {overview || 'No overview'}
           </Typography>
           <Typography variant="body2" color="textSecondary">
-            {genres[0] !== undefined ? `Genres: ${genres.join(', ')}` : 'No genres'}
+            {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
           </Typography>
         </Grid>
       </Grid>

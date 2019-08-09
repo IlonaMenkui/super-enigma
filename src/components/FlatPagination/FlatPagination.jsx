@@ -12,37 +12,28 @@ import './flat-pagination.css';
 
 const theme = createMuiTheme();
 
-export class FlatPagination extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(e, offset) {
-    const { onClickPage } = this.props;
+function FlatPagination({ totalResults, page, onClickPage }) {
+  const handleClick = (e, offset) => {
     onClickPage(e, offset);
-  }
+  };
 
-  render() {
-    const { totalResults, page } = this.props;
-    const offset = PAGE_COUNT * page - 1;
-    return (
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <Paper className="pagination-wrap" square>
-          <Pagination
-        // The number of rows per page. Allow a number greater than or equal to 1.
-            limit={PAGE_COUNT}
-        // The number of rows to skip. Allow a number greater than or equal to 0.
-            offset={offset}
-        // The total number of rows. Allow a number greater than or equal to 0.
-            total={totalResults}
-            onClick={this.handleClick}
-          />
-        </Paper>
-      </MuiThemeProvider>
-    );
-  }
+  const offset = PAGE_COUNT * page - 1;
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <Paper className="pagination-wrap" square>
+        <Pagination
+          // The number of rows per page. Allow a number greater than or equal to 1.
+          limit={PAGE_COUNT}
+          // The number of rows to skip. Allow a number greater than or equal to 0.
+          offset={offset}
+          // The total number of rows. Allow a number greater than or equal to 0.
+          total={totalResults}
+          onClick={handleClick}
+        />
+      </Paper>
+    </MuiThemeProvider>
+  );
 }
 
 FlatPagination.propTypes = {

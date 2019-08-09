@@ -57,7 +57,7 @@ export class SimpleModal extends React.Component {
               </Typography>
               <Typography variant="subtitle2">
                 <b>Genres: </b>
-                {genres[0] !== undefined ? `${genres.join(', ')}` : 'No genres'}
+                {genres.length ? `${genres.join(', ')}` : 'No genres'}
               </Typography>
             </div>
           </div>
