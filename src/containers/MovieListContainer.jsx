@@ -54,7 +54,9 @@ export default class MovieListContainer extends React.Component {
       page, url, searchQuery, cachedGenres,
     })
       .then(({ movies, totalResults, genres }) => {
-        cacheGenresAction({ cachedGenres: genres });
+        if (cachedGenres.length === 0) {
+          cacheGenresAction({ cachedGenres: genres });
+        }
         successLoadMovies({
           movies,
           totalResults,
