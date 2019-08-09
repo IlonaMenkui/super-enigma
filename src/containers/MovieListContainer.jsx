@@ -10,10 +10,9 @@ import {
   succsess,
   failure,
   reset,
-  setPage as setPageAction,
   cacheGenres as cacheGenresAction,
 } from '../actions/movies';
-import { PARAMS } from '../constants/constants';
+import { PARAMS } from '../constants';
 import { getMovies } from '../api/api';
 
 @connect(
@@ -25,8 +24,7 @@ import { getMovies } from '../api/api';
     successLoadMovies: succsess,
     failureLoadMovies: failure,
     resetSearchMovies: reset,
-    setPageAction,
-    cacheGenresAction,
+    cacheGenres: cacheGenresAction,
   },
 )
 export default class MovieListContainer extends React.Component {
@@ -46,7 +44,7 @@ export default class MovieListContainer extends React.Component {
   loadMovies(page, searchQuery) {
     const {
       type, requestLoadMovies, successLoadMovies, failureLoadMovies,
-      cachedGenres, cacheGenresAction,
+      cachedGenres, cacheGenres,
     } = this.props;
     requestLoadMovies();
     const url = searchQuery ? PARAMS.SEARCH_URL : `${PARAMS.URL}${type}`;
@@ -55,7 +53,7 @@ export default class MovieListContainer extends React.Component {
     })
       .then(({ movies, totalResults, genres }) => {
         if (cachedGenres.length === 0) {
-          cacheGenresAction({ cachedGenres: genres });
+          cacheGenres({ cachedGenres: genres });
         }
         successLoadMovies({
           movies,
@@ -92,4 +90,5 @@ MovieListContainer.propTypes = {
   successLoadMovies: PropTypes.func.isRequired,
   failureLoadMovies: PropTypes.func.isRequired,
   cachedGenres: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cacheGenres: PropTypes.func.isRequired,
 };

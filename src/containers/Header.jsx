@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Paper, Tabs } from '@material-ui/core';
 
-import { HEADER_TABS as tabs } from '../constants/constants';
+import { HEADER_TABS as tabs } from '../constants';
 import HeaderTab from '../components/HeaderTab';
 import {
   reset,

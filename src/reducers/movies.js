@@ -1,4 +1,4 @@
-import { MOVIES } from '../constants/constants';
+import { MOVIES } from '../constants';
 
 const defaultState = {
   movies: [],

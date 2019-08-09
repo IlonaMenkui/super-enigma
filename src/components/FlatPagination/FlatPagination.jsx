@@ -6,7 +6,7 @@ import { Paper } from '@material-ui/core';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import Pagination from 'material-ui-flat-pagination';
 
-import { PAGE_COUNT } from '../../constants/constants';
+import { PAGE_COUNT } from '../../constants';
 
 import './flat-pagination.css';
 

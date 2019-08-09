@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { PARAMS as params, STATIC_URL as imgUrl } from '../constants/constants';
+import { PARAMS as params, STATIC_URL as imgUrl, MAX_TOTAL_RESULTS as maxTotalResults } from '../constants';
 import noImg from '../static/images/no-img.png';
 
 export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
@@ -14,7 +14,11 @@ export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
   },
 )
   .then(((res) => {
-    const { total_results: totalResults, results } = res.data;
+    const { results } = res.data;
+    let { total_results: totalResults } = res.data;
+    if (totalResults > maxTotalResults) {
+      totalResults = maxTotalResults;
+    }
     const movies = results.map(
       ({
         title, genre_ids: genresIds, vote_average: voteAverage, overview, poster_path: posterPath,

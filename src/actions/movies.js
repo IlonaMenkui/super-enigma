@@ -1,4 +1,4 @@
-import { MOVIES } from '../constants/constants';
+import { MOVIES } from '../constants';
 
 export const request = () => ({
   type: MOVIES.LOAD_MOVIES_REQUEST,

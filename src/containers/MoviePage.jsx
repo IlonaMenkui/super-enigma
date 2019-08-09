@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { Paper } from '@material-ui/core';
 
-import { PAGE_COUNT } from '../constants/constants';
+import { PAGE_COUNT } from '../constants';
 import SearchContainer from './SearchContainer';
 import FlatPagination from '../components/FlatPagination';
 import MovieListContainer from './MovieListContainer';
