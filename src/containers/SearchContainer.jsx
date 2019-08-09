@@ -20,7 +20,7 @@ import {
 )
 export default class SearchContainer extends React.Component {
    state = {
-     searchQuery: null,
+     searchQuery: '',
    };
 
    componentDidUpdate(prevProps) {

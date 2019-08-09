@@ -9,7 +9,6 @@ import {
   request,
   succsess,
   failure,
-  reset,
   cacheGenres as cacheGenresAction,
 } from '../actions/movies';
 import { PARAMS } from '../constants';
@@ -23,7 +22,6 @@ import { getMovies } from '../api/api';
     requestLoadMovies: request,
     successLoadMovies: succsess,
     failureLoadMovies: failure,
-    resetSearchMovies: reset,
     cacheGenres: cacheGenresAction,
   },
 )

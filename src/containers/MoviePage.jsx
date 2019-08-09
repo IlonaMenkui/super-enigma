@@ -10,7 +10,6 @@ import SearchContainer from './SearchContainer';
 import FlatPagination from '../components/FlatPagination';
 import MovieListContainer from './MovieListContainer';
 import {
-  reset,
   setPage as setPageAction,
 } from '../actions/movies';
 
@@ -20,7 +19,6 @@ import {
   }),
   {
     setPage: setPageAction,
-    resetSearchMovies: reset,
   },
 )
 export default class MoviePage extends React.Component {

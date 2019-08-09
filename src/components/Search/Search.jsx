@@ -37,8 +37,8 @@ function Search({
         placeholder="Search…"
         className="input"
         inputProps={{ 'aria-label': 'Search' }}
-        onKeyPress={e => memoizedEnterPress(e)}
-        onChange={e => memoizedHandleChange(e)}
+        onKeyPress={memoizedEnterPress}
+        onChange={memoizedHandleChange}
         value={searchQuery}
       />
       <div className="search-icon">
