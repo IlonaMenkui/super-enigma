@@ -42,6 +42,11 @@ const movies = (state = defaultState, action) => {
       };
     case MOVIES.LOAD_MOVIES_FAILURE:
       return { isLoading: false };
+    case MOVIES.CACHE_GENRES:
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }

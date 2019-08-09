@@ -26,3 +26,8 @@ export const initSearch = payload => ({
   type: MOVIES.INIT_SEARCH_PROPS,
   payload,
 });
+
+export const cacheGenres = payload => ({
+  type: MOVIES.CACHE_GENRES,
+  payload,
+});
