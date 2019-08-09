@@ -49,4 +49,4 @@ export const PAGE_COUNT = 20;
 
 export const ENTER_KEY = 13;
 
-export const MAX_TOTAL_RESULTS = 1000 * 20;
+export const MAX_TOTAL_RESULTS = 1000 * PAGE_COUNT;
