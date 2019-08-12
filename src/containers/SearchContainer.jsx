@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Search from '../components/Search';
-import { ENTER_KEY } from '../constants/constants';
+import { ENTER_KEY } from '../constants';
 import {
-  initSearch,
+  initSearch as initSearchProps,
 } from '../actions/movies';
 
 @connect(
@@ -15,24 +15,21 @@ import {
     ...state,
   }),
   {
-    initSearch,
+    initSearch: initSearchProps,
   },
 )
 export default class SearchContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchQuery: null,
-    };
-  }
+   state = {
+     searchQuery: '',
+   };
 
-  componentDidUpdate(prevProps) {
-    const { searchQuery: prevSearchQuery } = prevProps;
-    const { searchQuery } = this.props;
-    if (prevSearchQuery !== searchQuery && !searchQuery) {
-      this.setState({ searchQuery: '' });
-    }
-  }
+   componentDidUpdate(prevProps) {
+     const { searchQuery: prevSearchQuery } = prevProps;
+     const { searchQuery } = this.props;
+     if (prevSearchQuery !== searchQuery && !searchQuery) {
+       this.setState({ searchQuery: '' });
+     }
+   }
 
   onSearchClick = () => {
     const { initSearch } = this.props;

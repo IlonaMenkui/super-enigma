@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 import { Paper, Tabs } from '@material-ui/core';
 
-import { HEADER_TABS as tabs } from '../constants/constants';
-import HeaderTab from '../components/Header/HeaderTab';
+import { HEADER_TABS as tabs } from '../constants';
+import HeaderTab from '../components/HeaderTab';
 import {
   reset,
   setPage as setPageAction,
@@ -18,7 +18,7 @@ import {
   }),
   {
     resetSearchMovies: reset,
-    setPageAction,
+    setPage: setPageAction,
   },
 )
 export class Header extends React.Component {
@@ -41,14 +41,14 @@ export class Header extends React.Component {
 
   handleChange = (event, value) => {
     const {
-      history, resetSearchMovies, searchQuery, setPageAction, page,
+      history, resetSearchMovies, searchQuery, setPage,
     } = this.props;
     history.push(tabs[value].PATH);
     this.setState({ value });
     if (searchQuery) {
       resetSearchMovies();
-    } else if (page !== 1) {
-      setPageAction({ page: 1 });
+    } else {
+      setPage({ page: 1 });
     }
   }
 
@@ -80,8 +80,7 @@ Header.propTypes = {
   }).isRequired,
   resetSearchMovies: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
-  page: PropTypes.number.isRequired,
-  setPageAction: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
 };
 
 export default Header;

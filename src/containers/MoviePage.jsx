@@ -5,12 +5,11 @@ import { connect } from 'react-redux';
 
 import { Paper } from '@material-ui/core';
 
-import { PAGE_COUNT } from '../constants/constants';
+import { PAGE_COUNT } from '../constants';
 import SearchContainer from './SearchContainer';
 import FlatPagination from '../components/FlatPagination';
 import MovieListContainer from './MovieListContainer';
 import {
-  reset,
   setPage as setPageAction,
 } from '../actions/movies';
 
@@ -19,14 +18,13 @@ import {
     ...state,
   }),
   {
-    setPageAction,
-    resetSearchMovies: reset,
+    setPage: setPageAction,
   },
 )
 export default class MoviePage extends React.Component {
   changePage(offset) {
-    const { setPageAction } = this.props;
-    setPageAction({ page: (offset / PAGE_COUNT + 1) });
+    const { setPage } = this.props;
+    setPage({ page: (offset / PAGE_COUNT + 1) });
   }
 
   render() {
@@ -59,5 +57,5 @@ MoviePage.propTypes = {
   totalResults: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  setPageAction: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
 };

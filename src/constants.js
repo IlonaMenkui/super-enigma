@@ -1,3 +1,13 @@
+export const MOVIES = {
+  SEARCH_MOVIES_RESET: 'SEARCH_MOVIES_RESET',
+  LOAD_MOVIES_SUCCESS: 'LOAD_MOVIES_SUCCESS',
+  INIT_SEARCH_PROPS: 'INIT_SEARCH_PROPS',
+  LOAD_MOVIES_REQUEST: 'LOAD_MOVIES_REQUEST',
+  LOAD_MOVIES_FAILURE: 'LOAD_MOVIES_FAILURE',
+  SET_PAGE: 'SET_PAGE',
+  CACHE_GENRES: 'CACHE_GENRES',
+};
+
 export const ROUTES = {
   POPULAR: '/',
   UPCOMING: '/upcoming',
@@ -38,3 +48,5 @@ export const STATIC_URL = 'https://image.tmdb.org/t/p/w200/';
 export const PAGE_COUNT = 20;
 
 export const ENTER_KEY = 13;
+
+export const MAX_TOTAL_RESULTS = 1000 * PAGE_COUNT;

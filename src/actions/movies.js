@@ -1,20 +1,20 @@
-import { MOVIES } from '../constants/actions';
+import { MOVIES } from '../constants';
 
 export const request = () => ({
-  type: MOVIES.REQUEST,
+  type: MOVIES.LOAD_MOVIES_REQUEST,
 });
 
 export const succsess = payload => ({
-  type: MOVIES.LOAD_SUCCESS,
+  type: MOVIES.LOAD_MOVIES_SUCCESS,
   payload,
 });
 
 export const failure = () => ({
-  type: MOVIES.FAILURE,
+  type: MOVIES.LOAD_MOVIES_FAILURE,
 });
 
 export const reset = () => ({
-  type: MOVIES.SEARCH_RESET,
+  type: MOVIES.SEARCH_MOVIES_RESET,
 });
 
 export const setPage = payload => ({
@@ -23,6 +23,11 @@ export const setPage = payload => ({
 });
 
 export const initSearch = payload => ({
-  type: MOVIES.INIT_SEARCH,
+  type: MOVIES.INIT_SEARCH_PROPS,
+  payload,
+});
+
+export const cacheGenres = payload => ({
+  type: MOVIES.CACHE_GENRES,
   payload,
 });
