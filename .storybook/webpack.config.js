@@ -12,7 +12,8 @@ module.exports = {
   ],
   module: {
     rules: [
-      // add your custom rules.
-    ],
-  },
+      { test: /\.css$/, use: 'css-loader' },
+      { test: /\.ts$/, use: 'ts-loader' }
+    ]
+  }
 };
