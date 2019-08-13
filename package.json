@@ -6,6 +6,7 @@
     "@babel/core": "7.4.3",
     "@material-ui/core": "^4.1.1",
     "@material-ui/icons": "^4.2.1",
+    "@storybook/cli": "^5.1.11",
     "@svgr/webpack": "4.1.0",
     "@typescript-eslint/eslint-plugin": "1.6.0",
     "@typescript-eslint/parser": "1.6.0",
@@ -32,6 +33,7 @@
     "history": "^4.9.0",
     "html-webpack-plugin": "4.0.0-beta.5",
     "identity-obj-proxy": "3.0.0",
+    "init": "^0.1.2",
     "is-wsl": "^1.1.0",
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.7.1",
@@ -58,6 +60,7 @@
     "redux-logger": "^3.0.6",
     "resolve": "1.10.0",
     "sass-loader": "7.1.0",
+    "sb": "^0.2.1",
     "semver": "6.0.0",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.3",
@@ -72,7 +75,9 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "jest",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -91,6 +96,10 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@storybook/addon-actions": "^5.1.11",
+    "@storybook/addon-links": "^5.1.11",
+    "@storybook/addons": "^5.1.11",
+    "@storybook/react": "^5.1.11",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-babel": "^5.3.0",
