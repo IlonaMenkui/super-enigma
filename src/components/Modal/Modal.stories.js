@@ -5,9 +5,6 @@ import { storiesOf } from '@storybook/react';
 
 import Modal from '.';
 
-// genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
-// originalLanguage, voteCount, originalTitle,
-
 storiesOf('Modal', module)
   .add('default', () => <Modal />)
   .add('with genres', () => <Modal genres={['Genres']} />)

@@ -11,7 +11,7 @@ import SimpleModal from '../../Modal';
 import './movie-list-item.css';
 
 const MovieListItem = ({
-  genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
+  genres = [], title, overview, posterPath, voteAverage, releaseDate, popularity,
   originalLanguage, voteCount, originalTitle,
 }) => (
   <Grid container spacing={2}>

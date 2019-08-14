@@ -8,7 +8,7 @@ import MovieListItem from './MovieListItem';
 
 import './movie-list.css';
 
-const MovieList = ({ movies, title, isLoading }) => (
+const MovieList = ({ movies = [], title, isLoading }) => (
   <main className="movies-wrap">
     <Paper>
       <Typography className="heading" variant="h4">
