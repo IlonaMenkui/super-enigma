@@ -7,7 +7,7 @@ import Modal from '@material-ui/core/Modal';
 import './modal.css';
 
 function SimpleModal({
-  genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
+  genres = [], title, overview, posterPath, voteAverage, releaseDate, popularity,
   originalLanguage, voteCount, originalTitle,
 }) {
   const [open, setOpen] = useState(false);
