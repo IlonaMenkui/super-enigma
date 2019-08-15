@@ -5,29 +5,39 @@ import { storiesOf } from '@storybook/react';
 
 import Modal from '.';
 
+const genres = ['Action', 'Romantic'];
+const title = 'Movie title';
+const overview = 'Some overwiew';
+const releaseDate = '2019-08-01';
+const posterPath = undefined;
+const voteAverage = 10;
+const popularity = 100;
+const originalTitle = 'Original movie title';
+const originalLanguage = 'Original language';
+const voteCount = 9;
+
 storiesOf('Modal', module)
-  .add('default', () => <Modal />)
-  .add('with genres', () => <Modal genres={['Genres']} />)
-  .add('with title', () => <Modal title="Title" />)
-  .add('with overview', () => <Modal overview="Overview" />)
-  .add('with posterPath', () => <Modal posterPath="." />)
-  .add('with voteAverage', () => <Modal voteAverage="1000" />)
-  .add('with releaseDate', () => <Modal releaseDate="2019.02.30" />)
-  .add('with popularity', () => <Modal popularity="199.9" />)
-  .add('with originalLanguage', () => <Modal originalLanguage="ru" />)
-  .add('with voteCount', () => <Modal voteCount="10" />)
-  .add('with originalTitle', () => <Modal originalTitle="Original title" />)
+  .add('default', () => <Modal posterPath={posterPath} />)
+  .add('with genres', () => <Modal posterPath={posterPath} genres={genres} />)
+  .add('with title', () => <Modal posterPath={posterPath} title={title} />)
+  .add('with overview', () => <Modal posterPath={posterPath} overview={overview} />)
+  .add('with voteAverage', () => <Modal posterPath={posterPath} voteAverage={voteAverage} />)
+  .add('with releaseDate', () => <Modal posterPath={posterPath} releaseDate={releaseDate} />)
+  .add('with popularity', () => <Modal posterPath={posterPath} popularity={popularity} />)
+  .add('with originalLanguage', () => <Modal posterPath={posterPath} originalLanguage={originalLanguage} />)
+  .add('with voteCount', () => <Modal posterPath={posterPath} voteCount={voteCount} />)
+  .add('with originalTitle', () => <Modal posterPath={posterPath} originalTitle={originalTitle} />)
   .add('with all props', () => (
     <Modal
-      genres={['Genres']}
-      title="Title"
-      overview="Overview"
-      posterPath="."
-      voteAverage="1000"
-      releaseDate="2019.02.30"
-      popularity="199.9"
-      originalLanguage="ru"
-      voteCount="10"
-      originalTitle="Original title"
+      genres={genres}
+      title={title}
+      overview={overview}
+      posterPath={posterPath}
+      voteAverage={voteAverage}
+      releaseDate={releaseDate}
+      popularity={popularity}
+      originalLanguage={originalLanguage}
+      voteCount={voteCount}
+      originalTitle={originalTitle}
     />
   ));

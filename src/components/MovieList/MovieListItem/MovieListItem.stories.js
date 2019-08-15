@@ -13,7 +13,7 @@ const posterPath = '.';
 const voteAverage = 10;
 const popularity = 100;
 const originalTitle = 'Original movie title';
-const originalLanguage = 'No original language';
+const originalLanguage = 'Original language';
 const voteCount = 9;
 
 storiesOf('MovieListItem', module)

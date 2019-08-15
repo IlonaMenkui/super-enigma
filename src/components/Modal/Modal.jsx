@@ -77,20 +77,25 @@ SimpleModal.defaultProps = {
   overview: 'No overview',
   releaseDate: 'No release date',
   voteAverage: 0,
+  popularity: 0,
+  originalTitle: 'No original title',
+  originalLanguage: 'No original language',
+  voteCount: 0,
+  title: 'No title',
 };
 
 
 SimpleModal.propTypes = {
   genres: PropTypes.arrayOf(PropTypes.string),
-  title: PropTypes.string.isRequired,
-  overview: PropTypes.string,
+  title: PropTypes.string,
   posterPath: PropTypes.string.isRequired,
+  popularity: PropTypes.number,
+  originalLanguage: PropTypes.string,
+  voteCount: PropTypes.number,
+  originalTitle: PropTypes.string,
+  overview: PropTypes.string,
   voteAverage: PropTypes.number,
   releaseDate: PropTypes.string,
-  popularity: PropTypes.number.isRequired,
-  originalLanguage: PropTypes.string.isRequired,
-  voteCount: PropTypes.number.isRequired,
-  originalTitle: PropTypes.string.isRequired,
 };
 
 export default SimpleModal;

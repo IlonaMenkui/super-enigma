@@ -6,17 +6,18 @@ import { action } from '@storybook/addon-actions';
 
 import FlatPagiinon from '.';
 
+const onClichPage = action('click-on-page');
+const totalResults = 10;
+const page = 1;
+
 storiesOf('FlatPagination', module)
-  .add('default', () => <FlatPagiinon />)
-  .add('with total results', () => <FlatPagiinon totalResults="25" />)
-  .add('with page', () => <FlatPagiinon page="2" />)
-  .add('with onClichPage func',
-    () => <FlatPagiinon onClickPage={action('click-on-page')} />)
+  .add('default', () => <FlatPagiinon onClickPage={onClichPage} totalResults={totalResults} />)
+  .add('with page', () => <FlatPagiinon onClickPage={onClichPage} totalResults={totalResults} page={page} />)
   .add('with all props',
     () => (
       <FlatPagiinon
-        totalResults="220"
-        page="8"
-        onClickPage={action('click-on-page')}
+        totalResults={totalResults}
+        page={page}
+        onClickPage={onClichPage}
       />
     ));
