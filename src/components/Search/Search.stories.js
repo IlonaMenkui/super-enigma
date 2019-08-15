@@ -7,18 +7,23 @@ import { action } from '@storybook/addon-actions';
 import Search from '.';
 
 const searchQuery = 'find movie...';
+const onHandleChange = action('change-input-value');
+const onSearchClick = action('click-on-search-icon');
+const onEnterPress = action('press-on-enter-key');
 
 storiesOf('Search', module)
-  .add('default', () => <Search />)
-  .add('with search query', () => <Search searchQuery={searchQuery} />)
-  .add('with onHandleChange func', () => <Search onHandleChange={action('change-input-value')} />)
-  .add('with onSearchClick func', () => <Search onSearchClick={action('click-on-search-icon')} />)
-  .add('with onEnterPress func', () => <Search onEnterPress={action('press-on-enter-key')} />)
-  .add('with all props', () => (
+  .add('default', () => (
+    <Search
+      onHandleChange={onHandleChange}
+      onSearchClick={onSearchClick}
+      onEnterPress={onEnterPress}
+    />
+  ))
+  .add('with search query', () => (
     <Search
       searchQuery={searchQuery}
-      onHandleChange={action('change-input-value')}
-      onSearchClick={action('click-on-search-icon')}
-      onEnterPress={action('press-on-enter-key')}
+      onHandleChange={onHandleChange}
+      onSearchClick={onSearchClick}
+      onEnterPress={onEnterPress}
     />
   ));
