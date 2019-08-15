@@ -4,12 +4,13 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import MovieListItem from '.';
+import noImg from '../../../static/images/no-img.png';
 
 const genres = ['Action', 'Romantic'];
 const title = 'Movie title';
 const overview = 'Some overwiew';
 const releaseDate = '2019-08-01';
-const posterPath = '.';
+const posterPath = noImg;
 const voteAverage = 10;
 const popularity = 100;
 const originalTitle = 'Original movie title';
