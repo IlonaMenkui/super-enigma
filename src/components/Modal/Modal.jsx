@@ -76,6 +76,7 @@ SimpleModal.defaultProps = {
   genres: [],
   overview: 'No overview',
   releaseDate: 'No release date',
+  voteAverage: 0,
 };
 
 
@@ -84,7 +85,7 @@ SimpleModal.propTypes = {
   title: PropTypes.string.isRequired,
   overview: PropTypes.string,
   posterPath: PropTypes.string.isRequired,
-  voteAverage: PropTypes.number.isRequired,
+  voteAverage: PropTypes.number,
   releaseDate: PropTypes.string,
   popularity: PropTypes.number.isRequired,
   originalLanguage: PropTypes.string.isRequired,

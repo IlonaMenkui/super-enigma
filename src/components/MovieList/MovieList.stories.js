@@ -12,14 +12,11 @@ const title = 'Page title';
 const isLoading = false;
 
 storiesOf('MovieList', module)
-  .add('default', () => <MovieList />)
-  .add('with movies', () => (<MovieList movies={movies} />))
-  .add('with title', () => <MovieList title={title} />)
-  .add('with circular', () => <MovieList isLoading={isLoading} />)
-  .add('with all props', () => (
+  .add('default', () => <MovieList title={title} isLoading={isLoading} />)
+  .add('with movies', () => (
     <MovieList
-      movies={movies}
       title={title}
       isLoading={isLoading}
+      movies={movies}
     />
   ));

@@ -9,18 +9,34 @@ const genres = ['Action', 'Romantic'];
 const title = 'Movie title';
 const overview = 'Some overwiew';
 const releaseDate = '2019-08-01';
+const posterPath = '.';
+const voteAverage = 10;
+const popularity = 100;
+const originalTitle = 'Original movie title';
+const originalLanguage = 'No original language';
+const voteCount = 9;
 
 storiesOf('MovieListItem', module)
-  .add('default', () => <MovieListItem />)
-  .add('with genres', () => (<MovieListItem genres={genres} />))
-  .add('with title', () => <MovieListItem title={title} />)
-  .add('with overview', () => <MovieListItem overview={overview} />)
-  .add('with releaseDate', () => <MovieListItem releaseDate={releaseDate} />)
+  .add('default', () => <MovieListItem posterPath={posterPath} releaseDate={releaseDate} />)
+  .add('with genres', () => (<MovieListItem genres={genres} releaseDate={releaseDate} posterPath={posterPath} />))
+  .add('with title', () => (<MovieListItem title={title} releaseDate={releaseDate} posterPath={posterPath} />))
+  .add('with overview', () => <MovieListItem posterPath={posterPath} releaseDate={releaseDate} overview={overview} />)
+  .add('with voteAverage', () => <MovieListItem posterPath={posterPath} releaseDate={releaseDate} voteAverage={voteAverage} />)
+  .add('with popularity', () => <MovieListItem posterPath={posterPath} releaseDate={releaseDate} popularity={popularity} />)
+  .add('with originalTitle', () => <MovieListItem posterPath={posterPath} releaseDate={releaseDate} originalTitle={originalTitle} />)
+  .add('with originalLanguage', () => <MovieListItem posterPath={posterPath} releaseDate={releaseDate} originalLanguage={originalLanguage} />)
+  .add('with voteCount', () => <MovieListItem posterPath={posterPath} releaseDate={releaseDate} voteCount={voteCount} />)
   .add('with all props', () => (
     <MovieListItem
       genres={genres}
-      title={title}
+      posterPath={posterPath}
       overview={overview}
       releaseDate={releaseDate}
+      title={title}
+      voteAverage={voteAverage}
+      popularity={popularity}
+      originalLanguage={originalLanguage}
+      originalTitle={originalTitle}
+      voteCount={voteCount}
     />
   ));
