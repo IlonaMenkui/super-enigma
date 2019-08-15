@@ -7,7 +7,7 @@ import Modal from '@material-ui/core/Modal';
 import './modal.css';
 
 function SimpleModal({
-  genres = [], title, overview, posterPath, voteAverage, releaseDate, popularity,
+  genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
   originalLanguage, voteCount, originalTitle,
 }) {
   const [open, setOpen] = useState(false);
@@ -72,14 +72,20 @@ function SimpleModal({
   );
 }
 
+SimpleModal.defaultProps = {
+  genres: [],
+  overview: 'No overview',
+  releaseDate: 'No release date',
+};
+
 
 SimpleModal.propTypes = {
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string.isRequired,
-  overview: PropTypes.string.isRequired,
+  overview: PropTypes.string,
   posterPath: PropTypes.string.isRequired,
   voteAverage: PropTypes.number.isRequired,
-  releaseDate: PropTypes.string.isRequired,
+  releaseDate: PropTypes.string,
   popularity: PropTypes.number.isRequired,
   originalLanguage: PropTypes.string.isRequired,
   voteCount: PropTypes.number.isRequired,

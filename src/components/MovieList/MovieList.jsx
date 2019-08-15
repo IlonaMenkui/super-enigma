@@ -8,7 +8,7 @@ import MovieListItem from './MovieListItem';
 
 import './movie-list.css';
 
-const MovieList = ({ movies = [], title, isLoading }) => (
+const MovieList = ({ movies, title, isLoading }) => (
   <main className="movies-wrap">
     <Paper>
       <Typography className="heading" variant="h4">
@@ -37,8 +37,12 @@ const MovieList = ({ movies = [], title, isLoading }) => (
   </main>
 );
 
+MovieList.defaultProps = {
+  movies: [],
+};
+
 MovieList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
