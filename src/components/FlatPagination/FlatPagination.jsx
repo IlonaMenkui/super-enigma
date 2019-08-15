@@ -38,11 +38,12 @@ function FlatPagination({ totalResults, page, onClickPage }) {
 
 FlatPagination.defaultProps = {
   page: 1,
+  totalResults: 0,
 };
 
 FlatPagination.propTypes = {
   onClickPage: PropTypes.func.isRequired,
-  totalResults: PropTypes.number.isRequired,
+  totalResults: PropTypes.number,
   page: PropTypes.number,
 };
 
