@@ -5,8 +5,8 @@ import { storiesOf } from '@storybook/react';
 
 import HeaderTab from '.';
 
+const PATH = '.';
+const TITLE = 'Popular';
+
 storiesOf('HeaderTab', module)
-  .add('default', () => <HeaderTab />)
-  .add('with title', () => <HeaderTab TITLE="hello" />)
-  .add('with path', () => <HeaderTab PATH="/hello" />)
-  .add('with all props', () => <HeaderTab TITLE="Hello" PATH="/hello" />);
+  .add('default', () => <HeaderTab PATH={PATH} TITLE={TITLE} />);
