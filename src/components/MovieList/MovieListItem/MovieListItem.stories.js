@@ -16,16 +16,7 @@ const originalLanguage = 'Original language';
 const voteCount = 9;
 
 storiesOf('MovieListItem', module)
-  .add('default', () => <MovieListItem releaseDate={releaseDate} />)
-  .add('with genres', () => (<MovieListItem genres={genres} releaseDate={releaseDate} />))
-  .add('with title', () => (<MovieListItem title={title} releaseDate={releaseDate} />))
-  .add('with overview', () => <MovieListItem releaseDate={releaseDate} overview={overview} />)
-  .add('with voteAverage', () => <MovieListItem releaseDate={releaseDate} voteAverage={voteAverage} />)
-  .add('with popularity', () => <MovieListItem releaseDate={releaseDate} popularity={popularity} />)
-  .add('with originalTitle', () => <MovieListItem releaseDate={releaseDate} originalTitle={originalTitle} />)
-  .add('with originalLanguage', () => <MovieListItem releaseDate={releaseDate} originalLanguage={originalLanguage} />)
-  .add('with voteCount', () => <MovieListItem releaseDate={releaseDate} voteCount={voteCount} />)
-  .add('with all props', () => (
+  .add('default', () => (
     <MovieListItem
       genres={genres}
       overview={overview}
@@ -37,4 +28,15 @@ storiesOf('MovieListItem', module)
       originalTitle={originalTitle}
       voteCount={voteCount}
     />
+  ))
+  .add('only with genres', () => (<MovieListItem genres={genres} releaseDate={releaseDate} />))
+  .add('only with title', () => (<MovieListItem title={title} releaseDate={releaseDate} />))
+  .add('only with overview', () => <MovieListItem releaseDate={releaseDate} overview={overview} />)
+  .add('only with vote average', () => <MovieListItem releaseDate={releaseDate} voteAverage={voteAverage} />)
+  .add('only with popularity', () => <MovieListItem releaseDate={releaseDate} popularity={popularity} />)
+  .add('only with original title', () => <MovieListItem releaseDate={releaseDate} originalTitle={originalTitle} />)
+  .add('only with original language', () => <MovieListItem releaseDate={releaseDate} originalLanguage={originalLanguage} />)
+  .add('only with vote count', () => <MovieListItem releaseDate={releaseDate} voteCount={voteCount} />)
+  .add('without any data', () => (
+    <MovieListItem releaseDate={releaseDate} />
   ));

@@ -14,14 +14,14 @@ const onEnterPress = action('press-on-enter-key');
 storiesOf('Search', module)
   .add('default', () => (
     <Search
+      searchQuery={searchQuery}
       onHandleChange={onHandleChange}
       onSearchClick={onSearchClick}
       onEnterPress={onEnterPress}
     />
   ))
-  .add('with search query', () => (
+  .add('without search query', () => (
     <Search
-      searchQuery={searchQuery}
       onHandleChange={onHandleChange}
       onSearchClick={onSearchClick}
       onEnterPress={onEnterPress}
