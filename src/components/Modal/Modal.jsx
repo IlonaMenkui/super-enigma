@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 
+import { STATIC_URL as imgUrl } from '../../constants';
+import noImg from '../../static/images/no-img.png';
 import './modal.css';
 
 function SimpleModal({
@@ -26,9 +28,11 @@ function SimpleModal({
     [setOpen],
   );
 
+  const posterPathUrl = posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`;
+
   return (
     <div>
-      <img className="img" alt="poster" src={posterPath} onClick={memoizedSetStateOpen} />
+      <img className="img" alt="poster" src={posterPathUrl} onClick={memoizedSetStateOpen} />
       <Modal
         onClose={memoizedSetStateClose}
         aria-labelledby="simple-modal-title"
@@ -36,7 +40,7 @@ function SimpleModal({
         open={open}
       >
         <div className="modal-paper">
-          <div><img className="img" alt="poster" src={posterPath} /></div>
+          <div><img className="img" alt="poster" src={posterPathUrl} /></div>
           <div className="text-wrap">
             <Typography gutterBottom variant="h4">
               {title}
@@ -72,18 +76,31 @@ function SimpleModal({
   );
 }
 
+SimpleModal.defaultProps = {
+  genres: [],
+  overview: 'No overview',
+  releaseDate: 'No release date',
+  voteAverage: 0,
+  popularity: 0,
+  originalTitle: 'No original title',
+  originalLanguage: 'No original language',
+  voteCount: 0,
+  title: 'No title',
+  posterPath: null,
+};
+
 
 SimpleModal.propTypes = {
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  title: PropTypes.string.isRequired,
-  overview: PropTypes.string.isRequired,
-  posterPath: PropTypes.string.isRequired,
-  voteAverage: PropTypes.number.isRequired,
-  releaseDate: PropTypes.string.isRequired,
-  popularity: PropTypes.number.isRequired,
-  originalLanguage: PropTypes.string.isRequired,
-  voteCount: PropTypes.number.isRequired,
-  originalTitle: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string),
+  title: PropTypes.string,
+  posterPath: PropTypes.string,
+  popularity: PropTypes.number,
+  originalLanguage: PropTypes.string,
+  voteCount: PropTypes.number,
+  originalTitle: PropTypes.string,
+  overview: PropTypes.string,
+  voteAverage: PropTypes.number,
+  releaseDate: PropTypes.string,
 };
 
 export default SimpleModal;

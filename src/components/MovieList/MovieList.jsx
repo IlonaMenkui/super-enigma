@@ -37,8 +37,12 @@ const MovieList = ({ movies, title, isLoading }) => (
   </main>
 );
 
+MovieList.defaultProps = {
+  movies: [],
+};
+
 MovieList.propTypes = {
-  movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
 };

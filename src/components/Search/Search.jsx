@@ -53,8 +53,12 @@ function Search({
 
 export default Search;
 
+Search.defaultProps = {
+  searchQuery: '',
+};
+
 Search.propTypes = {
-  searchQuery: PropTypes.string.isRequired,
+  searchQuery: PropTypes.string,
   onSearchClick: PropTypes.func.isRequired,
   onEnterPress: PropTypes.func.isRequired,
   onHandleChange: PropTypes.func.isRequired,

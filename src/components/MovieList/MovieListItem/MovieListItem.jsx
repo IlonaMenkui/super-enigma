@@ -57,17 +57,28 @@ const MovieListItem = ({
   </Grid>
 );
 
+MovieListItem.defaultProps = {
+  genres: [],
+  overview: 'No overview',
+  voteAverage: 0,
+  popularity: 0,
+  originalTitle: 'No original title',
+  originalLanguage: 'No original language',
+  voteCount: 0,
+  title: 'No title',
+};
+
 MovieListItem.propTypes = {
-  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
-  title: PropTypes.string.isRequired,
-  overview: PropTypes.string.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string),
+  title: PropTypes.string,
+  overview: PropTypes.string,
   posterPath: PropTypes.string.isRequired,
-  voteAverage: PropTypes.number.isRequired,
+  voteAverage: PropTypes.number,
   releaseDate: PropTypes.string.isRequired,
-  popularity: PropTypes.number.isRequired,
-  originalLanguage: PropTypes.string.isRequired,
-  voteCount: PropTypes.number.isRequired,
-  originalTitle: PropTypes.string.isRequired,
+  popularity: PropTypes.number,
+  originalLanguage: PropTypes.string,
+  voteCount: PropTypes.number,
+  originalTitle: PropTypes.string,
 };
 
 export default MovieListItem;

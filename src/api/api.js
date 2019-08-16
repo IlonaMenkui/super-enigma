@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-import { PARAMS as params, STATIC_URL as imgUrl, MAX_TOTAL_RESULTS as maxTotalResults } from '../constants';
-import noImg from '../static/images/no-img.png';
+import { PARAMS as params, MAX_TOTAL_RESULTS as maxTotalResults } from '../constants';
 
 export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
   url,
@@ -34,7 +33,7 @@ export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
         voteCount,
         originalTitle,
         releaseDate,
-        posterPath: posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`,
+        posterPath,
       }),
     );
     return { totalResults, movies };
