@@ -16,17 +16,7 @@ const originalLanguage = 'Original language';
 const voteCount = 9;
 
 storiesOf('Modal', module)
-  .add('default', () => <Modal />)
-  .add('only with genres', () => <Modal genres={genres} />)
-  .add('only with title', () => <Modal title={title} />)
-  .add('only with overview', () => <Modal overview={overview} />)
-  .add('only with voteAverage', () => <Modal voteAverage={voteAverage} />)
-  .add('only with releaseDate', () => <Modal releaseDate={releaseDate} />)
-  .add('only with popularity', () => <Modal popularity={popularity} />)
-  .add('only with originalLanguage', () => <Modal originalLanguage={originalLanguage} />)
-  .add('only with voteCount', () => <Modal voteCount={voteCount} />)
-  .add('only with originalTitle', () => <Modal originalTitle={originalTitle} />)
-  .add('only with all props', () => (
+  .add('default', () => (
     <Modal
       genres={genres}
       title={title}
@@ -38,4 +28,14 @@ storiesOf('Modal', module)
       voteCount={voteCount}
       originalTitle={originalTitle}
     />
-  ));
+  ))
+  .add('only with genres', () => <Modal genres={genres} />)
+  .add('only with title', () => <Modal title={title} />)
+  .add('only with overview', () => <Modal overview={overview} />)
+  .add('only with vote average', () => <Modal voteAverage={voteAverage} />)
+  .add('only with release date', () => <Modal releaseDate={releaseDate} />)
+  .add('only with popularity index', () => <Modal popularity={popularity} />)
+  .add('only with original language', () => <Modal originalLanguage={originalLanguage} />)
+  .add('only with vote count', () => <Modal voteCount={voteCount} />)
+  .add('only with original title', () => <Modal originalTitle={originalTitle} />)
+  .add('without any data', () => <Modal />);

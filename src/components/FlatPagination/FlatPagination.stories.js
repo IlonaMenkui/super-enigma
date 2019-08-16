@@ -13,5 +13,5 @@ const page = 3;
 storiesOf('FlatPagination', module)
   .add('default', () => <FlatPagiinon onClickPage={onClickPage} page={page} totalResults={totalResults} />)
   .add('only with total results', () => <FlatPagiinon onClickPage={onClickPage} totalResults={totalResults} />)
-  .add('only with selected page', () => <FlatPagiinon onClickPage={onClickPage} page={page} />)
+  .add('with selected page', () => <FlatPagiinon onClickPage={onClickPage} page={page} totalResults={totalResults} />)
   .add('without any data', () => <FlatPagiinon onClickPage={onClickPage} />);

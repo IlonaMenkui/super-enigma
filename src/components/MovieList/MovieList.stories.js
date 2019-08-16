@@ -19,4 +19,5 @@ storiesOf('MovieList', module)
       movies={movies}
     />
   ))
+  .add('when isLoading is true', () => <MovieList title={title} isLoading />)
   .add('without movies', () => <MovieList title={title} isLoading={isLoading} />);
