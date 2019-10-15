@@ -9,7 +9,6 @@ import { createLogger } from 'redux-logger';
 
 import movies from './reducers';
 import App from './app/App';
-import * as serviceWorker from './serviceWorker';
 
 import './index.css';
 
@@ -25,4 +24,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
-serviceWorker.unregister();
