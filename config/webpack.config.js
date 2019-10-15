@@ -305,7 +305,7 @@ module.exports = function(webpackEnv) {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader"
-        }
+         }
         },
         {
           test: /\.(js|mjs|jsx|ts|tsx)$/,
