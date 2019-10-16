@@ -6,7 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
-import SimpleModal from '../../Modal';
+// eslint-disable-next-line import/extensions
+import SimpleModal from '../../Modal/Modal.jsx';
 
 import './movie-list-item.css';
 

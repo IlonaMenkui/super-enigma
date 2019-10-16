@@ -1,10 +1,11 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-import { Header } from '../containers/Header';
+import { Header } from '../containers/Header.jsx';
 import { ROUTES, MOVIE_TYPE as type } from '../constants';
-import MoviePage from '../containers/MoviePage';
+import MoviePage from '../containers/MoviePage.jsx';
 
 import './app.css';
 

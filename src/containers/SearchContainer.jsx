@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import Search from '../components/Search';
+// eslint-disable-next-line import/extensions
+import Search from '../components/Search/Search.jsx';
 import { ENTER_KEY } from '../constants';
 import {
   initSearch as initSearchProps,
