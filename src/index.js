@@ -8,8 +8,7 @@ import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
 
 import movies from './reducers';
-// eslint-disable-next-line import/extensions
-import App from './app/App.jsx';
+import App from './app/App';
 
 import './index.css';
 

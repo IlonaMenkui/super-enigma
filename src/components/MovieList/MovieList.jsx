@@ -1,11 +1,10 @@
-/* eslint-disable import/extensions */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Paper, Typography } from '@material-ui/core';
 
-import Circular from '../Circular/Circular.jsx';
-import MovieListItem from './MovieListItem/MovieListItem.jsx';
+import Circular from '../Circular';
+import MovieListItem from './MovieListItem';
 
 import './movie-list.css';
 

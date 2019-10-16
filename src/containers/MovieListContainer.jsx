@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-// eslint-disable-next-line import/extensions
-import MovieList from '../components/MovieList/MovieList.jsx';
+import MovieList from '../components/MovieList';
 import {
   request,
   succsess,

@@ -6,8 +6,7 @@ import { connect } from 'react-redux';
 import { Paper, Tabs } from '@material-ui/core';
 
 import { HEADER_TABS as tabs } from '../constants';
-// eslint-disable-next-line import/extensions
-import HeaderTab from '../components/HeaderTab/HeaderTab.jsx';
+import HeaderTab from '../components/HeaderTab';
 import {
   reset,
   setPage as setPageAction,
