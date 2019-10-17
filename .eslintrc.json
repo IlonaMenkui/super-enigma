@@ -10,6 +10,7 @@
   "parser": "babel-eslint",
   "plugins": ["babel"],
   "rules": {
+    "react/jsx-props-no-spreading": "off",
     "arrow-parens": [2, "as-needed"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   },
