@@ -19,7 +19,6 @@
     "case-sensitive-paths-webpack-plugin": "2.2.0",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",
-    "eslint": "^5.16.0",
     "eslint-config-react-app": "^4.0.1",
     "eslint-loader": "2.1.2",
     "eslint-plugin-flowtype": "2.50.1",
@@ -71,10 +70,14 @@
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
     "test": "jest",
+    "lint": "eslint src",
     "test:watch": "npm test -- --watch",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "pre-commit": [
+    "npm run lint"
+  ],
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -102,13 +105,15 @@
     "@storybook/react": "^5.1.11",
     "babel-loader": "^8.0.6",
     "css-loader": "^2.1.1",
-    "eslint": "^5.16.0",
+    "eslint": "^6.5.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-babel": "^5.3.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-react": "^7.12.4",
     "image-webpack-loader": "^5.0.0",
     "jest": "^24.8.0",
+    "lint": "^0.7.0",
+    "pre-commit": "^1.2.2",
     "ts-loader": "^6.0.4",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
