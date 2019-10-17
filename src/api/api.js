@@ -12,7 +12,7 @@ export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
     },
   },
 )
-  .then(((res) => {
+  .then((res => {
     const { results } = res.data;
     let { total_results: totalResults } = res.data;
     if (totalResults > maxTotalResults) {
@@ -57,7 +57,7 @@ const getAllGenres = cachedGenres => (cachedGenres.length !== 0 ? Promise.resolv
       params: { api_key: params.API_KEY },
     },
   )
-    .then((res) => {
+    .then(res => {
       const { genres } = res.data;
       return genres;
     }));
