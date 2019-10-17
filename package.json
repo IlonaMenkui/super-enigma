@@ -112,7 +112,6 @@
     "eslint-plugin-react": "^7.12.4",
     "image-webpack-loader": "^5.0.0",
     "jest": "^24.8.0",
-    "lint": "^0.7.0",
     "pre-commit": "^1.2.2",
     "ts-loader": "^6.0.4",
     "webpack": "^4.41.2",
