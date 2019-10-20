@@ -1,104 +1,20 @@
 {
-  "extends": [
-    "airbnb-base",
-    "airbnb-base/rules/strict",
-    "airbnb/rules/react"
-  ],
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaFeatures": { "legacyDecorators": true }
+  "extends": ["airbnb-base", "airbnb-base/rules/strict", "airbnb/rules/react"],
+  "parserOptions": { 
+    "ecmaFeatures": {
+    "jsx": true
+   },
+    "ecmaVersion": 6,
+    "legacyDecorators": true 
   },
+  "parser": "babel-eslint",
+  "plugins": ["babel"],
   "rules": {
-    "react/destructuring-assignment": "warn",
-    "react/no-did-update-set-state": "off",
-    "import/named": "error",
-    "no-bitwise": [
-      "error",
-      {
-        "allow": [
-          "&",
-          "|"
-        ]
-      }
-    ],
-    "react/no-danger": "error",
-    "react/no-string-refs": "error",
-    "react/prop-types": "warn",
-    "react/no-unsafe": ["warn", { "checkAliases": true }],
-    "react/no-typos": "error",
-    "react/require-default-props": "warn",
-    "import/prefer-default-export": "warn",
-    "import/no-anonymous-default-export": ["warn", {
-      "allowArray": false,
-      "allowArrowFunction": false,
-      "allowAnonymousClass": false,
-      "allowAnonymousFunction": false,
-      "allowCallExpression": false,
-      "allowLiteral": false,
-      "allowObject": false
-    }],
-    "import/no-extraneous-dependencies": [
-      "error", {
-        "devDependencies": [
-          "**/*.stories.js",
-          "**/*.stories.jsx",
-          "**/*.test.js",
-          "**/*.spec.js",
-          "test.setup.js"
-        ]
-      }
-    ],
-    "no-console": "error",
-    "func-names": "error",
-    "no-shadow": "warn",
-    "max-len": "warn",
-    "class-methods-use-this": "off",
-    "react/sort-comp": ["error", {
-      "order": [
-        "propTypes",
-        "defaultProps",
-        "displayName",
-        "static-methods",
-        "instance-variables",
-        "lifecycle",
-        "/^on.+$/",
-        "getters",
-        "setters",
-        "/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/",
-        "instance-methods",
-        "everything-else",
-        "rendering"
-      ],
-      "groups": {
-        "lifecycle": [
-          "contextTypes",
-          "childContextTypes",
-          "mixins",
-          "statics",
-          "constructor",
-          "getDefaultProps",
-          "getInitialState",
-          "state",
-          "getChildContext",
-          "componentWillMount",
-          "componentDidMount",
-          "componentWillReceiveProps",
-          "shouldComponentUpdate",
-          "componentWillUpdate",
-          "componentDidUpdate",
-          "componentWillUnmount"
-        ],
-        "rendering": [
-          "/^render.+$/",
-          "render"
-        ]
-      }
-    }]
+    "react/jsx-props-no-spreading": "off",
+    "arrow-parens": [2, "as-needed"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   },
   "env": {
-    "es6": true
-  },
-  "plugins": [
-    "babel"
-  ]
+    "browser": true
+  }
 }

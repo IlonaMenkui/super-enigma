@@ -11,14 +11,14 @@ function Search({
   searchQuery, onHandleChange, onSearchClick, onEnterPress,
 }) {
   const memoizedEnterPress = useCallback(
-    (e) => {
+    e => {
       onEnterPress(e);
     },
     [onEnterPress],
   );
 
   const memoizedHandleChange = useCallback(
-    (e) => {
+    e => {
       onHandleChange(e);
     },
     [onHandleChange],
