@@ -37,14 +37,14 @@ export default class SearchContainer extends React.Component {
     initSearch({ searchQuery, page: 1 });
   };
 
-  onEnterPress = (e) => {
+  onEnterPress = e => {
     const { searchQuery } = this.state;
     if (e.charCode === ENTER_KEY) {
       this.onSearchClick(searchQuery);
     }
   }
 
-  onHandleChange = (e) => {
+  onHandleChange = e => {
     this.setState({ searchQuery: e.target.value });
   }
 

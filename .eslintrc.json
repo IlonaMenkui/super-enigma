@@ -2,14 +2,17 @@
   "extends": ["airbnb-base", "airbnb-base/rules/strict", "airbnb/rules/react"],
   "parserOptions": { 
     "ecmaFeatures": {
-    "jsx": true
-   },
-    "ecmaVersion": 6,
+    "jsx": true,
     "legacyDecorators": true 
+   },
+    "ecmaVersion": 6
   },
   "parser": "babel-eslint",
   "plugins": ["babel"],
   "rules": {
+    "react/no-deprecated": "off",
+    "react/no-did-update-set-state": "off",
+    "react/state-in-constructor": "off",
     "react/jsx-props-no-spreading": "off",
     "arrow-parens": [2, "as-needed"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]

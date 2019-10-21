@@ -14,8 +14,8 @@ export const SearchInput = styled.input`
   padding: 8px;    
   margin-right: 8px;
   outline: none;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: none;
+  border-bottom: 2px solid lightgray;
 `;
 export const SearchIcon = styled.img`
   cursor: pointer;

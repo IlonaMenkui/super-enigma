@@ -1,19 +1,27 @@
 import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import styled from 'styled-components';
 
 import { Header } from '../containers/Header';
 import { ROUTES, MOVIE_TYPE as type } from '../constants';
 import MoviePage from '../containers/MoviePage';
 
-import './app.css';
-
 const history = createBrowserHistory();
 
 function App() {
+  const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+`;
+  const AppWrapper = styled.div`
+    align-self: center;
+    width: 66%;
+`;
   return (
-    <div className="wrapper">
-      <div className="app">
+    <Wrapper>
+      <AppWrapper>
         <Router history={history}>
           <Header history={history} />
           <Switch>
@@ -32,8 +40,8 @@ function App() {
             />
           </Switch>
         </Router>
-      </div>
-    </div>
+      </AppWrapper>
+    </Wrapper>
   );
 }
 
