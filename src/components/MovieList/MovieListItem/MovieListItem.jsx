@@ -10,7 +10,7 @@ import './movie-list-item.css';
 
 const MovieWrap = styled.div`
   display: flex;
-  align-items: stretch;
+  align-items: flex-start;
 `;
 
 const TextWrap = styled.div`

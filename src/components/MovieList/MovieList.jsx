@@ -1,19 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { Paper, Typography } from '@material-ui/core';
+import styled from 'styled-components';
 
 import Circular from '../Circular';
 import MovieListItem from './MovieListItem';
 
-import './movie-list.css';
+const Title = styled.h1`
+  font-size: 35px;
+`;
+
+const MoviesWrap = styled.div`
+  display: flex;
+  flex-flow: column;
+  margin: 0 10px 0 10px;
+  `;
 
 const MovieList = ({ movies, title, isLoading }) => (
   <main className="movies-wrap">
-    <Paper>
-      <Typography className="heading" variant="h4">
+    <MoviesWrap>
+      <Title>
         {(!isLoading && movies.length === 0) ? 'No results' : title}
-      </Typography>
+      </Title>
       {isLoading ? <Circular />
         : (
           <>
@@ -33,7 +40,7 @@ const MovieList = ({ movies, title, isLoading }) => (
             ))}
           </>
         )}
-    </Paper>
+    </MoviesWrap>
   </main>
 );
 
