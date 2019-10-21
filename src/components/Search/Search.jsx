@@ -2,10 +2,8 @@ import React, { useCallback } from 'react';
 
 import PropTypes from 'prop-types';
 
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
-
-import './search.css';
+import searchImg from '../../static/images/searchicon.png';
+import * as styles from './search';
 
 function Search({
   searchQuery, onHandleChange, onSearchClick, onEnterPress,
@@ -32,22 +30,19 @@ function Search({
   );
 
   return (
-    <div className="search-wrap">
-      <InputBase
+    <styles.SearchWrap>
+      <styles.SearchInput
         placeholder="Search…"
-        className="input"
         inputProps={{ 'aria-label': 'Search' }}
         onKeyPress={memoizedEnterPress}
         onChange={memoizedHandleChange}
         value={searchQuery}
       />
-      <div className="search-icon">
-        <SearchIcon
-          color="primary"
-          onClick={memoizedSearchClick}
-        />
-      </div>
-    </div>
+      <styles.SearchIcon
+        src={searchImg}
+        onClick={memoizedSearchClick}
+      />
+    </styles.SearchWrap>
   );
 }
 
