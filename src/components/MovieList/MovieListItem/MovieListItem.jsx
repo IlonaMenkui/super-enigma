@@ -1,60 +1,83 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import Chip from '@material-ui/core/Chip';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 import SimpleModal from '../../Modal';
 
 import './movie-list-item.css';
 
+const MovieWrap = styled.div`
+  display: flex;
+  align-items: stretch;
+`;
+
+const TextWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-left: 15px;
+`;
+const Text = styled.div`
+  font-size: ${props => props.size || '15px'};
+  color: ${props => props.color || 'black'};
+  margin-bottom: ${props => props.marginBottom || '0'};
+`;
+
+const Chip = styled.div`
+  display: flex;
+  width: 35px;
+  height: 35px;
+  margin-right: 15px;
+  margin-left: 10px; 
+  justify-content: center;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 50px;
+`;
+
+const ChipWrap = styled.div`
+  margin-left: 20px;
+`;
+
 const MovieListItem = ({
   genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
   originalLanguage, voteCount, originalTitle,
 }) => (
-  <Grid container spacing={2}>
-    <Grid item>
-      <ButtonBase>
-        <SimpleModal
-          popularity={popularity}
-          originalLanguage={originalLanguage}
-          voteCount={voteCount}
-          originalTitle={originalTitle}
-          genres={genres}
-          title={title}
-          overview={overview}
-          posterPath={posterPath}
-          voteAverage={voteAverage}
-          releaseDate={releaseDate}
-        />
-      </ButtonBase>
-    </Grid>
-    <Grid item xs={12} sm container>
-      <Grid className="overview" item xs container direction="column" spacing={2}>
-        <Grid item xs>
-          <Typography gutterBottom variant="h5">
-            <div className="title-wrap">
-              <div>{title}</div>
-            </div>
-            <Typography variant="body2" color="textSecondary">
-              {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
-            </Typography>
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {overview || 'No overview'}
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid item>
-        <Chip className="chip" label={voteAverage} variant="outlined" />
-      </Grid>
-    </Grid>
-  </Grid>
+  <MovieWrap>
+    <ButtonBase>
+      <SimpleModal
+        popularity={popularity}
+        originalLanguage={originalLanguage}
+        voteCount={voteCount}
+        originalTitle={originalTitle}
+        genres={genres}
+        title={title}
+        overview={overview}
+        posterPath={posterPath}
+        voteAverage={voteAverage}
+        releaseDate={releaseDate}
+      />
+    </ButtonBase>
+    <TextWrap>
+      <Text size="25px">{title}</Text>
+      <Text color="gray" size="11px" marginBottom="20px">
+        {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
+      </Text>
+      <Text marginBottom="25px">
+        {overview || 'No overview'}
+      </Text>
+      <Text color="gray">
+        {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
+      </Text>
+    </TextWrap>
+    <ChipWrap>
+      <Chip>
+        <Text size="12px">{voteAverage}</Text>
+      </Chip>
+    </ChipWrap>
+  </MovieWrap>
 );
 
 MovieListItem.defaultProps = {
