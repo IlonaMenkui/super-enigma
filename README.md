@@ -33,8 +33,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 ## Built With
 
-[ReactJS](https://reactjs.org/) - A JavaScript library for building user interfaces
-[Redux](https://redux.js.org/) - A predictable state container for JavaScript apps
+* [ReactJS](https://reactjs.org/) - A JavaScript library for building user interfaces
+* [Redux](https://redux.js.org/) - A predictable state container for JavaScript apps
 
 ## Learn More
 
