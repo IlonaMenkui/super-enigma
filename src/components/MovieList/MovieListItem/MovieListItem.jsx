@@ -1,51 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 import SimpleModal from '../../Modal';
 
-import './movie-list-item.css';
-
-const MovieWrap = styled.div`
-  display: flex;
-  align-items: flex-start;
-`;
-
-const TextWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  margin-left: 15px;
-`;
-const Text = styled.div`
-  font-size: ${props => props.size || '15px'};
-  color: ${props => props.color || 'black'};
-  margin-bottom: ${props => props.marginBottom || '0'};
-`;
-
-const Chip = styled.div`
-  display: flex;
-  width: 35px;
-  height: 35px;
-  margin-right: 15px;
-  margin-left: 10px; 
-  justify-content: center;
-  align-items: center;
-  border: 1px solid gray;
-  border-radius: 50px;
-`;
-
-const ChipWrap = styled.div`
-  margin-left: 20px;
-`;
+import * as styles from './movie-list-item';
 
 const MovieListItem = ({
   genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
   originalLanguage, voteCount, originalTitle,
 }) => (
-  <MovieWrap>
+  <styles.MovieWrap>
     <ButtonBase>
       <SimpleModal
         popularity={popularity}
@@ -60,24 +26,24 @@ const MovieListItem = ({
         releaseDate={releaseDate}
       />
     </ButtonBase>
-    <TextWrap>
-      <Text size="25px">{title}</Text>
-      <Text color="gray" size="11px" marginBottom="20px">
+    <styles.TextWrap>
+      <styles.Text size="25px">{title}</styles.Text>
+      <styles.Text color="gray" size="11px" marginBottom="20px">
         {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
-      </Text>
-      <Text marginBottom="25px">
+      </styles.Text>
+      <styles.Text marginBottom="25px">
         {overview || 'No overview'}
-      </Text>
-      <Text color="gray">
+      </styles.Text>
+      <styles.Text color="gray">
         {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
-      </Text>
-    </TextWrap>
-    <ChipWrap>
-      <Chip>
-        <Text size="12px">{voteAverage}</Text>
-      </Chip>
-    </ChipWrap>
-  </MovieWrap>
+      </styles.Text>
+    </styles.TextWrap>
+    <styles.ChipWrap>
+      <styles.Chip>
+        <styles.Text size="12px">{voteAverage}</styles.Text>
+      </styles.Chip>
+    </styles.ChipWrap>
+  </styles.MovieWrap>
 );
 
 MovieListItem.defaultProps = {
