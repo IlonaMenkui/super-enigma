@@ -22,6 +22,11 @@ Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
+### `npm run storybook`
+
+Runs the Storybook for developing UI components in isolation for React.
+Open [http://localhost:6006](http://localhost:6006) to  view it in the browser.
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
@@ -35,6 +40,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 * [ReactJS](https://reactjs.org/) - A JavaScript library for building user interfaces
 * [Redux](https://redux.js.org/) - A predictable state container for JavaScript apps
+* [Storybook](https://storybook.js.org/) - An open source tool for developing UI components
 
 ## Learn More
 
