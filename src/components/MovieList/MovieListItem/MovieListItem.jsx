@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 import SimpleModal from '../../Modal/Modal.jsx';
 
-import * as styles from './movie-list-item';
+import {
+  MovieWrap, TextWrap, Text, ChipWrap, Chip,
+} from './movie-list-item';
 
 function MovieListItem({
   genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
@@ -25,7 +27,7 @@ function MovieListItem({
     [setOpen],
   );
   return (
-    <styles.MovieWrap>
+    <MovieWrap>
       <SimpleModal
         open={open}
         onClick={memoizedSetStateOpen}
@@ -41,24 +43,24 @@ function MovieListItem({
         voteAverage={voteAverage}
         releaseDate={releaseDate}
       />
-      <styles.TextWrap>
-        <styles.Text size="25px">{title}</styles.Text>
-        <styles.Text color="gray" size="11px" marginBottom="20px">
+      <TextWrap>
+        <Text size="25px">{title}</Text>
+        <Text color="gray" size="11px" marginBottom="20px">
           {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
-        </styles.Text>
-        <styles.Text marginBottom="25px">
+        </Text>
+        <Text marginBottom="25px">
           {overview || 'No overview'}
-        </styles.Text>
-        <styles.Text color="gray">
+        </Text>
+        <Text color="gray">
           {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
-        </styles.Text>
-      </styles.TextWrap>
-      <styles.ChipWrap>
-        <styles.Chip>
-          <styles.Text size="12px">{voteAverage}</styles.Text>
-        </styles.Chip>
-      </styles.ChipWrap>
-    </styles.MovieWrap>
+        </Text>
+      </TextWrap>
+      <ChipWrap>
+        <Chip>
+          <Text size="12px">{voteAverage}</Text>
+        </Chip>
+      </ChipWrap>
+    </MovieWrap>
   );
 }
 

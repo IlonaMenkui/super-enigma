@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import * as movieStyles from '../MovieList/MovieListItem/movie-list-item';
-import * as styles from './modal';
+import { MovieWrap, TextWrap, Text } from '../MovieList/MovieListItem/movie-list-item';
+import { Modal, CloseButton } from './modal';
 
 import { STATIC_URL as imgUrl } from '../../constants';
 import noImg from '../../static/images/no-img.png';
@@ -14,42 +14,42 @@ function SimpleModal({
   const posterPathUrl = posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`;
   return (
     <div>
-      <img className="img" alt="poster" src={posterPathUrl} onClick={onClick} />
-      <styles.Modal open={open}>
-        <movieStyles.MovieWrap>
-          <div><img className="img" alt="poster" src={posterPathUrl} /></div>
-          <movieStyles.TextWrap>
-            <movieStyles.Text size="25px">
+      <img alt="poster" src={posterPathUrl} onClick={onClick} />
+      <Modal open={open}>
+        <MovieWrap>
+          <div><img alt="poster" src={posterPathUrl} /></div>
+          <TextWrap>
+            <Text size="25px">
               {title}
-            </movieStyles.Text>
-            <movieStyles.Text>
+            </Text>
+            <Text>
               <b>Original title: </b>
               {`${originalTitle} (${originalLanguage})`}
-            </movieStyles.Text>
-            <movieStyles.Text>
+            </Text>
+            <Text>
               <b>Vote average (vote count): </b>
               {`${voteAverage} (${voteCount})`}
-            </movieStyles.Text>
-            <movieStyles.Text>
+            </Text>
+            <Text>
               <b>Popularity index: </b>
               {`${popularity}`}
-            </movieStyles.Text>
-            <movieStyles.Text>
+            </Text>
+            <Text>
               <b>Full date of release: </b>
               {releaseDate ? `${releaseDate.replace(/-/g, '.')}` : 'No release date'}
-            </movieStyles.Text>
-            <movieStyles.Text marginBottom="25px">
+            </Text>
+            <Text marginBottom="25px">
               <b>Overview: </b>
               {overview ? `${overview}` : 'No overview'}
-            </movieStyles.Text>
-            <movieStyles.Text>
+            </Text>
+            <Text>
               <b>Genres: </b>
               {genres.length ? `${genres.join(', ')}` : 'No genres'}
-            </movieStyles.Text>
-          </movieStyles.TextWrap>
-          <styles.CloseButton type="button" onClick={handleClose}>✖</styles.CloseButton>
-        </movieStyles.MovieWrap>
-      </styles.Modal>
+            </Text>
+          </TextWrap>
+          <CloseButton type="button" onClick={handleClose}>✖</CloseButton>
+        </MovieWrap>
+      </Modal>
     </div>
   );
 }

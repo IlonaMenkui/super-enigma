@@ -6,6 +6,7 @@ export const CloseButton = styled.button`
     margin-left: 10px; 
     background: none;
     border: none;
+    cursor: pointer;
     color: gray;
     :hover {
         color: black;
