@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import SimpleModal from '../../Modal/Modal.jsx';
+import ModalContainer from '../../../containers/ModalContainer';
 
 import {
   MovieWrap, TextWrap, Text, ChipWrap, Chip,
@@ -11,27 +11,9 @@ function MovieListItem({
   genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
   originalLanguage, voteCount, originalTitle,
 }) {
-  const [open, setOpen] = useState(false);
-
-  const memoizedSetStateOpen = useCallback(
-    () => {
-      setOpen(true);
-    },
-    [setOpen],
-  );
-
-  const memoizedSetStateClose = useCallback(
-    () => {
-      setOpen(false);
-    },
-    [setOpen],
-  );
   return (
     <MovieWrap>
-      <SimpleModal
-        open={open}
-        onClick={memoizedSetStateOpen}
-        handleClose={memoizedSetStateClose}
+      <ModalContainer
         popularity={popularity}
         originalLanguage={originalLanguage}
         voteCount={voteCount}
