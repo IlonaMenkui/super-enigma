@@ -1,19 +1,35 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import ButtonBase from '@material-ui/core/ButtonBase';
-
-import SimpleModal from '../../Modal';
+import SimpleModal from '../../Modal/Modal.jsx';
 
 import * as styles from './movie-list-item';
 
-const MovieListItem = ({
+function MovieListItem({
   genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
   originalLanguage, voteCount, originalTitle,
-}) => (
-  <styles.MovieWrap>
-    <ButtonBase>
+}) {
+  const [open, setOpen] = useState(false);
+
+  const memoizedSetStateOpen = useCallback(
+    () => {
+      setOpen(true);
+    },
+    [setOpen],
+  );
+
+  const memoizedSetStateClose = useCallback(
+    () => {
+      setOpen(false);
+    },
+    [setOpen],
+  );
+  return (
+    <styles.MovieWrap>
       <SimpleModal
+        open={open}
+        onClick={memoizedSetStateOpen}
+        handleClose={memoizedSetStateClose}
         popularity={popularity}
         originalLanguage={originalLanguage}
         voteCount={voteCount}
@@ -25,26 +41,26 @@ const MovieListItem = ({
         voteAverage={voteAverage}
         releaseDate={releaseDate}
       />
-    </ButtonBase>
-    <styles.TextWrap>
-      <styles.Text size="25px">{title}</styles.Text>
-      <styles.Text color="gray" size="11px" marginBottom="20px">
-        {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
-      </styles.Text>
-      <styles.Text marginBottom="25px">
-        {overview || 'No overview'}
-      </styles.Text>
-      <styles.Text color="gray">
-        {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
-      </styles.Text>
-    </styles.TextWrap>
-    <styles.ChipWrap>
-      <styles.Chip>
-        <styles.Text size="12px">{voteAverage}</styles.Text>
-      </styles.Chip>
-    </styles.ChipWrap>
-  </styles.MovieWrap>
-);
+      <styles.TextWrap>
+        <styles.Text size="25px">{title}</styles.Text>
+        <styles.Text color="gray" size="11px" marginBottom="20px">
+          {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
+        </styles.Text>
+        <styles.Text marginBottom="25px">
+          {overview || 'No overview'}
+        </styles.Text>
+        <styles.Text color="gray">
+          {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
+        </styles.Text>
+      </styles.TextWrap>
+      <styles.ChipWrap>
+        <styles.Chip>
+          <styles.Text size="12px">{voteAverage}</styles.Text>
+        </styles.Chip>
+      </styles.ChipWrap>
+    </styles.MovieWrap>
+  );
+}
 
 MovieListItem.defaultProps = {
   genres: [],

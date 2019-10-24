@@ -1,77 +1,55 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
+import * as movieStyles from '../MovieList/MovieListItem/movie-list-item';
+import * as styles from './modal';
 
 import { STATIC_URL as imgUrl } from '../../constants';
 import noImg from '../../static/images/no-img.png';
-import './modal.css';
 
 function SimpleModal({
-  genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
-  originalLanguage, voteCount, originalTitle,
+  open, genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
+  originalLanguage, voteCount, originalTitle, onClick, handleClose,
 }) {
-  const [open, setOpen] = useState(false);
-
-  const memoizedSetStateOpen = useCallback(
-    () => {
-      setOpen(true);
-    },
-    [setOpen],
-  );
-
-  const memoizedSetStateClose = useCallback(
-    () => {
-      setOpen(false);
-    },
-    [setOpen],
-  );
-
   const posterPathUrl = posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`;
-
   return (
     <div>
-      <img className="img" alt="poster" src={posterPathUrl} onClick={memoizedSetStateOpen} />
-      <Modal
-        onClose={memoizedSetStateClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={open}
-      >
-        <div className="modal-paper">
+      <img className="img" alt="poster" src={posterPathUrl} onClick={onClick} />
+      <styles.Modal open={open}>
+        <movieStyles.MovieWrap>
           <div><img className="img" alt="poster" src={posterPathUrl} /></div>
-          <div className="text-wrap">
-            <Typography gutterBottom variant="h4">
+          <movieStyles.TextWrap>
+            <movieStyles.Text size="25px">
               {title}
-            </Typography>
-            <Typography variant="subtitle2">
+            </movieStyles.Text>
+            <movieStyles.Text>
               <b>Original title: </b>
               {`${originalTitle} (${originalLanguage})`}
-            </Typography>
-            <Typography variant="subtitle2">
+            </movieStyles.Text>
+            <movieStyles.Text>
               <b>Vote average (vote count): </b>
               {`${voteAverage} (${voteCount})`}
-            </Typography>
-            <Typography variant="subtitle2">
+            </movieStyles.Text>
+            <movieStyles.Text>
               <b>Popularity index: </b>
               {`${popularity}`}
-            </Typography>
-            <Typography variant="subtitle2">
+            </movieStyles.Text>
+            <movieStyles.Text>
               <b>Full date of release: </b>
               {releaseDate ? `${releaseDate.replace(/-/g, '.')}` : 'No release date'}
-            </Typography>
-            <Typography variant="subtitle2">
+            </movieStyles.Text>
+            <movieStyles.Text marginBottom="25px">
               <b>Overview: </b>
               {overview ? `${overview}` : 'No overview'}
-            </Typography>
-            <Typography variant="subtitle2">
+            </movieStyles.Text>
+            <movieStyles.Text>
               <b>Genres: </b>
               {genres.length ? `${genres.join(', ')}` : 'No genres'}
-            </Typography>
-          </div>
-        </div>
-      </Modal>
+            </movieStyles.Text>
+          </movieStyles.TextWrap>
+          <styles.CloseButton type="button" onClick={handleClose}>✖</styles.CloseButton>
+        </movieStyles.MovieWrap>
+      </styles.Modal>
     </div>
   );
 }
@@ -91,6 +69,9 @@ SimpleModal.defaultProps = {
 
 
 SimpleModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
   posterPath: PropTypes.string,
