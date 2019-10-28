@@ -36,7 +36,6 @@ function MovieListItem({
       <ModalContainer
         onClose={memoizedSetStateClose}
         open={open}
-        posterPathUrl={posterPathUrl}
         modalContent={(
           <MovieWrap>
             <PosterImage alt="poster" src={posterPathUrl} />
