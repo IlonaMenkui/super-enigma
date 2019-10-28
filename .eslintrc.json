@@ -15,7 +15,8 @@
     "react/state-in-constructor": "off",
     "react/jsx-props-no-spreading": "off",
     "arrow-parens": [2, "as-needed"],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
   },
   "env": {
     "browser": true
