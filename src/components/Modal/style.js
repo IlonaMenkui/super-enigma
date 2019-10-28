@@ -8,7 +8,7 @@ export const CloseButton = styled.button`
   cursor: pointer;
   color: gray;
   :hover {
-      color: black;
+    color: black;
   }      
 `;
 
