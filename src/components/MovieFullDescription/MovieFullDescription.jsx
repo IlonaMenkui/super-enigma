@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  TextWrap, Text,
-} from '../MovieList/MovieListItem/style';
+import { TextWrap, Text } from '../MovieList/MovieListItem/style';
 
 const MovieFullDescription = ({
   genres, title, overview, voteAverage, releaseDate, popularity,

@@ -18,6 +18,7 @@ export const Text = styled.div`
 `;
 
 export const PosterImage = styled.img`
+  cursor: ${props => (props.cursor === 'pointer' ? 'pointer' : 'default')};
   width: 200px;
   padding-bottom: 10px;
 `;

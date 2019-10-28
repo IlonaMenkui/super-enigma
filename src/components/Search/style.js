@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const SearchWrap = styled.div`
-display: flex;
-justify-content: flex-end;
-align-items: center;
-background-color: white;
-width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: white;
+  width: 100%;
 `;
 export const SearchInput = styled.input`
   height: 45px;
