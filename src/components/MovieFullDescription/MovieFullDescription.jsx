@@ -23,7 +23,7 @@ const MovieFullDescription = ({
     </Text>
     <Text>
       <b>Popularity index: </b>
-      {`${popularity}`}
+      {popularity}
     </Text>
     <Text>
       <b>Full date of release: </b>
