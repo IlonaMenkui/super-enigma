@@ -38,17 +38,20 @@ function MovieListItem({
         open={open}
         posterPathUrl={posterPathUrl}
         modalContent={(
-          <MovieFullDescription
-            popularity={popularity}
-            originalLanguage={originalLanguage}
-            voteCount={voteCount}
-            originalTitle={originalTitle}
-            genres={genres}
-            title={title}
-            overview={overview}
-            voteAverage={voteAverage}
-            releaseDate={releaseDate}
-          />
+          <MovieWrap>
+            <PosterImage alt="poster" src={posterPathUrl} />
+            <MovieFullDescription
+              popularity={popularity}
+              originalLanguage={originalLanguage}
+              voteCount={voteCount}
+              originalTitle={originalTitle}
+              genres={genres}
+              title={title}
+              overview={overview}
+              voteAverage={voteAverage}
+              releaseDate={releaseDate}
+            />
+          </MovieWrap>
         )}
       />
       <TextWrap>
