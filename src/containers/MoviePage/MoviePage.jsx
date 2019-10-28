@@ -5,13 +5,13 @@ import { connect } from 'react-redux';
 
 import { Paper } from '@material-ui/core';
 
-import { PAGE_COUNT } from '../constants';
-import SearchContainer from './SearchContainer';
-import FlatPagination from '../components/FlatPagination';
-import MovieListContainer from './MovieListContainer';
+import { PAGE_COUNT } from '../../constants';
+import SearchContainer from '../SearchContainer/SearchContainer';
+import FlatPagination from '../../components/FlatPagination';
+import MovieListContainer from '../MovieListContainer/MovieListContainer';
 import {
   setPage as setPageAction,
-} from '../actions/movies';
+} from '../../actions/movies';
 
 @connect(
   state => ({

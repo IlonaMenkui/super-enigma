@@ -3,9 +3,9 @@ import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import styled from 'styled-components';
 
-import { Header } from '../containers/Header';
+import { Header } from '../containers/Header/Header';
 import { ROUTES, MOVIE_TYPE as type } from '../constants';
-import MoviePage from '../containers/MoviePage';
+import MoviePage from '../containers/MoviePage/MoviePage';
 
 const history = createBrowserHistory();
 

@@ -1,27 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
-import SimpleModal from '../components/Modal/Modal';
+import WrapBackground from './styles';
+import SimpleModal from '../../components/Modal/Modal';
 
 export default class ModalContainer extends React.Component {
   render() {
     const { open } = this.props;
-    const WrapBackground = styled.div`
-      ${open ? `
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      background-color: rgba(0,0,0,0.6);` : ''}
-      `;
     const {
       genres, title, overview, posterPathUrl, voteAverage, releaseDate, popularity,
       originalLanguage, voteCount, originalTitle, onClose, modalContent,
     } = this.props;
     return (
-      <WrapBackground onClick={onClose}>
+      <WrapBackground open={open} onClick={onClose}>
         <SimpleModal
           modalContent={modalContent}
           open={open}

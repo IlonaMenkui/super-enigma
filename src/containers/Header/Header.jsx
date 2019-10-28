@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 
 import { Paper, Tabs } from '@material-ui/core';
 
-import { HEADER_TABS as tabs } from '../constants';
-import HeaderTab from '../components/HeaderTab';
+import { HEADER_TABS as tabs } from '../../constants';
+import HeaderTab from '../../components/HeaderTab';
 import {
   reset,
   setPage as setPageAction,
-} from '../actions/movies';
+} from '../../actions/movies';
 
 @connect(
   state => ({

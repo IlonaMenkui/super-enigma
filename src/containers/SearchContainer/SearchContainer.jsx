@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import Search from '../components/Search';
-import { ENTER_KEY } from '../constants';
+import Search from '../../components/Search';
+import { ENTER_KEY } from '../../constants';
 import {
   initSearch as initSearchProps,
-} from '../actions/movies';
+} from '../../actions/movies';
 
 @connect(
   state => ({

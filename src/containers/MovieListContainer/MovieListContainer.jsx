@@ -4,15 +4,15 @@ import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import MovieList from '../components/MovieList';
+import MovieList from '../../components/MovieList';
 import {
   request,
   succsess,
   failure,
   cacheGenres as cacheGenresAction,
-} from '../actions/movies';
-import { PARAMS } from '../constants';
-import { getMovies } from '../api/api';
+} from '../../actions/movies';
+import { PARAMS } from '../../constants';
+import { getMovies } from '../../api/api';
 
 @connect(
   state => ({

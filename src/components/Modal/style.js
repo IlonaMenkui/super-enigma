@@ -15,12 +15,8 @@ export const CloseButton = styled.button`
 export const Modal = styled.div`
   display:  ${props => (props.open ? 'flex' : 'none')};
   align-items: flex-start;
-  position: fixed;
   background: white;
   border-radius: 4px;
   padding: 20px 0 20px 20px;
   width: 40%;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
 `;

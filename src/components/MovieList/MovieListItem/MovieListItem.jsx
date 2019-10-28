@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import ModalContainer from '../../../containers/ModalContainer';
+import ModalContainer from '../../../containers/ModalContainer/ModalContainer';
 import MovieFullDescription from '../../MovieFullDescription/MovieFullDescription';
 import noImg from '../../../static/images/no-img.png';
 import { STATIC_URL as imgUrl } from '../../../constants';
