@@ -25,7 +25,7 @@ import { getMovies } from '../../api/api';
     cacheGenres: cacheGenresAction,
   },
 )
-export default class MovieListContainer extends React.Component {
+export default class MovieListContainer extends React.PureComponent {
   componentDidMount() {
     const { page } = this.props;
     this.loadMovies(page);

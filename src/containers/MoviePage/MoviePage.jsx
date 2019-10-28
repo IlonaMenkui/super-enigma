@@ -21,7 +21,7 @@ import {
     setPage: setPageAction,
   },
 )
-export default class MoviePage extends React.Component {
+export default class MoviePage extends React.PureComponent {
   changePage(offset) {
     const { setPage } = this.props;
     setPage({ page: (offset / PAGE_COUNT + 1) });

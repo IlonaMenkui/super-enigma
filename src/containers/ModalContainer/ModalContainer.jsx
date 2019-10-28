@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import WrapBackground from './styles';
 import SimpleModal from '../../components/Modal/Modal';
 
-export default class ModalContainer extends React.Component {
+export default class ModalContainer extends React.PureComponent {
   render() {
     const { open } = this.props;
     const { onClose, modalContent } = this.props;

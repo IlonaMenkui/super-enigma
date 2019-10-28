@@ -18,7 +18,7 @@ import {
     initSearch: initSearchProps,
   },
 )
-export default class SearchContainer extends React.Component {
+export default class SearchContainer extends React.PureComponent {
    state = {
      searchQuery: '',
    };
