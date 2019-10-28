@@ -17,6 +17,11 @@ export const Text = styled.div`
   margin-bottom: ${props => props.marginBottom || '0'};
 `;
 
+export const PosterImage = styled.img`
+  width: 200px;
+  padding-bottom: 10px;
+`;
+
 export const Chip = styled.div`
   display: flex;
   width: 35px;

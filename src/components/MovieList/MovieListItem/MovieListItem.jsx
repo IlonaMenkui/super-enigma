@@ -1,29 +1,55 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import ModalContainer from '../../../containers/ModalContainer';
+import MovieFullDescription from '../../MovieFullDescription/MovieFullDescription';
+import noImg from '../../../static/images/no-img.png';
+import { STATIC_URL as imgUrl } from '../../../constants';
 
 import {
-  MovieWrap, TextWrap, Text, ChipWrap, Chip,
+  MovieWrap, TextWrap, Text, ChipWrap, Chip, PosterImage,
 } from './movie-list-item';
 
 function MovieListItem({
   genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
   originalLanguage, voteCount, originalTitle,
 }) {
+  const [open, setOpen] = useState(false);
+
+  const memoizedSetStateOpen = useCallback(
+    () => {
+      setOpen(true);
+    },
+    [setOpen],
+  );
+
+  const memoizedSetStateClose = useCallback(
+    () => {
+      setOpen(false);
+    },
+    [setOpen],
+  );
+  const posterPathUrl = posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`;
   return (
     <MovieWrap>
+      <PosterImage alt="poster" src={posterPathUrl} onClick={memoizedSetStateOpen} />
       <ModalContainer
-        popularity={popularity}
-        originalLanguage={originalLanguage}
-        voteCount={voteCount}
-        originalTitle={originalTitle}
-        genres={genres}
-        title={title}
-        overview={overview}
-        posterPath={posterPath}
-        voteAverage={voteAverage}
-        releaseDate={releaseDate}
+        onClose={memoizedSetStateClose}
+        open={open}
+        posterPathUrl={posterPathUrl}
+        modalContent={(
+          <MovieFullDescription
+            popularity={popularity}
+            originalLanguage={originalLanguage}
+            voteCount={voteCount}
+            originalTitle={originalTitle}
+            genres={genres}
+            title={title}
+            overview={overview}
+            voteAverage={voteAverage}
+            releaseDate={releaseDate}
+          />
+        )}
       />
       <TextWrap>
         <Text size="25px">{title}</Text>
