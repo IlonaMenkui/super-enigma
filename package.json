@@ -19,7 +19,6 @@
     "redux-connect-decorator": "^0.2.1",
     "redux-logger": "^3.0.6",
     "resolve": "1.10.0",
-    "sb": "^0.2.1",
     "styled-components": "^4.4.0"
   },
   "scripts": {
@@ -83,6 +82,7 @@
     "jest-resolve": "^24.9.0",
     "jest-watch-typeahead": "^0.4.0",
     "pre-commit": "^1.2.2",
+    "sb": "^5.1.11",
     "style-loader": "^1.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
