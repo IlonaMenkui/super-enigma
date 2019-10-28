@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import {
   TextWrap, Text,
-} from '../MovieList/MovieListItem/movie-list-item';
+} from '../MovieList/MovieListItem/style';
 
 const MovieFullDescription = ({
   genres, title, overview, voteAverage, releaseDate, popularity,

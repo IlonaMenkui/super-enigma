@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Circular from '../Circular';
 import MovieListItem from './MovieListItem';
 
-import { MoviesWrap, Title } from './movie-list';
+import { MoviesWrap, Title } from './style';
 
 const MovieList = ({ movies, title, isLoading }) => (
   <main className="movies-wrap">

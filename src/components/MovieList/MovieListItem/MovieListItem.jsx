@@ -8,7 +8,7 @@ import { STATIC_URL as imgUrl } from '../../../constants';
 
 import {
   MovieWrap, TextWrap, Text, ChipWrap, Chip, PosterImage,
-} from './movie-list-item';
+} from './style';
 
 function MovieListItem({
   genres, title, overview, posterPath, voteAverage, releaseDate, popularity,

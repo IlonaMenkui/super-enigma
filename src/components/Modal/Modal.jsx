@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, CloseButton } from './modal';
+import { Modal, CloseButton } from './style';
 
 function SimpleModal({
   open, onClose, modalContent,

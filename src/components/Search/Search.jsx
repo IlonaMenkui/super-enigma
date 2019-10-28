@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import searchImg from '../../static/images/searchicon.png';
-import { SearchWrap, SearchIcon, SearchInput } from './search';
+import { SearchWrap, SearchIcon, SearchInput } from './style';
 
 function Search({
   searchQuery, onHandleChange, onSearchClick, onEnterPress,
