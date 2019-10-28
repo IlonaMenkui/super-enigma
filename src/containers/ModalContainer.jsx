@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import SimpleModal from '../components/Modal/Modal.jsx';
+import SimpleModal from '../components/Modal/Modal';
 
 export default class ModalContainer extends React.Component {
   render() {
@@ -10,10 +10,10 @@ export default class ModalContainer extends React.Component {
     const WrapBackground = styled.div`
       ${open ? `
       position: fixed;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      height: 100%;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
       background-color: rgba(0,0,0,0.6);` : ''}
       `;
     const {
