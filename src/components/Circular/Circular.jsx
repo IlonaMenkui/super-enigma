@@ -1,35 +1,29 @@
-import React,{ useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 import { ProgressBar, Filler, ProgressWrap } from './styles';
 
 function Circular() {
-  const [persentage, setPersentage] = useState(0);
+  const [percent, setPercentage] = useState(0);
 
-  const memoizedsetPersentage = useCallback(
-    value => {
-      setPersentage(value);
-    },
-    [setPersentage],
-  );
+  const setStatePercentage = value => {
+    setPercentage(value);
+  };
 
-  const memoizedresetPersentage = useCallback(
-    () => {
-      setPersentage(0);
-    },
-    [setPersentage],
-  );
+  const resetPercentage = () => {
+    setPercentage(0);
+  };
 
   (function () {
-    if (persentage === 0) {
-      memoizedsetPersentage(10);
+    if (percent === 0) {
+      setStatePercentage(10);
     }
-    const id = setInterval(setPersentageInterval, 60);
-    function setPersentageInterval() {
-      if (persentage >= 100) {
+    const id = setInterval(setPercentageInterval, 60);
+    function setPercentageInterval() {
+      if (percent >= 100) {
         clearInterval(id);
-        memoizedresetPersentage();
+        resetPercentage();
       } else {
-        memoizedsetPersentage(persentage + 10);
+        setStatePercentage(percent + 10);
       }
     }
   }());
@@ -37,7 +31,7 @@ function Circular() {
   return (
     <ProgressWrap>
       <ProgressBar>
-        <Filler width={persentage} />
+        <Filler width={percent} />
       </ProgressBar>
     </ProgressWrap>
   );
