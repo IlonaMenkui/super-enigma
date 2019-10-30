@@ -6,9 +6,9 @@ import { connect } from 'react-redux';
 import { Paper } from '@material-ui/core';
 
 import { PAGE_COUNT } from '../../constants';
-import SearchContainer from '../SearchContainer/SearchContainer';
+import SearchContainer from '../SearchContainer';
 import FlatPagination from '../../components/FlatPagination';
-import MovieListContainer from '../MovieListContainer/MovieListContainer';
+import MovieListContainer from '../MovieListContainer';
 import {
   setPage as setPageAction,
 } from '../../actions/movies';

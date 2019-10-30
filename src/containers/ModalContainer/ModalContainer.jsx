@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import WrapBackground from './styles';
-import SimpleModal from '../../components/Modal/Modal';
+import SimpleModal from '../../components/Modal';
 
 export default class ModalContainer extends React.PureComponent {
   render() {

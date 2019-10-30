@@ -12,7 +12,7 @@ import {
   cacheGenres as cacheGenresAction,
 } from '../../actions/movies';
 import { PARAMS } from '../../constants';
-import { getMovies } from '../../api/api';
+import getMovies from '../../api';
 
 @connect(
   state => ({
