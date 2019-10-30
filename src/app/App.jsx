@@ -2,18 +2,17 @@ import React from 'react';
 import { Router, Switch, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-import { Header } from '../containers/Header';
+import Header from '../containers/Header';
 import { ROUTES, MOVIE_TYPE as type } from '../constants';
 import MoviePage from '../containers/MoviePage';
-
-import './app.css';
+import { Wrapper, AppWrapper } from './styles';
 
 const history = createBrowserHistory();
 
 function App() {
   return (
-    <div className="wrapper">
-      <div className="app">
+    <Wrapper>
+      <AppWrapper>
         <Router history={history}>
           <Header history={history} />
           <Switch>
@@ -32,8 +31,8 @@ function App() {
             />
           </Switch>
         </Router>
-      </div>
-    </div>
+      </AppWrapper>
+    </Wrapper>
   );
 }
 

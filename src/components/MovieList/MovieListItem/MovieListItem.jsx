@@ -1,61 +1,78 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Chip from '@material-ui/core/Chip';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import ModalContainer from '../../../containers/ModalContainer';
+import MovieFullDescription from '../../MovieFullDescription';
+import noImg from '../../../static/images/no-img.png';
+import { STATIC_URL as imgUrl } from '../../../constants';
 
-import SimpleModal from '../../Modal';
+import {
+  MovieWrap, TextWrap, Text, ChipWrap, Chip, PosterImage,
+} from './style';
 
-import './movie-list-item.css';
-
-const MovieListItem = ({
+function MovieListItem({
   genres, title, overview, posterPath, voteAverage, releaseDate, popularity,
   originalLanguage, voteCount, originalTitle,
-}) => (
-  <Grid container spacing={2}>
-    <Grid item>
-      <ButtonBase>
-        <SimpleModal
-          popularity={popularity}
-          originalLanguage={originalLanguage}
-          voteCount={voteCount}
-          originalTitle={originalTitle}
-          genres={genres}
-          title={title}
-          overview={overview}
-          posterPath={posterPath}
-          voteAverage={voteAverage}
-          releaseDate={releaseDate}
-        />
-      </ButtonBase>
-    </Grid>
-    <Grid item xs={12} sm container>
-      <Grid className="overview" item xs container direction="column" spacing={2}>
-        <Grid item xs>
-          <Typography gutterBottom variant="h5">
-            <div className="title-wrap">
-              <div>{title}</div>
-            </div>
-            <Typography variant="body2" color="textSecondary">
-              {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
-            </Typography>
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            {overview || 'No overview'}
-          </Typography>
-          <Typography variant="body2" color="textSecondary">
-            {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid item>
-        <Chip className="chip" label={voteAverage} variant="outlined" />
-      </Grid>
-    </Grid>
-  </Grid>
-);
+}) {
+  const [open, setOpen] = useState(false);
+
+  const memoizedSetStateOpen = useCallback(
+    () => {
+      setOpen(true);
+    },
+    [setOpen],
+  );
+
+  const memoizedSetStateClose = useCallback(
+    () => {
+      setOpen(false);
+    },
+    [setOpen],
+  );
+  const posterPathUrl = posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`;
+  return (
+    <MovieWrap>
+      <PosterImage alt="poster" cursor="pointer" src={posterPathUrl} onClick={memoizedSetStateOpen} />
+      <ModalContainer
+        onClose={memoizedSetStateClose}
+        open={open}
+        modalContent={(
+          <MovieWrap>
+            <PosterImage alt="poster" src={posterPathUrl} />
+            <MovieFullDescription
+              popularity={popularity}
+              originalLanguage={originalLanguage}
+              voteCount={voteCount}
+              originalTitle={originalTitle}
+              genres={genres}
+              title={title}
+              overview={overview}
+              voteAverage={voteAverage}
+              releaseDate={releaseDate}
+            />
+          </MovieWrap>
+        )}
+      />
+      <TextWrap>
+        <Text size="25px">{title}</Text>
+        <Text color="gray" size="11px" marginBottom="20px">
+          {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
+        </Text>
+        <Text marginBottom="25px">
+          {overview || 'No overview'}
+        </Text>
+        <Text color="gray">
+          {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
+        </Text>
+      </TextWrap>
+      <ChipWrap>
+        <Chip>
+          <Text size="12px">{voteAverage}</Text>
+        </Chip>
+      </ChipWrap>
+    </MovieWrap>
+  );
+}
 
 MovieListItem.defaultProps = {
   genres: [],
