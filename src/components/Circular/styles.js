@@ -11,13 +11,13 @@ export const ProgressBar = styled.div`
     height: 20px;
     width: 350px;
     border-radius: 50px;
-    border: 1px solid #333;
+    border: 1px solid #404040;
     margin-top: 150px;
 `;
 
 export const Filler = styled.div`
     width: ${props => `${props.width}%` || '100%'};
-    background: #1DA598;
+    background: #80d4ff;
     height: 100%;
     border-radius: inherit;
 `;

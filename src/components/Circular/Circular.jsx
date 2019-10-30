@@ -1,33 +1,46 @@
-import React from 'react';
+import React,{ useCallback, useState } from 'react';
 
 import { ProgressBar, Filler, ProgressWrap } from './styles';
 
-export default class Circular extends React.PureComponent {
-  constructor() {
-    super();
-    this.state = { persentage: 5 };
-  }
+function Circular() {
+  const [persentage, setPersentage] = useState(0);
 
-  componentDidUpdate() {
-    const { persentage } = this.state;
-    if (persentage > 100) {
-      this.clearPersentage();
+  const memoizedsetPersentage = useCallback(
+    value => {
+      setPersentage(value);
+    },
+    [setPersentage],
+  );
+
+  const memoizedresetPersentage = useCallback(
+    () => {
+      setPersentage(0);
+    },
+    [setPersentage],
+  );
+
+  (function () {
+    if (persentage === 0) {
+      memoizedsetPersentage(10);
     }
-  }
+    const id = setInterval(setPersentageInterval, 60);
+    function setPersentageInterval() {
+      if (persentage >= 100) {
+        clearInterval(id);
+        memoizedresetPersentage();
+      } else {
+        memoizedsetPersentage(persentage + 10);
+      }
+    }
+  }());
 
-  clearPersentage = () => {
-    this.setState({ persentage: 5 });
-  }
-
-  render() {
-    const { persentage } = this.state;
-    this.timerId = setInterval(() => this.setState({ persentage: persentage + 10 }), 70);
-    return (
-      <ProgressWrap>
-        <ProgressBar>
-          <Filler width={persentage} />
-        </ProgressBar>
-      </ProgressWrap>
-    );
-  }
+  return (
+    <ProgressWrap>
+      <ProgressBar>
+        <Filler width={persentage} />
+      </ProgressBar>
+    </ProgressWrap>
+  );
 }
+
+export default Circular;
