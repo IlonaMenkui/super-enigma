@@ -9,7 +9,6 @@ const rotate = keyframes`
   }
 `;
 
-
 export const Wrap = styled.div`
     height: 800px;
     display: flex;
@@ -31,4 +30,5 @@ export const Circle = styled.circle`
     stroke-width: 15;
     stroke-dasharray: 534;
     animation: ${rotate} 1s;
+    animation-iteration-count: infinite;
 `;
