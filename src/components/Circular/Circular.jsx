@@ -5,8 +5,8 @@ import { Svg, Wrap, Circle } from './styles';
 function Circular() {
   return (
     <Wrap>
-      <Svg>
-        <Circle transform="rotate(-90, 95, 95)" />
+      <Svg viewBox="0 0 100 100">
+        <Circle />
       </Svg>
     </Wrap>
   );
