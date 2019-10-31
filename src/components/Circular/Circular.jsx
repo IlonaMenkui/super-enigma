@@ -1,39 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { ProgressBar, Filler, ProgressWrap } from './styles';
+import { Svg, Wrap, Circle } from './styles';
 
 function Circular() {
-  const [percent, setPercentage] = useState(0);
-
-  const setStatePercentage = value => {
-    setPercentage(value);
-  };
-
-  const resetPercentage = () => {
-    setPercentage(0);
-  };
-
-  (function () {
-    if (percent === 0) {
-      setStatePercentage(10);
-    }
-    const id = setInterval(setPercentageInterval, 60);
-    function setPercentageInterval() {
-      if (percent >= 100) {
-        clearInterval(id);
-        resetPercentage();
-      } else {
-        setStatePercentage(percent + 10);
-      }
-    }
-  }());
-
   return (
-    <ProgressWrap>
-      <ProgressBar>
-        <Filler width={percent} />
-      </ProgressBar>
-    </ProgressWrap>
+    <Wrap>
+      <Svg>
+        <Circle transform="rotate(-90, 95, 95)" />
+      </Svg>
+    </Wrap>
   );
 }
 

@@ -1,23 +1,34 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
-export const ProgressWrap = styled.div`
+const rotate = keyframes`
+  from {
+    stroke-dashoffset: 537;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+`;
+
+
+export const Wrap = styled.div`
     height: 800px;
     display: flex;
     justify-content: center;
 `;
 
-export const ProgressBar = styled.div`
-    position: relative;
-    height: 20px;
-    width: 350px;
-    border-radius: 50px;
-    border: 1px solid #404040;
+export const Svg = styled.svg`
     margin-top: 150px;
+    width: 200px;
+    height: 200px;
 `;
 
-export const Filler = styled.div`
-    width: ${props => `${props.width}%` || '100%'};
-    background: #80d4ff;
-    height: 100%;
-    border-radius: inherit;
+export const Circle = styled.circle`
+    cx: 95;
+    cy: 95;
+    r: 85;
+    stroke: #4dc3ff;
+    fill: transparent;
+    stroke-width: 15;
+    stroke-dasharray: 534;
+    animation: ${rotate} 1s;
 `;
