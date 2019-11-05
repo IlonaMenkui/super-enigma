@@ -14,6 +14,5 @@ export const PageNumber = styled.a`
         background-color: #ddd;
     }
 `;
-  
-//   /* Add a grey background color on mouse-over */
-//   .pagination a:hover:not(.active) {background-color: #ddd;}
+
+export default PageNumber;
