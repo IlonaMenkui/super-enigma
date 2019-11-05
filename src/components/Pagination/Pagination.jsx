@@ -1,20 +1,47 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import { PageNumber } from './style';
+import { PAGE_COUNT } from '../../constants';
 
-function Pagination() {
+import { PageNumber, PaginationWrap } from './style';
+
+function Pagination({ onClickPage, totalResults }) {
+  let totalPages = 1;
+
+  if (totalResults > 1000) {
+    totalPages = 10;
+    console.log(totalResults / PAGE_COUNT);
+  } else if (totalResults / PAGE_COUNT < 50) {
+    totalPages = Math.floor(totalResults / PAGE_COUNT + 1);
+    console.log(totalResults / PAGE_COUNT);
+  }
+
+  const handleClick = pageNumber => {
+    onClickPage(1, pageNumber);
+  };
+
   return (
-    <div className="pagination">
-      <PageNumber href="#">&laquo;</PageNumber>
-      <PageNumber href="#">1</PageNumber>
-      <PageNumber className="active" href="#">2</PageNumber>
-      <PageNumber href="#">3</PageNumber>
-      <PageNumber href="#">4</PageNumber>
-      <PageNumber href="#">5</PageNumber>
-      <PageNumber href="#">6</PageNumber>
-      <PageNumber href="#">&raquo;</PageNumber>
-    </div>
+    <PaginationWrap>
+      {[...Array(totalPages).keys()]
+        .map(index => index + 1)
+        .map(pageNumber => (
+          <PageNumber
+            onClick={() => handleClick(pageNumber)}
+          >
+            {pageNumber}
+          </PageNumber>
+        ))}
+    </PaginationWrap>
   );
 }
+
+Pagination.defaultProps = {
+  totalResults: 0,
+};
+
+Pagination.propTypes = {
+  totalResults: PropTypes.number,
+  onClickPage: PropTypes.func.isRequired,
+};
 
 export default Pagination;

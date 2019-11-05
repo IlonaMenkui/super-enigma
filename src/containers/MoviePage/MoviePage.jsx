@@ -28,6 +28,11 @@ export default class MoviePage extends React.PureComponent {
     setPage({ page: (offset / PAGE_COUNT + 1) });
   }
 
+  changeNewPage(page) {
+    const { setPage } = this.props;
+    setPage({ page });
+  }
+
   render() {
     const {
       title, totalResults, isLoading, type, page,
@@ -39,10 +44,12 @@ export default class MoviePage extends React.PureComponent {
           page={page}
           totalResults={totalResults}
         />
+        <Pagination
+          onClickPage={(e, pageNew) => this.changeNewPage(pageNew)}
+          page={page}
+          totalResults={totalResults}
+        />
         <Paper>
-          <Pagination
-            page={page}
-          />
           <SearchContainer title={title} />
           <MovieListContainer
             type={type}

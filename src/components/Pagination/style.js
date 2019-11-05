@@ -15,4 +15,5 @@ export const PageNumber = styled.a`
     }
 `;
 
-export default PageNumber;
+export const PaginationWrap = styled.div`
+`;
