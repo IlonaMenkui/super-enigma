@@ -5,7 +5,7 @@ import { PAGE_COUNT } from '../../constants';
 
 import { PageNumber, PaginationWrap } from './style';
 
-function Pagination({ onClickPage, totalResults }) {
+function Pagination({ onClickPage, totalResults, page }) {
   let totalPages = 1;
 
   if (totalResults > 1000) {
@@ -25,6 +25,8 @@ function Pagination({ onClickPage, totalResults }) {
         .map(pageNumber => (
           <PageNumber
             onClick={() => handleClick(pageNumber)}
+            className={`p${pageNumber}`}
+            page={page}
           >
             {pageNumber}
           </PageNumber>
@@ -34,10 +36,12 @@ function Pagination({ onClickPage, totalResults }) {
 }
 
 Pagination.defaultProps = {
+  page: 1,
   totalResults: 0,
 };
 
 Pagination.propTypes = {
+  page: PropTypes.number,
   totalResults: PropTypes.number,
   onClickPage: PropTypes.func.isRequired,
 };

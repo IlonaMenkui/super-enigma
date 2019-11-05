@@ -6,7 +6,7 @@ export const PageNumber = styled.a`
     padding: 8px 16px;
     text-decoration: none;
     transition: background-color .3s;
-    &.active {
+    &.p${props => props.page} {
         background-color: dodgerblue;
         color: white;
     }
