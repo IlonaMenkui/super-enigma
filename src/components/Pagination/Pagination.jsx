@@ -10,10 +10,8 @@ function Pagination({ onClickPage, totalResults }) {
 
   if (totalResults > 1000) {
     totalPages = 10;
-    console.log(totalResults / PAGE_COUNT);
   } else if (totalResults / PAGE_COUNT < 50) {
     totalPages = Math.floor(totalResults / PAGE_COUNT + 1);
-    console.log(totalResults / PAGE_COUNT);
   }
 
   const handleClick = pageNumber => {
