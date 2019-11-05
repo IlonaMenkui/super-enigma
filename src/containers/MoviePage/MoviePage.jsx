@@ -12,6 +12,7 @@ import MovieListContainer from '../MovieListContainer';
 import {
   setPage as setPageAction,
 } from '../../actions/movies';
+import Pagination from '../../components/Pagination';
 
 @connect(
   state => ({
@@ -39,6 +40,9 @@ export default class MoviePage extends React.PureComponent {
           totalResults={totalResults}
         />
         <Paper>
+          <Pagination
+            page={page}
+          />
           <SearchContainer title={title} />
           <MovieListContainer
             type={type}
