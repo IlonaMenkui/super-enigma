@@ -10,7 +10,7 @@ export const PageNumber = styled.a`
         background-color: dodgerblue;
         color: white;
     }
-    &:hover:not(.active) {
+    &:hover:not(.p${props => props.page}) {
         background-color: #ddd;
     }
 `;
