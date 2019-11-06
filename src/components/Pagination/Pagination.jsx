@@ -20,6 +20,7 @@ function Pagination({ onClickPage, totalResults, page }) {
 
   return (
     <PaginationWrap>
+      <PageNumber onClick={() => handleClick(1)}>{'<<'}</PageNumber>
       {[...Array(totalPages).keys()]
         .map(index => index + 1)
         .map(pageNumber => (
@@ -31,6 +32,7 @@ function Pagination({ onClickPage, totalResults, page }) {
             {pageNumber}
           </PageNumber>
         ))}
+      <PageNumber onClick={() => handleClick(totalPages)}>{'>>'}</PageNumber>
     </PaginationWrap>
   );
 }
