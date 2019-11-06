@@ -16,11 +16,11 @@ function Pagination({ onClickPage, totalResults, page }) {
 
   const handleClick = pageNumber => {
     if (pageNumber < 1) {
-      onClickPage(1, 1);
+      onClickPage(1);
     } else if (pageNumber > totalPages) {
-      onClickPage(1, totalPages);
+      onClickPage(totalPages);
     } else {
-      onClickPage(1, pageNumber);
+      onClickPage(pageNumber);
     }
   };
 
