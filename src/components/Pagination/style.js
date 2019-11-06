@@ -7,7 +7,7 @@ export const PageNumber = styled.a`
     text-decoration: none;
     transition: background-color .3s;
     &.p${props => props.page} {
-        background-color: dodgerblue;
+        background-color: #00bfff;
         color: white;
     }
     &:hover:not(.p${props => props.page}) {
