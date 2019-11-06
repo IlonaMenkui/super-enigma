@@ -7,32 +7,30 @@ import MovieListItem from './MovieListItem';
 import { MoviesWrap, Title } from './style';
 
 const MovieList = ({ movies, title, isLoading }) => (
-  <main className="movies-wrap">
-    <MoviesWrap>
-      <Title>
-        {(!isLoading && movies.length === 0) ? 'No results' : title}
-      </Title>
-      {isLoading ? <Circular />
-        : (
-          <>
-            {movies.map(movie => (
-              <MovieListItem
-                title={movie.title}
-                genres={movie.genres}
-                voteAverage={movie.voteAverage}
-                overview={movie.overview}
-                posterPath={movie.posterPath}
-                releaseDate={movie.releaseDate}
-                popularity={movie.popularity}
-                originalLanguage={movie.originalLanguage}
-                voteCount={movie.voteCount}
-                originalTitle={movie.originalTitle}
-              />
-            ))}
-          </>
-        )}
-    </MoviesWrap>
-  </main>
+  <MoviesWrap>
+    <Title>
+      {(!isLoading && movies.length === 0) ? 'No results' : title}
+    </Title>
+    {isLoading ? <Circular />
+      : (
+        <>
+          {movies.map(movie => (
+            <MovieListItem
+              title={movie.title}
+              genres={movie.genres}
+              voteAverage={movie.voteAverage}
+              overview={movie.overview}
+              posterPath={movie.posterPath}
+              releaseDate={movie.releaseDate}
+              popularity={movie.popularity}
+              originalLanguage={movie.originalLanguage}
+              voteCount={movie.voteCount}
+              originalTitle={movie.originalTitle}
+            />
+          ))}
+        </>
+      )}
+  </MoviesWrap>
 );
 
 MovieList.defaultProps = {

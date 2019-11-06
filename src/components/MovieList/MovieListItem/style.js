@@ -5,15 +5,12 @@ export const MovieWrap = styled.div`
   align-items: flex-start;
 `;
 export const Label = styled.div`
-  font-size: ${props => props.size || '15px'};
-  color: ${props => props.color || 'black'};
+  font-size: 15px;
   margin-bottom: ${props => props.marginBottom || '0'};
 `;
 
 export const TitleLabel = styled.div`
   font-size: 25px;
-  color: ${props => props.color || 'black'};
-  margin-bottom: ${props => props.marginBottom || '0'};
 `;
 
 export const LabelGroup = styled.div`
@@ -32,8 +29,12 @@ export const DateLabel = styled.div`
 export const Title = styled.b``;
 
 export const PosterImage = styled.img`
-  cursor: ${props => (props.cursor === 'pointer' ? 'pointer' : 'default')};
-  width: ${props => (props.size === 'small' ? '170px' : '')};
+  cursor: pointer;
+  width: 170px;
+  padding-bottom: 10px;
+`;
+
+export const ModalPosterImage = styled.img`
   padding-bottom: 10px;
 `;
 
