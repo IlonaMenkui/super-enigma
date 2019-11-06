@@ -13,6 +13,8 @@ import {
 } from '../../actions/movies';
 import Pagination from '../../components/Pagination';
 
+import { PaginationWrap } from './style';
+
 @connect(
   state => ({
     ...state,
@@ -38,11 +40,13 @@ export default class MoviePage extends React.PureComponent {
     } = this.props;
     return (
       <div>
-        <Pagination
-          onClickPage={(e, pageNew) => this.changeNewPage(pageNew)}
-          page={page}
-          totalResults={totalResults}
-        />
+        <PaginationWrap>
+          <Pagination
+            onClickPage={(e, pageNew) => this.changeNewPage(pageNew)}
+            page={page}
+            totalResults={totalResults}
+          />
+        </PaginationWrap>
         <Paper>
           <SearchContainer title={title} />
           <MovieListContainer

@@ -16,7 +16,4 @@ export const PageNumber = styled.a`
 `;
 
 export const PaginationWrap = styled.div`
-    display: flex;
-    flex-direction: center;
-    background-color: white;
 `;
