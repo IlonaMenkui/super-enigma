@@ -7,7 +7,6 @@ import { Paper } from '@material-ui/core';
 
 import { PAGE_COUNT } from '../../constants';
 import SearchContainer from '../SearchContainer';
-import FlatPagination from '../../components/FlatPagination';
 import MovieListContainer from '../MovieListContainer';
 import {
   setPage as setPageAction,
@@ -39,11 +38,6 @@ export default class MoviePage extends React.PureComponent {
     } = this.props;
     return (
       <div>
-        <FlatPagination
-          onClickPage={(e, offset) => this.changePage(offset)}
-          page={page}
-          totalResults={totalResults}
-        />
         <Pagination
           onClickPage={(e, pageNew) => this.changeNewPage(pageNew)}
           page={page}
