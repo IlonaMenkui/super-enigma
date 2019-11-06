@@ -9,18 +9,25 @@ function Pagination({ onClickPage, totalResults, page }) {
   let totalPages = 1;
 
   if (totalResults > 1000) {
-    totalPages = 10;
+    totalPages = 15;
   } else if (totalResults / PAGE_COUNT < 50) {
     totalPages = Math.floor(totalResults / PAGE_COUNT + 1);
   }
 
   const handleClick = pageNumber => {
-    onClickPage(1, pageNumber);
+    if (pageNumber < 1) {
+      onClickPage(1, 1);
+    } else if (pageNumber > totalPages) {
+      onClickPage(1, totalPages);
+    } else {
+      onClickPage(1, pageNumber);
+    }
   };
 
   return (
     <PaginationWrap>
       <PageNumber onClick={() => handleClick(1)}>{'<<'}</PageNumber>
+      <PageNumber onClick={() => handleClick(page - 1)}>{'<'}</PageNumber>
       {[...Array(totalPages).keys()]
         .map(index => index + 1)
         .map(pageNumber => (
@@ -32,6 +39,7 @@ function Pagination({ onClickPage, totalResults, page }) {
             {pageNumber}
           </PageNumber>
         ))}
+      <PageNumber onClick={() => handleClick(page + 1)}>{'>'}</PageNumber>
       <PageNumber onClick={() => handleClick(totalPages)}>{'>>'}</PageNumber>
     </PaginationWrap>
   );
