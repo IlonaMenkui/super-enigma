@@ -13,7 +13,6 @@ function SimpleModal({
   );
 }
 
-
 SimpleModal.propTypes = {
   modalContent: PropTypes.element.isRequired,
   open: PropTypes.bool.isRequired,

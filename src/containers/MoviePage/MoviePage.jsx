@@ -22,12 +22,7 @@ import { PaginationWrap, MovieWrap } from './style';
   },
 )
 export default class MoviePage extends React.PureComponent {
-  changePage(offset) {
-    const { setPage } = this.props;
-    setPage({ page: (offset / PAGE_COUNT + 1) });
-  }
-
-  changeNewPage(page) {
+  changePage(page) {
     const { setPage } = this.props;
     setPage({ page });
   }
@@ -40,7 +35,7 @@ export default class MoviePage extends React.PureComponent {
       <div>
         <PaginationWrap>
           <Pagination
-            onClickPage={pageNew => this.changeNewPage(pageNew)}
+            onClickPage={pageNew => this.changePage(pageNew)}
             page={page}
             totalResults={totalResults}
           />
