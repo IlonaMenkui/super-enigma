@@ -7,7 +7,7 @@ import noImg from '../../../static/images/no-img.png';
 import { STATIC_URL as imgUrl } from '../../../constants';
 
 import {
-  MovieWrap, TextWrap, Text, ChipWrap, Chip, PosterImage,
+  MovieWrap, Label, LabelGroup, ChipWrap, Chip, PosterImage, TitleLabel, DateLabel,
 } from './style';
 
 function MovieListItem({
@@ -29,6 +29,28 @@ function MovieListItem({
     },
     [setOpen],
   );
+
+  function checkReleaseDate() {
+    if (releaseDate) {
+      return new Date(releaseDate).getFullYear();
+    }
+    return 'No release date';
+  }
+
+  function checkOverview() {
+    if (overview) {
+      return overview;
+    }
+    return 'No overview';
+  }
+
+  function checkGenres() {
+    if (genres.length) {
+      return genres.join(', ');
+    }
+    return 'No genres';
+  }
+
   const posterPathUrl = posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`;
   return (
     <MovieWrap>
@@ -44,30 +66,24 @@ function MovieListItem({
               originalLanguage={originalLanguage}
               voteCount={voteCount}
               originalTitle={originalTitle}
-              genres={genres}
+              genres={checkGenres()}
               title={title}
-              overview={overview}
+              overview={checkOverview()}
               voteAverage={voteAverage}
               releaseDate={releaseDate}
             />
           </MovieWrap>
         )}
       />
-      <TextWrap>
-        <Text size="25px">{title}</Text>
-        <Text color="gray" size="11px" marginBottom="20px">
-          {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
-        </Text>
-        <Text marginBottom="25px">
-          {overview || 'No overview'}
-        </Text>
-        <Text color="gray">
-          {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
-        </Text>
-      </TextWrap>
+      <LabelGroup>
+        <TitleLabel>{title}</TitleLabel>
+        <DateLabel>{checkReleaseDate()}</DateLabel>
+        <Label marginBottom="25px">{checkOverview()}</Label>
+        <Label color="gray">{checkGenres(genres)}</Label>
+      </LabelGroup>
       <ChipWrap>
         <Chip>
-          <Text size="12px">{voteAverage}</Text>
+          <Label size="12px">{voteAverage}</Label>
         </Chip>
       </ChipWrap>
     </MovieWrap>
