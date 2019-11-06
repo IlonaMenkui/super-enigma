@@ -6,4 +6,6 @@ export const PaginationWrap = styled.div`
     background-color: white;
 `;
 
-export default PaginationWrap;
+export const MovieWrap = styled.div`
+    background-color: white;
+`;

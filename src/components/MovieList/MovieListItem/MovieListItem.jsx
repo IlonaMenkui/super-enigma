@@ -32,7 +32,7 @@ function MovieListItem({
   const posterPathUrl = posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`;
   return (
     <MovieWrap>
-      <PosterImage alt="poster" cursor="pointer" src={posterPathUrl} onClick={memoizedSetStateOpen} />
+      <PosterImage size="small" alt="poster" cursor="pointer" src={posterPathUrl} onClick={memoizedSetStateOpen} />
       <ModalContainer
         onClose={memoizedSetStateClose}
         open={open}

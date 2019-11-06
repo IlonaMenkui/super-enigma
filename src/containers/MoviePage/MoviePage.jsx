@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { Paper } from '@material-ui/core';
-
 import { PAGE_COUNT } from '../../constants';
 import SearchContainer from '../SearchContainer';
 import MovieListContainer from '../MovieListContainer';
@@ -13,7 +11,7 @@ import {
 } from '../../actions/movies';
 import Pagination from '../../components/Pagination';
 
-import { PaginationWrap } from './style';
+import { PaginationWrap, MovieWrap } from './style';
 
 @connect(
   state => ({
@@ -47,14 +45,14 @@ export default class MoviePage extends React.PureComponent {
             totalResults={totalResults}
           />
         </PaginationWrap>
-        <Paper>
+        <MovieWrap>
           <SearchContainer title={title} />
           <MovieListContainer
             type={type}
             title={title}
             isLoading={isLoading}
           />
-        </Paper>
+        </MovieWrap>
       </div>
     );
   }
