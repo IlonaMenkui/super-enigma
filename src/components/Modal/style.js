@@ -1,15 +1,13 @@
 import styled from 'styled-components';
 
-export const CloseButton = styled.button`
+
+export const CloseCross = styled.img`
   margin-left: 20px;
   margin-right: 15px;
   background: none;
   border: none;
   cursor: pointer;
-  color: gray;
-  :hover {
-    color: black;
-  }      
+  width: 13px;
 `;
 
 export const Modal = styled.div`

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, CloseButton } from './style';
+import { Modal, CloseCross } from './style';
+import cross from '../../static/images/close.svg';
 
 function SimpleModal({
   open, onClose, modalContent,
@@ -8,7 +9,7 @@ function SimpleModal({
   return (
     <Modal open={open}>
       {modalContent}
-      <CloseButton type="button" onClick={onClose}>✖</CloseButton>
+      <CloseCross src={cross} onClick={onClose} />
     </Modal>
   );
 }
