@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const WrapBackground = styled.div`
-    ${props => (props.open ? `
+    ${({ open }) => (open ? `
     display: flex;
     position: fixed;
     top: 0;

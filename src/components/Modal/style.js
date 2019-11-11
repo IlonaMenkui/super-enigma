@@ -9,7 +9,7 @@ export const CloseCross = styled.img`
 `;
 
 export const Modal = styled.div`
-  display:  ${props => (props.open ? 'flex' : 'none')};
+  display:  ${({ open }) => (open ? 'flex' : 'none')};
   align-items: flex-start;
   background: white;
   border-radius: 4px;

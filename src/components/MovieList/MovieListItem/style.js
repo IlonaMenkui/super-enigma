@@ -6,7 +6,7 @@ export const MovieWrap = styled.div`
 `;
 export const Label = styled.div`
   font-size: 15px;
-  margin-bottom: ${props => props.marginBottom || '0'};
+  margin-bottom: ${({ marginBottom }) => marginBottom || '0'};
 `;
 
 export const TitleLabel = styled.div`
