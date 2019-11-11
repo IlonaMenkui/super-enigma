@@ -5,6 +5,8 @@ import { PageNumber, PaginationWrap } from './style';
 
 function Pagination({ onClickPage, totalPages: pagesCount, page }) {
   let totalPage = 1;
+  const currentPage = page;
+  const lastPage = pagesCount;
 
   if (pagesCount > 20) {
     totalPage = 10;
@@ -25,20 +27,33 @@ function Pagination({ onClickPage, totalPages: pagesCount, page }) {
   return (
     <PaginationWrap>
       <PageNumber onClick={() => handleClick(1)}>{'<<'}</PageNumber>
-      <PageNumber onClick={() => handleClick(page - 1)}>{'<'}</PageNumber>
-      {[...Array(totalPage).keys()]
-        .map(index => index + 1)
+      <PageNumber onClick={() => handleClick(currentPage - 1)}>{'<'}</PageNumber>
+      {[currentPage, currentPage + 1, currentPage + 2]
         .map(pageNumber => (
           <PageNumber
             onClick={() => handleClick(pageNumber)}
             className={`p${pageNumber}`}
-            page={page}
+            page={currentPage}
           >
             {pageNumber}
           </PageNumber>
         ))}
-      <PageNumber onClick={() => handleClick(page + 1)}>{'>'}</PageNumber>
-      <PageNumber onClick={() => handleClick(totalPage)}>{'>>'}</PageNumber>
+
+      {pagesCount > 3 ? <PageNumber>...</PageNumber> : ''}
+      {pagesCount > 3 ? (
+        [lastPage - 2, lastPage - 1, lastPage]
+          .map(pageNumber => (
+            <PageNumber
+              onClick={() => handleClick(pageNumber)}
+              className={`p${pageNumber}`}
+              page={currentPage}
+            >
+              {pageNumber}
+            </PageNumber>
+          ))
+      ) : ''}
+      <PageNumber onClick={() => handleClick(currentPage + 1)}>{'>'}</PageNumber>
+      <PageNumber onClick={() => handleClick(lastPage)}>{'>>'}</PageNumber>
     </PaginationWrap>
   );
 }
