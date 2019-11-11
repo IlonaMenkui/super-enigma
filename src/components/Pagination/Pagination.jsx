@@ -10,7 +10,7 @@ function Pagination({ onClickPage, totalPages: pagesCount, page }) {
   const handleClick = pageNumber => {
     if (pageNumber < 1) {
       onClickPage(1);
-    } else {
+    } else if (pageNumber <= pagesCount) {
       onClickPage(pageNumber);
     }
   };
