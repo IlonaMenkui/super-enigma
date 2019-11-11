@@ -4,21 +4,12 @@ import PropTypes from 'prop-types';
 import { PageNumber, PaginationWrap } from './style';
 
 function Pagination({ onClickPage, totalPages: pagesCount, page }) {
-  let totalPage = 1;
   const currentPage = page;
   const lastPage = pagesCount;
-
-  if (pagesCount > 20) {
-    totalPage = 10;
-  } else {
-    totalPage = pagesCount;
-  }
 
   const handleClick = pageNumber => {
     if (pageNumber < 1) {
       onClickPage(1);
-    } else if (pageNumber > totalPage) {
-      onClickPage(totalPage);
     } else {
       onClickPage(pageNumber);
     }
