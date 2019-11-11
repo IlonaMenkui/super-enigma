@@ -12,24 +12,20 @@ const MovieList = ({ movies, title, isLoading }) => (
       {(!isLoading && movies.length === 0) ? 'No results' : title}
     </Title>
     {isLoading ? <Circular />
-      : (
-        <>
-          {movies.map(movie => (
-            <MovieListItem
-              title={movie.title}
-              genres={movie.genres}
-              voteAverage={movie.voteAverage}
-              overview={movie.overview}
-              posterPath={movie.posterPath}
-              releaseDate={movie.releaseDate}
-              popularity={movie.popularity}
-              originalLanguage={movie.originalLanguage}
-              voteCount={movie.voteCount}
-              originalTitle={movie.originalTitle}
-            />
-          ))}
-        </>
-      )}
+      : movies.map(movie => (
+        <MovieListItem
+          title={movie.title}
+          genres={movie.genres}
+          voteAverage={movie.voteAverage}
+          overview={movie.overview}
+          posterPath={movie.posterPath}
+          releaseDate={movie.releaseDate}
+          popularity={movie.popularity}
+          originalLanguage={movie.originalLanguage}
+          voteCount={movie.voteCount}
+          originalTitle={movie.originalTitle}
+        />
+      ))}
   </MoviesWrap>
 );
 
