@@ -15,8 +15,10 @@ import { PARAMS } from '../../constants';
 import getMovies from '../../api';
 
 @connect(
-  state => ({
-    ...state,
+  ({
+    movies, isLoading, searchQuery, cachedGenres, page,
+  }) => ({
+    movies, isLoading, searchQuery, cachedGenres, page,
   }),
   {
     requestLoadMovies: request,

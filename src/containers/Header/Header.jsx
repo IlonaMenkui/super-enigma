@@ -13,9 +13,7 @@ import {
 } from '../../actions/movies';
 
 @connect(
-  state => ({
-    ...state,
-  }),
+  ({ searchQuery }) => ({ searchQuery }),
   {
     resetSearchMovies: reset,
     setPage: setPageAction,

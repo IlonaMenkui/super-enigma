@@ -13,9 +13,7 @@ import Pagination from '../../components/Pagination';
 import { PaginationWrap, MovieWrap } from './style';
 
 @connect(
-  state => ({
-    ...state,
-  }),
+  ({ page, totalPages, isLoading }) => ({ page, totalPages, isLoading }),
   {
     setPage: setPageAction,
   },

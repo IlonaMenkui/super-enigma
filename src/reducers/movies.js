@@ -6,7 +6,6 @@ const defaultState = {
   page: 1,
   totalPages: 0,
   isLoading: false,
-  isSearchChange: false,
   searchQuery: '',
 };
 
