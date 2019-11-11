@@ -14,6 +14,7 @@ export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
 )
   .then((res => {
     const { results } = res.data;
+    const { total_pages: totalPages } = res.data;
     let { total_results: totalResults } = res.data;
     if (totalResults > maxTotalResults) {
       totalResults = maxTotalResults;
@@ -36,7 +37,7 @@ export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
         posterPath,
       }),
     );
-    return { totalResults, movies };
+    return { totalResults, totalPages, movies };
   }));
 
 const getMovieWithGenres = (movie, genres) => {
@@ -66,8 +67,9 @@ export const getMovies = ({
   searchQuery, url, page, cachedGenres,
 }) => getAllGenres(cachedGenres)
   .then(genres => getMoviesWithoutGenres({ searchQuery, page, url })
-    .then(({ movies, totalResults }) => ({
+    .then(({ movies, totalResults, totalPages }) => ({
       totalResults,
+      totalPages,
       movies: movies.map(movie => getMovieWithGenres(movie, genres)),
       genres,
     })));

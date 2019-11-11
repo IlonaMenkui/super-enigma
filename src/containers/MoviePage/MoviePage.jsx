@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { PAGE_COUNT } from '../../constants';
 import SearchContainer from '../SearchContainer';
 import MovieListContainer from '../MovieListContainer';
 import {
@@ -29,7 +28,7 @@ export default class MoviePage extends React.PureComponent {
 
   render() {
     const {
-      title, totalResults, isLoading, type, page,
+      title, totalResults, isLoading, type, page, totalPages,
     } = this.props;
     return (
       <div>
@@ -38,6 +37,7 @@ export default class MoviePage extends React.PureComponent {
             onClickPage={pageNew => this.changePage(pageNew)}
             page={page}
             totalResults={totalResults}
+            totalPages={totalPages}
           />
         </PaginationWrap>
         <MovieWrap>
@@ -57,6 +57,7 @@ MoviePage.propTypes = {
   page: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   totalResults: PropTypes.number.isRequired,
+  totalPages: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
   setPage: PropTypes.func.isRequired,

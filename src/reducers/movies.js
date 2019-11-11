@@ -5,6 +5,7 @@ const defaultState = {
   cachedGenres: [],
   page: 1,
   totalResults: 0,
+  totalPages: 0,
   isLoading: false,
   isSearchChange: false,
   searchQuery: '',

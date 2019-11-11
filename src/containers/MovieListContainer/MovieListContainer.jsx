@@ -49,13 +49,16 @@ export default class MovieListContainer extends React.PureComponent {
     return getMovies({
       page, url, searchQuery, cachedGenres,
     })
-      .then(({ movies, totalResults, genres }) => {
+      .then(({
+        movies, totalResults, totalPages, genres,
+      }) => {
         if (cachedGenres.length === 0) {
           cacheGenres({ cachedGenres: genres });
         }
         successLoadMovies({
           movies,
           totalResults,
+          totalPages,
           isLoading: false,
         });
       })
@@ -70,7 +73,6 @@ export default class MovieListContainer extends React.PureComponent {
     } = this.props;
     const searchTitle = 'Searching results:';
     const pageTitle = searchQuery ? searchTitle : title;
-
     return (
       <MovieList movies={movies} title={pageTitle} isLoading={isLoading} type={type} />
     );
