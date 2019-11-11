@@ -28,7 +28,7 @@ export default class MoviePage extends React.PureComponent {
 
   render() {
     const {
-      title, totalResults, isLoading, type, page, totalPages,
+      title, isLoading, type, page, totalPages,
     } = this.props;
     return (
       <div>
@@ -36,7 +36,6 @@ export default class MoviePage extends React.PureComponent {
           <Pagination
             onClickPage={pageNew => this.changePage(pageNew)}
             page={page}
-            totalResults={totalResults}
             totalPages={totalPages}
           />
         </PaginationWrap>
@@ -56,7 +55,6 @@ export default class MoviePage extends React.PureComponent {
 MoviePage.propTypes = {
   page: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  totalResults: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,

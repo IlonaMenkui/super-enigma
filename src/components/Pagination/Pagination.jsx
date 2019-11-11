@@ -6,7 +6,7 @@ import { PageNumber, PaginationWrap } from './style';
 function Pagination({ onClickPage, totalPages: pagesCount, page }) {
   let totalPage = 1;
 
-  if (pagesCount > 499) {
+  if (pagesCount > 20) {
     totalPage = 10;
   } else {
     totalPage = pagesCount;

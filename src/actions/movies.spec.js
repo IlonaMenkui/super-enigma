@@ -15,7 +15,7 @@ describe('actions', () => {
   it('Should create an action informing the reducers that the movies load request finished successfully', () => {
     const payload = {
       page: 1,
-      totalResults: 1,
+      totalPages: 1,
       searchQuery: '',
     };
     const expectedAction = {

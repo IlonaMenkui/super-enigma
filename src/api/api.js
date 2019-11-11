@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { PARAMS as params, MAX_TOTAL_RESULTS as maxTotalResults } from '../constants';
+import { PARAMS as params, MAX_TOTAL_PAGES as maxTotalPages } from '../constants';
 
 export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
   url,
@@ -14,10 +14,9 @@ export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
 )
   .then((res => {
     const { results } = res.data;
-    const { total_pages: totalPages } = res.data;
-    let { total_results: totalResults } = res.data;
-    if (totalResults > maxTotalResults) {
-      totalResults = maxTotalResults;
+    let { total_pages: totalPages } = res.data;
+    if (totalPages > maxTotalPages) {
+      totalPages = maxTotalPages;
     }
     const movies = results.map(
       ({
@@ -37,7 +36,7 @@ export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
         posterPath,
       }),
     );
-    return { totalResults, totalPages, movies };
+    return { totalPages, movies };
   }));
 
 const getMovieWithGenres = (movie, genres) => {
@@ -67,8 +66,7 @@ export const getMovies = ({
   searchQuery, url, page, cachedGenres,
 }) => getAllGenres(cachedGenres)
   .then(genres => getMoviesWithoutGenres({ searchQuery, page, url })
-    .then(({ movies, totalResults, totalPages }) => ({
-      totalResults,
+    .then(({ movies, totalPages }) => ({
       totalPages,
       movies: movies.map(movie => getMovieWithGenres(movie, genres)),
       genres,

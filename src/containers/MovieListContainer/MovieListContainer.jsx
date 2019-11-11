@@ -50,14 +50,13 @@ export default class MovieListContainer extends React.PureComponent {
       page, url, searchQuery, cachedGenres,
     })
       .then(({
-        movies, totalResults, totalPages, genres,
+        movies, totalPages, genres,
       }) => {
         if (cachedGenres.length === 0) {
           cacheGenres({ cachedGenres: genres });
         }
         successLoadMovies({
           movies,
-          totalResults,
           totalPages,
           isLoading: false,
         });
