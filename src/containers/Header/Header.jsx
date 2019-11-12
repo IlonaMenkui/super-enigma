@@ -7,6 +7,8 @@ import { Paper, Tabs } from '@material-ui/core';
 
 import { HEADER_TABS as tabs } from '../../constants';
 import HeaderTab from '../../components/HeaderTab';
+import HeaderTabs from '../../components/HeaderTabs';
+import Tab from '../../components/HeaderTabs/Tab';
 import {
   reset,
   setPage as setPageAction,
@@ -63,6 +65,9 @@ export class Header extends React.PureComponent {
           >
             {tabs.map(HeaderTab)}
           </Tabs>
+          {tabs.map(tab => (
+            <HeaderTabs onClickTab={this.handleChange} value={tab} title={tab.TITLE} />
+          ))}
         </Paper>
       </header>
     );
