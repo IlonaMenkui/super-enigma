@@ -9,15 +9,29 @@ function Pagination({ onClickPage, totalPages: pagesCount, page }) {
   const secondPage = currentPage + 1;
   const thirdPage = currentPage + 2;
   const firstPages = [];
-  if (secondPage === lastPage) {
-    firstPages.push(currentPage, secondPage); // когда вторая страница - последняя
-  } else if (currentPage !== 1 && currentPage === lastPage) {
-    firstPages.push(1, currentPage); // когда всего две страницы и актуальная - вторая
-  } else if (currentPage !== lastPage && thirdPage !== lastPage && pagesCount > 3) {
-    firstPages.push(currentPage, secondPage, thirdPage);
-  } else if (pagesCount === 0) {
-    firstPages.push(0);
-  }
+  (function pageCheck() {
+    if (secondPage === lastPage && secondPage < 3) {
+      firstPages.push(currentPage, secondPage); // когда вторая страница - последняя
+    } else if (currentPage === lastPage - 3
+      || currentPage === lastPage - 4
+      || currentPage === lastPage - 5) {
+      firstPages.push(lastPage - 5, lastPage - 4, lastPage - 3);
+      // когда актуальная страница (и две рядом) идут до трех последних
+    } else if (currentPage === 2 && currentPage === lastPage) {
+      firstPages.push(1, currentPage); // когда всего две страницы и актуальная - вторая
+    } else if (currentPage !== lastPage
+      && pagesCount > 3
+      && thirdPage < lastPage) {
+      firstPages.push(currentPage, secondPage, thirdPage); // отобразить первые три страницы
+    } else if (pagesCount === 0) {
+      firstPages.push(0); // когда нет результата поиска или нет страниц
+    } else if (pagesCount === 1) {
+      firstPages.push(1); // когда всего одна страница
+    } else if (currentPage) {
+      firstPages.push(1, 2, 3);
+      // когда актуальная страница - одна из трех последних (отобразить первые три страницы)
+    }
+  }());
 
   const handleClick = pageNumber => {
     if (pageNumber < 1 && pageNumber !== 0) {
