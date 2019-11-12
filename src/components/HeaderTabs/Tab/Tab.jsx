@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button } from './style';
+import { Button, ButtonWrapper } from './style';
 
 const Tab = ({
   title, value, onClickTab, index,
 }) => (
-  <Button onClick={() => onClickTab(1, index)} key={value}>
-    {title}
-    -
-    {index}
-    -
-    {value}
-  </Button>
+  <ButtonWrapper>
+    <Button
+      onClick={e => onClickTab(e, index)}
+      key={value}
+      index={index}
+      value={value}
+    >
+      {title}
+    </Button>
+  </ButtonWrapper>
 );
 
 Tab.propTypes = {
