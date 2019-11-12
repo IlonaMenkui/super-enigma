@@ -3,17 +3,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Tab from './Tab';
-import { ButtonWrapper } from './Tab/style';
 
-const HeaderTabs = ({ title, value }) => (
-  <ButtonWrapper>
-    <Tab title={title} value={value} />
-  </ButtonWrapper>
+const HeaderTabs = ({
+  title, value, onClickTab, index,
+}) => (
+  <Tab onClickTab={onClickTab} title={title} value={value} index={index} />
 );
 
 HeaderTabs.propTypes = {
+  onClickTab: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default HeaderTabs;

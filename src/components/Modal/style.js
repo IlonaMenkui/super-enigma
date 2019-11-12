@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-
-export const CloseCross = styled.img`
-  margin-left: 20px;
-  margin-right: 15px;
-  cursor: pointer;
-  width: 13px;
-`;
-
 export const Modal = styled.div`
   display:  ${({ open }) => (open ? 'flex' : 'none')};
   align-items: flex-start;
@@ -16,3 +8,5 @@ export const Modal = styled.div`
   padding: 20px 0 20px 20px;
   width: 40%;
 `;
+
+export default Modal;
