@@ -16,8 +16,28 @@ function Pagination({ onClickPage, totalPages, page }) {
     } else {
       firstPages.push(1, 2, 3);
     }
-    if (currentPage > 3 && totalPages > 9) {
+    if (currentPage === lastPage - 3
+      || currentPage === lastPage - 4) {
+      actualPages.push(lastPage - 5, lastPage - 4, lastPage - 3);
+      // когда актуальная страница (и две рядом) идут до трех последних
+    } else if ((currentPage > 3
+      && totalPages > 9
+      && currentPage < totalPages - 3
+      && currentPage !== firstPages.length + 1) || currentPage === lastPage - 5) { // отображаем актуальные страницы
+      actualPages.push(currentPage - 1, currentPage, currentPage + 1);
+    } else if (currentPage > 3
+      && totalPages > 9
+      && currentPage < totalPages - 3
+      && currentPage === firstPages.length + 1) {
+      // отображаем актуальную страницу, если она идет сразу после первых трех
       actualPages.push(currentPage, currentPage + 1, currentPage + 2);
+    } else if (currentPage === 3 && totalPages > 9) {
+      actualPages.push(currentPage + 1, currentPage + 2, currentPage + 3);
+    } else if (currentPage === lastPage - 2) {
+      actualPages.push(currentPage - 3, currentPage - 2, currentPage - 1);
+    }
+    if (totalPages === 0) { // когда нет результата поиска или нет страниц
+      firstPages.push(0);
     }
   }());
 
@@ -54,7 +74,7 @@ function Pagination({ onClickPage, totalPages, page }) {
             {pageNumber}
           </PageNumber>
         ))}
-      {totalPages > 3 ? <PageNumber>...</PageNumber> : ''}
+      {totalPages > 9 ? <PageNumber>...</PageNumber> : ''}
       {totalPages > 9 ? (
         [lastPage - 2, lastPage - 1, lastPage]
           .map(pageNumber => (
