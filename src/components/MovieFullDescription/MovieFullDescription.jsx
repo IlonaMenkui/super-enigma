@@ -5,7 +5,7 @@ import {
   Label, LabelGroup, TitleLabel, Title,
 } from '../MovieList/MovieListItem/style';
 
-function checkReleaseDate(releaseDate) {
+function getReleaseDate(releaseDate) {
   if (releaseDate) {
     return releaseDate.replace(/-/g, '.');
   }
@@ -32,7 +32,7 @@ const MovieFullDescription = ({
     </Label>
     <Label>
       <Title>Full date of release: </Title>
-      {checkReleaseDate(releaseDate)}
+      {getReleaseDate(releaseDate)}
     </Label>
     <Label marginBottom="25px">
       <Title>Overview: </Title>

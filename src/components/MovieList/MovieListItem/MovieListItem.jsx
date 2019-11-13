@@ -31,7 +31,7 @@ function MovieListItem({
     [setOpen],
   );
 
-  function checkReleaseDate() {
+  function getReleaseDate() {
     if (releaseDate) {
       return new Date(releaseDate).getFullYear();
     }
@@ -78,7 +78,7 @@ function MovieListItem({
       />
       <LabelGroup>
         <TitleLabel>{title}</TitleLabel>
-        <DateLabel>{checkReleaseDate()}</DateLabel>
+        <DateLabel>{getReleaseDate()}</DateLabel>
         <Label marginBottom="25px">{checkOverview()}</Label>
         <Label color="gray">{checkGenres(genres)}</Label>
       </LabelGroup>
