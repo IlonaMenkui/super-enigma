@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Button = styled.button`
   color: black;
   border: none;
-  padding: 15px 32px;
+  padding: 15px 42px;
   text-align: center;
   font-size: 16px;
   ${({ index, value }) => (index === value
