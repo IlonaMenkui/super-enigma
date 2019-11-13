@@ -3,40 +3,28 @@ import PropTypes from 'prop-types';
 
 import { PageNumber, PaginationWrap } from './style';
 
-function Pagination({ onClickPage, totalPages: pagesCount, page }) {
+function Pagination({ onClickPage, totalPages, page }) {
   const currentPage = page;
-  const lastPage = pagesCount;
-  const secondPage = currentPage + 1;
-  const thirdPage = currentPage + 2;
+  const lastPage = totalPages;
   const firstPages = [];
+  const actualPages = [];
   (function pageCheck() {
-    if (secondPage === lastPage && secondPage < 3) {
-      firstPages.push(currentPage, secondPage); // когда вторая страница - последняя
-    } else if (currentPage === lastPage - 3
-      || currentPage === lastPage - 4
-      || currentPage === lastPage - 5) {
-      firstPages.push(lastPage - 5, lastPage - 4, lastPage - 3);
-      // когда актуальная страница (и две рядом) идут до трех последних
-    } else if (currentPage === 2 && currentPage === lastPage) {
-      firstPages.push(1, currentPage); // когда всего две страницы и актуальная - вторая
-    } else if (currentPage !== lastPage
-      && pagesCount > 3
-      && thirdPage < lastPage) {
-      firstPages.push(currentPage, secondPage, thirdPage); // отобразить первые три страницы
-    } else if (pagesCount === 0) {
-      firstPages.push(0); // когда нет результата поиска или нет страниц
-    } else if (pagesCount === 1) {
-      firstPages.push(1); // когда всего одна страница
-    } else if (currentPage) {
+    if (totalPages < 10) {
+      for (let i = 1; i <= totalPages; i++) {
+        firstPages.push(i);
+      }
+    } else {
       firstPages.push(1, 2, 3);
-      // когда актуальная страница - одна из трех последних (отобразить первые три страницы)
+    }
+    if (currentPage > 3 && totalPages > 9) {
+      actualPages.push(currentPage, currentPage + 1, currentPage + 2);
     }
   }());
 
   const handleClick = pageNumber => {
     if (pageNumber < 1 && pageNumber !== 0) {
       onClickPage(1);
-    } else if (pageNumber <= pagesCount && pageNumber !== 0) {
+    } else if (pageNumber <= totalPages && pageNumber !== 0) {
       onClickPage(pageNumber);
     }
   };
@@ -55,9 +43,19 @@ function Pagination({ onClickPage, totalPages: pagesCount, page }) {
             {pageNumber}
           </PageNumber>
         ))}
-
-      {pagesCount > 3 ? <PageNumber>...</PageNumber> : ''}
-      {pagesCount > 3 ? (
+      {actualPages.length > 0 ? <PageNumber>...</PageNumber> : ''}
+      {actualPages
+        .map(pageNumber => (
+          <PageNumber
+            onClick={() => handleClick(pageNumber)}
+            className={`p${pageNumber}`}
+            page={currentPage}
+          >
+            {pageNumber}
+          </PageNumber>
+        ))}
+      {totalPages > 3 ? <PageNumber>...</PageNumber> : ''}
+      {totalPages > 9 ? (
         [lastPage - 2, lastPage - 1, lastPage]
           .map(pageNumber => (
             <PageNumber
