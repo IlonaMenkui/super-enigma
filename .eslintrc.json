@@ -10,7 +10,7 @@
   "parser": "babel-eslint",
   "plugins": ["babel"],
   "rules": {
-    "import/no-named-as-default": 0,
+    "import/no-named-as-default": "off",
     "react/no-deprecated": "off",
     "react/no-did-update-set-state": "off",
     "react/state-in-constructor": "off",
@@ -18,7 +18,8 @@
     "arrow-parens": [2, "as-needed"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
-    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
+    "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+    "implicit-arrow-linebreak": "off"
   },
   "env": {
     "browser": true
