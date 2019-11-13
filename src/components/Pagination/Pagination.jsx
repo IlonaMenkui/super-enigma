@@ -23,7 +23,8 @@ function Pagination({ onClickPage, totalPages, page }) {
     } else if ((currentPage > 3
       && totalPages > 9
       && currentPage < totalPages - 3
-      && currentPage !== firstPages.length + 1) || currentPage === lastPage - 5) { // отображаем актуальные страницы
+      && currentPage !== firstPages.length + 1)
+      || currentPage === lastPage - 5) { // отображаем актуальные страницы
       actualPages.push(currentPage - 1, currentPage, currentPage + 1);
     } else if (currentPage > 3
       && totalPages > 9
@@ -63,7 +64,7 @@ function Pagination({ onClickPage, totalPages, page }) {
             {pageNumber}
           </PageNumber>
         ))}
-      {actualPages.length > 0 ? <PageNumber>...</PageNumber> : ''}
+      {actualPages.length ? <PageNumber>...</PageNumber> : ''}
       {actualPages
         .map(pageNumber => (
           <PageNumber
