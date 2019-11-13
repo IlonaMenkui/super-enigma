@@ -19,25 +19,25 @@ function Pagination({ onClickPage, totalPages, page }) {
     if (currentPage === lastPage - 3
       || currentPage === lastPage - 4) {
       actualPages.push(lastPage - 5, lastPage - 4, lastPage - 3);
-      // когда актуальная страница (и две рядом) идут до трех последних
+      // when the current page (and two next) go to the last three
     } else if ((currentPage > 3
       && totalPages > 9
       && currentPage < totalPages - 3
       && currentPage !== firstPages.length + 1)
-      || currentPage === lastPage - 5) { // отображаем актуальные страницы
+      || currentPage === lastPage - 5) { // display actual pages
       actualPages.push(currentPage - 1, currentPage, currentPage + 1);
     } else if (currentPage > 3
       && totalPages > 9
       && currentPage < totalPages - 3
       && currentPage === firstPages.length + 1) {
-      // отображаем актуальную страницу, если она идет сразу после первых трех
+      // display the current page if it goes immediately after the first three
       actualPages.push(currentPage, currentPage + 1, currentPage + 2);
     } else if (currentPage === 3 && totalPages > 9) {
       actualPages.push(currentPage + 1, currentPage + 2, currentPage + 3);
     } else if (currentPage === lastPage - 2) {
       actualPages.push(currentPage - 3, currentPage - 2, currentPage - 1);
     }
-    if (totalPages === 0) { // когда нет результата поиска или нет страниц
+    if (totalPages === 0) { // when there is no search result or no pages
       firstPages.push(0);
     }
   }());
