@@ -14,10 +14,8 @@ export const getMoviesWithoutGenres = ({ searchQuery, page, url }) => axios.get(
 )
   .then((res => {
     const { results } = res.data;
-    let { total_pages: totalPages } = res.data;
-    if (totalPages > maxTotalPages) {
-      totalPages = maxTotalPages;
-    }
+    const { total_pages: originalTotalPages } = res.data;
+    const totalPages = Math.min(originalTotalPages, maxTotalPages);
     const movies = results.map(
       ({
         title, genre_ids: genresIds, vote_average: voteAverage, overview, poster_path: posterPath,
