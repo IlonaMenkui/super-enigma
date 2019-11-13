@@ -32,7 +32,7 @@ export default class MoviePage extends React.PureComponent {
       <div>
         <PaginationWrapper>
           <Pagination
-            onClickPage={pageNew => this.changePage(pageNew)}
+            onClickPage={() => this.changePage()}
             page={page}
             totalPages={totalPages}
           />
