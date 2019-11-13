@@ -15,6 +15,3 @@ export const Button = styled.button`
 export const ButtonWrapper = styled.div`
     margin-bottom: 10px;
 `;
-
-// transition: background 0.4s ease-in-out, height 0.2s linear;
-// transition: background-color .3s;
