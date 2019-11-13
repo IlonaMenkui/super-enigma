@@ -7,7 +7,7 @@ import noImg from '../../../static/images/no-img.png';
 import { STATIC_URL as imgUrl } from '../../../constants';
 
 import {
-  MovieWrap, Label, LabelGroup, ChipWrap, Chip, PosterImage, TitleLabel, DateLabel,
+  MovieWrapper, Label, LabelGroup, ChipWrapper, Chip, PosterImage, TitleLabel, DateLabel,
   ModalPosterImage,
 } from './style';
 
@@ -54,13 +54,13 @@ function MovieListItem({
 
   const posterPathUrl = posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`;
   return (
-    <MovieWrap>
+    <MovieWrapper>
       <PosterImage src={posterPathUrl} onClick={memoizedSetStateOpen} />
       <ModalContainer
         onClose={memoizedSetStateClose}
         open={open}
         modalContent={(
-          <MovieWrap>
+          <MovieWrapper>
             <ModalPosterImage src={posterPathUrl} />
             <MovieFullDescription
               popularity={popularity}
@@ -73,7 +73,7 @@ function MovieListItem({
               voteAverage={voteAverage}
               releaseDate={releaseDate}
             />
-          </MovieWrap>
+          </MovieWrapper>
         )}
       />
       <LabelGroup>
@@ -82,12 +82,12 @@ function MovieListItem({
         <Label marginBottom="25px">{checkOverview()}</Label>
         <Label color="gray">{checkGenres(genres)}</Label>
       </LabelGroup>
-      <ChipWrap>
+      <ChipWrapper>
         <Chip>
           <Label size="12px">{voteAverage}</Label>
         </Chip>
-      </ChipWrap>
-    </MovieWrap>
+      </ChipWrapper>
+    </MovieWrapper>
   );
 }
 

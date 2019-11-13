@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SearchWrap = styled.div`
+export const SearchWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;

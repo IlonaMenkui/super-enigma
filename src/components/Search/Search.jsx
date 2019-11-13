@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import searchImg from '../../static/images/searchicon.png';
-import { SearchWrap, SearchIcon, SearchInput } from './style';
+import { SearchWrapper, SearchIcon, SearchInput } from './style';
 
 function Search({
   searchQuery, onHandleChange, onSearchClick, onEnterPress,
@@ -30,7 +30,7 @@ function Search({
   );
 
   return (
-    <SearchWrap>
+    <SearchWrapper>
       <SearchInput
         placeholder="Search…"
         inputProps={{ 'aria-label': 'Search' }}
@@ -42,7 +42,7 @@ function Search({
         src={searchImg}
         onClick={memoizedSearchClick}
       />
-    </SearchWrap>
+    </SearchWrapper>
   );
 }
 

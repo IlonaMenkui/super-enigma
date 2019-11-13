@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WrapBackground = styled.div`
+export const BackgroundWrapper = styled.div`
     ${({ open }) => (open ? `
     display: flex;
     position: fixed;
@@ -13,4 +13,4 @@ export const WrapBackground = styled.div`
     background-color: rgba(0,0,0,0.6);` : 'none')}
 `;
 
-export default WrapBackground;
+export default BackgroundWrapper;

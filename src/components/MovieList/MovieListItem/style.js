@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MovieWrap = styled.div`
+export const MovieWrapper = styled.div`
   display: flex;
   align-items: flex-start;
 `;
@@ -50,6 +50,6 @@ export const Chip = styled.div`
   border-radius: 50px;
 `;
 
-export const ChipWrap = styled.div`
+export const ChipWrapper = styled.div`
   margin-left: 20px;
 `;

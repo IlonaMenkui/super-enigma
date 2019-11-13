@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PageNumber, PaginationWrap } from './style';
+import { PageNumber, PaginationWrapper } from './style';
 
 function Pagination({ onClickPage, totalPages, page }) {
   const currentPage = page;
@@ -51,7 +51,7 @@ function Pagination({ onClickPage, totalPages, page }) {
   };
 
   return (
-    <PaginationWrap>
+    <PaginationWrapper>
       <PageNumber onClick={() => handleClick(1)}>{'<<'}</PageNumber>
       <PageNumber onClick={() => handleClick(currentPage - 1)}>{'<'}</PageNumber>
       {firstPages
@@ -90,7 +90,7 @@ function Pagination({ onClickPage, totalPages, page }) {
       ) : ''}
       <PageNumber onClick={() => handleClick(currentPage + 1)}>{'>'}</PageNumber>
       <PageNumber onClick={() => handleClick(lastPage)}>{'>>'}</PageNumber>
-    </PaginationWrap>
+    </PaginationWrapper>
   );
 }
 

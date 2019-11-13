@@ -10,7 +10,7 @@ import {
 } from '../../actions/movies';
 import Pagination from '../../components/Pagination';
 
-import { PaginationWrap, MovieWrap } from './style';
+import { PaginationWrapper, MovieWrapper } from './style';
 
 @connect(
   ({ page, totalPages, isLoading }) => ({ page, totalPages, isLoading }),
@@ -30,21 +30,21 @@ export default class MoviePage extends React.PureComponent {
     } = this.props;
     return (
       <div>
-        <PaginationWrap>
+        <PaginationWrapper>
           <Pagination
             onClickPage={pageNew => this.changePage(pageNew)}
             page={page}
             totalPages={totalPages}
           />
-        </PaginationWrap>
-        <MovieWrap>
+        </PaginationWrapper>
+        <MovieWrapper>
           <SearchContainer title={title} />
           <MovieListContainer
             type={type}
             title={title}
             isLoading={isLoading}
           />
-        </MovieWrap>
+        </MovieWrapper>
       </div>
     );
   }

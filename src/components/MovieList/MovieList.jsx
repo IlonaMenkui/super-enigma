@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import Circular from '../Circular';
 import MovieListItem from './MovieListItem';
 
-import { MoviesWrap, Title } from './style';
+import { MoviesWrapper, Title } from './style';
 
 const MovieList = ({ movies, title, isLoading }) => (
-  <MoviesWrap>
+  <MoviesWrapper>
     <Title>
       {(!isLoading && movies.length === 0) ? 'No results' : title}
     </Title>
@@ -26,7 +26,7 @@ const MovieList = ({ movies, title, isLoading }) => (
           originalTitle={movie.originalTitle}
         />
       ))}
-  </MoviesWrap>
+  </MoviesWrapper>
 );
 
 MovieList.defaultProps = {

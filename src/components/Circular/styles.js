@@ -43,7 +43,7 @@ export const Circle = styled.circle`
     transform-origin: 50% 50%;
 `;
 
-export const Wrap = styled.div`
+export const Wrapper = styled.div`
     height: 800px;
     display: flex;
     justify-content: center;
