@@ -49,6 +49,8 @@ export const ENTER_KEY = 13;
 
 export const MAX_TOTAL_PAGES = 500;
 
+export const PAGINATION_MIN_TOTAL_PAGES = 10;
+
 export const PAGINATION_FIRST_PAGES = 3;
 
 export const PAGINATION_LAST_PAGES = 3;

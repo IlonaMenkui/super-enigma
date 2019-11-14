@@ -7,6 +7,7 @@ import {
 import {
   PAGINATION_FIRST_PAGES as firstPagesValue,
   PAGINATION_LAST_PAGES as lastPagesValue,
+  PAGINATION_MIN_TOTAL_PAGES as minTotalResults,
 } from '../../constants';
 
 import { PageNumber, PaginationWrapper } from './style';
@@ -22,6 +23,7 @@ export default class Pagination extends React.PureComponent {
     super(props);
     this.state = {
       firstPages: [],
+      lastpages: [],
       actualPages: [],
     };
   }
@@ -45,6 +47,12 @@ export default class Pagination extends React.PureComponent {
     } else {
       this.setState({ firstPages: [...Array(firstPagesValue)].map((v, i) => i + 1) });
     }
+    if (totalPages >= minTotalResults) {
+      this.setState({
+        lastpages:
+          [...Array(lastPagesValue)].map((v, i) => i + (totalPages - lastPagesValue) + 1),
+      });
+    }
   }
 
   changePage(page) {
@@ -55,7 +63,7 @@ export default class Pagination extends React.PureComponent {
   render() {
     const { totalPages, page } = this.props;
     const {
-      firstPages, actualPages,
+      firstPages, actualPages, lastpages,
     } = this.state;
 
     const handleClick = pageNumber => {
@@ -92,9 +100,9 @@ export default class Pagination extends React.PureComponent {
               {pageNumber}
             </PageNumber>
           ))}
-        {totalPages > 9 ? <PageNumber>...</PageNumber> : ''}
-        {totalPages > 9 ? (
-          [totalPages - 2, totalPages - 1, totalPages]
+        {totalPages >= minTotalResults ? <PageNumber>...</PageNumber> : ''}
+        {totalPages >= minTotalResults ? (
+          lastpages
             .map(pageNumber => (
               <PageNumber
                 onClick={() => handleClick(pageNumber)}
