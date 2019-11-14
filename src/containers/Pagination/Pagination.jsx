@@ -8,6 +8,7 @@ import {
   PAGINATION_FIRST_PAGES as firstPagesValue,
   PAGINATION_LAST_PAGES as lastPagesValue,
   PAGINATION_MIN_TOTAL_PAGES as minTotalResults,
+  MAX_PAGINATION_PAGES as maxPagesValue,
 } from '../../constants';
 
 import { PageNumber, PaginationWrapper } from './style';
@@ -23,35 +24,44 @@ export default class Pagination extends React.PureComponent {
     super(props);
     this.state = {
       firstPages: [],
-      lastpages: [],
+      lastPages: [],
       actualPages: [],
     };
-  }
-
-  componentDidMount() {
-    this.setPaginationPages();
   }
 
   componentDidUpdate(prevProps) {
     const { totalPages: prevtotalPages } = prevProps;
     const { totalPages } = this.props;
     if (prevtotalPages !== totalPages) {
-      this.setPaginationPages();
+      this.checkPaginationPages();
     }
   }
 
-  setPaginationPages() {
+  setPaginationPages(firstPageValue = 3, lastPageValue = 3) {
     const { totalPages } = this.props;
-    if (totalPages < 10) {
+    if (totalPages === 0) {
+      this.setState({ firstPages: [0] });
+    } else if (totalPages < 10) {
       this.setState({ firstPages: [...Array(totalPages)].map((v, i) => i + 1) });
     } else {
-      this.setState({ firstPages: [...Array(firstPagesValue)].map((v, i) => i + 1) });
+      this.setState({ firstPages: [...Array(firstPageValue)].map((v, i) => i + 1) });
     }
     if (totalPages >= minTotalResults) {
       this.setState({
-        lastpages:
-          [...Array(lastPagesValue)].map((v, i) => i + (totalPages - lastPagesValue) + 1),
+        lastPages:
+          [...Array(lastPageValue)].map((v, i) => i + (totalPages - lastPageValue) + 1),
       });
+    } else {
+      this.setState({ lastPages: [] });
+    }
+  }
+
+  checkPaginationPages() {
+    if (firstPagesValue > maxPagesValue
+      && lastPagesValue > maxPagesValue) {
+      this.setPaginationPages();
+    } else {
+      this.setPaginationPages(firstPagesValue, lastPagesValue);
     }
   }
 
@@ -63,7 +73,7 @@ export default class Pagination extends React.PureComponent {
   render() {
     const { totalPages, page } = this.props;
     const {
-      firstPages, actualPages, lastpages,
+      firstPages, actualPages, lastPages,
     } = this.state;
 
     const handleClick = pageNumber => {
@@ -100,19 +110,17 @@ export default class Pagination extends React.PureComponent {
               {pageNumber}
             </PageNumber>
           ))}
-        {totalPages >= minTotalResults ? <PageNumber>...</PageNumber> : ''}
-        {totalPages >= minTotalResults ? (
-          lastpages
-            .map(pageNumber => (
-              <PageNumber
-                onClick={() => handleClick(pageNumber)}
-                className={`p${pageNumber}`}
-                page={page}
-              >
-                {pageNumber}
-              </PageNumber>
-            ))
-        ) : ''}
+        {lastPages.length ? <PageNumber>...</PageNumber> : ''}
+        {lastPages
+          .map(pageNumber => (
+            <PageNumber
+              onClick={() => handleClick(pageNumber)}
+              className={`p${pageNumber}`}
+              page={page}
+            >
+              {pageNumber}
+            </PageNumber>
+          ))}
         <PageNumber onClick={() => handleClick(page + 1)}>{'>'}</PageNumber>
         <PageNumber onClick={() => handleClick(totalPages)}>{'>>'}</PageNumber>
       </PaginationWrapper>
