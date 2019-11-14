@@ -1,97 +1,115 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import {
+  setPage as setPageAction,
+} from '../../actions/movies';
+import {
+  PAGINATION_FIRST_PAGES as firstPagesValue,
+  PAGINATION_LAST_PAGES as lastPagesValue,
+} from '../../constants';
 
 import { PageNumber, PaginationWrapper } from './style';
 
-function Pagination({ onClickPage, totalPages, page }) {
-  const currentPage = page;
-  const lastPage = totalPages;
-  const firstPages = [];
-  const actualPages = [];
-  (function pageCheck() {
+@connect(
+  ({ page, totalPages }) => ({ page, totalPages }),
+  {
+    setPage: setPageAction,
+  },
+)
+export default class Pagination extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      firstPages: [],
+      actualPages: [],
+    };
+  }
+
+  componentDidMount() {
+    this.setPaginationPages();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { totalPages: prevtotalPages } = prevProps;
+    const { totalPages } = this.props;
+    if (prevtotalPages !== totalPages) {
+      this.setPaginationPages();
+    }
+  }
+
+  setPaginationPages() {
+    const { totalPages } = this.props;
     if (totalPages < 10) {
-      for (let i = 1; i <= totalPages; i++) {
-        firstPages.push(i);
-      }
+      this.setState({ firstPages: [...Array(totalPages)].map((v, i) => i + 1) });
     } else {
-      firstPages.push(1, 2, 3);
+      this.setState({ firstPages: [...Array(firstPagesValue)].map((v, i) => i + 1) });
     }
-    if (currentPage === lastPage - 3
-      || currentPage === lastPage - 4) {
-      actualPages.push(lastPage - 5, lastPage - 4, lastPage - 3);
-      // when the current page (and two next) go to the last three
-    } else if ((currentPage > 3
-      && totalPages > 9
-      && currentPage < totalPages - 3
-      && currentPage !== firstPages.length + 1)
-      || currentPage === lastPage - 5) { // display actual pages
-      actualPages.push(currentPage - 1, currentPage, currentPage + 1);
-    } else if (currentPage > 3
-      && totalPages > 9
-      && currentPage < totalPages - 3
-      && currentPage === firstPages.length + 1) {
-      // display the current page if it goes immediately after the first three
-      actualPages.push(currentPage, currentPage + 1, currentPage + 2);
-    } else if (currentPage === 3 && totalPages > 9) {
-      actualPages.push(currentPage + 1, currentPage + 2, currentPage + 3);
-    } else if (currentPage === lastPage - 2 && totalPages > 3) {
-      actualPages.push(currentPage - 3, currentPage - 2, currentPage - 1);
-    }
-    if (totalPages === 0) { // when there is no search result or no pages
-      firstPages.push(0);
-    }
-  }());
+  }
 
-  const handleClick = pageNumber => {
-    if (pageNumber < 1 && pageNumber !== 0) {
-      onClickPage(1);
-    } else if (pageNumber <= totalPages && pageNumber !== 0) {
-      onClickPage(pageNumber);
-    }
-  };
+  changePage(page) {
+    const { setPage } = this.props;
+    setPage({ page });
+  }
 
-  return (
-    <PaginationWrapper>
-      <PageNumber onClick={() => handleClick(1)}>{'<<'}</PageNumber>
-      <PageNumber onClick={() => handleClick(currentPage - 1)}>{'<'}</PageNumber>
-      {firstPages
-        .map(pageNumber => (
-          <PageNumber
-            onClick={() => handleClick(pageNumber)}
-            className={`p${pageNumber}`}
-            page={currentPage}
-          >
-            {pageNumber}
-          </PageNumber>
-        ))}
-      {actualPages.length ? <PageNumber>...</PageNumber> : ''}
-      {actualPages
-        .map(pageNumber => (
-          <PageNumber
-            onClick={() => handleClick(pageNumber)}
-            className={`p${pageNumber}`}
-            page={currentPage}
-          >
-            {pageNumber}
-          </PageNumber>
-        ))}
-      {totalPages > 9 ? <PageNumber>...</PageNumber> : ''}
-      {totalPages > 9 ? (
-        [lastPage - 2, lastPage - 1, lastPage]
+  render() {
+    const { totalPages, page } = this.props;
+    const {
+      firstPages, actualPages,
+    } = this.state;
+
+    const handleClick = pageNumber => {
+      if ((pageNumber < 1 && pageNumber !== 0)
+        || pageNumber === 0) {
+        this.changePage(1);
+      } else if (pageNumber <= totalPages && pageNumber !== 0) {
+        this.changePage(pageNumber);
+      }
+    };
+
+    return (
+      <PaginationWrapper>
+        <PageNumber onClick={() => handleClick(1)}>{'<<'}</PageNumber>
+        <PageNumber onClick={() => handleClick(page - 1)}>{'<'}</PageNumber>
+        {firstPages
           .map(pageNumber => (
             <PageNumber
               onClick={() => handleClick(pageNumber)}
               className={`p${pageNumber}`}
-              page={currentPage}
+              page={page}
             >
               {pageNumber}
             </PageNumber>
-          ))
-      ) : ''}
-      <PageNumber onClick={() => handleClick(currentPage + 1)}>{'>'}</PageNumber>
-      <PageNumber onClick={() => handleClick(lastPage)}>{'>>'}</PageNumber>
-    </PaginationWrapper>
-  );
+          ))}
+        {actualPages.length ? <PageNumber>...</PageNumber> : ''}
+        {actualPages
+          .map(pageNumber => (
+            <PageNumber
+              onClick={() => handleClick(pageNumber)}
+              className={`p${pageNumber}`}
+              page={page}
+            >
+              {pageNumber}
+            </PageNumber>
+          ))}
+        {totalPages > 9 ? <PageNumber>...</PageNumber> : ''}
+        {totalPages > 9 ? (
+          [totalPages - 2, totalPages - 1, totalPages]
+            .map(pageNumber => (
+              <PageNumber
+                onClick={() => handleClick(pageNumber)}
+                className={`p${pageNumber}`}
+                page={page}
+              >
+                {pageNumber}
+              </PageNumber>
+            ))
+        ) : ''}
+        <PageNumber onClick={() => handleClick(page + 1)}>{'>'}</PageNumber>
+        <PageNumber onClick={() => handleClick(totalPages)}>{'>>'}</PageNumber>
+      </PaginationWrapper>
+    );
+  }
 }
 
 Pagination.defaultProps = {
@@ -102,7 +120,5 @@ Pagination.defaultProps = {
 Pagination.propTypes = {
   page: PropTypes.number,
   totalPages: PropTypes.number,
-  onClickPage: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
 };
-
-export default Pagination;
