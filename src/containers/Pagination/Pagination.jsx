@@ -39,7 +39,7 @@ export default class Pagination extends React.PureComponent {
 
   setPaginationPages(firstPageValue = 3, lastPageValue = 3) {
     const { page, totalPages } = this.props;
-    const { firstPages } = this.state;
+    const { firstPages, lastPages } = this.state;
     // first pages
     if (totalPages === 0) {
       this.setState({ firstPages: [0] });
@@ -58,32 +58,34 @@ export default class Pagination extends React.PureComponent {
       this.setState({ lastPages: [] });
     }
     // actual pages
-    if (page === totalPages - 3
-      || page === totalPages - 4) {
+    if (page === lastPages[0] - 1
+      || page === lastPages[0] - 2) {
       this.setState({
         actualPages:
-          [totalPages - 5, totalPages - 4, totalPages - 3],
+          [lastPages[0] - 3, lastPages[0] - 2, lastPages[0] - 1],
       });
       // when the current page (and two next) go to the last three
-    } else if ((page > 3
-      && totalPages > 9
-      && page < totalPages - 3
+    } else
+    if ((page > firstPagesValue
+      && totalPages >= minTotalResults
+      && page < totalPages - firstPagesValue
       && page !== firstPages.length + 1)
-      || page === totalPages - 5) { // display actual pages
+      || page === lastPages[0] - 3) { // display actual pages
       this.setState({
         actualPages:
           [page - 1, page, page + 1],
       });
-    } else if (page > 3
-      && totalPages > 9
-      && page < totalPages - 3
+    } else if (page > firstPagesValue
+      && totalPages >= minTotalResults
+      && page < totalPages - minTotalResults
       && page === firstPages.length + 1) {
       // display the current page if it goes immediately after the first three
       this.setState({
         actualPages:
           [page, page + 1, page + 2],
       });
-    } else if (page === 3 && totalPages > 9) {
+    } else if (page === firstPages[firstPages.length - 1]
+      && totalPages >= minTotalResults) {
       this.setState({
         actualPages:
           [page + 1, page + 2, page + 3],
