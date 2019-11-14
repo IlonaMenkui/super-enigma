@@ -58,7 +58,8 @@ export default class Pagination extends React.PureComponent {
       this.setState({ lastPages: [] });
     }
     // actual pages
-    if (page === lastPages[0] - 1
+    if (page === lastPages[0]
+      || page === lastPages[0] - 1
       || page === lastPages[0] - 2) {
       this.setState({
         actualPages:
@@ -90,15 +91,9 @@ export default class Pagination extends React.PureComponent {
         actualPages:
           [page + 1, page + 2, page + 3],
       });
-    } else if (page === totalPages - 2 && totalPages > 3) {
-      this.setState({
-        actualPages:
-          [page - 3, page - 2, page - 1],
-      });
     } else {
       this.setState({ actualPages: [] });
     }
-    // actual pages array[array.length - 1]
   }
 
   checkPaginationPages() {
