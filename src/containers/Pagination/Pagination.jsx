@@ -30,15 +30,17 @@ export default class Pagination extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { totalPages: prevtotalPages } = prevProps;
-    const { totalPages } = this.props;
-    if (prevtotalPages !== totalPages) {
+    const { totalPages: prevtotalPages, page: prevPage } = prevProps;
+    const { totalPages, page } = this.props;
+    if (prevtotalPages !== totalPages || prevPage !== page) {
       this.checkPaginationPages();
     }
   }
 
   setPaginationPages(firstPageValue = 3, lastPageValue = 3) {
-    const { totalPages } = this.props;
+    const { page, totalPages } = this.props;
+    const { firstPages } = this.state;
+    // first pages
     if (totalPages === 0) {
       this.setState({ firstPages: [0] });
     } else if (totalPages < 10) {
@@ -46,6 +48,7 @@ export default class Pagination extends React.PureComponent {
     } else {
       this.setState({ firstPages: [...Array(firstPageValue)].map((v, i) => i + 1) });
     }
+    // last pages
     if (totalPages >= minTotalResults) {
       this.setState({
         lastPages:
@@ -54,14 +57,54 @@ export default class Pagination extends React.PureComponent {
     } else {
       this.setState({ lastPages: [] });
     }
+    // actual pages
+    if (page === totalPages - 3
+      || page === totalPages - 4) {
+      this.setState({
+        actualPages:
+          [totalPages - 5, totalPages - 4, totalPages - 3],
+      });
+      // when the current page (and two next) go to the last three
+    } else if ((page > 3
+      && totalPages > 9
+      && page < totalPages - 3
+      && page !== firstPages.length + 1)
+      || page === totalPages - 5) { // display actual pages
+      this.setState({
+        actualPages:
+          [page - 1, page, page + 1],
+      });
+    } else if (page > 3
+      && totalPages > 9
+      && page < totalPages - 3
+      && page === firstPages.length + 1) {
+      // display the current page if it goes immediately after the first three
+      this.setState({
+        actualPages:
+          [page, page + 1, page + 2],
+      });
+    } else if (page === 3 && totalPages > 9) {
+      this.setState({
+        actualPages:
+          [page + 1, page + 2, page + 3],
+      });
+    } else if (page === totalPages - 2 && totalPages > 3) {
+      this.setState({
+        actualPages:
+          [page - 3, page - 2, page - 1],
+      });
+    } else {
+      this.setState({ actualPages: [] });
+    }
+    // actual pages array[array.length - 1]
   }
 
   checkPaginationPages() {
-    if (firstPagesValue > maxPagesValue
-      && lastPagesValue > maxPagesValue) {
-      this.setPaginationPages();
-    } else {
+    if (firstPagesValue <= maxPagesValue
+      && lastPagesValue <= maxPagesValue) {
       this.setPaginationPages(firstPagesValue, lastPagesValue);
+    } else {
+      this.setPaginationPages();
     }
   }
 
