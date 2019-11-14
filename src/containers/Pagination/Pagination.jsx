@@ -34,7 +34,7 @@ function Pagination({ onClickPage, totalPages, page }) {
       actualPages.push(currentPage, currentPage + 1, currentPage + 2);
     } else if (currentPage === 3 && totalPages > 9) {
       actualPages.push(currentPage + 1, currentPage + 2, currentPage + 3);
-    } else if (currentPage === lastPage - 2) {
+    } else if (currentPage === lastPage - 2 && totalPages > 3) {
       actualPages.push(currentPage - 3, currentPage - 2, currentPage - 1);
     }
     if (totalPages === 0) { // when there is no search result or no pages

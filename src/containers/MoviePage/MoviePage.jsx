@@ -8,7 +8,7 @@ import MovieListContainer from '../MovieListContainer';
 import {
   setPage as setPageAction,
 } from '../../actions/movies';
-import Pagination from '../../components/Pagination';
+import Pagination from '../Pagination';
 
 import { PaginationWrapper, MovieWrapper } from './style';
 
