@@ -78,7 +78,6 @@ export default class Pagination extends React.PureComponent {
       });
     } else if (page > firstPagesValue
       && totalPages >= minTotalResults
-      && page < totalPages - minTotalResults
       && page === firstPages.length + 1) {
       // display the current page if it goes immediately after the first three
       this.setState({

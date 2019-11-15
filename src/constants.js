@@ -51,8 +51,8 @@ export const MAX_TOTAL_PAGES = 500;
 
 export const PAGINATION_MIN_TOTAL_PAGES = 10;
 
-export const PAGINATION_FIRST_PAGES = 3;
+export const PAGINATION_FIRST_PAGES = 5;
 
-export const PAGINATION_LAST_PAGES = 3;
+export const PAGINATION_LAST_PAGES = 5;
 
 export const MAX_PAGINATION_PAGES = 5;
