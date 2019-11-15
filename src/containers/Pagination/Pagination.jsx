@@ -66,6 +66,7 @@ export default class Pagination extends React.PureComponent {
           [lastPages[0] - 3, lastPages[0] - 2, lastPages[0] - 1],
       });
       // when the current page (and two next) go to the last three
+      // or current page = first last page
     } else
     if ((page > firstPagesValue
       && totalPages >= minTotalResults
