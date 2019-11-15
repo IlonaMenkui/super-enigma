@@ -85,8 +85,9 @@ export default class Pagination extends React.PureComponent {
         actualPages:
           [page, page + 1, page + 2],
       });
-    } else if (page === firstPages[firstPages.length - 1]
-      && totalPages >= minTotalResults) {
+    } else if ((page === firstPages[firstPages.length - 1]
+      && totalPages >= minTotalResults)
+      || (page === firstPages.length + 1 && firstPagesValue === 1)) {
       this.setState({
         actualPages:
           [page + 1, page + 2, page + 3],
