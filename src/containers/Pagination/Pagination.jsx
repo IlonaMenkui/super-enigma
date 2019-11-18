@@ -67,8 +67,7 @@ export default class Pagination extends React.PureComponent {
       });
       // when the current page (and two next) go to the last three
       // or current page = first last page
-    } else
-    if ((page > firstPagesValue
+    } else if ((page > firstPagesValue
       && totalPages >= minTotalResults
       && page < totalPages - firstPagesValue
       && page !== firstPages.length + 1)
@@ -106,6 +105,16 @@ export default class Pagination extends React.PureComponent {
     }
   }
 
+  handleClick(pageNumber) {
+    const { totalPages } = this.props;
+    if ((pageNumber < 1 && pageNumber !== 0)
+      || pageNumber === 0) {
+      this.changePage(1);
+    } else if (pageNumber <= totalPages && pageNumber !== 0) {
+      this.changePage(pageNumber);
+    }
+  }
+
   changePage(page) {
     const { setPage } = this.props;
     setPage({ page });
@@ -117,23 +126,14 @@ export default class Pagination extends React.PureComponent {
       firstPages, actualPages, lastPages,
     } = this.state;
 
-    const handleClick = pageNumber => {
-      if ((pageNumber < 1 && pageNumber !== 0)
-        || pageNumber === 0) {
-        this.changePage(1);
-      } else if (pageNumber <= totalPages && pageNumber !== 0) {
-        this.changePage(pageNumber);
-      }
-    };
-
     return (
       <PaginationWrapper>
-        <PageNumber onClick={() => handleClick(1)}>{'<<'}</PageNumber>
-        <PageNumber onClick={() => handleClick(page - 1)}>{'<'}</PageNumber>
+        <PageNumber onClick={() => this.handleClick(1)}>{'<<'}</PageNumber>
+        <PageNumber onClick={() => this.handleClick(page - 1)}>{'<'}</PageNumber>
         {firstPages
           .map(pageNumber => (
             <PageNumber
-              onClick={() => handleClick(pageNumber)}
+              onClick={() => this.handleClick(pageNumber)}
               className={`p${pageNumber}`}
               page={page}
             >
@@ -144,7 +144,7 @@ export default class Pagination extends React.PureComponent {
         {actualPages
           .map(pageNumber => (
             <PageNumber
-              onClick={() => handleClick(pageNumber)}
+              onClick={() => this.handleClick(pageNumber)}
               className={`p${pageNumber}`}
               page={page}
             >
@@ -155,15 +155,15 @@ export default class Pagination extends React.PureComponent {
         {lastPages
           .map(pageNumber => (
             <PageNumber
-              onClick={() => handleClick(pageNumber)}
+              onClick={() => this.handleClick(pageNumber)}
               className={`p${pageNumber}`}
               page={page}
             >
               {pageNumber}
             </PageNumber>
           ))}
-        <PageNumber onClick={() => handleClick(page + 1)}>{'>'}</PageNumber>
-        <PageNumber onClick={() => handleClick(totalPages)}>{'>>'}</PageNumber>
+        <PageNumber onClick={() => this.handleClick(page + 1)}>{'>'}</PageNumber>
+        <PageNumber onClick={() => this.handleClick(totalPages)}>{'>>'}</PageNumber>
       </PaginationWrapper>
     );
   }
