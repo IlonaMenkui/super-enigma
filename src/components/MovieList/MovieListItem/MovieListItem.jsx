@@ -38,14 +38,14 @@ function MovieListItem({
     return 'No release date';
   }
 
-  function checkOverview() {
+  function getOverview() {
     if (overview) {
       return overview;
     }
     return 'No overview';
   }
 
-  function checkGenres() {
+  function getGenres() {
     if (genres.length) {
       return genres.join(', ');
     }
@@ -67,9 +67,9 @@ function MovieListItem({
               originalLanguage={originalLanguage}
               voteCount={voteCount}
               originalTitle={originalTitle}
-              genres={checkGenres()}
+              genres={getGenres()}
               title={title}
-              overview={checkOverview()}
+              overview={getOverview()}
               voteAverage={voteAverage}
               releaseDate={releaseDate}
             />
@@ -79,8 +79,8 @@ function MovieListItem({
       <LabelGroup>
         <TitleLabel>{title}</TitleLabel>
         <DateLabel>{getReleaseDate()}</DateLabel>
-        <Label marginBottom="25px">{checkOverview()}</Label>
-        <Label color="gray">{checkGenres(genres)}</Label>
+        <Label marginBottom="25px">{getOverview()}</Label>
+        <Label color="gray">{getGenres(genres)}</Label>
       </LabelGroup>
       <ChipWrapper>
         <Chip>
