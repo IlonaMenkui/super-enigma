@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Button, ButtonWrapper } from './style';
 
-const Tab = ({
+const HeaderTab = ({
   title, value, onClickTab, index,
 }) => (
   <ButtonWrapper>
@@ -18,11 +18,11 @@ const Tab = ({
   </ButtonWrapper>
 );
 
-Tab.propTypes = {
+HeaderTab.propTypes = {
   onClickTab: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
 };
 
-export default Tab;
+export default HeaderTab;

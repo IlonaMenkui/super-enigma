@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { HEADER_TABS as tabs } from '../../constants';
-import HeaderTabs from '../../components/HeaderTabs';
+import HeaderTab from '../../components/HeaderTab';
 import {
   reset,
   setPage as setPageAction,
@@ -56,7 +56,7 @@ export class Header extends React.PureComponent {
       <header>
         <TabsWrapper>
           {tabs.map((tab, index) => (
-            <HeaderTabs
+            <HeaderTab
               onClickTab={this.handleChange}
               value={value}
               index={index}

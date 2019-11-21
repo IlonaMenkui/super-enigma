@@ -1,4 +1,4 @@
-const { resolve } = require('path')
+const { resolve } = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
