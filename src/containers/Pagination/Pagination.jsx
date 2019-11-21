@@ -61,17 +61,18 @@ export default class Pagination extends React.PureComponent {
     if (page === lastPages[0]
       || page === lastPages[0] - 1
       || page === lastPages[0] - 2) {
+      // when the current page (and two next) go to the last three
+      // or current page = first last page
       this.setState({
         actualPages:
           [lastPages[0] - 3, lastPages[0] - 2, lastPages[0] - 1],
       });
-      // when the current page (and two next) go to the last three
-      // or current page = first last page
     } else if ((page > firstPagesValue
       && totalPages >= minTotalResults
       && page < totalPages - firstPagesValue
       && page !== firstPages.length + 1)
-      || page === lastPages[0] - 3) { // display actual pages
+      || page === lastPages[0] - 3) {
+      // display actual pages
       this.setState({
         actualPages:
           [page - 1, page, page + 1],
@@ -87,6 +88,7 @@ export default class Pagination extends React.PureComponent {
     } else if ((page === firstPages[firstPages.length - 1]
       && totalPages >= minTotalResults)
       || (page === firstPages.length + 1 && firstPagesValue === 1)) {
+      // display actual pages when current page goes immediately before the actual
       this.setState({
         actualPages:
           [page + 1, page + 2, page + 3],
