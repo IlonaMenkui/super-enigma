@@ -55,14 +55,11 @@ export class Header extends React.PureComponent {
     return (
       <header>
         <TabsWrapper>
-          {tabs.map((tab, index) => (
-            <HeaderTab
-              onClickTab={this.handleChange}
-              value={value}
-              index={index}
-              title={tab.TITLE}
-            />
-          ))}
+          <HeaderTab
+            tabs={tabs}
+            onClickTab={this.handleChange}
+            value={value}
+          />
         </TabsWrapper>
       </header>
     );
