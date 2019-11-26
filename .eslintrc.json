@@ -19,7 +19,8 @@
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
-    "implicit-arrow-linebreak": "off"
+    "implicit-arrow-linebreak": "off",
+    "class-methods-use-this": "off"
   },
   "env": {
     "browser": true

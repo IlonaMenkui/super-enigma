@@ -13,6 +13,7 @@ import {
   PAGINATION_LAST_PAGES as lastPagesValue,
   PAGINATION_MIN_TOTAL_PAGES as minTotalResults,
   MAX_PAGINATION_PAGES as maxPagesValue,
+  ACTUAL_PAGES_COUNT as actualPagesCount,
 } from '../../constants';
 
 import Pagination from '../../components/Pagination';
@@ -43,9 +44,67 @@ export default class MoviePage extends React.PureComponent {
     }
   }
 
+  getPaginationPages(totalPages, page, firstPagesCount, lastPagesCount) {
+    if (totalPages === 0) {
+      return {
+        firstPages: [0],
+        actualPages: [],
+        lastPages: [],
+      };
+    }
+
+    if (totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) {
+      return {
+        firstPages: [...Array(totalPages)].map((_, i) => i),
+        actualPages: [],
+        lastPages: [],
+      };
+    }
+
+    return {
+      firstPages: this.getFirstPages(firstPagesCount),
+      actualPages: this.getActualPages(totalPages, page, firstPagesCount, lastPagesCount),
+      lastPages: this.getLastPages(lastPagesCount, totalPages),
+    };
+  }
+
+  getFirstPages(firstPagesCount) {
+    return [...Array(firstPagesCount)].map((v, i) => i + 1);
+  }
+
+  getLastPages(lastPagesCount, totalPages) {
+    return [...Array(lastPagesCount)].map((v, i) => i + totalPages - lastPagesCount + 1);
+  }
+
+  getActualPages(totalPages, page, firstPagesCount, lastPagesCount) {
+    const firstLastPage = totalPages - lastPagesCount + 1;
+    if (page < firstPagesCount) return [];
+    if (page > firstLastPage) return [];
+
+    const endOfTheFirstGroup = firstPagesCount + 1;
+    const endOfTheLastGroup = totalPages - lastPagesCount - 1;
+
+    const actualPagesStart = Math.max(endOfTheFirstGroup, page - ((actualPagesCount - 1) / 2));
+    const actualPagesEnd = Math.max(
+      Math.min(endOfTheLastGroup, page + ((actualPagesCount - 1) / 2)),
+      endOfTheFirstGroup + firstPagesCount - 1,
+    );
+
+    console.log(actualPagesStart, actualPagesEnd, firstLastPage);
+
+    if (page <= firstLastPage && page > firstLastPage - 3) {
+      return [...Array(3)].map((_, i) => i + firstLastPage - 3);
+    }
+
+    return [...Array(actualPagesEnd - actualPagesStart + 1)].map((_, i) => i + actualPagesStart);
+  }
+
   setPaginationPages(firstPageValue = 3, lastPageValue = 3) {
     const { page, totalPages } = this.props;
     const { firstPages, lastPages } = this.state;
+
+    console.log(this.getPaginationPages(totalPages, page, firstPageValue, lastPageValue));
+
     // first pages
     if (totalPages === 0) {
       this.setState({ firstPages: [0] });

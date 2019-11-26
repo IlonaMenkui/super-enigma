@@ -55,4 +55,6 @@ export const PAGINATION_FIRST_PAGES = 3;
 
 export const PAGINATION_LAST_PAGES = 3;
 
+export const ACTUAL_PAGES_COUNT = 3;
+
 export const MAX_PAGINATION_PAGES = 5;
