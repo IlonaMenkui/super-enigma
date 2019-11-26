@@ -75,8 +75,7 @@ export default class MoviePage extends React.PureComponent {
 
   getActualPages(totalPages, page, lastPagesCount) {
     const firstLastPage = totalPages - lastPagesCount + 1;
-    if (page < firstPagesCount) return [];
-    if (page > firstLastPage) return [];
+    if (page < firstPagesCount || page > firstLastPage) return [];
 
     const endOfTheFirstGroup = firstPagesCount + 1;
     const endOfTheLastGroup = totalPages - lastPagesCount - 1;
