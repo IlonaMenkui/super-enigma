@@ -11,7 +11,6 @@ import {
 import {
   PAGINATION_FIRST_PAGES as firstPagesCount,
   PAGINATION_LAST_PAGES as lastPagesValue,
-  PAGINATION_MIN_TOTAL_PAGES as minTotalResults,
   MAX_PAGINATION_PAGES as maxPagesValue,
   ACTUAL_PAGES_COUNT as actualPagesCount,
 } from '../../constants';
@@ -87,8 +86,8 @@ export default class MoviePage extends React.PureComponent {
       Math.min(endOfTheLastGroup, page + ((actualPagesCount - 1) / 2)),
       endOfTheFirstGroup + firstPagesCount - 1,
     );
-    if (page <= firstLastPage && page > firstLastPage - 3) {
-      return [...Array(3)].map((_, i) => i + firstLastPage - 3);
+    if (page <= firstLastPage && page > firstLastPage - actualPagesCount) {
+      return [...Array(actualPagesCount)].map((_, i) => i + firstLastPage - actualPagesCount);
     }
     return [...Array(actualPagesEnd - actualPagesStart + 1)].map((_, i) => i + actualPagesStart);
   }
