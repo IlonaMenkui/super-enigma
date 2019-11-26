@@ -9,7 +9,7 @@ import {
   setPage as setPageAction,
 } from '../../actions/movies';
 import {
-  PAGINATION_FIRST_PAGES as firstPagesValue,
+  PAGINATION_FIRST_PAGES as firstPagesCount,
   PAGINATION_LAST_PAGES as lastPagesValue,
   PAGINATION_MIN_TOTAL_PAGES as minTotalResults,
   MAX_PAGINATION_PAGES as maxPagesValue,
@@ -40,43 +40,41 @@ export default class MoviePage extends React.PureComponent {
     const { totalPages: prevtotalPages, page: prevPage } = prevProps;
     const { totalPages, page } = this.props;
     if (prevtotalPages !== totalPages || prevPage !== page) {
-      this.checkPaginationPages();
+      this.getPaginationPages(totalPages, page, lastPagesValue);
     }
   }
 
-  getPaginationPages(totalPages, page, firstPagesCount, lastPagesCount) {
+  getPaginationPages(totalPages, page, lastPagesCount) {
     if (totalPages === 0) {
-      return {
+      this.setState({
         firstPages: [0],
         actualPages: [],
         lastPages: [],
-      };
-    }
-
-    if (totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) {
-      return {
-        firstPages: [...Array(totalPages)].map((_, i) => i),
+      });
+    } else if (totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) {
+      this.setState({
+        firstPages: [...Array(totalPages)].map((_, i) => i + 1),
         actualPages: [],
         lastPages: [],
-      };
+      });
+    } else {
+      this.setState({
+        firstPages: this.getFirstPages(),
+        actualPages: this.getActualPages(totalPages, page, lastPagesCount),
+        lastPages: this.getLastPages(totalPages, lastPagesCount),
+      });
     }
-
-    return {
-      firstPages: this.getFirstPages(firstPagesCount),
-      actualPages: this.getActualPages(totalPages, page, firstPagesCount, lastPagesCount),
-      lastPages: this.getLastPages(lastPagesCount, totalPages),
-    };
   }
 
-  getFirstPages(firstPagesCount) {
-    return [...Array(firstPagesCount)].map((v, i) => i + 1);
+  getFirstPages() {
+    return [...Array(firstPagesCount)].map((_, i) => i + 1);
   }
 
-  getLastPages(lastPagesCount, totalPages) {
-    return [...Array(lastPagesCount)].map((v, i) => i + totalPages - lastPagesCount + 1);
+  getLastPages(totalPages, lastPagesCount) {
+    return [...Array(lastPagesCount)].map((_, i) => i + totalPages - lastPagesCount + 1);
   }
 
-  getActualPages(totalPages, page, firstPagesCount, lastPagesCount) {
+  getActualPages(totalPages, page, lastPagesCount) {
     const firstLastPage = totalPages - lastPagesCount + 1;
     if (page < firstPagesCount) return [];
     if (page > firstLastPage) return [];
@@ -89,87 +87,10 @@ export default class MoviePage extends React.PureComponent {
       Math.min(endOfTheLastGroup, page + ((actualPagesCount - 1) / 2)),
       endOfTheFirstGroup + firstPagesCount - 1,
     );
-
-    console.log(actualPagesStart, actualPagesEnd, firstLastPage);
-
     if (page <= firstLastPage && page > firstLastPage - 3) {
       return [...Array(3)].map((_, i) => i + firstLastPage - 3);
     }
-
     return [...Array(actualPagesEnd - actualPagesStart + 1)].map((_, i) => i + actualPagesStart);
-  }
-
-  setPaginationPages(firstPageValue = 3, lastPageValue = 3) {
-    const { page, totalPages } = this.props;
-    const { firstPages, lastPages } = this.state;
-
-    console.log(this.getPaginationPages(totalPages, page, firstPageValue, lastPageValue));
-
-    // first pages
-    if (totalPages === 0) {
-      this.setState({ firstPages: [0] });
-    } else if (totalPages < minTotalResults) {
-      this.setState({ firstPages: [...Array(totalPages)].map((v, i) => i + 1) });
-    } else {
-      this.setState({ firstPages: [...Array(firstPageValue)].map((v, i) => i + 1) });
-    }
-    // last pages
-    if (totalPages >= minTotalResults) {
-      this.setState({
-        lastPages:
-          [...Array(lastPageValue)].map((v, i) => i + (totalPages - lastPageValue) + 1),
-      });
-    } else {
-      this.setState({ lastPages: [] });
-    }
-    // actual pages
-    if (page === lastPages[0]
-      || page === lastPages[0] - 1
-      || page === lastPages[0] - 2) {
-      // when the current page (and two next) go to the last three
-      // or current page = first last page
-      this.setState({
-        actualPages:
-          [lastPages[0] - 3, lastPages[0] - 2, lastPages[0] - 1],
-      });
-    } else if ((page > firstPagesValue
-      && totalPages >= minTotalResults
-      && page < totalPages - firstPagesValue
-      && page !== firstPages.length + 1)
-      || page === lastPages[0] - 3) {
-      // display actual pages
-      this.setState({
-        actualPages:
-          [page - 1, page, page + 1],
-      });
-    } else if (page > firstPagesValue
-      && totalPages >= minTotalResults
-      && page === firstPages.length + 1) {
-      // display the current page if it goes immediately after the first three
-      this.setState({
-        actualPages:
-          [page, page + 1, page + 2],
-      });
-    } else if ((page === firstPages[firstPages.length - 1]
-      && totalPages >= minTotalResults)
-      || (page === firstPages.length + 1 && firstPagesValue === 1)) {
-      // display actual pages when current page goes immediately before the actual
-      this.setState({
-        actualPages:
-          [page + 1, page + 2, page + 3],
-      });
-    } else {
-      this.setState({ actualPages: [] });
-    }
-  }
-
-  checkPaginationPages() {
-    if (firstPagesValue <= maxPagesValue
-      && lastPagesValue <= maxPagesValue) {
-      this.setPaginationPages(firstPagesValue, lastPagesValue);
-    } else {
-      this.setPaginationPages();
-    }
   }
 
   handleClick(pageNumber) {
