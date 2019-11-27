@@ -69,8 +69,8 @@ export default class MoviePage extends React.PureComponent {
   }
 
   getActualPages(totalPages, page) {
-    const firstLastPage = totalPages - lastPagesCount + 1;
-    if (totalPages <= 0 || page < firstPagesCount || page > firstLastPage
+    const firstPageOfTheLastGroup = totalPages - lastPagesCount + 1;
+    if (totalPages <= 0 || page < firstPagesCount || page > firstPageOfTheLastGroup
       || totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) return [];
 
     const endOfTheFirstGroup = firstPagesCount + 1;
@@ -85,7 +85,7 @@ export default class MoviePage extends React.PureComponent {
     }
 
     if (page >= endOfTheLastGroup) {
-      return [...Array(actualPagesCount)].map((_, i) => i + firstLastPage - actualPagesCount);
+      return [...Array(actualPagesCount)].map((_, i) => i + firstPageOfTheLastGroup - actualPagesCount);
     }
 
     return [...Array(actualPagesEnd - actualPagesStart + 1)].map((_, i) => i + actualPagesStart);
