@@ -10,7 +10,7 @@ import {
 } from '../../actions/movies';
 import {
   PAGINATION_FIRST_PAGES as firstPagesCount,
-  PAGINATION_LAST_PAGES as lastPagesValue,
+  PAGINATION_LAST_PAGES as lastPagesCount,
   MAX_PAGINATION_PAGES as maxPagesValue,
   ACTUAL_PAGES_COUNT as actualPagesCount,
 } from '../../constants';
@@ -39,45 +39,39 @@ export default class MoviePage extends React.PureComponent {
     const { totalPages: prevtotalPages, page: prevPage } = prevProps;
     const { totalPages, page } = this.props;
     if (prevtotalPages !== totalPages || prevPage !== page) {
-      this.getPaginationPages(totalPages, page, lastPagesValue);
+      this.setPaginationPages(totalPages, page);
     }
   }
 
-  getPaginationPages(totalPages, page, lastPagesCount) {
-    if (totalPages === 0) {
-      this.setState({
-        firstPages: [0],
-        actualPages: [],
-        lastPages: [],
-      });
-    } else if (totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) {
-      this.setState({
-        firstPages: [...Array(totalPages)].map((_, i) => i + 1),
-        actualPages: [],
-        lastPages: [],
-      });
-    } else {
-      this.setState({
-        firstPages: this.getFirstPages(),
-        actualPages: this.getActualPages(totalPages, page, lastPagesCount),
-        lastPages: this.getLastPages(totalPages, lastPagesCount),
-      });
-    }
+  setPaginationPages(totalPages, page) {
+    this.setState({
+      firstPages: this.getFirstPages(),
+      actualPages: this.getActualPages(totalPages, page, lastPagesCount),
+      lastPages: this.getLastPages(totalPages, lastPagesCount),
+    });
   }
 
   getFirstPages(totalPages) {
     if (totalPages <= 0) return [0];
 
+    if (totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) {
+      return [...Array(totalPages)].map((_, i) => i + 1);
+    }
+
     return [...Array(firstPagesCount)].map((_, i) => i + 1);
   }
 
-  getLastPages(totalPages, lastPagesCount) {
+  getLastPages(totalPages) {
+    if (totalPages <= 0
+      || totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) return [];
+
     return [...Array(lastPagesCount)].map((_, i) => i + totalPages - lastPagesCount + 1);
   }
 
-  getActualPages(totalPages, page, lastPagesCount) {
+  getActualPages(totalPages, page) {
     const firstLastPage = totalPages - lastPagesCount + 1;
-    if (page < firstPagesCount || page > firstLastPage) return [];
+    if (totalPages <= 0 || page < firstPagesCount || page > firstLastPage
+      || totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) return [];
 
     const endOfTheFirstGroup = firstPagesCount + 1;
     const endOfTheLastGroup = totalPages - lastPagesCount - 1;
