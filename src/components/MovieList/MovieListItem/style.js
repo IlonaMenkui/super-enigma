@@ -4,6 +4,12 @@ export const MovieWrapper = styled.div`
   display: flex;
   align-items: flex-start;
 `;
+
+export const PosterWrapper = styled.div`
+  width: 170px;
+  height: 265px;
+`;
+
 export const Label = styled.div`
   font-size: 15px;
   margin-bottom: ${({ marginBottom }) => marginBottom || '0'};

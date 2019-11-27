@@ -8,7 +8,7 @@ import { STATIC_URL as imgUrl } from '../../../constants';
 
 import {
   MovieWrapper, Label, LabelGroup, ChipWrapper, Chip, PosterImage, TitleLabel, DateLabel,
-  ModalPosterImage,
+  ModalPosterImage, PosterWrapper,
 } from './style';
 
 function MovieListItem({
@@ -55,7 +55,9 @@ function MovieListItem({
   const posterPathUrl = posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`;
   return (
     <MovieWrapper>
-      <PosterImage src={posterPathUrl} onClick={memoizedSetStateOpen} />
+      <PosterWrapper>
+        <PosterImage src={posterPathUrl} onClick={memoizedSetStateOpen} />
+      </PosterWrapper>
       <ModalContainer
         onClose={memoizedSetStateClose}
         open={open}
