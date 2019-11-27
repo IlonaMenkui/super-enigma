@@ -11,7 +11,6 @@ import {
 import {
   PAGINATION_FIRST_PAGES as firstPagesCount,
   PAGINATION_LAST_PAGES as lastPagesCount,
-  MAX_PAGINATION_PAGES as maxPagesValue,
   ACTUAL_PAGES_COUNT as actualPagesCount,
 } from '../../constants';
 
