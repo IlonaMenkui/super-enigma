@@ -22,7 +22,7 @@ describe('actions', () => {
       type: types.MOVIES.LOAD_MOVIES_SUCCESS,
       payload,
     };
-    expect(actions.succsess(payload)).toEqual(expectedAction);
+    expect(actions.success(payload)).toEqual(expectedAction);
   });
 });
 

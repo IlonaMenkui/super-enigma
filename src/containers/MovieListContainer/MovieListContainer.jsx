@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import MovieList from '../../components/MovieList';
 import {
   request,
-  succsess,
+  success,
   failure,
   cacheGenres as cacheGenresAction,
 } from '../../actions/movies';
@@ -22,7 +22,7 @@ import getMovies from '../../api';
   }),
   {
     requestLoadMovies: request,
-    successLoadMovies: succsess,
+    successLoadMovies: success,
     failureLoadMovies: failure,
     cacheGenres: cacheGenresAction,
   },

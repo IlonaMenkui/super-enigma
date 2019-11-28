@@ -4,7 +4,7 @@ export const request = () => ({
   type: MOVIES.LOAD_MOVIES_REQUEST,
 });
 
-export const succsess = payload => ({
+export const success = payload => ({
   type: MOVIES.LOAD_MOVIES_SUCCESS,
   payload,
 });
