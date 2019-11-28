@@ -44,13 +44,14 @@ export default class MoviePage extends React.PureComponent {
 
   setPaginationPages(totalPages, page) {
     this.setState({
-      firstPages: this.getFirstPages(),
+      firstPages: this.getFirstPages(totalPages),
       actualPages: this.getActualPages(totalPages, page, lastPagesCount),
       lastPages: this.getLastPages(totalPages, lastPagesCount),
     });
   }
 
   getFirstPages(totalPages) {
+    console.log(1);
     if (totalPages <= 0) return [0];
 
     if (totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) {
