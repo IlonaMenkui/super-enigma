@@ -31,3 +31,7 @@ export const cacheGenres = payload => ({
   type: MOVIES.CACHE_GENRES,
   payload,
 });
+
+export const load = () => ({
+  type: MOVIES.LOAD_MOVIES,
+});

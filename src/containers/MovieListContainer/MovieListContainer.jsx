@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 
 import MovieList from '../../components/MovieList';
 import {
-  request,
   success,
   failure,
   cacheGenres as cacheGenresAction,
+  load,
 } from '../../actions/movies';
 import { PARAMS } from '../../constants';
 import getMovies from '../../api';
@@ -21,10 +21,10 @@ import getMovies from '../../api';
     movies, isLoading, searchQuery, cachedGenres, page,
   }),
   {
-    requestLoadMovies: request,
     successLoadMovies: success,
     failureLoadMovies: failure,
     cacheGenres: cacheGenresAction,
+    loadMovies: load,
   },
 )
 export default class MovieListContainer extends React.PureComponent {
@@ -43,10 +43,10 @@ export default class MovieListContainer extends React.PureComponent {
 
   loadMovies(page, searchQuery) {
     const {
-      type, requestLoadMovies, successLoadMovies, failureLoadMovies,
+      type, successLoadMovies, failureLoadMovies, loadMovies,
       cachedGenres, cacheGenres,
     } = this.props;
-    requestLoadMovies();
+    loadMovies();
     const url = searchQuery ? PARAMS.SEARCH_URL : `${PARAMS.URL}${type}`;
     return getMovies({
       page, url, searchQuery, cachedGenres,
@@ -87,7 +87,7 @@ MovieListContainer.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   searchQuery: PropTypes.string.isRequired,
-  requestLoadMovies: PropTypes.func.isRequired,
+  loadMovies: PropTypes.func.isRequired,
   successLoadMovies: PropTypes.func.isRequired,
   failureLoadMovies: PropTypes.func.isRequired,
   cachedGenres: PropTypes.arrayOf(PropTypes.object).isRequired,
