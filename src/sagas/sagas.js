@@ -9,9 +9,8 @@ export function* loadMovies(props) {
   try {
     const moviesList = yield getMovies({ page, url, searchQuery, cachedGenres });
     const { movies, totalPages, genres } = moviesList;
-
     if (cachedGenres.length === 0) {
-      yield put({ type: 'CACHE_GENRES', genres });
+      yield put({ type: 'CACHE_GENRES', payload: { cachedGenres: genres } });
     }
 
     yield put({

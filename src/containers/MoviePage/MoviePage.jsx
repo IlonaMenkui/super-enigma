@@ -4,19 +4,17 @@ import { connect } from 'react-redux';
 
 import SearchContainer from '../SearchContainer';
 import MovieListContainer from '../MovieListContainer';
+import Pagination from '../Pagination';
 import {
   PAGINATION_FIRST_PAGES as firstPagesCount,
   PAGINATION_LAST_PAGES as lastPagesCount,
   ACTUAL_PAGES_COUNT as actualPagesCount,
 } from '../../constants';
-
 import {
   setPage as setPageAction,
 } from '../../actions/movies';
 
-import Pagination from '../Pagination';
-
-import { PaginationWrapper, MovieWrapper } from './style';
+import { MovieWrapper, PaginationWrapper } from './style';
 
 @connect(
   ({ page, totalPages }) => ({ page, totalPages }),

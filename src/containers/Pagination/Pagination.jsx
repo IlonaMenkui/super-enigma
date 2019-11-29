@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PageNumber, PaginationWrapper } from './style';
+import { PaginationWrapper, PageNumber } from './style';
 
 export default class Pagination extends React.PureComponent {
   constructor(props) {
@@ -118,10 +118,17 @@ export default class Pagination extends React.PureComponent {
   }
 }
 
+Pagination.defaultProps = {
+  firstPagesCount: 3,
+  lastPagesCount: 3,
+  actualPagesCount: 3,
+};
+
+
 Pagination.propTypes = {
-  firstPagesCount: PropTypes.number.isRequired,
-  lastPagesCount: PropTypes.number.isRequired,
-  actualPagesCount: PropTypes.number.isRequired,
+  firstPagesCount: PropTypes.number,
+  lastPagesCount: PropTypes.number,
+  actualPagesCount: PropTypes.number,
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
