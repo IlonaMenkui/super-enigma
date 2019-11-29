@@ -21,7 +21,7 @@
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "implicit-arrow-linebreak": "off",
     "class-methods-use-this": "off",
-    "object-curly-newline": "off",
+    "object-curly-newline": "off"
   },
   "env": {
     "browser": true
