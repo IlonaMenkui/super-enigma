@@ -5,12 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import MovieList from '../../components/MovieList';
-import {
-  success,
-  failure,
-  cacheGenres as cacheGenresAction,
-  load,
-} from '../../actions/movies';
+import { load } from '../../actions/movies';
 import { PARAMS } from '../../constants';
 
 @connect(
@@ -20,10 +15,7 @@ import { PARAMS } from '../../constants';
     movies, isLoading, searchQuery, cachedGenres, page,
   }),
   {
-    successLoadMovies: success,
-    failureLoadMovies: failure,
-    cacheGenres: cacheGenresAction,
-    loadMovies: load,
+    dispatchLoadMoviesAction: load,
   },
 )
 export default class MovieListContainer extends React.PureComponent {
@@ -41,9 +33,9 @@ export default class MovieListContainer extends React.PureComponent {
   }
 
   loadMovies(page, searchQuery) {
-    const { type, loadMovies, cachedGenres } = this.props;
+    const { type, dispatchLoadMoviesAction, cachedGenres } = this.props;
     const url = searchQuery ? PARAMS.SEARCH_URL : `${PARAMS.URL}${type}`;
-    loadMovies({ searchQuery, url, cachedGenres, page });
+    dispatchLoadMoviesAction({ searchQuery, url, cachedGenres, page });
   }
 
   render() {
@@ -65,6 +57,6 @@ MovieListContainer.propTypes = {
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   searchQuery: PropTypes.string.isRequired,
-  loadMovies: PropTypes.func.isRequired,
+  dispatchLoadMoviesAction: PropTypes.func.isRequired,
   cachedGenres: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
