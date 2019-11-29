@@ -1,17 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Tab } from '@material-ui/core';
+import { Button, ButtonWrapper } from './style';
 
-import './header-tab.css';
-
-const HeaderTab = ({ PATH, TITLE }, index) => (
-  <Tab key={index} className="tab" label={TITLE} to={PATH} />
+const HeaderTab = ({
+  value, onClickTab, tabs,
+}) => (
+  tabs.map((tab, index) => (
+    <ButtonWrapper>
+      <Button
+        onClick={e => onClickTab(e, index)}
+        key={value}
+        index={index}
+        value={value}
+      >
+        {tab.TITLE}
+      </Button>
+    </ButtonWrapper>
+  ))
 );
 
 HeaderTab.propTypes = {
-  PATH: PropTypes.string.isRequired,
-  TITLE: PropTypes.string.isRequired,
+  onClickTab: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default HeaderTab;

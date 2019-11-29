@@ -1,46 +1,51 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TextWrap, Text } from '../MovieList/MovieListItem/style';
+import {
+  Label, LabelGroup, TitleLabel, Title,
+} from '../MovieList/MovieListItem/style';
+
+function getReleaseDate(releaseDate) {
+  if (releaseDate) {
+    return releaseDate.replace(/-/g, '.');
+  }
+  return 'No release date';
+}
 
 const MovieFullDescription = ({
   genres, title, overview, voteAverage, releaseDate, popularity,
   originalLanguage, voteCount, originalTitle,
 }) => (
-  <TextWrap>
-    <Text size="25px">
-      {title}
-    </Text>
-    <Text>
-      <b>Original title: </b>
+  <LabelGroup>
+    <TitleLabel>{title}</TitleLabel>
+    <Label>
+      <Title>Original title: </Title>
       {`${originalTitle} (${originalLanguage})`}
-    </Text>
-    <Text>
-      <b>Vote average (vote count): </b>
+    </Label>
+    <Label>
+      <Title>Vote average (vote count): </Title>
       {`${voteAverage} (${voteCount})`}
-    </Text>
-    <Text>
-      <b>Popularity index: </b>
+    </Label>
+    <Label>
+      <Title>Popularity index: </Title>
       {popularity}
-    </Text>
-    <Text>
-      <b>Full date of release: </b>
-      {releaseDate ? `${releaseDate.replace(/-/g, '.')}` : 'No release date'}
-    </Text>
-    <Text marginBottom="25px">
-      <b>Overview: </b>
-      {overview ? `${overview}` : 'No overview'}
-    </Text>
-    <Text>
-      <b>Genres: </b>
-      {genres.length ? `${genres.join(', ')}` : 'No genres'}
-    </Text>
-  </TextWrap>
+    </Label>
+    <Label>
+      <Title>Full date of release: </Title>
+      {getReleaseDate(releaseDate)}
+    </Label>
+    <Label marginBottom="25px">
+      <Title>Overview: </Title>
+      {overview}
+    </Label>
+    <Label>
+      <Title>Genres: </Title>
+      {genres}
+    </Label>
+  </LabelGroup>
 );
 
 MovieFullDescription.defaultProps = {
-  genres: [],
-  overview: 'No overview',
   releaseDate: 'No release date',
   voteAverage: 0,
   popularity: 0,
@@ -52,13 +57,13 @@ MovieFullDescription.defaultProps = {
 
 
 MovieFullDescription.propTypes = {
-  genres: PropTypes.arrayOf(PropTypes.string),
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string,
   popularity: PropTypes.number,
   originalLanguage: PropTypes.string,
   voteCount: PropTypes.number,
   originalTitle: PropTypes.string,
-  overview: PropTypes.string,
+  overview: PropTypes.string.isRequired,
   voteAverage: PropTypes.number,
   releaseDate: PropTypes.string,
 };

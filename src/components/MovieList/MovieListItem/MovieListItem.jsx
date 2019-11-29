@@ -7,7 +7,8 @@ import noImg from '../../../static/images/no-img.png';
 import { STATIC_URL as imgUrl } from '../../../constants';
 
 import {
-  MovieWrap, TextWrap, Text, ChipWrap, Chip, PosterImage,
+  MovieWrapper, Label, LabelGroup, ChipWrapper, Chip, PosterImage, TitleLabel, DateLabel,
+  ModalPosterImage, PosterWrapper,
 } from './style';
 
 function MovieListItem({
@@ -29,48 +30,66 @@ function MovieListItem({
     },
     [setOpen],
   );
+
+  function getReleaseDate() {
+    if (releaseDate) {
+      return new Date(releaseDate).getFullYear();
+    }
+    return 'No release date';
+  }
+
+  function getOverview() {
+    if (overview) {
+      return overview;
+    }
+    return 'No overview';
+  }
+
+  function getGenres() {
+    if (genres.length) {
+      return genres.join(', ');
+    }
+    return 'No genres';
+  }
+
   const posterPathUrl = posterPath === null ? noImg : `${imgUrl}${posterPath && posterPath.substring(1)}`;
   return (
-    <MovieWrap>
-      <PosterImage alt="poster" cursor="pointer" src={posterPathUrl} onClick={memoizedSetStateOpen} />
+    <MovieWrapper>
+      <PosterWrapper>
+        <PosterImage src={posterPathUrl} onClick={memoizedSetStateOpen} />
+      </PosterWrapper>
       <ModalContainer
         onClose={memoizedSetStateClose}
         open={open}
         modalContent={(
-          <MovieWrap>
-            <PosterImage alt="poster" src={posterPathUrl} />
+          <MovieWrapper>
+            <ModalPosterImage src={posterPathUrl} />
             <MovieFullDescription
               popularity={popularity}
               originalLanguage={originalLanguage}
               voteCount={voteCount}
               originalTitle={originalTitle}
-              genres={genres}
+              genres={getGenres()}
               title={title}
-              overview={overview}
+              overview={getOverview()}
               voteAverage={voteAverage}
               releaseDate={releaseDate}
             />
-          </MovieWrap>
+          </MovieWrapper>
         )}
       />
-      <TextWrap>
-        <Text size="25px">{title}</Text>
-        <Text color="gray" size="11px" marginBottom="20px">
-          {releaseDate ? new Date(releaseDate).getFullYear() : 'No release date'}
-        </Text>
-        <Text marginBottom="25px">
-          {overview || 'No overview'}
-        </Text>
-        <Text color="gray">
-          {genres.length ? `Genres: ${genres.join(', ')}` : 'No genres'}
-        </Text>
-      </TextWrap>
-      <ChipWrap>
+      <LabelGroup>
+        <TitleLabel>{title}</TitleLabel>
+        <DateLabel>{getReleaseDate()}</DateLabel>
+        <Label marginBottom="25px">{getOverview()}</Label>
+        <Label color="gray">{getGenres(genres)}</Label>
+      </LabelGroup>
+      <ChipWrapper>
         <Chip>
-          <Text size="12px">{voteAverage}</Text>
+          <Label size="12px">{voteAverage}</Label>
         </Chip>
-      </ChipWrap>
-    </MovieWrap>
+      </ChipWrapper>
+    </MovieWrapper>
   );
 }
 

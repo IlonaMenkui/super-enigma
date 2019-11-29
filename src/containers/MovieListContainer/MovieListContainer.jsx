@@ -15,8 +15,10 @@ import { PARAMS } from '../../constants';
 import getMovies from '../../api';
 
 @connect(
-  state => ({
-    ...state,
+  ({
+    movies, isLoading, searchQuery, cachedGenres, page,
+  }) => ({
+    movies, isLoading, searchQuery, cachedGenres, page,
   }),
   {
     requestLoadMovies: request,
@@ -49,13 +51,15 @@ export default class MovieListContainer extends React.PureComponent {
     return getMovies({
       page, url, searchQuery, cachedGenres,
     })
-      .then(({ movies, totalResults, genres }) => {
+      .then(({
+        movies, totalPages, genres,
+      }) => {
         if (cachedGenres.length === 0) {
           cacheGenres({ cachedGenres: genres });
         }
         successLoadMovies({
           movies,
-          totalResults,
+          totalPages,
           isLoading: false,
         });
       })
@@ -70,7 +74,6 @@ export default class MovieListContainer extends React.PureComponent {
     } = this.props;
     const searchTitle = 'Searching results:';
     const pageTitle = searchQuery ? searchTitle : title;
-
     return (
       <MovieList movies={movies} title={pageTitle} isLoading={isLoading} type={type} />
     );

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 
-import { Paper, Tabs } from '@material-ui/core';
-
 import { HEADER_TABS as tabs } from '../../constants';
 import HeaderTab from '../../components/HeaderTab';
 import {
@@ -12,10 +10,10 @@ import {
   setPage as setPageAction,
 } from '../../actions/movies';
 
+import TabsWrapper from './style';
+
 @connect(
-  state => ({
-    ...state,
-  }),
+  ({ searchQuery }) => ({ searchQuery }),
   {
     resetSearchMovies: reset,
     setPage: setPageAction,
@@ -56,16 +54,13 @@ export class Header extends React.PureComponent {
     const { value } = this.state;
     return (
       <header>
-        <Paper>
-          <Tabs
+        <TabsWrapper>
+          <HeaderTab
+            tabs={tabs}
+            onClickTab={this.handleChange}
             value={value}
-            centered
-            onChange={this.handleChange}
-            indicatorColor="primary"
-          >
-            {tabs.map(HeaderTab)}
-          </Tabs>
-        </Paper>
+          />
+        </TabsWrapper>
       </header>
     );
   }

@@ -1,6 +1,10 @@
+const { resolve } = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  output: {
+    path: resolve('dist'),
+  },
   module: {
     rules: [
       {
@@ -50,4 +54,9 @@ module.exports = {
       filename: './index.html',
     }),
   ],
+  devServer: {
+    open: true,
+    historyApiFallback: true,
+    hot: true,
+  },
 };

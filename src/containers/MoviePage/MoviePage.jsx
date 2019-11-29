@@ -1,61 +1,79 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { connect } from 'react-redux';
 
-import { Paper } from '@material-ui/core';
-
-import { PAGE_COUNT } from '../../constants';
 import SearchContainer from '../SearchContainer';
-import FlatPagination from '../../components/FlatPagination';
 import MovieListContainer from '../MovieListContainer';
+import Pagination from '../Pagination';
+import {
+  PAGINATION_FIRST_PAGES as firstPagesCount,
+  PAGINATION_LAST_PAGES as lastPagesCount,
+  ACTUAL_PAGES_COUNT as actualPagesCount,
+} from '../../constants';
 import {
   setPage as setPageAction,
 } from '../../actions/movies';
 
+import { MovieWrapper, PaginationWrapper } from './style';
+
 @connect(
-  state => ({
-    ...state,
-  }),
+  ({ page, totalPages }) => ({ page, totalPages }),
   {
     setPage: setPageAction,
   },
 )
 export default class MoviePage extends React.PureComponent {
-  changePage(offset) {
+  handleClick(pageNumber) {
+    const { totalPages } = this.props;
+    if ((pageNumber < 1 && pageNumber !== 0)
+      || pageNumber === 0) {
+      this.changePage(1);
+    } else if (pageNumber <= totalPages && pageNumber !== 0) {
+      this.changePage(pageNumber);
+    }
+  }
+
+  changePage(page) {
     const { setPage } = this.props;
-    setPage({ page: (offset / PAGE_COUNT + 1) });
+    setPage({ page });
   }
 
   render() {
-    const {
-      title, totalResults, isLoading, type, page,
-    } = this.props;
+    const { title, type } = this.props;
+    const { totalPages, page } = this.props;
     return (
       <div>
-        <FlatPagination
-          onClickPage={(e, offset) => this.changePage(offset)}
-          page={page}
-          totalResults={totalResults}
-        />
-        <Paper>
-          <SearchContainer title={title} />
+        <PaginationWrapper>
+          <Pagination
+            firstPagesCount={firstPagesCount}
+            lastPagesCount={lastPagesCount}
+            actualPagesCount={actualPagesCount}
+            totalPages={totalPages}
+            page={page}
+            handleClick={pageNumber => this.handleClick(pageNumber)}
+          />
+        </PaginationWrapper>
+        <MovieWrapper>
+          <SearchContainer />
           <MovieListContainer
             type={type}
             title={title}
-            isLoading={isLoading}
           />
-        </Paper>
+        </MovieWrapper>
       </div>
     );
   }
 }
 
+MoviePage.defaultProps = {
+  page: 1,
+  totalPages: 0,
+};
+
 MoviePage.propTypes = {
-  page: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  totalResults: PropTypes.number.isRequired,
-  isLoading: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
+  page: PropTypes.number,
+  totalPages: PropTypes.number,
   setPage: PropTypes.func.isRequired,
 };

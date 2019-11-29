@@ -11,9 +11,7 @@ import {
 } from '../../actions/movies';
 
 @connect(
-  state => ({
-    ...state,
-  }),
+  ({ searchQuery }) => ({ searchQuery }),
   {
     initSearch: initSearchProps,
   },

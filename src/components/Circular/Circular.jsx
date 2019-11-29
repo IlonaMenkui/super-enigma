@@ -1,11 +1,13 @@
 import React from 'react';
 
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { Svg, Wrapper, Circle } from './styles';
 
 const Circular = () => (
-  <div className="circular-wrapp">
-    <CircularProgress className="circular" />
-  </div>
+  <Wrapper>
+    <Svg viewBox="0 0 100 100">
+      <Circle />
+    </Svg>
+  </Wrapper>
 );
 
 export default Circular;

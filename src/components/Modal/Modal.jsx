@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Modal, CloseButton } from './style';
+import Modal from './style';
+import CloseCross from '../CloseCross';
 
 function SimpleModal({
   open, onClose, modalContent,
@@ -8,11 +9,10 @@ function SimpleModal({
   return (
     <Modal open={open}>
       {modalContent}
-      <CloseButton type="button" onClick={onClose}>✖</CloseButton>
+      <CloseCross onClick={onClose} />
     </Modal>
   );
 }
-
 
 SimpleModal.propTypes = {
   modalContent: PropTypes.element.isRequired,

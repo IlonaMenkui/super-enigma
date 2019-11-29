@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SearchWrap = styled.div`
+export const SearchWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -8,7 +8,7 @@ export const SearchWrap = styled.div`
   width: 100%;
 `;
 export const SearchInput = styled.input`
-  height: 45px;
+  height: 30px;
   font-size: 15px;
   float: left;
   padding: 8px;    

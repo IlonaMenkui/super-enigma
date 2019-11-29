@@ -1,25 +1,46 @@
 import styled from 'styled-components';
 
-export const MovieWrap = styled.div`
+export const MovieWrapper = styled.div`
   display: flex;
   align-items: flex-start;
 `;
 
-export const TextWrap = styled.div`
+export const PosterWrapper = styled.div`
+  width: 170px;
+  height: 265px;
+`;
+
+export const Label = styled.div`
+  font-size: 15px;
+  margin-bottom: ${({ marginBottom }) => marginBottom || '0'};
+`;
+
+export const TitleLabel = styled.div`
+  font-size: 25px;
+`;
+
+export const LabelGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
   margin-left: 15px;
 `;
-export const Text = styled.div`
-  font-size: ${props => props.size || '15px'};
-  color: ${props => props.color || 'black'};
-  margin-bottom: ${props => props.marginBottom || '0'};
+
+export const DateLabel = styled.div`
+  font-size: 11px;
+  color: gray;
+  margin-bottom: 20px;
 `;
 
+export const Title = styled.b``;
+
 export const PosterImage = styled.img`
-  cursor: ${props => (props.cursor === 'pointer' ? 'pointer' : 'default')};
-  width: 200px;
+  cursor: pointer;
+  width: 170px;
+  padding-bottom: 10px;
+`;
+
+export const ModalPosterImage = styled.img`
   padding-bottom: 10px;
 `;
 
@@ -35,6 +56,6 @@ export const Chip = styled.div`
   border-radius: 50px;
 `;
 
-export const ChipWrap = styled.div`
+export const ChipWrapper = styled.div`
   margin-left: 20px;
 `;

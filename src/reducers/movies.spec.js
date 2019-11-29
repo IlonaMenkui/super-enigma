@@ -8,9 +8,8 @@ describe('movies reducer', () => {
       movies: [],
       cachedGenres: [],
       page: 1,
-      totalResults: 0,
+      totalPages: 0,
       isLoading: false,
-      isSearchChange: false,
       searchQuery: '',
     });
   });
@@ -33,14 +32,14 @@ describe('movies reducer', () => {
         type: types.MOVIES.LOAD_MOVIES_SUCCESS,
         payload: {
           page: 1,
-          totalResults: 1,
+          totalPages: 1,
           searchQuery: '',
         },
       }),
     ).toEqual(
       {
         page: 1,
-        totalResults: 1,
+        totalPages: 1,
         searchQuery: '',
       },
     );

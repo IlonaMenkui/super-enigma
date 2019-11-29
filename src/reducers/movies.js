@@ -4,9 +4,8 @@ const defaultState = {
   movies: [],
   cachedGenres: [],
   page: 1,
-  totalResults: 0,
+  totalPages: 0,
   isLoading: false,
-  isSearchChange: false,
   searchQuery: '',
 };
 
