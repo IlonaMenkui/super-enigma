@@ -1,11 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  PAGINATION_FIRST_PAGES as firstPagesCount,
-  PAGINATION_LAST_PAGES as lastPagesCount,
-  ACTUAL_PAGES_COUNT as actualPagesCount,
-} from '../../constants';
 import { PageNumber, PaginationWrapper } from './style';
 
 export default class Pagination extends React.PureComponent {
@@ -29,12 +24,13 @@ export default class Pagination extends React.PureComponent {
   setPaginationPages(totalPages, page) {
     this.setState({
       firstPages: this.getFirstPages(),
-      actualPages: this.getActualPages(totalPages, page, lastPagesCount),
-      lastPages: this.getLastPages(totalPages, lastPagesCount),
+      actualPages: this.getActualPages(totalPages, page),
+      lastPages: this.getLastPages(totalPages),
     });
   }
 
   getFirstPages(totalPages) {
+    const { firstPagesCount, lastPagesCount, actualPagesCount } = this.props;
     if (totalPages <= 0) return [0];
 
     if (totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) {
@@ -45,6 +41,7 @@ export default class Pagination extends React.PureComponent {
   }
 
   getLastPages(totalPages) {
+    const { firstPagesCount, lastPagesCount, actualPagesCount } = this.props;
     if (totalPages <= 0
       || totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) return [];
 
@@ -52,6 +49,7 @@ export default class Pagination extends React.PureComponent {
   }
 
   getActualPages(totalPages, page) {
+    const { firstPagesCount, lastPagesCount, actualPagesCount } = this.props;
     const firstPageOfTheLastGroup = totalPages - lastPagesCount + 1;
     if (totalPages <= 0 || page < firstPagesCount || page > firstPageOfTheLastGroup
       || totalPages <= firstPagesCount + lastPagesCount + actualPagesCount) return [];
@@ -121,6 +119,9 @@ export default class Pagination extends React.PureComponent {
 }
 
 Pagination.propTypes = {
+  firstPagesCount: PropTypes.number.isRequired,
+  lastPagesCount: PropTypes.number.isRequired,
+  actualPagesCount: PropTypes.number.isRequired,
   page: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
