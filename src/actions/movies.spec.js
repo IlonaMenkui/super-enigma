@@ -67,7 +67,7 @@ describe('actions', () => {
       type: types.MOVIES.INIT_SEARCH_PROPS,
       payload,
     };
-    expect(actions.initSearch(payload)).toEqual(expectedAction);
+    expect(actions.search(payload)).toEqual(expectedAction);
   });
 });
 

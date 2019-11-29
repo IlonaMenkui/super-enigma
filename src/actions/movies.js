@@ -22,7 +22,7 @@ export const setPage = payload => ({
   payload,
 });
 
-export const initSearch = payload => ({
+export const search = payload => ({
   type: MOVIES.INIT_SEARCH_PROPS,
   payload,
 });
