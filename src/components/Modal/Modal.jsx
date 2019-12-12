@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import Modal from './style';
 import CloseCross from '../CloseCross';
 
-function SimpleModal({
-  open, onClose, modalContent,
-}) {
+function SimpleModal({ open, onClose, modalContent }) {
   return (
     <Modal open={open}>
       {modalContent}

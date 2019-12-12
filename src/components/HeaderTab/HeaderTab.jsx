@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Button, ButtonWrapper } from './style';
 
-const HeaderTab = ({
-  value, onClickTab, tabs,
-}) => (
+const HeaderTab = ({ value, onClickTab, tabs }) => (
   tabs.map((tab, index) => (
     <ButtonWrapper>
       <Button

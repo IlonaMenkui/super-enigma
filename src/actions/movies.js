@@ -4,7 +4,7 @@ export const request = () => ({
   type: MOVIES.LOAD_MOVIES_REQUEST,
 });
 
-export const succsess = payload => ({
+export const success = payload => ({
   type: MOVIES.LOAD_MOVIES_SUCCESS,
   payload,
 });
@@ -22,12 +22,17 @@ export const setPage = payload => ({
   payload,
 });
 
-export const initSearch = payload => ({
+export const search = payload => ({
   type: MOVIES.INIT_SEARCH_PROPS,
   payload,
 });
 
 export const cacheGenres = payload => ({
   type: MOVIES.CACHE_GENRES,
+  payload,
+});
+
+export const load = payload => ({
+  type: MOVIES.LOAD_MOVIES,
   payload,
 });

@@ -38,9 +38,7 @@ export class Header extends React.PureComponent {
   }
 
   handleChange = (event, value) => {
-    const {
-      history, resetSearchMovies, searchQuery, setPage,
-    } = this.props;
+    const { history, resetSearchMovies, searchQuery, setPage } = this.props;
     history.push(tabs[value].PATH);
     this.setState({ value });
     if (searchQuery) {

@@ -6,15 +6,11 @@ import PropTypes from 'prop-types';
 
 import Search from '../../components/Search';
 import { ENTER_KEY } from '../../constants';
-import {
-  initSearch as initSearchProps,
-} from '../../actions/movies';
+import { search } from '../../actions/movies';
 
 @connect(
   ({ searchQuery }) => ({ searchQuery }),
-  {
-    initSearch: initSearchProps,
-  },
+  { applySearchFilter: search },
 )
 export default class SearchContainer extends React.PureComponent {
    state = {
@@ -30,9 +26,9 @@ export default class SearchContainer extends React.PureComponent {
    }
 
   onSearchClick = () => {
-    const { initSearch } = this.props;
+    const { applySearchFilter } = this.props;
     const { searchQuery } = this.state;
-    initSearch({ searchQuery, page: 1 });
+    applySearchFilter({ searchQuery, page: 1 });
   };
 
   onEnterPress = e => {
@@ -60,6 +56,6 @@ export default class SearchContainer extends React.PureComponent {
 }
 
 SearchContainer.propTypes = {
-  initSearch: PropTypes.func.isRequired,
+  applySearchFilter: PropTypes.func.isRequired,
   searchQuery: PropTypes.string.isRequired,
 };

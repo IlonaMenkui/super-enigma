@@ -22,7 +22,7 @@ describe('actions', () => {
       type: types.MOVIES.LOAD_MOVIES_SUCCESS,
       payload,
     };
-    expect(actions.succsess(payload)).toEqual(expectedAction);
+    expect(actions.success(payload)).toEqual(expectedAction);
   });
 });
 
@@ -67,7 +67,7 @@ describe('actions', () => {
       type: types.MOVIES.INIT_SEARCH_PROPS,
       payload,
     };
-    expect(actions.initSearch(payload)).toEqual(expectedAction);
+    expect(actions.search(payload)).toEqual(expectedAction);
   });
 });
 
