@@ -23,7 +23,7 @@ export default class Pagination extends React.PureComponent {
 
   setPaginationPages(totalPages, page) {
     this.setState({
-      firstPages: this.getFirstPages(),
+      firstPages: this.getFirstPages(totalPages),
       actualPages: this.getActualPages(totalPages, page),
       lastPages: this.getLastPages(totalPages),
     });
