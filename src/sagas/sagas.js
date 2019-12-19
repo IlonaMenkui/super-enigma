@@ -1,18 +1,25 @@
+import axios from 'axios';
 import { put, takeEvery, all } from 'redux-saga/effects';
-import getMovies from '../api/api';
+
+const getMovies = ({ searchQuery, page, url }) => axios.get('http://127.0.0.1:8080/movies/',
+  {
+    params: {
+      url,
+      query: searchQuery,
+      page,
+    },
+  })
+  .then((({ data }) => {
+    const movies = data;
+    return { movies };
+  }));
 
 export function* loadMovies(props) {
-  const { cachedGenres, page, url, searchQuery } = props.payload;
-
+  const { page, url, searchQuery } = props.payload;
   yield put({ type: 'LOAD_MOVIES_REQUEST' });
-
   try {
-    const moviesList = yield getMovies({ page, url, searchQuery, cachedGenres });
-    const { movies, totalPages, genres } = moviesList;
-    if (cachedGenres.length === 0) {
-      yield put({ type: 'CACHE_GENRES', payload: { cachedGenres: genres } });
-    }
-
+    const { movies } = yield getMovies({ searchQuery, page, url });
+    const { totalPages } = movies[0];
     yield put({
       type: 'LOAD_MOVIES_SUCCESS',
       payload: {
@@ -35,3 +42,7 @@ export default function* rootSaga() {
     watchSaga(),
   ]);
 }
+
+// if (cachedGenres.length === 0) {
+//   yield put({ type: 'CACHE_GENRES', payload: { cachedGenres: genres } });
+// }

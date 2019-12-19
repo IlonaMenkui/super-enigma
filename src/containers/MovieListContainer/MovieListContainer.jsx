@@ -34,8 +34,7 @@ export default class MovieListContainer extends React.PureComponent {
 
   loadMovies(page, searchQuery) {
     const { type, dispatchLoadMoviesAction, cachedGenres } = this.props;
-    const url = searchQuery ? PARAMS.SEARCH_URL : `${PARAMS.URL}${type}`;
-    dispatchLoadMoviesAction({ searchQuery, url, cachedGenres, page });
+    dispatchLoadMoviesAction({ searchQuery, url: type, cachedGenres, page });
   }
 
   render() {
