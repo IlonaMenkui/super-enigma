@@ -1,18 +1,14 @@
 import { put, takeEvery, all } from 'redux-saga/effects';
-import getMovies from '../api/api';
+import getMovies from '../api';
 
 export function* loadMovies(props) {
-  const { cachedGenres, page, url, searchQuery } = props.payload;
-
+  const { page, url, searchQuery, cachedGenres } = props.payload;
   yield put({ type: 'LOAD_MOVIES_REQUEST' });
-
   try {
-    const moviesList = yield getMovies({ page, url, searchQuery, cachedGenres });
-    const { movies, totalPages, genres } = moviesList;
+    const { movies: { movies, totalPages, genres } } = yield getMovies({ searchQuery, page, url });
     if (cachedGenres.length === 0) {
       yield put({ type: 'CACHE_GENRES', payload: { cachedGenres: genres } });
     }
-
     yield put({
       type: 'LOAD_MOVIES_SUCCESS',
       payload: {
