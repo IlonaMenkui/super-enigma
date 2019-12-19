@@ -15,11 +15,13 @@ const getMovies = ({ searchQuery, page, url }) => axios.get('http://127.0.0.1:80
   }));
 
 export function* loadMovies(props) {
-  const { page, url, searchQuery } = props.payload;
+  const { page, url, searchQuery, cachedGenres } = props.payload;
   yield put({ type: 'LOAD_MOVIES_REQUEST' });
   try {
-    const { movies } = yield getMovies({ searchQuery, page, url });
-    const { totalPages } = movies[0];
+    const { movies: { movies, totalPages, genres } } = yield getMovies({ searchQuery, page, url });
+    if (cachedGenres.length === 0) {
+      yield put({ type: 'CACHE_GENRES', payload: { cachedGenres: genres } });
+    }
     yield put({
       type: 'LOAD_MOVIES_SUCCESS',
       payload: {
@@ -42,7 +44,3 @@ export default function* rootSaga() {
     watchSaga(),
   ]);
 }
-
-// if (cachedGenres.length === 0) {
-//   yield put({ type: 'CACHE_GENRES', payload: { cachedGenres: genres } });
-// }
