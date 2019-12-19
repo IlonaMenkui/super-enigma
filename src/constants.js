@@ -37,6 +37,10 @@ export const MOVIE_TYPE = {
 
 export const BASE_URL = 'https://api.themoviedb.org/3/';
 
+export const PORT = 8080;
+export const HOST = '127.0.0.1';
+export const API_URL = `http://${HOST}:${PORT}`;
+
 export const PARAMS = {
   URL: `${BASE_URL}movie/`,
   SEARCH_URL: `${BASE_URL}search/movie`,
